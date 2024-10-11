@@ -6,26 +6,53 @@ interface SideBarProps {
     isSidebarOpen: boolean;
 }
 const sideBarItems = [
-    { name: "Home", icon: "material-symbols:home", link: "/" },
-    { name: "Employés", icon: "clarity:employee-solid", link: "/employes" },
-    { name: "Visiteurs", icon: "mdi:user-clock", link: "/visitor" },
-    { name: "Evènements", icon: "bxs:calendar-event", link: "/" },
-    { name: "Liste d'attente", icon: "medical-icon:i-waiting-area", link: "/wait-list" },
+    {
+    icon: "material-symbols:empty-dashboard-sharp",
+    name:"Tableau de bord",
+    path: "/",
+  },
+  {
+    icon: "fa:group",
+    name:"Comité d'organisation",
+    path: "/comite-organisation",
+  },
+  {
+    icon: "mdi:account-student",
+    name:"Séminariste",
+    path: "/seminariste",
+  },
+  {
+    icon: "fa-solid:home",
+    name:"Dortoir",
+    path: "/dortoir",
+  },
+  {
+    icon: "heroicons:users-solid",
+    name:"Visiteurs",
+    path: "/visiteur",
+  },
+  {
+    icon: "ri:file-check-fill",
+    name:"Piste d'audit",
+    path: "/piste-audit",
+  },
+  {
+    icon: "bi:patch-check-fill",
+    name:"Permissions",
+    path: "/permissions",
+  },
 ];
 
-const supportItems = [
-    { name: "Aide", icon: "carbon:help-filled", link: "/help" },
-    { name: "Paramètres", icon: "ant-design:setting-filled", link: "/settings" },
-];
+
+
+
 
 const SideBar: React.FC<SideBarProps> = ({ isSidebarOpen }) => {
-    // State to track the active tab based on the current path
     const [activeTab, setActiveTab] = useState<string>("");
-
     useEffect(() => {
         // Set the active tab based on the current URL path
         const currentPath = window.location.pathname;
-        const activeItem = sideBarItems.find(item => item.link === currentPath) || supportItems.find(item => item.link === currentPath);
+        const activeItem = sideBarItems.find(item => item.path === currentPath) 
         if (activeItem) {
             setActiveTab(activeItem.name);
         }
@@ -33,46 +60,30 @@ const SideBar: React.FC<SideBarProps> = ({ isSidebarOpen }) => {
 
     return (
         <aside
-            className={`fixed top-0 left-0 z-40 bg-white w-[190px] h-screen pt-20 bg-white-300 border-r lg:translate-x-0 transition-transform ${
+            className={` fixed top-0 left-0 z-40 bg-primary_green w-[199px] h-screen pt-[80px] bg-white-300 border-l-[2px] border-primary_orange lg:hidden transition-transform ${
                 isSidebarOpen ? "translate-x-0" : "-translate-x-full"
             }`}
         >
-            <div className="h-full px-3 pb-4 overflow-auto">
-                <span className="text-blue-500 text-[14px]">Menu</span>
-                <div className="my-2 border-b-[1px]"></div>
+            <div className="h-full px-[8px] pb-4 overflow-auto">
+                <span className="text-white/70 text-[16px] font-semibold">Menu</span>
+                <div className="my-2 border-b-[1px] mb-[16px] text-white/70"></div>
                 {/* Menu items */}
-                <div>
+                <div className="px-">
                     {sideBarItems.map((item, index) => (
                         <a
                             key={index}
-                            href={item.link}
-                            className={`flex items-center rounded-md pl-2 py-2 text-gray-700 hover:bg-blue-[20px] mt-2 ${
-                                activeTab === item.name ? " bg-paytou_orange text-white" : ""
+                            href={item.path}
+                            className={`flex items-center rounded-md pl-2 py-[12px] hover:bg-blue-[20px] mt-2 ${
+                                activeTab === item.name ? "bg-white/30 text-white" : "text-white/70"
                             }`}
                             onClick={() => setActiveTab(item.name)} // Update the active tab on click
                         >
                             <Icon icon={item.icon} className="w-5 h-5" />
-                            <span className="mx-4 text-[13px]">{item.name}</span>
+                            <span className="ml-[6px] text-[13px]">{item.name}</span>
                         </a>
                     ))}
                 </div>
-                <div className="my-2 border-b-[1px]"></div>
-                <span className="text-blue-500 text-[14px]">Support</span>
-                <div>
-                    {supportItems.map((item, index) => (
-                        <a
-                            key={index}
-                            href={item.link}
-                            className={`flex items-center pl-2 py-2 text-gray-700 hover:bg-blue-[20px] mt-2 ${
-                                activeTab === item.name ? "bg-green-500 text-white" : ""
-                            }`}
-                            onClick={() => setActiveTab(item.name)} // Update the active tab on click
-                        >
-                            <Icon icon={item.icon} className="w-5 h-5" />
-                            <span className="mx-4 text-[13px]">{item.name}</span>
-                        </a>
-                    ))}
-                </div>
+
             </div>
         </aside>
     );

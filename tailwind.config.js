@@ -4,8 +4,10 @@ export default {
   theme: {
     extend: {
         colors:{
-          paytou_green:"#4daa46",   
-          paytou_orange:"#f39009",   
+          primary_green:"#0E5907",   
+          secondary_green:"#265828",   
+          tertiary_green:"#4DAF27", 
+          primary_orange:"#F29000", 
         }
     },
   },
