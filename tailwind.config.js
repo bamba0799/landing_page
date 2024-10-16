@@ -8,6 +8,9 @@ export default {
           secondary_green:"#265828",   
           tertiary_green:"#4DAF27", 
           primary_orange:"#F29000", 
+          primary_gray:"#9CA2A9",
+          secondary_gray:"#00000029",
+          tertiary_gray:"#DFDFDF",
         }
     },
   },
