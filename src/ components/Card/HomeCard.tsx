@@ -2,33 +2,50 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import React from "react";
 
 interface HomeCardProps {
-    name: string;
-    number: number;
+    title: string;
+    item1: {
+        title: string;
+        value: number;
+    };
+    item2: {
+        title: string;
+        value: number;
+    };
+    item3?: {
+        title: string;
+        value: number;
+    };
     icon: string;
-    date: string;
+    bg: string;
+    eye?: boolean;
+    onClick?: () => void;
 }
 // streamline:graph-arrow-decrease
-const HomeCard: React.FC<HomeCardProps> = ({ name, number, date, icon }) => {
+const HomeCard: React.FC<HomeCardProps> = ({ title, item1, item2, item3, icon, bg, eye, onClick }) => {
     return (
-        <div className="bg-white  flex flex-col  justify-between  w-full h-[110px] rounded-md p-4 ">
-            <div className="flex flex-row items-center">
-                <div className=" bg-red-50 w-8 h-8 rounded-full flex justify-center items-center">
-                    <Icon icon="clarity:employee-solid" className="w-4 h-4 text-red-500" />
+        <button className={`${bg} border flex flex-col items-center w-full lg:w-auto justify-between h-[90px] lg:h-[120px] rounded-[10px] px-[20px] lg:px-[40px] py-[15px]`}>
+            <div className="flex flex-row items-center justify-between lg:space-x-[30px] w-full">
+                <div className=" flex flex-row items-center space-x-[5px]">
+                    <Icon icon={icon} className="w-[20px] h-[20px] text-primary_green/60"/>
+                    <p className="w-full text-[0.8rem] text-primary_green font-bold">{title}</p>
                 </div>
-                <span className="ml-2 text-[13px] text-gray-500 text-red">Total employés</span>
+              {eye==true?
+                <div onClick={onClick}>
+                    <Icon icon="mdi:eye" className="w-[20px] h-[20px] text-primary_green/60"/>
+               </div>:null
+               }
             </div>
-            <div className="flex flex-row justify-between items-center">
-                <span className="text-2xl">100</span>
-                <div className="flex flex-col items-start">
-                    <div className="flex justify-between w-16">
-                        <Icon icon="streamline:graph-arrow-increase" className="w-5 h-5 text-red-500" />
-                        <span className="text-[12px] font-bold text-red-500">0,4%</span>
-                    </div>
-                    <span className="text-[10px]  text-gray-400">vs mois passé</span>
+            <div className="flex flex-row items-center space-x-[10px] w-full">
+                <div className="flex flex-row items-center space-x-[5px] ">
+                    <span className="text-[0.8rem] text-primary_green">{item1.title}:</span>
+                    <span className="text-[`1rem`] text-primary_green font-bold"> {item1.value}</span>
+                </div>
+                <div className="flex flex-row items-center space-x-[5px] ">
+                    <span className="text-[0.8rem] text-primary_green">{item2.title}:</span>
+                    <span className="text-[1rem] text-primary_green font-bold"> {item2.value}</span>
                 </div>
             </div>
-
-        </div>
+        </button>
     );
 }
 export default HomeCard;

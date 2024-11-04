@@ -6,6 +6,9 @@
   .button-icon  {
     @apply flex flex-row items-center space-x-[5px] text-[12px] font-semibold;
   } 
+  .error-message {
+    @apply text-red-500 text-[12px];
+  }
 }
 /* :root {
     --main-bg-color: blue;

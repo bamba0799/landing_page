@@ -10,7 +10,6 @@ const Home: React.FC = () => {
       <HomeCard name="Home" number={1} date="2022-01-01" icon="home" />
       <HomeCard name="Home" number={1} date="2022-01-01" icon="home" />
       <HomeCard name="Home" number={1} date="2022-01-01" icon="home" />
-
     </div>
   );
 };

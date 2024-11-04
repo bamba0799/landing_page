@@ -58,15 +58,12 @@ function App() {
   return (
   <div>
    {isSidebarOpen?
-    <button onClick={()=>toggleSideBar()} className='absolute bg-slate-950/[0.2] w-full h-full'>
+    <button onClick={()=>toggleSideBar()} className='fixed top-0 left-0 z-10 bg-slate-950/[0.2] w-full h-full'>
     
     </button>
     :null
     }
    <Header toggleSideBar={toggleSideBar}/>
-    {/* <div className='mt-[60px]'>
-    <Menu/>
-    </div> */}
     <SideBar isSidebarOpen={isSidebarOpen}/>
     <Main className=''>
       <RouterProvider router={router}/>

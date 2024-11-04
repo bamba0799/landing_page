@@ -7,15 +7,15 @@ type PrimaryLayoutProps = {
 const PrimaryLayout: React.FC<PrimaryLayoutProps> = ({ children, title }) => {
     return (
         <div className='mt-[60px] lg:mt-[140px]'>
-            <div className='flex flex-row  items-center space-x-[5px] mb-[20px]'>
+            <div className='flex flex-row  items-center space-x-[5px] mb-[10px]'>
                 <Icon icon="fa-solid:home" className='text-secondary_green ' />
                 <div className='flex flex-row items-center space-x-[1px]'>
                     <Icon icon="tdesign:chevron-right-double" className='text-secondary_green text-[10px]' />
-                    <span className='text-secondary_green text-[12px]'>{title}</span>
+                    <span className='text-secondary_green text-[0.8rem]'>{title}</span>
                     <Icon icon="tdesign:chevron-right-double" className='text-secondary_green text-[10px]' />
-
                 </div>
             </div>
+            <p className='text-primary_green font-bold text-[rem] mb-[10px]'>{title}</p>
             {children}
         </div>
     );

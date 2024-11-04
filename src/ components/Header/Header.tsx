@@ -117,8 +117,8 @@ const Header: React.FC<HeaderProps> = ({ toggleSideBar }) => {
               setActiveTab(item.path)
             }} className={` w-[140px] flex flex-row justify-center items-center text-white/70 ${activeTab == item.path ? 'bg-white/30 text-white' : ''}`}>
               <div className="flex flex-col justify-between items-center space-y-[3px]">
-                <Icon icon={item.icon} className={`w-[30px] h-[30px] ${activeTab == item.path ? 'text-white' : 'text-secondary_gray'} `} />
-                <span className={`text-[12px] ${activeTab == item.path ? 'text-white' : 'text-secondary_gray'}`}>{item.name}</span>
+                <Icon icon={item.icon} className={`w-[30px] h-[30px] ${activeTab == item.path ? 'text-white' : 'text-primary_gray'} `} />
+                <span className={`text-[12px] ${activeTab == item.path ? 'text-white' : 'text-primary_gray'}`}>{item.name}</span>
               </div>
             </a>
           ))}
