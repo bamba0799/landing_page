@@ -1,17 +1,365 @@
-import React, { useEffect } from "react";
-import HomeCard from "../ components/Card/HomeCard";
-import Chart from "react-apexcharts";
+import { useEffect, useState } from 'react'
+import Header from '../ components/Header/Header'
+import SideBar from '../ components/SideBar/SideBar'
+import Main from '../ components/Main/Main'
+import Card from '../ components/Card/Card'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Menu from '../ components/SideBar/Menu'
+import Dashboard from '../Pages/Dashboard'
+import OrganizationComite from '../Pages/OrganizationComite'
+import Seminarian from '../Pages/Seminarian'
+import Dormitory from '../Pages/Dormitory'
+import Visitor from '../Pages/Visitor'
+import AuditTrail from '../Pages/AuditTrail'
+import Permission from '../Pages/Permission'
+// import { Button } from 'flowbite-react'
+import Input from '../ components/Input/Input'
+import HomeCard from '../ components/Card/HomeCard'
+import PrimaryLayout from '../layouts/PrimaryLayout'
+import { Icon } from '@iconify/react/dist/iconify.js'
+import EditButton from '../ components/Button/EditButton'
+import DeleteButton from '../ components/Button/DeleteButton'
+import apiService from '../../services/api'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
+import Button from '../ components/Button/Button'
+import { MembreCo, Seminariste } from '../../services/model'
+import { set } from 'react-hook-form'
 
-const Home: React.FC = () => {
+function Home() {
+  const [count, setCount] = useState(0)
+  const [isLoading, setIsLoading] = useState(false)
+
+
+
+  const[seminariste, setSeminariste] = useState<Seminariste>({
+    frère: 0,
+    soeur: 0,
+    Total: 0,
+    m: null
+  })
+
+  const [membreCo, setMembreCo] = useState<MembreCo>({
+    Accueil_Hébegement: {
+      frère: 0,
+      soeur: 0,
+      Total: 0
+    },
+    Administration: {
+      frère: 0,
+      soeur: 0,
+      Total: 0
+    },
+    Formation: {
+      frère: 0,
+      soeur: 0,
+      Total: 0
+  }})
+
+  const studentData = [
+    {
+      id: 1,
+      name: "Neeraj",
+      email: "neeraj@gmail.com",
+      year: 2015,
+      fee: 167000,
+    },
+    {
+      id: 2,
+      name: "Vikas",
+      email: "vikas@gmail.com",
+      year: 2013,
+      fee: 785462,
+    },
+
+    {
+      id: 3,
+      name: "Rahul",
+      email: "rahul@gmail.com",
+      year: 2020,
+      fee: 784596,
+    }
+  ]
+
+  const columns = [
+    { title: "Name", field: "name", },
+    { title: "Email", field: "email", },
+    { title: "Year", field: "year", type: "numeric" },
+    { title: "Fee", field: 'fee', type: "currency" }]
+
+  // const downloadExcel = () => {
+  //   const newData = studentData.map(row => {
+  //     delete row.tableData
+  //     return row
+  //   })
+  //   const workSheet = XLSX.utils.json_to_sheet(newData)
+  //   const workBook = XLSX.utils.book_new()
+  //   XLSX.utils.book_append_sheet(workBook, workSheet, "students")
+  //   //Buffer
+  //   XLSX.write(workBook, { bookType: "xlsx", type: "buffer" })
+  //   //Binary string
+  //   XLSX.write(workBook, { bookType: "xlsx", type: "binary" })
+  //   //Download
+  //   XLSX.writeFile(workBook, "StudentsData.xlsx")
+
+
+  // }
+
+  const downloadPdf = () => {
+    //https://github.com/vikas62081/material-table-YT/blob/pdfExport/src/App.js exporter en excel
+    const doc: any = new jsPDF()
+    doc.text("Student Details", 20, 10)
+    doc.autoTable({
+      theme: "grid",
+      columns: columns.map(col => ({ ...col, dataKey: col.field })),
+      body: studentData
+    })
+    doc.save('table.pdf')
+  }
+
+  const getHomeData = async () => {
+    setIsLoading(true)
+    try {
+      const { data: membreCo } = await apiService.getMembresCo();
+      setMembreCo(membreCo)
+      const {data:seminariste} = await apiService.getSeminariste()
+      console.log("seminariste", seminariste);
+      setSeminariste(seminariste)
+
+    } catch (error) {
+      setIsLoading(false)
+      console.log("error", error);
+    }
+  }
+  useEffect(() => {
+    getHomeData()
+  }, [])
 
   return (
-    <div className="mt-[110px] flex flex-col gap-y-4 pt-7 pb-10 md:grid md:grid-cols-4 md:gap-x-3">
-      <HomeCard name="Home" number={1} date="2022-01-01" icon="home" />
-      <HomeCard name="Home" number={1} date="2022-01-01" icon="home" />
-      <HomeCard name="Home" number={1} date="2022-01-01" icon="home" />
-      <HomeCard name="Home" number={1} date="2022-01-01" icon="home" />
-    </div>
-  );
-};
+    <div>
+      <Main className=''>
+        <PrimaryLayout title={"Tableau de bord"}>
+          <div>
+            <div className='flex flex-col lg:flex-row lg:items-center '>
+              <div className=' flex flex-col items-center space-y-0 lg:flex-row lg:items-center  lg:space-y-0'>
+                <HomeCard bg={'bg-secondary_orange'} title={'Membres de C.O'} item1={{
+                  title: "Frères",
+                  value: membreCo?.Formation.frère + membreCo?.Administration.frère + membreCo?.Accueil_Hébegement.frère
+                }} item2={{
+                  title: "Sœurs",
+                  value: membreCo?.Formation.soeur + membreCo?.Administration.soeur + membreCo?.Accueil_Hébegement.soeur
+                }}
+                  item3={{
+                    title: "Total",
+                    value: membreCo?.Accueil_Hébegement.Total + membreCo?.Administration.Total + membreCo?.Formation.Total
+                  }}
+                  icon={'fa:group'}
+                  eye={false}
+                />
+                <div className='lg:w-[1px]  bg-primary_green lg:h-[100px] w-[95%] h-[1px]'></div>
+                <HomeCard bg={'bg-secondary_orange'} title={'Nombre de séminariste'} item1={{
+                  title: "Frères",
+                  value: seminariste?.frère
+                }} item2={{
+                  title: "Sœurs",
+                  value: seminariste?.soeur
+                }}
+                  item3={{
+                    title: "Total",
+                    value: seminariste?.Total
+                  }}
+                  icon={'mdi:account-student'}
+                  eye={false}
+                />
+                <div className='lg:w-[1px]  bg-primary_green lg:h-[100px] w-[95%] h-[1px]'></div>
+                <HomeCard bg={'bg-secondary_orange'} title={'Nombre de dortoirs'} item1={{
+                  title: "Frères",
+                  value: 10
+                }} item2={{
+                  title: "Sœurs",
+                  value: 12
+                }}
+                  item3={{
+                    title: "Total",
+                    value: 12
+                  }}
+                  icon={'fa-solid:home'}
+                  eye={false}
+                />
+                <div className='lg:w-[1px]  bg-primary_green lg:h-[100px] w-[95%] h-[1px]'></div>
+                <HomeCard bg={'bg-secondary_orange'} title={'Nombre de formateur'} item1={{
+                  title: "Frères",
+                  value: 10
+                }} item2={{
+                  title: "Sœurs",
+                  value: 12
+                }}
+                  item3={{
+                    title: "Total",
+                    value: 12
+                  }}
+                  icon={'fa-solid:home'}
+                  eye={false}
+                />
 
-export default Home;
+              </div>
+              <HomeCard bg={'bg-quaternary_green mt-3 lg:mt-0 lg:ml-3'} title={'Nombre total de visite'} item1={{
+                title: "Frères",
+                value: 10
+              }} item2={{
+                title: "Sœurs",
+                value: 12
+              }}
+                item3={{
+                  title: "Total",
+                  value: 10
+                }}
+                icon={'fa-solid:home'}
+                eye={false}
+              />
+            </div>
+            <div className='flex flex-row items-center justify-between mt-[10px]'>
+              <div className=' '>
+                <Input className='rounded-[5px]' type='text' id={"recherche"} placeholder='Rechercher' onChange={(e) => console.log(e.target.value)} />
+              </div>
+              <Button onClick={() => downloadPdf()} outline={true} className='button-icon bg-tertiary_green' bg={''}>
+                <p className='text-secondary_green'>Exporter</p>
+              </Button>
+            </div>
+            <div className="relative overflow-x-auto shadow-sm mt-[10px]">
+              <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead className="text-xs text-white  bg-secondary_green">
+                  <tr>
+                    <th scope="col" className="px-6 py-3">Commission</th>
+                    <th scope="col" className="px-6 py-3">Total frères</th>
+                    <th scope="col" className="px-6 py-3">Total soeurs</th>
+                    <th scope="col" className="px-6 py-3">Total membres</th>
+                    <th scope="col" className="px-6 py-3">Nom séminaire</th>
+                    <th scope="col" className="px-6 py-3">Période séminaire</th>
+                    <th scope="col" className="px-6 py-3">
+                      <span className="sr-only">Edit</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                  <tr className="bg-white dark:bg-gray-800">
+                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      Apple MacBook Pro 17"
+                    </th>
+                    <td className="px-6 py-4">Silver</td>
+                    <td className="px-6 py-4">Laptop</td>
+                    <td className="px-6 py-4">$2999</td>
+                    <td className="px-6 py-4">$2999</td>
+                    <td className="px-6 py-4">$2999</td>
+                    <td className="px-6 py-4 text-right">
+                      <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    </td>
+                  </tr>
+                  <tr className="bg-gray-50 dark:bg-gray-700">
+                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      Microsoft Surface Pro
+                    </th>
+                    <td className="px-6 py-4">White</td>
+                    <td className="px-6 py-4">Laptop PC</td>
+                    <td className="px-6 py-4">$1999</td>
+                    <td className="px-6 py-4">$1999</td>
+                    <td className="px-6 py-4">$1999</td>
+                    <td className="px-6 py-4 text-right">
+                      <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    </td>
+                  </tr>
+                  <tr className="bg-white dark:bg-gray-800">
+                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      Magic Mouse 2
+                    </th>
+                    <td className="px-6 py-4">Black</td>
+                    <td className="px-6 py-4">Accessories</td>
+                    <td className="px-6 py-4">$99</td>
+                    <td className="px-6 py-4">$99</td>
+                    <td className="px-6 py-4">$99</td>
+                    <td className="px-6 py-4 text-right">
+                      <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+            <div className='mt-[10px] flex flex-row justify-between items-center'>
+              <p className=' text-[12px] text-primary_green font-bold'>Les PCO du séminaire</p>
+              <Button outline={true} className='button-icon bg-quaternary_green' bg={''}>
+                <div className='border rounded-full p-[3px] bg-primary_green'>
+                  <Icon icon="mdi:plus" className='text-white' />
+                </div>
+                <p className='text-secondary_green'>Ajouter un PCO</p>
+              </Button>
+            </div>
+            <div className="relative overflow-x-auto shadow-sm mt-[10px]">
+              <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead className="text-xs text-white  bg-secondary_green">
+                  <tr>
+                    <th scope="col" className="px-6 py-3">Nom et prénoms</th>
+                    <th scope="col" className="px-6 py-3">Genre</th>
+                    <th scope="col" className="px-6 py-3">Sous-comités</th>
+                    <th scope="col" className="px-6 py-3">Contact</th>
+                    <th scope="col" className="px-6 py-3">Situation</th>
+                    <th scope="col" className="px-6 py-3">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                  <tr className="bg-white dark:bg-gray-800">
+                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      Apple MacBook Pro 17"
+                    </th>
+                    <td className="px-6 py-4">Silver</td>
+                    <td className="px-6 py-4">Laptop</td>
+                    <td className="px-6 py-4">$2999</td>
+                    <td className="px-6 py-4">$udsuf</td>
+                    <td className="px-6 py-4 text-right">
+                      <div className='flex flex-row justify-start items-center space-x-2'>
+                        <EditButton />
+                        <DeleteButton />
+                      </div>
+                    </td>
+                  </tr>
+                  <tr className="bg-gray-50 dark:bg-gray-700">
+                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      Microsoft Surface Pro
+                    </th>
+                    <td className="px-6 py-4">White</td>
+                    <td className="px-6 py-4">Laptop PC</td>
+                    <td className="px-6 py-4">$1999</td>
+                    <td className="px-6 py-4">$1999</td>
+                    <td className="px-6 py-4 text-right">
+                      <div className='flex flex-row justify-start items-center space-x-2'>
+                        <EditButton />
+                        <DeleteButton />
+                      </div>
+                    </td>
+                  </tr>
+                  <tr className="bg-white dark:bg-gray-800">
+                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      Magic Mouse 2
+                    </th>
+                    <td className="px-6 py-4">Black</td>
+                    <td className="px-6 py-4">Accessories</td>
+                    <td className="px-6 py-4">$99</td>
+                    <td className="px-6 py-4">$99</td>
+                    <td className="px-6 py-4 text-right">
+                      <div className='flex flex-row justify-start items-center space-x-2'>
+                        <EditButton />
+                        <DeleteButton />
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </PrimaryLayout>
+      </Main>
+    </div>
+  )
+}
+
+export default Home

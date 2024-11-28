@@ -19,7 +19,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSideBar }) => {
     {
       icon: "material-symbols:empty-dashboard-sharp",
       name:"Tableau de bord",
-      path: "/",
+      path: "/home",
     },
     {
       icon: "fa:group",
@@ -58,6 +58,8 @@ const Header: React.FC<HeaderProps> = ({ toggleSideBar }) => {
 
   const getOnglet = () => {
     const currentPath = window.location.pathname;
+    console.log("currentPath", currentPath);
+    
     const activeItem = HeaderIcon.find(item => item.path === currentPath);
     if (activeItem) {
       setActiveTab(activeItem.path);
@@ -82,7 +84,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSideBar }) => {
             </div>
             <div className="flex flex-row items-center space-x-[25px]">
               <img className="w-12 h-9  object-fill hidden lg:flex lg:items-center" src={logo_aeemci} alt="" />
-              <Button className="hidden lg:flex">
+              <Button className="hidden lg:flex" bg={""}>
                 <div className="button-icon text-green-800">
                   <Icon icon="charm:refresh" />
                   <p>Rafraichir</p>

@@ -9,7 +9,7 @@ const sideBarItems = [
     {
     icon: "material-symbols:empty-dashboard-sharp",
     name:"Tableau de bord",
-    path: "/",
+    path: "/home",
   },
   {
     icon: "fa:group",

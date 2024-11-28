@@ -1,75 +1,28 @@
-import { useState } from 'react'
-import './App.css'
-import Header from './ components/Header/Header'
-import SideBar from './ components/SideBar/SideBar'
-import Main from './ components/Main/Main'
-import Card from './ components/Card/Card'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Home from './Pages/Home'
-import Menu from './ components/SideBar/Menu'
-import Dashboard from './Pages/Dashboard'
-import OrganizationComite from './Pages/OrganizationComite'
-import Seminarian from './Pages/Seminarian'
-import Dormitory from './Pages/Dormitory'
-import Visitor from './Pages/Visitor'
-import AuditTrail from './Pages/AuditTrail'
-import Permission from './Pages/Permission'
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Dashboard/>
-  },
-  {
-    path: '/comite-organisation',
-    element: <OrganizationComite/>
-  },
-  {
-    path: '/seminariste',
-    element: <Seminarian/>
-  },
-  {
-    path: '/dortoir',
-    element: <Dormitory/>
-  },
-  {
-    path: '/visiteur',
-    element: <Visitor/>
-  },
-  {
-    path: '/piste-audit',
-    element: <AuditTrail/>
-  },
-  {
-    path: '/permissions',
-    element: <Permission/>
-  },
-
-])
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Login from "../src/Pages/Login";
+import Dashboard from "../src/Pages/Dashboard";
+import AuthProvider from "../src/contexts/AuthContext";
+import PrivateRoute from "../src/router/PrivateRoutes";
+import Home from "./Pages/Home";
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-
-  const toggleSideBar = () => {
-    setIsSidebarOpen(!isSidebarOpen)
-  }
+  console.log("App");
   
   return (
-  <div>
-   {isSidebarOpen?
-    <button onClick={()=>toggleSideBar()} className='fixed top-0 left-0 z-10 bg-slate-950/[0.2] w-full h-full'>
-    
-    </button>
-    :null
-    }
-   <Header toggleSideBar={toggleSideBar}/>
-    <SideBar isSidebarOpen={isSidebarOpen}/>
-    <Main className=''>
-      <RouterProvider router={router}/>
-    </Main>
-  </div>
-  )
+    <div className="App">
+      <Router>
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route element={<PrivateRoute  />}>
+              <Route path="/home" element={<Home />} />
+            </Route>
+            {/* Other routes */}
+          </Routes>
+        </AuthProvider>
+      </Router>
+    </div>
+  );
 }
 
-export default App
+export default App;

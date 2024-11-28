@@ -12,15 +12,21 @@ import DeleteButton from '../ components/Button/DeleteButton';
 
 
 type formValues = {
-    name: string;
-    sc_comite: string;
+    phonePers: string;
+    motPass: string;
 }
 
 const Dashboard: React.FC = () => {
+
+    const send = async () => {
+        console.log('ecris je suis la');
+        
+    }
+
     const form = useForm<formValues>({
         defaultValues: {
-            name: "dddd",
-            sc_comite: ""
+            phonePers: "dddd",
+            motPass: ""
         }
     });
     // const form = useForm<formValues>({
@@ -142,9 +148,9 @@ const Dashboard: React.FC = () => {
                 </div>
                 <div className='flex flex-row items-center justify-between mt-[10px]'>
                     <div className=' '>
-                        <Input className='rounded-[5px]' type='text' id={"nom_prenom"} placeholder='Rechercher' onChange={(e) => console.log(e.target.value)} />
+                        <Input className='rounded-[5px]' type='text' id={"recherche"}  placeholder='Rechercher' onChange={(e) => console.log(e.target.value)} />
                     </div>
-                    <Button outline={true} className='button-icon bg-tertiary_green'>
+                    <Button onClick={()=>send()} outline={true} className='button-icon bg-tertiary_green'>
                         <p className='text-secondary_green'>Exporter</p>
                     </Button>
                 </div>

@@ -23,5 +23,10 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": [
+    "src/**/*",
+    "config/**/*" // Ajoutez ce chemin pour inclure le dossier config
+  ],
+  "exclude": ["node_modules"]
+
 }

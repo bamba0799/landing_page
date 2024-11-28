@@ -5,11 +5,11 @@ interface HomeCardProps {
     title: string;
     item1: {
         title: string;
-        value: number;
+        value: number ;
     };
     item2: {
         title: string;
-        value: number;
+        value: number ;
     };
     item3?: {
         title: string;
@@ -44,6 +44,11 @@ const HomeCard: React.FC<HomeCardProps> = ({ title, item1, item2, item3, icon, b
                     <span className="text-[0.8rem] text-primary_green">{item2.title}:</span>
                     <span className="text-[1rem] text-primary_green font-bold"> {item2.value}</span>
                 </div>
+               {item3 &&
+                <div className="flex flex-row items-center space-x-[5px] ">
+                    <span className="text-[0.8rem] text-primary_green">{item3?.title}:</span>
+                    <span className="text-[1rem] text-primary_green font-bold"> {item3?.value}</span>
+                </div>}
             </div>
         </button>
     );
