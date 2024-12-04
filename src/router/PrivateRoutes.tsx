@@ -9,7 +9,7 @@ interface PrivateRouteProps {
   }
   
 const PrivateRoute = () => {
-  const user = useAuth() ;
+  const user:any = useAuth() ;
   console.log("ppppp",user);
   
   if (!user.access_token) return <Navigate to="/" />;

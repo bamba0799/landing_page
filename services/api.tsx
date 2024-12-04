@@ -3,8 +3,9 @@ import axiosClient from '../config/axios';
 
     // Exemple de méthode GET
     const getData = async (endpoint: string, params?: any) => {
+        const access_token = localStorage.getItem("access_token") as string; ;
         try {
-            const response = await axiosClient().get(endpoint, { params });
+            const response = await axiosClient(access_token).get(endpoint, { params });
             return response;
         } catch (error) {
             console.error("Error in ge:", error);
@@ -14,8 +15,9 @@ import axiosClient from '../config/axios';
 
     // Exemple de méthode POST
    const  postData = async (endpoint: string, data: any) => {
+    const access_token = localStorage.getItem("access_token");
         try {
-            const response = await axiosClient().post(endpoint, data);
+            const response = await axiosClient(access_token).post(endpoint, data);
             return response;
         } catch (error) { 
             console.error("Error in postData:", error);
@@ -25,8 +27,9 @@ import axiosClient from '../config/axios';
 
     // Exemple de méthode PUT
     const updateData = async (endpoint: string, data: any) => {
+        const access_token = localStorage.getItem("access_token");
         try {
-            const response = await axiosClient().put(endpoint, data);
+            const response = await axiosClient(access_token).put(endpoint, data);
             return response;
         } catch (error) {
             console.error("Error in updateData:", error);
@@ -36,8 +39,9 @@ import axiosClient from '../config/axios';
 
     // Exemple de méthode DELETE
     const deleteData = async (endpoint: string) => {
+        const access_token = localStorage.getItem("access_token");
         try {
-            const response = await axiosClient().delete(endpoint);
+            const response = await axiosClient(access_token).delete(endpoint);
             return response;
         } catch (error) {
             console.error("Error in deleteData:", error);
@@ -49,6 +53,9 @@ const apiService = {
         loginUser: async (data: any) => postData("/auth/signIn", data),
         getMembresCo: async () => getData("/membre-co/totalByGender"),
         getSeminariste: async () => getData("/seminariste/totalByGender"),
-};
+        getDortoir: async () => getData("/dortoirs/totaldortoirBytype"),
+        getCommission: async () => getData("/commission/totalByGender"),
+        addMembereCo: async (data: any) => postData("/membre-co/add", data),
+}; 
 
 export default apiService;

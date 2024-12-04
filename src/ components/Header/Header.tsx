@@ -6,6 +6,8 @@ import messi from '../../assets/lionel-messi.jpg';
 
 interface HeaderProps {
   toggleSideBar: () => void;
+  isActiveMenuBar?: boolean
+
 }
 type HeaderIconType = {
   icon: string,
@@ -13,7 +15,7 @@ type HeaderIconType = {
   path: string
 }
 
-const Header: React.FC<HeaderProps> = ({ toggleSideBar }) => {
+const Header: React.FC<HeaderProps> = ({ toggleSideBar, isActiveMenuBar=true }) => {
   const [activeTab, setActiveTab] = useState<string>("");
   const HeaderIcon: HeaderIconType[] = [
     {
@@ -55,6 +57,10 @@ const Header: React.FC<HeaderProps> = ({ toggleSideBar }) => {
 
   ]
 
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+  
 
   const getOnglet = () => {
     const currentPath = window.location.pathname;
@@ -73,7 +79,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSideBar }) => {
   return (
     <nav className="fixed top-0 z-50 w-full bg-white ">
       {/* <h2>Header</h2> */}
-      <div className="px-3 py-3 lg:px-5 lg:pl-3">
+      <div className="px-3 py-3 lg:px-5 lg:pl-3 md:border-b-[3px] md:border-primary_orange">
         <div className="flex flex-row items-center justify-between">
           <div className="flex items-center justify-start rtl:justify-end">
             <div className="lg:hidden flex flex-row items-center space-x-[5px]">
@@ -84,7 +90,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSideBar }) => {
             </div>
             <div className="flex flex-row items-center space-x-[25px]">
               <img className="w-12 h-9  object-fill hidden lg:flex lg:items-center" src={logo_aeemci} alt="" />
-              <Button className="hidden lg:flex" bg={""}>
+              <Button onClick={handleRefresh} outline={true} className="hidden lg:flex" bg={""}>
                 <div className="button-icon text-green-800">
                   <Icon icon="charm:refresh" />
                   <p>Rafraichir</p>
@@ -112,7 +118,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSideBar }) => {
           </button>
         </div>
       </div>
-      <div className=' bg-primary_green px-[15px] h-[80px] border-t-[3px] border-primary_orange fixed w-full hidden lg:flex flex-col justify-center'>
+      <div className={`bg-primary_green px-[15px] h-[80px]  fixed w-full hidden ${isActiveMenuBar==true?"lg:flex":"lg:none"} flex-col justify-center`}>
         <div className="flex flex-row h-full justify-between">
           {HeaderIcon.map((item, index) => (
             <a key={index} href={item.path} onClick={() => {

@@ -48,10 +48,10 @@ function Login() {
     return (
         <form onSubmit={handleSubmit(loginUser)} className='min-h-screen px-[18px] md:px-[0px] md:pl-[18px] bg-white md:flex md:flex-col md:justify-center'>
             <div className=' md:flex md:flex-row md:items-center md:space-x-2'>
-                <div className='md:w-[40%] md:h-screen'>
+                <div className='md:w-[40%] md:h-screen md:px-[40px]'>
                     <div className='flex flex-col items-center'>
                         <img src={logo} className=' w-[100px] h-[100px]' />
-                        <span className=' text-[12px] text-primary_green'>Système de gestion administrative du séminaire al Ikhwane</span>
+                        <span className=' text-[12px] text-primary_green'>Système de gestion administratif du séminaire al Ikhwane</span>
                     </div>
                     <div className='flex flex-col items-center mt-[50px]'>
                         <h1 className='text-primary_green font-bold text-[20px]'>Bienvenue</h1>
@@ -59,7 +59,7 @@ function Login() {
                     </div>
                     <div className='flex flex-col justify-center space-y-[20px] mt-[24px]'>
                         <div>
-                            <ConnexionInput isPassword={false} icon={'ph:user'} placeholder='Entrez votre login' {...register("phonePers", {
+                            <ConnexionInput isPassword={false} icon={'ph:user'} placeholder='Entrez votre Contact' {...register("phonePers", {
                                 required: {
                                     value: true,
                                     message: "Ce champ est obligatoire"

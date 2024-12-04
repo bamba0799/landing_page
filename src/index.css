@@ -9,7 +9,20 @@
   .error-message {
     @apply text-red-500 text-[12px];
   }
+
+  
 }
+
+@layer utilities {
+  .hide-scrollbar {
+    scrollbar-width: none; /* Pour Firefox */
+    -ms-overflow-style: none; /* Pour IE et Edge */
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Pour Chrome, Safari et Opera */
+  }
+}
+
 /* :root {
     --main-bg-color: blue;
     --main-text-color: black;

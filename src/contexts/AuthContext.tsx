@@ -1,5 +1,5 @@
 import { useContext, createContext, useState, ReactNode, Context, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import apiService from "../../services/api";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -9,6 +9,10 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState(null);
   const [access_token, setAccess_token] = useState(localStorage.getItem("site") || "");
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.pathname || "/home";
+
   const loginAction = async (data:any) => {
     try {
       const res = await apiService.loginUser(data);
@@ -42,7 +46,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     const access_token = localStorage.getItem("access_token");
     if(access_token){
       setAccess_token(access_token);
-      navigate("/home");
+      navigate(from);
     }else {
       navigate("/");
     }

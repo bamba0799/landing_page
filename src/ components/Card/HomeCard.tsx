@@ -23,7 +23,7 @@ interface HomeCardProps {
 // streamline:graph-arrow-decrease
 const HomeCard: React.FC<HomeCardProps> = ({ title, item1, item2, item3, icon, bg, eye, onClick }) => {
     return (
-        <button className={`${bg} border flex flex-col items-center w-full lg:w-auto justify-between h-[90px] lg:h-[120px] rounded-[10px] px-[20px] lg:px-[40px] py-[15px]`}>
+        <button className={`${bg} shadow-md border flex flex-col items-center w-full lg:w-auto justify-between h-[90px] lg:h-[120px] rounded-[10px] px-[20px] lg:px-[40px] py-[15px]`}>
             <div className="flex flex-row items-center justify-between lg:space-x-[30px] w-full">
                 <div className=" flex flex-row items-center space-x-[5px]">
                     <Icon icon={icon} className="w-[20px] h-[20px] text-primary_green/60"/>
