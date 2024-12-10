@@ -62,3 +62,21 @@ export interface User {
     rolePers: string;
     roleMembre: string;
   }
+
+  export interface AddSeminaristeFormValues {
+    nomSemi: string;
+    prenomSemi: string;
+    age: number;
+    genreSemi: string;
+    phoneSemi: string ; 
+    sousComite: string; 
+    numUrgence: string; 
+    dortoir: string;
+    etatSante: string;
+    situation: string | null;
+    problemeSante: string;
+  }
+
+  export interface AddNiveauFormValues {
+    nomNiveau: string;
+ }

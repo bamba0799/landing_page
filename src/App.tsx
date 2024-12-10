@@ -8,6 +8,8 @@ import AddCommission from "./Pages/Commission/addCommission";
 import IndexPageComiteOrganisation from "./Pages/ComiteOrganisation/IndexPage";
 import IndexPageSeminariste from "./Pages/Seminariste/IndexPage";
 import IndexPageDortoir from "./Pages/Dortoir/IndexPage";
+import AddSeminariste from "./Pages/Seminariste/addSeminariste";
+import AddNiveau from "./Pages/Niveau/addNiveau";
 
 function App() {
   console.log("App");
@@ -23,6 +25,8 @@ function App() {
               <Route path="/add-commission" element={<AddCommission />} />
               <Route path="/comite-organisation" element={<IndexPageComiteOrganisation />} />
               <Route path="/seminariste" element={<IndexPageSeminariste />} />
+              <Route path="/add-seminariste" element={<AddSeminariste />} />
+              <Route path="/add-niveau" element={<AddNiveau />} />
               <Route path="/dortoir" element={<IndexPageDortoir />} />
             </Route>
             {/* Other routes */}

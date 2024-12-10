@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Main from '../../ components/Main/Main';
 import PrimaryLayout from '../../layouts/PrimaryLayout';
 import HomeCard from '../../ components/Card/HomeCard';
@@ -8,20 +8,91 @@ import { useNavigate } from 'react-router-dom';
 import Input from '../../ components/Input/Input';
 import EditButton from '../../ components/Button/EditButton';
 import DeleteButton from '../../ components/Button/DeleteButton';
-// import '../../assets/css/index.css';
+import apiService from '../../../services/api';
+import DeleteModal from '../../ components/Modal/DeleteModal';
+import toast from 'react-hot-toast';
 const IndexPage = () => {
 
+    const [open, setOpen] = React.useState<boolean>(false);
+
+    const [isClicked, setIsClicked] = React.useState<boolean>(false);
+
     const [activeTabIndex, setActiveTabIndex] = React.useState<number>(0);
+    const [statistiqueSeminariste, setStatistiqueSeminariste] = React.useState<any>(null);
+    const [totalSeminariste, setTotalSeminariste] = React.useState<any>(null);
+    const [totalFrereSeminariste, setTotalFrereSeminariste] = React.useState<any>(null);
+    const [totalSoeurSeminariste, setTotalSoeurSeminariste] = React.useState<any>(null);
+
+    const [seminaristeId, setSeminaristeId] = React.useState<any>(null);
+
+    const [currentNiveauData, setCurrentNiveauData] = React.useState<any>([]);
+    const [niveau, setNiveau] = React.useState<any>(null);
 
     const navigate = useNavigate();
 
-    const tab = [
-        { id: 0, name: "Pépinières" },
-        { id: 1, name: "Niveau 1" },
-        { id: 2, name: "Niveau 2" },
-        { id: 3, name: "Niveau 3" },
 
-    ];
+    const deleteSeminariste = async (id: any) => {
+        console.log("id", id);
+        setOpen(false);
+        try {
+            const { data: seminariste } = await apiService.deleteSeminariste(id);
+            console.log("seminariste", seminariste);
+            setOpen(false);
+            setIsClicked(!isClicked);
+            toast.success("Seminariste supprimé avec succès");
+        } catch (error) {
+            console.error("Error in deleteSeminariste:", error);
+            toast.error("Une erreur s'est produite lors de la suppression du seminariste");
+        }
+    }
+
+    const getStatistiqueSeminariste = async () => {
+        try {
+            const { data: stat } = await apiService.getStatistiqueSeminariste();
+            const totalFrereSeminariste = stat?.Enfants.totalFrere + stat?.Jeunes_et_Adultes.totalFrere + stat?.Pepinieres.totalFrere + stat?.Non_specifie.totalFrere;
+            const totalSoeurSeminariste = stat?.Enfants.totalSoeur + stat?.Jeunes_et_Adultes.totalSoeur + stat?.Pepinieres.totalSoeur + stat?.Non_specifie.totalSoeur;
+            const totalSeminarist = totalFrereSeminariste + totalSoeurSeminariste;
+            setStatistiqueSeminariste(stat);
+            setTotalFrereSeminariste(totalFrereSeminariste);
+            setTotalSoeurSeminariste(totalSoeurSeminariste);
+            setTotalSeminariste(totalSeminarist);
+            console.log("statistiqueSeminariste", stat);
+
+
+        } catch (error) {
+            console.error("Error in getStatistiqueSeminariste:", error);
+
+        }
+    }
+
+    const getNiveau = async () => {
+        try {
+            const { data: nivo } = await apiService.getNiveau();
+            console.log("niveausssssss", nivo);
+            setNiveau(nivo);
+            const currentNiveauDataByNiveau = nivo?.filter((_item: any, index: number) => index == activeTabIndex);
+            setCurrentNiveauData(currentNiveauDataByNiveau);
+            console.log("currentNiveauDataByNiveau", currentNiveauDataByNiveau);
+
+        } catch (error) {
+            console.error("Error in getNiveau:", error);
+        }
+    }
+
+    useEffect(() => {
+        getNiveau();
+        getStatistiqueSeminariste();
+    }, [activeTabIndex, isClicked]);
+
+
+    // useEffect(() => {
+    //   if(activeTabIndex > 0){
+    //     const currentNiveauDataByNiveau = niveau?.filter((_item: any, index: number) => index == activeTabIndex);
+    //     setCurrentNiveauData(currentNiveauDataByNiveau);
+    //     console.log("currentNiveauDataByNiveau", currentNiveauDataByNiveau);
+    //   }
+    // }, [activeTabIndex]);
+
     return (
         <div>
             <Main className=''>
@@ -32,14 +103,14 @@ const IndexPage = () => {
                                 {/* card1 */}
                                 <HomeCard bg={'bg-secondary_orange'} title={'Nombre de séminariste'} item1={{
                                     title: "Frères",
-                                    value: 12
+                                    value: totalFrereSeminariste
                                 }} item2={{
                                     title: "Sœurs",
-                                    value: 12
+                                    value: totalSoeurSeminariste
                                 }}
                                     item3={{
                                         title: "Total",
-                                        value: 24
+                                        value: totalSeminariste
                                     }}
                                     icon={'mdi:account-student'}
                                     eye={false}
@@ -47,14 +118,14 @@ const IndexPage = () => {
                                 {/* card2 */}
                                 <HomeCard bg={'bg-quaternary_green'} title={'Pépinières'} item1={{
                                     title: "Frères",
-                                    value: 12
+                                    value: statistiqueSeminariste?.Pepinieres.totalFrere
                                 }} item2={{
                                     title: "Sœurs",
-                                    value: 12
+                                    value: statistiqueSeminariste?.Pepinieres.totalSoeur
                                 }}
                                     item3={{
                                         title: "Total",
-                                        value: 24
+                                        value: statistiqueSeminariste?.Pepinieres.totalFrere + statistiqueSeminariste?.Pepinieres.totalSoeur
                                     }}
                                     icon={''}
                                     eye={false}
@@ -62,14 +133,14 @@ const IndexPage = () => {
                                 {/* card3 */}
                                 <HomeCard bg={'bg-quaternary_green'} title={'Enfants'} item1={{
                                     title: "Frères",
-                                    value: 12
+                                    value: statistiqueSeminariste?.Enfants.totalFrere
                                 }} item2={{
                                     title: "Sœurs",
-                                    value: 12
+                                    value: statistiqueSeminariste?.Enfants.totalSoeur
                                 }}
                                     item3={{
                                         title: "Total",
-                                        value: 24
+                                        value: statistiqueSeminariste?.Enfants.totalFrere + statistiqueSeminariste?.Enfants.totalSoeur
                                     }}
                                     icon={''}
                                     eye={false}
@@ -77,14 +148,14 @@ const IndexPage = () => {
                                 {/* card4 */}
                                 <HomeCard bg={'bg-quaternary_green'} title={'Jeunes et adultes'} item1={{
                                     title: "Frères",
-                                    value: 12
+                                    value: statistiqueSeminariste?.Jeunes_et_Adultes.totalFrere
                                 }} item2={{
                                     title: "Sœurs",
-                                    value: 12
+                                    value: statistiqueSeminariste?.Jeunes_et_Adultes.totalSoeur
                                 }}
                                     item3={{
                                         title: "Total",
-                                        value: 24
+                                        value: statistiqueSeminariste?.Jeunes_et_Adultes.totalFrere + statistiqueSeminariste?.Jeunes_et_Adultes.totalSoeur
                                     }}
                                     icon={''}
                                     eye={false}
@@ -93,22 +164,22 @@ const IndexPage = () => {
 
                         </div>
                         <div className='mt-[10px] flex flex-row justify-end items-center'>
-                            <Button onClick={() => navigate("/add-commission")} outline={true} className='button-icon bg-quaternary_green' bg={''}>
+                            <Button onClick={() => navigate("/add-niveau")} outline={true} className='button-icon bg-quaternary_green' bg={''}>
                                 <div className='border rounded-full p-[3px] bg-primary_green'>
                                     <Icon icon="mdi:plus" className='text-white' />
                                 </div>
-                                <p className='text-secondary_green'>Ajouter un membre de co </p>
+                                <p className='text-secondary_green'>Ajouter niveau </p>
                             </Button>
                         </div>
-                        {/* tableau */}
+                        {/* niveauleau */}
                         <div className='md:border md:shadow-lg py-[20px] md:px-[10px]  border-gray-300 mt-[14px] rounded-t-[10px]'>
                             <div className='w-full md:border-b-[2px] border-gray-300 flex items-center space-x-[10px] md:space-x-[20px] overflow-x-auto hide-scrollbar'>
                                 {
-                                    tab.map((item, index) => {
+                                    niveau?.map((item: any, index: number) => {
 
                                         return (
                                             <button onClick={() => setActiveTabIndex(index)} className={`flex-shrink-0  px-[12px] py-[8px] ${activeTabIndex == index ? "bg-primary_orange" : ""} rounded-t-[10px]`} key={index}>
-                                                <p className={`text-[14px] ${activeTabIndex == index ? "text-white font-bold" : "text-primary_green"}  `}>{item.name}</p>
+                                                <p className={`text-[14px] ${activeTabIndex == index ? "text-white font-bold" : "text-primary_green"}  `}>{item.nomNiveau}</p>
                                             </button>
                                         )
                                     })
@@ -120,11 +191,11 @@ const IndexPage = () => {
                                     <Input className='rounded-[5px]' type='text' id={"recherche"} placeholder='Rechercher' onChange={(e) => console.log(e.target.value)} />
                                 </div>
                                 <div className='flex flex-col  space-y-[10px] md:flex-row md:items-center md:justify-between md:space-x-[20px] md:space-y-[0px]'>
-                                    <Button onClick={() => navigate("/add-commission")} outline={true} className='button-icon bg-quaternary_green' bg={''}>
+                                    <Button onClick={() => navigate("/add-seminariste")} outline={true} className='button-icon bg-quaternary_green' bg={''}>
                                         <div className='border rounded-full p-[3px] bg-primary_green'>
                                             <Icon icon="mdi:plus" className='text-white' />
                                         </div>
-                                        <p className='text-secondary_green'>Ajouter un membre </p>
+                                        <p className='text-secondary_green'>Ajouter séminariste </p>
                                     </Button>
                                     <Button onClick={() => alert("sss")} outline={true} className='button-icon bg-tertiary_green' bg={''}>
                                         <p className='text-secondary_green'>Exporter</p>
@@ -146,61 +217,47 @@ const IndexPage = () => {
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                                        <tr className="bg-white dark:bg-gray-800">
-                                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                Apple MacBook Pro 17"
-                                            </th>
-                                            <td className="px-6 py-4">Silver</td>
-                                            <td className="px-6 py-4">Laptop</td>
-                                            <td className="px-6 py-4">Laptop</td>
-                                            <td className="px-6 py-4">$2999</td>
-                                            <td className="px-6 py-4">$2999</td>
-                                            <td className="px-6 py-4">$udsuf</td>
-                                            <td className="px-6 py-4 text-right">
-                                                <div className='flex flex-row justify-start items-center space-x-2'>
-                                                    <EditButton />
-                                                    <DeleteButton />
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr className="bg-gray-50 dark:bg-gray-700">
-                                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                Microsoft Surface Pro
-                                            </th>
-                                            <td className="px-6 py-4">White</td>
-                                            <td className="px-6 py-4">Laptop PC</td>
-                                            <td className="px-6 py-4">Laptop PC</td>
-                                            <td className="px-6 py-4">$1999</td>
-                                            <td className="px-6 py-4">$1999</td>
-                                            <td className="px-6 py-4">$1999</td>
-                                            <td className="px-6 py-4 text-right">
-                                                <div className='flex flex-row justify-start items-center space-x-2'>
-                                                    <EditButton />
-                                                    <DeleteButton />
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr className="bg-white dark:bg-gray-800">
-                                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                Magic Mouse 2
-                                            </th>
-                                            <td className="px-6 py-4">Black</td>
-                                            <td className="px-6 py-4">Accessories</td>
-                                            <td className="px-6 py-4">Accessories</td>
-                                            <td className="px-6 py-4">$99</td>
-                                            <td className="px-6 py-4">$99</td>
-                                            <td className="px-6 py-4">$99</td>
-                                            <td className="px-6 py-4 text-right">
-                                                <div className='flex flex-row justify-start items-center space-x-2'>
-                                                    <EditButton />
-                                                    <DeleteButton />
-                                                </div>
-                                            </td>
-                                        </tr>
+
+
+                                        {
+                                            currentNiveauData.length > 0 ?
+                                                currentNiveauData[0]?.seminariste?.map((item: any, index: number) => (
+                                                    <tr className={`${index % 2 == 0 ? "bg-white" : "bg-white/50"} dark:bg-gray-800`} key={index}>
+                                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                            {item.nomSemi} {item.prenomSemi}
+                                                        </th>
+                                                        <td className="px-6 py-4">{item.genreSemi}</td>
+                                                        <td className="px-6 py-4">{item.nomdortoir}</td>
+                                                        <td className="px-6 py-4">{item.sousComite}</td>
+                                                        <td className="px-6 py-4">{item.etatSante}</td>
+                                                        <td className="px-6 py-4">{item.phoneSemi}</td>
+                                                        <td className="px-6 py-4">{item.situation}</td>
+
+                                                        <td className="px-6 py-4 text-right">
+                                                            <div className='flex flex-row justify-start items-center space-x-2'>
+                                                                <EditButton />
+                                                                <DeleteButton onClick={()=>{
+                                                                    setOpen(true)
+                                                                    setSeminaristeId(item.idSemi)
+
+                                                                }}/>
+                                                            </div>
+                                                        </td>
+
+                                                    </tr>
+                                                )) :
+                                                <tr>
+                                                    <td className="text-center">Aucune donnée disponible</td>
+                                                </tr>
+
+                                        }
                                     </tbody>
                                 </table>
                             </div>
                         </div>
+                        <DeleteModal deleteAction={()=>deleteSeminariste(seminaristeId)} cancelAction={()=> {setOpen(false); setSeminaristeId("")}} text='Etes vous sur de bien effacer?' open={open} onClose={() => setOpen(false)} />
+                          
+                       
                     </div>
                 </PrimaryLayout>
             </Main>

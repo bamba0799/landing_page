@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 const axiosClient = ( token: string | null = null): any => {
   const headers = token
     ? {
@@ -32,8 +33,11 @@ const axiosClient = ( token: string | null = null): any => {
       try {
         const { response } = error;
         if (response?.status === 401) {
-          localStorage.removeItem("access_token");
-          // navigate("/");
+          // localStorage.removeItem("access_token");
+          alert("Your session has expired. Please login again.");
+        // setTimeout(() => {
+        //   window.location.href = "/"
+        // }, 5000);
         }
       } catch (e) {
         console.error(e);

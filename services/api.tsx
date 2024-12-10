@@ -38,10 +38,10 @@ import axiosClient from '../config/axios';
     }
 
     // Exemple de méthode DELETE
-    const deleteData = async (endpoint: string) => {
+    const deleteData = async (endpoint: string,id:any) => {
         const access_token = localStorage.getItem("access_token");
         try {
-            const response = await axiosClient(access_token).delete(endpoint);
+            const response = await axiosClient(access_token).delete(`${endpoint}/${id}`);
             return response;
         } catch (error) {
             console.error("Error in deleteData:", error);
@@ -56,6 +56,12 @@ const apiService = {
         getDortoir: async () => getData("/dortoirs/totaldortoirBytype"),
         getCommission: async () => getData("/commission/totalByGender"),
         addMembereCo: async (data: any) => postData("/membre-co/add", data),
+        getAllDortoir: async () => getData("/dortoirs"),
+        addSeminariste: async (data: any) => postData("/seminariste/add", data),
+        deleteSeminariste: async (id: any) => deleteData("/seminariste/delete", id),
+        getStatistiqueSeminariste: async () => getData("/seminariste/totalByCateg"),
+        addNiveau: async (data: any) => postData("/niveau/add", data),
+        getNiveau: async () => getData("/niveau/all"),
 }; 
 
 export default apiService;

@@ -3,7 +3,7 @@ import React from "react";
 type SelectProps = {
     options: { value: string; label: string }[];
     label?: string;
-    value: string;
+    value: string | null
     onChange: (value: string) => void;
     placeholder?: string;
     required?: boolean;
