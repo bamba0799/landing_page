@@ -235,7 +235,7 @@ const IndexPage = () => {
 
                                                         <td className="px-6 py-4 text-right">
                                                             <div className='flex flex-row justify-start items-center space-x-2'>
-                                                                <EditButton />
+                                                                <EditButton onClick={()=> navigate(`/update-seminariste/${item.idSemi}`)}/>
                                                                 <DeleteButton onClick={()=>{
                                                                     setOpen(true)
                                                                     setSeminaristeId(item.idSemi)

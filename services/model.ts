@@ -77,6 +77,29 @@ export interface User {
     problemeSante: string;
   }
 
+  export interface UpdateSeminaristeFormValues {
+    nomSemi: string;
+    prenomSemi: string;
+    age: number;
+    genreSemi: string;
+    phoneSemi: string ; 
+    sousComite: string; 
+    numUrgence: string; 
+    dortoir: string;
+    etatSante: string;
+    situation: string | null;
+    problemeSante: string;
+    niveau: string;
+    categorie: string;
+  }
+
   export interface AddNiveauFormValues {
     nomNiveau: string;
+ }
+
+ export interface AddDortoirFormValues {
+  nomDortoir: string;
+  genre: "frere" | "soeur" | "";
+  typedortoir: "co" | "seminariste" | "non_defini" | "";
+  nbPlace: number;
  }

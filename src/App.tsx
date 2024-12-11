@@ -10,6 +10,8 @@ import IndexPageSeminariste from "./Pages/Seminariste/IndexPage";
 import IndexPageDortoir from "./Pages/Dortoir/IndexPage";
 import AddSeminariste from "./Pages/Seminariste/addSeminariste";
 import AddNiveau from "./Pages/Niveau/addNiveau";
+import UpdateSeminariste from "./Pages/Seminariste/updateSeminariste";
+import AddDortoir from "./Pages/Dortoir/AddDortoir";
 
 function App() {
   console.log("App");
@@ -26,8 +28,11 @@ function App() {
               <Route path="/comite-organisation" element={<IndexPageComiteOrganisation />} />
               <Route path="/seminariste" element={<IndexPageSeminariste />} />
               <Route path="/add-seminariste" element={<AddSeminariste />} />
+              <Route path="/update-seminariste/:seminaristeId" element={<UpdateSeminariste />} />
               <Route path="/add-niveau" element={<AddNiveau />} />
+              {/* dortoir */}
               <Route path="/dortoir" element={<IndexPageDortoir />} />
+              <Route path="/add-dortoir" element={<AddDortoir />} />
             </Route>
             {/* Other routes */}
           </Routes>
