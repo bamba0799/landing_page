@@ -8,12 +8,10 @@ import { AddNiveauFormValues } from '../../../services/model';
 import Select from '../../ components/Select/Select';
 import apiService from '../../../services/api';
 import toast from "react-hot-toast";
-import DeleteModal from '../../ components/Modal/DeleteModal';
-import { useState } from 'react';
 
 
 const AddNiveau = () => {
-    const [open, setOpen] = useState<boolean>(false);
+    // const [open, setOpen] = useState<boolean>(false);
 
     const navigate = useNavigate();
     const { handleSubmit, setValue, formState, control } = useForm<AddNiveauFormValues>({

@@ -1,5 +1,4 @@
 import React from 'react';
-import Loader from '../Loader';
 import LoaderB from '../LoaderB';
 
 interface ButtonProps {

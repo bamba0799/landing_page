@@ -4,17 +4,15 @@ import Button from '../../ components/Button/Button';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import { useNavigate } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
-import { AddDortoirFormValues, AddNiveauFormValues } from '../../../services/model';
+import { AddDortoirFormValues, } from '../../../services/model';
 import Select from '../../ components/Select/Select';
 import apiService from '../../../services/api';
 import toast from "react-hot-toast";
-import DeleteModal from '../../ components/Modal/DeleteModal';
-import { useState } from 'react';
 import Input from '../../ components/Input/Input';
 
 
 const AddDortoir = () => {
-    const [open, setOpen] = useState<boolean>(false);
+    // const [open, setOpen] = useState<boolean>(false);
 
     const navigate = useNavigate();
     const { handleSubmit, register, setValue, formState, control } = useForm<AddDortoirFormValues>({

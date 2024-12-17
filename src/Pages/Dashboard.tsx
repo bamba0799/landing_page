@@ -1,20 +1,19 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import PrimaryLayout from '../layouts/PrimaryLayout';
 import Input from '../ components/Input/Input';
 // import MyInput from '../ components/Input/Input';
-import { Field, FieldError, FieldErrors, useForm } from 'react-hook-form';
+// import {   useForm } from 'react-hook-form';
 import Button from '../ components/Button/Button';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import HomeCard from '../ components/Card/HomeCard';
-import { Table } from "flowbite-react";
 import EditButton from '../ components/Button/EditButton';
 import DeleteButton from '../ components/Button/DeleteButton';
 
 
-type formValues = {
-    phonePers: string;
-    motPass: string;
-}
+// type formValues = {
+//     phonePers: string;
+//     motPass: string;
+// }
 
 const Dashboard: React.FC = () => {
 
@@ -23,12 +22,12 @@ const Dashboard: React.FC = () => {
         
     }
 
-    const form = useForm<formValues>({
-        defaultValues: {
-            phonePers: "dddd",
-            motPass: ""
-        }
-    });
+    // const form = useForm<formValues>({
+    //     defaultValues: {
+    //         phonePers: "dddd",
+    //         motPass: ""
+    //     }
+    // });
     // const form = useForm<formValues>({
     //     defaultValues: async () => {
     //         const response = await fetch('https://api.example.com/data');
@@ -38,19 +37,19 @@ const Dashboard: React.FC = () => {
     //             sc_comite: data.sc_comite
     //     }}
     // });
-    const nameInputRef = useRef<HTMLInputElement>(null);
-    const nameInputRefx = useRef<HTMLInputElement>(null);
+    // const nameInputRef = useRef<HTMLInputElement>(null);
+    // const nameInputRefx = useRef<HTMLInputElement>(null);
 
-    const { register, control, handleSubmit, formState } = form;
-    const { errors } = formState;
+    // const { register, control, handleSubmit, formState } = form;
+    // const { errors } = formState;
 
-    const onSubmit = (data: formValues) => {
-        console.log("data", data);
-    }
+    // const onSubmit = (data: formValues) => {
+    //     console.log("data", data);
+    // }
 
-    const onError = (errors: FieldErrors<formValues>) => {
-        console.log("errors", errors);
-    }
+    // const onError = (errors: FieldErrors<formValues>) => {
+    //     console.log("errors", errors);
+    // }
     // useEffect(() => {
     //     if (nameInputRef.current) {
     //         console.log(nameInputRef.current);
@@ -150,7 +149,7 @@ const Dashboard: React.FC = () => {
                     <div className=' '>
                         <Input className='rounded-[5px]' type='text' id={"recherche"}  placeholder='Rechercher' onChange={(e) => console.log(e.target.value)} />
                     </div>
-                    <Button onClick={()=>send()} outline={true} className='button-icon bg-tertiary_green'>
+                    <Button onClick={() => send()} outline={true} className='button-icon bg-tertiary_green' bg={''}>
                         <p className='text-secondary_green'>Exporter</p>
                     </Button>
                 </div>
@@ -215,7 +214,7 @@ const Dashboard: React.FC = () => {
                 </div>
                 <div className='mt-[10px] flex flex-row justify-between items-center'>
                     <p className=' text-[12px] text-primary_green font-bold'>Les PCO du séminaire</p>
-                    <Button outline={true} className='button-icon bg-quaternary_green'>
+                    <Button outline={true} className='button-icon bg-quaternary_green' bg={''}>
                         <div className='border rounded-full p-[3px] bg-primary_green'>
                             <Icon icon="mdi:plus" className='text-white' />
                         </div>

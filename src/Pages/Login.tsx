@@ -5,7 +5,7 @@ import ConnexionInput from '../ components/Input/ConnexionInput'
 import logo from '../assets/LogoAEEMCI.png';
 import coran from '../assets/coran.png';
 import Button from '../ components/Button/Button'
-import { set, useForm } from 'react-hook-form';
+import {  useForm } from 'react-hook-form';
 
 import { useAuth } from '../contexts/AuthContext'
 

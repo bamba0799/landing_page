@@ -14,10 +14,10 @@ export interface User {
     roleMembre: string;
   }
   
-  export interface AuthResponse {
-    user: User;
-    access_token: string;
-  }
+  // export interface AuthResponse {
+  //   user: User;
+  //   access_token: string;
+  // }
 
   interface CategoryStats {
     frere: number ;

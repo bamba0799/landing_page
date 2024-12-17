@@ -69,11 +69,11 @@ const IndexPage = () => {
             const { data: dortoirList } = await apiService.getDortoirList();
             console.log("getDortoirList", dortoirList);
             setDortoirList(dortoirList);
-            const currentDortoir = dortoirList.filter((item: any, index: number) => index == activeTabIndex);
+            const currentDortoir = dortoirList.filter(( index: number) => index == activeTabIndex);
             console.log("currentDortoir", currentDortoir);
 
             setCurrentDortoir(currentDortoir);
-            const seminaristeForPdf = currentDortoir[0]?.seminaristes?.map((item: any, index: number) => {
+            const seminaristeForPdf = currentDortoir[0]?.seminaristes?.map((item: any) => {
                 return {
                     nomPrenomSemi: `${item.nomSemi} ${item.prenomSemi}`,
                     genreSemi: item.genreSemi,

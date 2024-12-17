@@ -1,4 +1,3 @@
-import { get } from 'axios';
 import axiosClient from '../config/axios';
 
 

@@ -9,6 +9,7 @@ import Input from '../../ components/Input/Input';
 import EditButton from '../../ components/Button/EditButton';
 import DeleteButton from '../../ components/Button/DeleteButton';
 import apiService from '../../../services/api';
+import jsPDF from 'jspdf';
 // import '../../assets/css/index.css';
 const IndexPage = () => {
 
@@ -17,10 +18,32 @@ const IndexPage = () => {
     const [totalByGender, setTotalByGender] = React.useState<any>([]);
     const [listParCo, setListParCo] = React.useState<any>([]);
     const [selectedComiMember, setSelectedComiMember] = React.useState<any>(null);
+    const [selectedComiMemberForpdf, setSelectedComiMemberForpdf] = React.useState<any>(null);
 
     const navigate = useNavigate();
 
 
+
+    const columns = [
+        { title: "Nom et Prénoms", field: "nomPrenomCo", },
+        { title: "Genre", field: "genrePers", },
+        { title: "Sous comité", field: "sousComite", },
+        { title: "Rôle", field: "rolePers", },
+        { title: "Contact", field: "phonePers", },
+        { title: "situation", field: "situation", },
+    ]
+
+
+  const downloadPdf = () => {
+    const doc: any = new jsPDF()
+    doc.text(`Commission_${selectedComiMember?.commission}`, 20, 10)
+    doc.autoTable({
+      theme: "grid",
+      columns: columns.map(col => ({ ...col, dataKey: col.field })),
+      body: selectedComiMemberForpdf
+    })
+    doc.save(`${`Commission_${selectedComiMember?.commission}`}.pdf`)
+  }
 
     // const tab = [
     //     { id: 0, name: "Communicatoin" },
@@ -43,8 +66,21 @@ const IndexPage = () => {
             const { data: listParCo } = await apiService.getListParCo();
             console.log("listParCo", listParCo);
             setListParCo(listParCo);
-            const selectedComiMember = listParCo[activeTabIndex];            
+            const selectedComiMember = listParCo[activeTabIndex];   
+            console.log("selectedComiMember", selectedComiMember);
+                     
             setSelectedComiMember(selectedComiMember);
+            const selectedComiMemberForpdf = selectedComiMember?.membres.map((item:any) => {
+                return {
+                    nomPrenomCo: item.nomPers + " " + item.pernomPers,
+                    genrePers: item.genrePers,
+                    sousComite: item.sousComite,
+                    rolePers: item.rolePers,
+                    phonePers: item.phonePers,
+                    situation: item.situation&&'Néant',
+                }
+            })
+            setSelectedComiMemberForpdf(selectedComiMemberForpdf);
 
         } catch (error) {
             console.log("error", error);
@@ -172,7 +208,7 @@ const IndexPage = () => {
                                         </div>
                                         <p className='text-secondary_green'>Ajouter un membre </p>
                                     </Button>
-                                    <Button onClick={() => alert("sss")} outline={true} className='button-icon bg-tertiary_green' bg={''}>
+                                    <Button onClick={() => downloadPdf()} outline={true} className='button-icon bg-tertiary_green' bg={''}>
                                         <p className='text-secondary_green'>Exporter</p>
                                     </Button>
                                 </div>
@@ -199,7 +235,7 @@ const IndexPage = () => {
                                                     <td className="px-6 py-4">{item.genrePers}</td>
                                                     <td className="px-6 py-4">{item.sousComite}</td>
                                                     <td className="px-6 py-4">{item.phonePers}</td>
-                                                    <td className="px-6 py-4">{item.situation}</td>
+                                                    <td className="px-6 py-4">{item.situation&&'Néant'}</td>
                                                     <td className="px-6 py-4">
                                                         <div className="flex items-center space-x-2">
                                                             <EditButton onClick={() => navigate("/edit-commission")} />

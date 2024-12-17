@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import SecondMain from '../../ components/Main/SecondMain';
 import SecondLayout from '../../layouts/SecondLayout';
 import Button from '../../ components/Button/Button';
@@ -19,11 +19,13 @@ const UpdateSeminariste = () => {
     console.log("seminaristeId", seminaristeId);
 
     const [allDortoirs, setAllDortoirs] = useState([]);
+    console.log("allDortoirs", allDortoirs);
+    
     const [dortoirOptions, setDortoirOptions] = useState([]);
     const [relativeDortoirOptions, setRelativeDortoirOptions] = useState([]);
     // const [dortoir, setDortoir] = useState<any>([]);
     const navigate = useNavigate();
-    const { register, handleSubmit, setValue, watch, formState, control } = useForm<UpdateSeminaristeFormValues>({
+    const { register, handleSubmit, setValue, formState, control } = useForm<UpdateSeminaristeFormValues>({
         defaultValues: {
             nomSemi: "",
             prenomSemi: "",
@@ -41,11 +43,11 @@ const UpdateSeminariste = () => {
 
         }
     });
-    const genreSemi = watch("genreSemi") || "";
-    const sousComite = watch("sousComite") || "";
-    const situation = watch("situation");
-    const dortoir = watch("dortoir") || "";
-    const etatSante = watch("etatSante") || "";
+    // const genreSemi = watch("genreSemi") || "";
+    // const sousComite = watch("sousComite") || "";
+    // const situation = watch("situation");
+    // const dortoir = watch("dortoir") || "";
+    // const etatSante = watch("etatSante") || "";
 
 
     const genreOptions = [

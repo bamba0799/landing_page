@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import React, { useEffect, useState } from "react";
-import esphereLogo from "../../assets/logo2.jpg";
+// import esphereLogo from "../../assets/logo2.jpg";
 
 interface SideBarProps {
     isSidebarOpen: boolean;

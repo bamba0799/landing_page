@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect } from 'react';
 import SecondMain from '../../ components/Main/SecondMain';
 import SecondLayout from '../../layouts/SecondLayout';
 import Button from '../../ components/Button/Button';
@@ -20,7 +20,7 @@ const UpdateVisiteur = () => {
 
     // const [dortoir, setDortoir] = useState<any>([]);
     const navigate = useNavigate();
-    const { register, handleSubmit, setValue, watch, formState, control } = useForm<UpdateVisiteurFormValues>({
+    const { register, handleSubmit, setValue, formState, control } = useForm<UpdateVisiteurFormValues>({
         defaultValues: {
             nomVisiteur: "",
             pernomVisiteur: "",
@@ -40,18 +40,6 @@ const UpdateVisiteur = () => {
         { value: "pepiniere", label: "Pépinière" },
         { value: "non_defini", label: "Non défini" },
     ];
-
-
-
-
-
-  
-
-
-
-
-  
-
 
     const { errors } = formState;
 

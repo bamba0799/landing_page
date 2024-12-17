@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import SecondMain from '../../ components/Main/SecondMain';
 import SecondLayout from '../../layouts/SecondLayout';
 import Button from '../../ components/Button/Button';
@@ -28,12 +27,12 @@ const AddVisiteur = () => {
 
         }
     });
-    const nomVisiteur = watch("nomVisiteur") || "";
-    const pernomVisiteur = watch("pernomVisiteur") || "";
+    // const nomVisiteur = watch("nomVisiteur") || "";
+    // const pernomVisiteur = watch("pernomVisiteur") || "";
     const sousComite = watch("sousComite") || "";
     const genreVisiteur = watch("genreVisiteur") || "";
-    const phoneVisiteur = watch("phoneVisiteur") || "";
-    const roleVisiteur = watch("roleVisiteur") || "";
+    // const phoneVisiteur = watch("phoneVisiteur") || "";
+    // const roleVisiteur = watch("roleVisiteur") || "";
 
 
     const genreOptions = [

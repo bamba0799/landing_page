@@ -1,17 +1,14 @@
-import React, { useState } from 'react';
 import SecondMain from '../../ components/Main/SecondMain';
-import PrimaryLayout from '../../layouts/PrimaryLayout';
 import SecondLayout from '../../layouts/SecondLayout';
 import Button from '../../ components/Button/Button';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import { useNavigate } from 'react-router-dom';
-import ConnexionInput from '../../ components/Input/ConnexionInput';
 import { useForm } from 'react-hook-form';
 import { AddCommissionFormValues } from '../../../services/model';
 import Input from '../../ components/Input/Input';
 import Select from '../../ components/Select/Select';
 import apiService from '../../../services/api';
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 
 
@@ -39,7 +36,6 @@ const AddCommission = () => {
     const rolePers = watch("rolePers") || "";
     const roleMembre = watch("roleMembre") || "";
     const situation = watch("situation") || "false";
-    const [selectedValue, setSelectedValue] = useState("");
 
 
     const genreOptions = [

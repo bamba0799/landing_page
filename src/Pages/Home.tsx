@@ -1,36 +1,28 @@
 import { useEffect, useState } from 'react'
-import Header from '../ components/Header/Header'
-import SideBar from '../ components/SideBar/SideBar'
 import Main from '../ components/Main/Main'
-import Card from '../ components/Card/Card'
-import { createBrowserRouter, RouterProvider, useNavigate } from 'react-router-dom';
-import Menu from '../ components/SideBar/Menu'
-import Dashboard from '../Pages/Dashboard'
-import OrganizationComite from '../Pages/OrganizationComite'
-import Seminarian from '../Pages/Seminarian'
-import Dormitory from '../Pages/Dormitory'
-import Visitor from '../Pages/Visitor'
-import AuditTrail from '../Pages/AuditTrail'
-import Permission from '../Pages/Permission'
+import { useNavigate } from 'react-router-dom';
+
 // import { Button } from 'flowbite-react'
 import Input from '../ components/Input/Input'
 import HomeCard from '../ components/Card/HomeCard'
 import PrimaryLayout from '../layouts/PrimaryLayout'
 import { Icon } from '@iconify/react/dist/iconify.js'
-import EditButton from '../ components/Button/EditButton'
-import DeleteButton from '../ components/Button/DeleteButton'
+
 import apiService from '../../services/api'
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 import Button from '../ components/Button/Button'
 import { Commision, MembreCo, Seminariste } from '../../services/model'
-import { set } from 'react-hook-form'
-import { get } from 'axios'
+import EditButton from '../ components/Button/EditButton';
+import DeleteButton from '../ components/Button/DeleteButton';
+
 
 function Home() {
   const navigate = useNavigate();
-  const [count, setCount] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
+  console.log("isLoading", isLoading);
+
+  const [pco, setPco] = useState([])
 
 
 
@@ -74,30 +66,6 @@ function Home() {
   ])
 
 
-  const commissionDataForExport = [
-    {
-      commission: "Neeraj",
-      total_frères: "neeraj@gmail.com",
-      total_soeurs: 2015,
-      total_membres: 167000,
-    },
-    {
-      commission: "Vikas",
-      total_frères: "vikas@gmail.com",
-      total_soeurs: 2013,
-      total_membres: 785462,
-    },
-
-    {
-      commission: "Rahul",
-      email: "rahul@gmail.com",
-      total_frères: "neeraj@gmail.com",
-      total_soeurs: 2020,
-      total_membres: 784596,
-      
-    }
-  ]
-
   const columns = [
     { title: "Commission", field: "commission", },
     { title: "Total frères", field: "total_frères", },
@@ -120,19 +88,19 @@ function Home() {
   //   XLSX.writeFile(workBook, "StudentsData.xlsx")
 
   // }
-      //https://github.com/vikas62081/material-table-YT/blob/pdfExport/src/App.js exporter en excel
+  //https://github.com/vikas62081/material-table-YT/blob/pdfExport/src/App.js exporter en excel
 
-      const getPco = async () => {
-        setIsLoading(true)
-        try {
-          const { data: pco } = await apiService.getPco()
-          // setpco(pco)
-          console.log("pco", pco);
-        } catch (error) {
-          setIsLoading(false)
-          console.log("error", error);
-        }
-      }
+  const getPco = async () => {
+    setIsLoading(true)
+    try {
+      const { data: pco } = await apiService.getPco()
+      setPco(pco)
+      console.log("pco", pco);
+    } catch (error) {
+      setIsLoading(false)
+      console.log("error", error);
+    }
+  }
 
   const downloadPdf = () => {
     const doc: any = new jsPDF()
@@ -152,9 +120,8 @@ function Home() {
       setMembreCo(membreCo)
       const { data: seminariste } = await apiService.getSeminariste()
       setSeminariste(seminariste)
-      const { data: dortoir } = await apiService.getDortoir()
-
-      setDortoir(dortoir)
+      const { data: dort } = await apiService.getDortoir()
+      setDortoir(dort)
       const { data: commission } = await apiService.getCommission()
       setCommission(commission)
       console.log("commission", commission);
@@ -186,7 +153,7 @@ function Home() {
                     title: "Total",
                     value: membreCo?.Accueil_Hebergement.Total + membreCo?.Administration.Total + membreCo?.Formation.Total
                   }}
-                  icon={'fa:group'} 
+                  icon={'fa:group'}
                   eye={false}
                 />
                 <div className='lg:w-[1px]  bg-primary_green lg:h-[100px] w-[95%] h-[1px]'></div>
@@ -270,17 +237,17 @@ function Home() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-  
+
                   {
                     commission.map((item, index) => (
-                      <tr className={`${index % 2 == 0 ? "bg-white":"bg-white/50"} dark:bg-gray-800`} key={index}>
+                      <tr className={`${index % 2 == 0 ? "bg-white" : "bg-white/50"} dark:bg-gray-800`} key={index}>
                         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                           {item.commission}
                         </th>
                         <td className="px-6 py-4">{item.total_frères}</td>
                         <td className="px-6 py-4">{item.total_soeurs}</td>
                         <td className="px-6 py-4">{item.total_membres}</td>
-  
+
                       </tr>
                     ))
                   }
@@ -290,7 +257,7 @@ function Home() {
             </div>
             <div className='mt-[10px] flex flex-row justify-between items-center'>
               <p className=' text-[12px] text-primary_green font-bold'>Les PCO du séminaire</p>
-              <Button onClick={()=>navigate("/add-commission")} outline={true} className='button-icon bg-quaternary_green' bg={''}>
+              <Button onClick={() => navigate("/add-commission")} outline={true} className='button-icon bg-quaternary_green' bg={''}>
                 <div className='border rounded-full p-[3px] bg-primary_green'>
                   <Icon icon="mdi:plus" className='text-white' />
                 </div>
@@ -310,51 +277,29 @@ function Home() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                  <tr className="bg-white dark:bg-gray-800">
-                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                      Apple MacBook Pro 17"
-                    </th>
-                    <td className="px-6 py-4">Silver</td>
-                    <td className="px-6 py-4">Laptop</td>
-                    <td className="px-6 py-4">$2999</td>
-                    <td className="px-6 py-4">$udsuf</td>
-                    <td className="px-6 py-4 text-right">
-                      <div className='flex flex-row justify-start items-center space-x-2'>
-                        <EditButton />
-                        <DeleteButton />
-                      </div>
-                    </td>
-                  </tr>
-                  <tr className="bg-gray-50 dark:bg-gray-700">
-                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                      Microsoft Surface Pro
-                    </th>
-                    <td className="px-6 py-4">White</td>
-                    <td className="px-6 py-4">Laptop PC</td>
-                    <td className="px-6 py-4">$1999</td>
-                    <td className="px-6 py-4">$1999</td>
-                    <td className="px-6 py-4 text-right">
-                      <div className='flex flex-row justify-start items-center space-x-2'>
-                        <EditButton />
-                        <DeleteButton />
-                      </div>
-                    </td>
-                  </tr>
-                  <tr className="bg-white dark:bg-gray-800">
-                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                      Magic Mouse 2
-                    </th>
-                    <td className="px-6 py-4">Black</td>
-                    <td className="px-6 py-4">Accessories</td>
-                    <td className="px-6 py-4">$99</td>
-                    <td className="px-6 py-4">$99</td>
-                    <td className="px-6 py-4 text-right">
-                      <div className='flex flex-row justify-start items-center space-x-2'>
-                        <EditButton />
-                        <DeleteButton />
-                      </div>
-                    </td>
-                  </tr>
+                  {
+                    pco?.map((item: any, index: number) => (
+                      <tr className={`${index % 2 == 0 ? "bg-white" : "bg-white/50"} dark:bg-gray-800`} key={index}>
+                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                          {item.nomPers} {item.pernomPers}
+                        </th>
+                        <td className="px-6 py-4">{item.genrePers}</td>
+                        <td className="px-6 py-4">{item.phonePers}</td>
+                        <td className="px-6 py-4">{item.sousComite}</td>
+                        <td className="px-6 py-4">{item.situation}</td>
+                        <td className="px-6 py-4 text-right">
+                          <div className='flex flex-row justify-start items-center space-x-2'>
+                            <EditButton onClick={() => navigate(`/update-seminariste/${item.idSemi}`)} />
+                            <DeleteButton onClick={() => {
+                              // setOpen(true)
+                              // setSeminaristeId(item.idSemi)
+
+                            }} />
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                  }
                 </tbody>
               </table>
             </div>

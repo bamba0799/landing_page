@@ -5,7 +5,6 @@ import SideBar from "../SideBar/SideBar"
 
 
 const SecondMain = ({children}:any) => {
-  const [count, setCount] = useState(0)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   const toggleSideBar = () => {

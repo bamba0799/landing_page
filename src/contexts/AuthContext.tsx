@@ -1,4 +1,4 @@
-import { useContext, createContext, useState, ReactNode, Context, useEffect } from "react";
+import { useContext, createContext, useState, ReactNode, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import apiService from "../../services/api";
 import toast, { Toaster } from "react-hot-toast";
