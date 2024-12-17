@@ -103,3 +103,22 @@ export interface User {
   typedortoir: "co" | "seminariste" | "non_defini" | "";
   nbPlace: number;
  }
+
+
+
+ export interface AddVisiteurFormValues {
+  nomVisiteur: string;
+  pernomVisiteur: string;
+  genreVisiteur: string;
+  phoneVisiteur: string;
+  roleVisiteur: string; // Rôle dans le sous-comité
+  sousComite: string;
+}
+export interface UpdateVisiteurFormValues {
+  nomVisiteur: string;
+  pernomVisiteur: string;
+  genreVisiteur: string;
+  phoneVisiteur: string;
+  roleVisiteur: string; // Rôle dans le sous-comité
+  sousComite: string;
+}

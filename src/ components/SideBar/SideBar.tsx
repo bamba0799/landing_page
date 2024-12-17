@@ -31,11 +31,7 @@ const sideBarItems = [
     name:"Visiteurs",
     path: "/visiteur",
   },
-  {
-    icon: "ri:file-check-fill",
-    name:"Piste d'audit",
-    path: "/piste-audit",
-  },
+
   {
     icon: "bi:patch-check-fill",
     name:"Permissions",

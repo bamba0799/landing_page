@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Main from '../../ components/Main/Main';
 import PrimaryLayout from '../../layouts/PrimaryLayout';
 import HomeCard from '../../ components/Card/HomeCard';
@@ -8,27 +8,77 @@ import { useNavigate } from 'react-router-dom';
 import Input from '../../ components/Input/Input';
 import EditButton from '../../ components/Button/EditButton';
 import DeleteButton from '../../ components/Button/DeleteButton';
+import apiService from '../../../services/api';
 // import '../../assets/css/index.css';
 const IndexPage = () => {
 
     const [activeTabIndex, setActiveTabIndex] = React.useState<number>(0);
+    const [totalByComi, setTotalByComi] = React.useState<any>([]);
+    const [totalByGender, setTotalByGender] = React.useState<any>([]);
+    const [listParCo, setListParCo] = React.useState<any>([]);
+    const [selectedComiMember, setSelectedComiMember] = React.useState<any>(null);
 
     const navigate = useNavigate();
 
-    const tab = [
-        { id: 0, name: "Communicatoin" },
-        { id: 1, name: "Restauration" },
-        { id: 2, name: "Formation" },
-        { id: 3, name: "Sécurité" },
-        { id: 4, name: "Protocole" },
-        { id: 5, name: "Hygiène" },
-        { id: 6, name: "Administration" },
-        { id: 7, name: "Accueil/Hébergement" },
-        { id: 8, name: "Logistique" },
-        { id: 9, name: "Finances" },
-        { id: 10, name: "Pépinère" },
-        { id: 11, name: "Santé" }
-    ];
+
+
+    // const tab = [
+    //     { id: 0, name: "Communicatoin" },
+    //     { id: 1, name: "Restauration" },
+    //     { id: 2, name: "Formation" },
+    //     { id: 3, name: "Sécurité" },
+    //     { id: 4, name: "Protocole" },
+    //     { id: 5, name: "Hygiène" },
+    //     { id: 6, name: "Administration" },
+    //     { id: 7, name: "Accueil/Hébergement" },
+    //     { id: 8, name: "Logistique" },
+    //     { id: 9, name: "Finances" },
+    //     { id: 10, name: "Pépinère" },
+    //     { id: 11, name: "Santé" }
+    // ];
+
+
+    const getListParCo = async () => {
+        try {
+            const { data: listParCo } = await apiService.getListParCo();
+            console.log("listParCo", listParCo);
+            setListParCo(listParCo);
+            const selectedComiMember = listParCo[activeTabIndex];            
+            setSelectedComiMember(selectedComiMember);
+
+        } catch (error) {
+            console.log("error", error);
+
+        }
+    }
+
+    const getTotalGender = async () => {
+        try {
+            const { data: totalByGender } = await apiService.getTotalGender();
+            console.log("getTotalGender", totalByGender);
+            setTotalByGender(totalByGender);
+        } catch (error) {
+            console.log("error", error);
+
+        }
+    }
+
+    const getTotalByComi = async () => {
+        try {
+            const { data: totalByComi } = await apiService.getTotalByComi();
+            console.log("totalByComi", totalByComi);
+            setTotalByComi(totalByComi);
+        } catch (error) {
+            console.log("error", error);
+
+        }
+    }
+
+    useEffect(() => {
+        getListParCo();
+        getTotalByComi();
+        getTotalGender();
+    }, [activeTabIndex]);
     return (
         <div>
             <Main className=''>
@@ -39,14 +89,14 @@ const IndexPage = () => {
                                 {/* card1 */}
                                 <HomeCard bg={'bg-secondary_orange'} title={'Membres de C.O'} item1={{
                                     title: "Frères",
-                                    value: 12
+                                    value: totalByGender?.frere
                                 }} item2={{
                                     title: "Sœurs",
-                                    value: 12
+                                    value: totalByGender?.soeur
                                 }}
                                     item3={{
                                         title: "Total",
-                                        value: 24
+                                        value: totalByGender?.frere+totalByGender?.soeur+totalByGender?.non_defini
                                     }}
                                     icon={'fa:group'}
                                     eye={false}
@@ -54,20 +104,20 @@ const IndexPage = () => {
                                 {/* card2 */}
                                 <HomeCard bg={'bg-quaternary_green'} title={'Materiels'} item1={{
                                     title: "Loués",
-                                    value: 12
+                                    value: totalByComi?.loue
                                 }} item2={{
                                     title: "Achetés",
-                                    value: 12
+                                    value: totalByComi?.achete
                                 }}
                                     item3={{
-                                        title: "Total",
-                                        value: 24
+                                        title: "Total depenses",
+                                        value: totalByComi?.totalDepenses
                                     }}
                                     icon={'entypo:tools'}
                                     eye={true}
                                 />
                                 {/* card3 */}
-                                <HomeCard bg={'bg-quaternary_green'} title={'Caisse de l\'activité (en Fcfa)'} item1={{
+                                {/* <HomeCard bg={'bg-quaternary_green'} title={'Caisse de l\'activité (en Fcfa)'} item1={{
                                     title: "Collecte",
                                     value: 12
                                 }} item2={{
@@ -80,7 +130,7 @@ const IndexPage = () => {
                                     }}
                                     icon={'entypo:tools'}
                                     eye={true}
-                                />
+                                /> */}
                             </div>
 
                         </div>
@@ -96,11 +146,11 @@ const IndexPage = () => {
                         <div className='md:border md:shadow-lg py-[20px] md:px-[10px]  border-gray-300 mt-[14px] rounded-t-[10px]'>
                             <div className='w-full md:border-b-[2px] border-gray-300 flex items-center space-x-[10px] md:space-x-[20px] overflow-x-auto hide-scrollbar'>
                                 {
-                                    tab.map((item, index) => {
+                                    listParCo.map((item:any, index:number) => {
 
                                         return (
                                             <button onClick={() => setActiveTabIndex(index)} className={`flex-shrink-0  px-[12px] py-[8px] ${activeTabIndex == index ? "bg-primary_orange" : ""} rounded-t-[10px]`} key={index}>
-                                                <p className={`text-[14px] ${activeTabIndex == index ? "text-white font-bold" : "text-primary_green"}  `}>{item.name}</p>
+                                                <p className={`text-[14px] ${activeTabIndex == index ? "text-white font-bold" : "text-primary_green"}  `}>{item.commission=='Accueil_Hebergement'?'Accueil/Hébergement':item.commission=='Pepiniere'?'Pépinière':item.commission=='Sante'?'Santé':item.commission=='Hygiene'?'Hygiène':item.commission=='Securite'?'Sécurite':item.commission}</p>
                                             </button>
                                         )
                                     })
@@ -113,7 +163,7 @@ const IndexPage = () => {
                                 </div>
                                 <div className='flex flex-col  space-y-[10px] md:flex-row md:items-center md:justify-between md:space-x-[20px] md:space-y-[0px]'>
                                     <Button onClick={() => navigate("/add-commission")} outline={true} className='button-icon bg-quaternary_green' bg={''}>
-                                            <Icon icon="fluent:document-edit-24-filled" className='text-primary_green text-[18px]' />
+                                        <Icon icon="fluent:document-edit-24-filled" className='text-primary_green text-[18px]' />
                                         <p className='text-secondary_green'>Rapport </p>
                                     </Button>
                                     <Button onClick={() => navigate("/add-commission")} outline={true} className='button-icon bg-quaternary_green' bg={''}>
@@ -128,66 +178,41 @@ const IndexPage = () => {
                                 </div>
                             </div>
                             <div className="relative overflow-x-auto shadow-sm mt-[10px]">
-              <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-white  bg-secondary_green">
-                  <tr>
-                    <th scope="col" className="px-6 py-3">Nom et prénoms</th>
-                    <th scope="col" className="px-6 py-3">Genre</th>
-                    <th scope="col" className="px-6 py-3">Sous-comités</th>
-                    <th scope="col" className="px-6 py-3">Contact</th>
-                    <th scope="col" className="px-6 py-3">Situation</th>
-                    <th scope="col" className="px-6 py-3">Actions</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                  <tr className="bg-white dark:bg-gray-800">
-                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                      Apple MacBook Pro 17"
-                    </th>
-                    <td className="px-6 py-4">Silver</td>
-                    <td className="px-6 py-4">Laptop</td>
-                    <td className="px-6 py-4">$2999</td>
-                    <td className="px-6 py-4">$udsuf</td>
-                    <td className="px-6 py-4 text-right">
-                      <div className='flex flex-row justify-start items-center space-x-2'>
-                        <EditButton />
-                        <DeleteButton />
-                      </div>
-                    </td>
-                  </tr>
-                  <tr className="bg-gray-50 dark:bg-gray-700">
-                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                      Microsoft Surface Pro
-                    </th>
-                    <td className="px-6 py-4">White</td>
-                    <td className="px-6 py-4">Laptop PC</td>
-                    <td className="px-6 py-4">$1999</td>
-                    <td className="px-6 py-4">$1999</td>
-                    <td className="px-6 py-4 text-right">
-                      <div className='flex flex-row justify-start items-center space-x-2'>
-                        <EditButton />
-                        <DeleteButton />
-                      </div>
-                    </td>
-                  </tr>
-                  <tr className="bg-white dark:bg-gray-800">
-                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                      Magic Mouse 2
-                    </th>
-                    <td className="px-6 py-4">Black</td>
-                    <td className="px-6 py-4">Accessories</td>
-                    <td className="px-6 py-4">$99</td>
-                    <td className="px-6 py-4">$99</td>
-                    <td className="px-6 py-4 text-right">
-                      <div className='flex flex-row justify-start items-center space-x-2'>
-                        <EditButton />
-                        <DeleteButton />
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    <thead className="text-xs text-white  bg-secondary_green">
+                                        <tr>
+                                            <th scope="col" className="px-6 py-3">Nom et prénoms</th>
+                                            <th scope="col" className="px-6 py-3">Genre</th>
+                                            <th scope="col" className="px-6 py-3">Sous-comités</th>
+                                            <th scope="col" className="px-6 py-3">Contact</th>
+                                            <th scope="col" className="px-6 py-3">Situation</th>
+                                            <th scope="col" className="px-6 py-3">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                                        {
+                                            selectedComiMember?.membres?.map((item:any, index:number) => (
+                                                <tr className={`${index % 2 == 0 ? "bg-white" : "bg-white/50"} dark:bg-gray-800`} key={index}>
+                                                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                        {item.nomPers} {item.prenomPers}
+                                                    </th>
+                                                    <td className="px-6 py-4">{item.genrePers}</td>
+                                                    <td className="px-6 py-4">{item.sousComite}</td>
+                                                    <td className="px-6 py-4">{item.phonePers}</td>
+                                                    <td className="px-6 py-4">{item.situation}</td>
+                                                    <td className="px-6 py-4">
+                                                        <div className="flex items-center space-x-2">
+                                                            <EditButton onClick={() => navigate("/edit-commission")} />
+                                                            <DeleteButton onClick={() => alert("delete")} />
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                            ))
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </PrimaryLayout>

@@ -71,7 +71,15 @@ const apiService = {
         getSeminariste: async () => getData("/seminariste/totalByGender"),
         getDortoir: async () => getData("/dortoirs/totaldortoirBytype"),
         getCommission: async () => getData("/commission/totalByGender"),
+        //co
         addMembereCo: async (data: any) => postData("/membre-co/add", data),
+        getListParCo: async () => getData("/commission/listeparco"),
+
+        //membreco
+
+        getTotalGender: async () => getData("/membre-co/TotalGender"),
+        getPco: async () => getData("/membre-co/getPco"),
+
         getAllDortoir: async () => getData("/dortoirs"),
         addSeminariste: async (data: any) => postData("/seminariste/add", data),
         deleteSeminariste: async (id: any) => deleteData("/seminariste/delete", id),
@@ -90,6 +98,21 @@ const apiService = {
         getDortoirById: async (dortoirId: any) => getDataById(`/dortoirs/getone`, dortoirId),
         getTotalDortoirByType: async () => getData("/dortoirs/totaldortoirBytype"),
         getTotalDortoirByGenre: async () => getData("/dortoirs/totaldortoirByGenre"),
+
+        // visiteur
+        addVisiteur: async (data: any) => postData("/visiteur/add", data),
+        getNbVisiteurDuJours: async (currentDate:string) => getData(`/visiteur/totalByJourParGenre?date=${currentDate}`),
+        getTotalVisiteurByGenre: async () => getData("/visiteur/totalByGenre"),
+        getVisiteurEnCours: async () => getData("/visiteur/visites/encours"),
+        getVisiteurTermines: async () => getData("/visiteur/visites/termine"),
+        getVisiteurById: async (visiteurId: any) => getDataById(`/visiteur/getone`, visiteurId),
+        updateVisiteur: async (id:any,data: any) => updateData("/visiteur/update", id, data),
+        deleteVisiteur: async (id: any) => deleteData("/visiteur/delete", id),
+        terminateVisiteur: async (id: any) => deleteData("/visiteur/softdelete", id),
+
+        //materiel
+
+        getTotalByComi: async () => getData("/materiel/getTotalByComi"),
 
 }; 
 

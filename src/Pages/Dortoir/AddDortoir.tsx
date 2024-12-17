@@ -26,16 +26,7 @@ const AddDortoir = () => {
         }
     });
 
-    const niveauOptions = [
-        { value: "Pepiniere", label: "Pépinière" },
-        { value: "Niveau 1", label: "Niveau 1" },
-        { value: "Niveau 2", label: "Niveau 2" },
-        { value: "Niveau 3", label: "Niveau 3" },
-        { value: "Niveau 4", label: "Niveau 4" },
-        { value: "Niveau 5", label: "Niveau 5" },
-        { value: "Niveau 6", label: "Niveau 6" },
 
-    ];
 
     const genreDortoirOptions = [
         { value: "frere", label: "Frère" },

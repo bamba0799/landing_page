@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "../src/Pages/Login";
-import Dashboard from "../src/Pages/Dashboard";
 import AuthProvider from "../src/contexts/AuthContext";
 import PrivateRoute from "../src/router/PrivateRoutes";
 import Home from "./Pages/Home";
@@ -12,6 +11,9 @@ import AddSeminariste from "./Pages/Seminariste/addSeminariste";
 import AddNiveau from "./Pages/Niveau/addNiveau";
 import UpdateSeminariste from "./Pages/Seminariste/updateSeminariste";
 import AddDortoir from "./Pages/Dortoir/AddDortoir";
+import IndexPageVisiteur from "./Pages/Visiteur/IndexPage";
+import AddVisiteur from "./Pages/Visiteur/AddVisiteur";
+import UpdateVisiteur from "./Pages/Visiteur/UpdateVisiteur";
 
 function App() {
   console.log("App");
@@ -30,6 +32,11 @@ function App() {
               <Route path="/add-seminariste" element={<AddSeminariste />} />
               <Route path="/update-seminariste/:seminaristeId" element={<UpdateSeminariste />} />
               <Route path="/add-niveau" element={<AddNiveau />} />
+              {/* visiteur */}
+              <Route path="/visiteur" element={<IndexPageVisiteur />} />
+              <Route path="/add-visiteur" element={<AddVisiteur />} />
+              <Route path="/update-visiteur/:visiteurId" element={<UpdateVisiteur />} />
+
               {/* dortoir */}
               <Route path="/dortoir" element={<IndexPageDortoir />} />
               <Route path="/add-dortoir" element={<AddDortoir />} />

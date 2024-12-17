@@ -25,6 +25,7 @@ import 'jspdf-autotable'
 import Button from '../ components/Button/Button'
 import { Commision, MembreCo, Seminariste } from '../../services/model'
 import { set } from 'react-hook-form'
+import { get } from 'axios'
 
 function Home() {
   const navigate = useNavigate();
@@ -121,6 +122,17 @@ function Home() {
   // }
       //https://github.com/vikas62081/material-table-YT/blob/pdfExport/src/App.js exporter en excel
 
+      const getPco = async () => {
+        setIsLoading(true)
+        try {
+          const { data: pco } = await apiService.getPco()
+          // setpco(pco)
+          console.log("pco", pco);
+        } catch (error) {
+          setIsLoading(false)
+          console.log("error", error);
+        }
+      }
 
   const downloadPdf = () => {
     const doc: any = new jsPDF()
@@ -153,6 +165,7 @@ function Home() {
   }
   useEffect(() => {
     getHomeData()
+    getPco()
   }, [])
 
   return (

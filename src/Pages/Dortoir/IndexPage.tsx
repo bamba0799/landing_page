@@ -28,7 +28,7 @@ const IndexPage = () => {
 
 
     const columns = [
-        { title: "Nom et Prénoms", field: "commission", },
+        { title: "Nom et Prénoms", field: "nomPrenomSemi", },
         { title: "Genre", field: "genreSemi", },
         { title: "Dortoirs", field: "nomdortoir", },
         { title: "Sous comité", field: "souscomite", },
@@ -75,7 +75,7 @@ const IndexPage = () => {
             setCurrentDortoir(currentDortoir);
             const seminaristeForPdf = currentDortoir[0]?.seminaristes?.map((item: any, index: number) => {
                 return {
-                    commission: `${item.nomSemi} ${item.prenomSemi}`,
+                    nomPrenomSemi: `${item.nomSemi} ${item.prenomSemi}`,
                     genreSemi: item.genreSemi,
                     nomdortoir: item.nomdortoir,
                     souscomite: item.sousComite,
