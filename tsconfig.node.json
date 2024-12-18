@@ -13,12 +13,20 @@
     "noEmit": true
   },
   "include": [
-    "vite.config.ts",
     "config/**/*",
-    "src/**/*",
-    "services/**/*",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "services/**/*.ts" // Inclure le répertoire services
   ],
-  "exclude": ["node_modules", "**/*.test.ts"]
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
+  // "include": [
+  //   "vite.config.ts",
+  //   "config/**/*",
+  //   "src/**/*",
+  //   "services/**/*",
+  // ],
+  // "exclude": ["node_modules", "**/*.test.ts"]
 }
-
-
