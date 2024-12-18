@@ -59,7 +59,6 @@ export interface User {
     sousComite: string; 
     commission: string;
     motPass: string; 
-    rolePers: string;
     roleMembre: string;
   }
 

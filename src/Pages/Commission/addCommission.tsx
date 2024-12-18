@@ -25,7 +25,6 @@ const AddCommission = () => {
             sousComite: "",
             commission: "",
             motPass: "",
-            rolePers: "",
             roleMembre: "",
 
         }
@@ -33,7 +32,6 @@ const AddCommission = () => {
     const genrePers = watch("genrePers") || "";
     const sousComite = watch("sousComite") || "";
     const commission = watch("commission") || "";
-    const rolePers = watch("rolePers") || "";
     const roleMembre = watch("roleMembre") || "";
     const situation = watch("situation") || "false";
 
@@ -111,6 +109,8 @@ const AddCommission = () => {
     const { errors } = formState;
 
     const addCoMember = async (data: any) => {
+        console.log("data", data);
+        
        try {
         const {data: addedCoMember} = await apiService.addMembereCo({
             nomPers: data.nomPers,
@@ -119,7 +119,6 @@ const AddCommission = () => {
             phonePers: data.phonePers,
             sousComite: data.sousComite,
             commission: data.commission,
-            rolePers: data.rolePers,
             roleMembre: data.roleMembre,
             situation: data.situation === "true" ? true : false,
             motPass: data.motPass,
@@ -194,6 +193,9 @@ const AddCommission = () => {
                                             value: 10,
                                             message: "Le contact doit contenir au maximum 10 caractères"
                                         },
+                                        validate:{
+                                            length: (value) => value.length === 10 || "Le contact doit contenir 10 caractères"
+                                        }
 
                                     })} />
                                     <p className='error-message'>{errors.phonePers?.message}</p>
@@ -227,17 +229,6 @@ const AddCommission = () => {
 
                                 <div className="md:w-[48%]">
                                     <Select
-                                        options={rolePersOptions}
-                                        label="Rôle personne"
-                                        value={rolePers} // Watch the selected value
-                                        onChange={(value: any) => setValue("rolePers", value)} // Update form state
-                                        placeholder="Choisir une option"
-                                    />
-                                    <p className="error-message">{errors.rolePers?.message}</p>
-                                </div>
-
-                                <div className="md:w-[48%]">
-                                    <Select
                                         options={roleMembreOptions}
                                         label="Rôle membre"
                                         value={roleMembre} // Watch the selected value
@@ -246,19 +237,20 @@ const AddCommission = () => {
                                     />
                                     <p className="error-message">{errors.roleMembre?.message}</p>
                                 </div>
-                            </div>
-                            {/* line 5 */}
-                            <div className='flex flex-col space-y-[20px] md:space-y-[0px]  md:flex-row md:justify-between md:items-center'>
                                 <div className="md:w-[48%]">
                                     <Select
                                         options={situationOptions}
-                                        label="Sous comité"
+                                        label="Situation"
                                         value={situation} // Watch the selected value
                                         onChange={(value: any) => setValue("situation", value)} // Update form state
                                         placeholder="Choisir une option"
                                     />
                                     <p className="error-message">{errors.situation?.message}</p>
                                 </div>
+                            </div>
+                            {/* line 5 */}
+                            <div className='flex flex-col space-y-[20px] md:space-y-[0px]  md:flex-row md:justify-between md:items-center'>
+                           
                                 <div className=' md:w-[48%]'>
                                     <Input type={'text'} id={'motPass'} label='Mot de passe' required={true} {...register("motPass", {
                                         required: {
