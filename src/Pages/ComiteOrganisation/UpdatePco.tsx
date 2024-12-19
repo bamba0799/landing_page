@@ -20,6 +20,7 @@ const UpdatePco = () => {
     const { pcoId } = useParams();
     console.log("pcoId", pcoId);
 
+    // const [dortoir, setDortoir] = useState<any>([]);
     const navigate = useNavigate();
     const { register, handleSubmit, setValue, formState, control } = useForm<UpdatePcoFormValues>({
         defaultValues: {
@@ -27,14 +28,15 @@ const UpdatePco = () => {
             pernomPers: "",
             genrePers: "",
             phonePers: "",
-            situation: null,
+            situation: "",
             sousComite: "",
             motPass: "",
             roleMembre: "",
 
         }
     });
-    const { errors } = formState;
+        const { errors } = formState;
+
 
     const genreOptions = [
         { value: "frere", label: "Frère" },
@@ -96,7 +98,7 @@ const UpdatePco = () => {
             setValue("phonePers", pco[0].phonePers);
             setValue("situation", pco[0].situation);
             setValue("sousComite", pco[0].sousComite);
-            setValue("motPass", '');
+            setValue("motPass", "");
             setValue("roleMembre", pco[0].roleMembre);
 
 

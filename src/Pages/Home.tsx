@@ -17,12 +17,12 @@ import EditButton from '../ components/Button/EditButton';
 import DeleteButton from '../ components/Button/DeleteButton';
 import DeleteModal from '../ components/Modal/DeleteModal';
 import toast from 'react-hot-toast';
-import { useAuth } from '../contexts/AuthContext';
 
 
 function Home() {
-  const auth:any = useAuth() ;
-  console.log("userrrrrr",auth);
+  let auth:any = localStorage.getItem("user");
+  auth = JSON.parse(auth);
+  console.log("auth",auth);
   
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false)
@@ -109,7 +109,7 @@ function Home() {
   //https://github.com/vikas62081/material-table-YT/blob/pdfExport/src/App.js exporter en excel
 
   const deletePco = async (id: any) => {
-    if(pcoPhone == auth?.user.phonePers){
+    if(pcoPhone == auth?.phonePers){
       toast.error("Vous ne pouvez pas vous supprimer vous même")
       setOpen(false)
     } else{
@@ -305,7 +305,7 @@ function Home() {
             </div>
             <div className='mt-[10px] flex flex-row justify-between items-center'>
               <p className=' text-[12px] text-primary_green font-bold'>Les PCO du séminaire</p>
-              <Button onClick={() => navigate("/add-commission")} outline={true} className='button-icon bg-quaternary_green' bg={''}>
+              <Button onClick={() => navigate("/add-pco")} outline={true} className='button-icon bg-quaternary_green' bg={''}>
                 <div className='border rounded-full p-[3px] bg-primary_green'>
                   <Icon icon="mdi:plus" className='text-white' />
                 </div>

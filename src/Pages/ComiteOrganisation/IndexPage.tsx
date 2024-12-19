@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Main from '../../ components/Main/Main';
 import PrimaryLayout from '../../layouts/PrimaryLayout';
 import HomeCard from '../../ components/Card/HomeCard';
@@ -10,8 +10,13 @@ import EditButton from '../../ components/Button/EditButton';
 import DeleteButton from '../../ components/Button/DeleteButton';
 import apiService from '../../../services/api';
 import jsPDF from 'jspdf';
+import toast from 'react-hot-toast';
+import DeleteModal from '../../ components/Modal/DeleteModal';
 // import '../../assets/css/index.css';
 const IndexPage = () => {
+    const [open, setOpen] = useState<boolean>(false);
+    const [coId, setCoId] = useState<any>(null);
+    const [isClicked, setIsClicked] = useState<boolean>(false);
 
     const [activeTabIndex, setActiveTabIndex] = React.useState<number>(0);
     const [totalByComi, setTotalByComi] = React.useState<any>([]);
@@ -43,6 +48,26 @@ const IndexPage = () => {
       body: selectedComiMemberForpdf
     })
     doc.save(`${`Commission_${selectedComiMember?.commission}`}.pdf`)
+  }
+
+
+  const deleteCo = async (id: any) => {
+    // if(pcoPhone == auth?.phonePers){
+    //   toast.error("Vous ne pouvez pas vous supprimer vous même")
+    //   setOpen(false)
+    // } else{
+
+    try {
+      const { data } = await apiService.deleteCo(id)
+      console.log("data", data);
+      setOpen(false)
+      setIsClicked(!isClicked);
+      toast.success("Co supprimé avec succès");
+
+    } catch (error) {
+      console.log("error pco", error);
+      toast.error("Une erreur s'est produite lors de la suppression du pco");
+    }
   }
 
     // const tab = [
@@ -114,7 +139,7 @@ const IndexPage = () => {
         getListParCo();
         getTotalByComi();
         getTotalGender();
-    }, [activeTabIndex]);
+    }, [activeTabIndex, isClicked]);
     return (
         <div>
             <Main className=''>
@@ -238,8 +263,12 @@ const IndexPage = () => {
                                                     <td className="px-6 py-4">{item.situation && 'Néant'}</td>
                                                     <td className="px-6 py-4">
                                                         <div className="flex items-center space-x-2">
-                                                            <EditButton onClick={() => navigate("/edit-commission")} />
-                                                            <DeleteButton onClick={() => alert("delete")} />
+                                                            <EditButton onClick={() => navigate(`/update-co/${item.idpers}`)} />
+                                                            <DeleteButton onClick={() => {
+                                                                     setOpen(true)
+                                                                     setCoId(item.idpers)
+                                                                    //  setPcoPhone(item.phonePers)
+                                                            }} />
                                                         </div>
                                                     </td>
 
@@ -250,6 +279,7 @@ const IndexPage = () => {
                                 </table>
                             </div>
                         </div>
+                        <DeleteModal deleteAction={() => deleteCo(coId)} cancelAction={() => { setOpen(false); setCoId("") }} text='Etes vous sur de bien effacer?' open={open} onClose={() => setOpen(false)} />
                     </div>
                 </PrimaryLayout>
             </Main>

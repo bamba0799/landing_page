@@ -3,7 +3,8 @@ import Login from "../src/Pages/Login";
 import AuthProvider from "../src/contexts/AuthContext";
 import PrivateRoute from "../src/router/PrivateRoutes";
 import Home from "./Pages/Home";
-import AddCommission from "./Pages/Commission/addCommission";
+import AddPco from "./Pages/Commission/AddPco";
+import AddCommission from "./Pages/Commission/AddCommission";
 import IndexPageComiteOrganisation from "./Pages/ComiteOrganisation/IndexPage";
 import IndexPageSeminariste from "./Pages/Seminariste/IndexPage";
 import IndexPageDortoir from "./Pages/Dortoir/IndexPage";
@@ -16,6 +17,7 @@ import AddVisiteur from "./Pages/Visiteur/AddVisiteur";
 import UpdateVisiteur from "./Pages/Visiteur/UpdateVisiteur";
 import UpdatePco from "./Pages/ComiteOrganisation/UpdatePco";
 import IndexPageMateriel  from './Pages/Materiel/IndexPage';
+import UpdateCo from "./Pages/Commission/UpdateCo";
 
 function App() { 
   console.log("App");
@@ -28,6 +30,7 @@ function App() {
             <Route path="/" element={<Login />} />
             <Route element={<PrivateRoute  />}>
               <Route path="/home" element={<Home />} />
+              <Route path="/add-pco" element={<AddPco />} />
               <Route path="/add-commission" element={<AddCommission />} />
               <Route path="/comite-organisation" element={<IndexPageComiteOrganisation />} />
               <Route path="/update-pco/:pcoId" element={<UpdatePco />} />
@@ -39,6 +42,7 @@ function App() {
               <Route path="/visiteur" element={<IndexPageVisiteur />} />
               <Route path="/add-visiteur" element={<AddVisiteur />} />
               <Route path="/update-visiteur/:visiteurId" element={<UpdateVisiteur />} />
+              <Route path="/update-co/:coId" element={<UpdateCo />} />
 
               {/* dortoir */}
               <Route path="/dortoir" element={<IndexPageDortoir />} />

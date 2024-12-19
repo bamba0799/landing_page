@@ -19,6 +19,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       console.log("user", res.data);  
       if (res.data) {
         setUser(res.data.user);
+        localStorage.setItem("user", JSON.stringify(res.data.user)); 
         setAccess_token(res.data.access_token);
         localStorage.setItem("access_token", res.data.access_token);
         navigate("/home");
@@ -39,6 +40,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     setUser(null);
     setAccess_token("");
     localStorage.removeItem("access_token");
+    localStorage.removeItem("user"); 
     navigate("/");
   };
 

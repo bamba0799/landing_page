@@ -75,9 +75,12 @@ const apiService = {
         //co
         addMembereCo: async (data: any) => postData("/membre-co/add", data),
         getPcoById: async (pcoId: any) => getDataById(`/membre-co/getPcobyid`, pcoId),
+        getCoById: async (coId: any) => getDataById(`/membre-co/getCobyid`, coId),
         getListParCo: async () => getData("/commission/listeparco"),
         updatePco: async (id:any,data: any) => updateData("/membre-co/update", id, data),
+        updateCo: async (id:any,data: any) => updateData("/membre-co/update", id, data),
         deletePco: async (id: any) => deleteData("/membre-co/delete", id),
+        deleteCo: async (id: any) => deleteData("/membre-co/delete", id),
 
         //membreco
         getTotalGender: async () => getData("/membre-co/TotalGender"),
