@@ -77,7 +77,7 @@ const IndexPage = () => {
                     sousComite: item.sousComite,
                     rolePers: item.rolePers,
                     phonePers: item.phonePers,
-                    situation: item.situation&&'Néant',
+                    situation: item.situation && 'Néant',
                 }
             })
             setSelectedComiMemberForpdf(selectedComiMemberForpdf);
@@ -138,12 +138,12 @@ const IndexPage = () => {
                                     eye={false}
                                 />
                                 {/* card2 */}
-                                <HomeCard bg={'bg-quaternary_green'} title={'Materiels'} item1={{
+                                <HomeCard onClickEye={() => navigate('/materiel')} bg={'bg-quaternary_green'} title={'Materiels'} item1={{
                                     title: "Loués",
-                                    value: totalByComi?.loue
+                                    value: totalByComi?.loues
                                 }} item2={{
                                     title: "Achetés",
-                                    value: totalByComi?.achete
+                                    value: totalByComi?.achetes
                                 }}
                                     item3={{
                                         title: "Total depenses",
@@ -235,7 +235,7 @@ const IndexPage = () => {
                                                     <td className="px-6 py-4">{item.genrePers}</td>
                                                     <td className="px-6 py-4">{item.sousComite}</td>
                                                     <td className="px-6 py-4">{item.phonePers}</td>
-                                                    <td className="px-6 py-4">{item.situation&&'Néant'}</td>
+                                                    <td className="px-6 py-4">{item.situation && 'Néant'}</td>
                                                     <td className="px-6 py-4">
                                                         <div className="flex items-center space-x-2">
                                                             <EditButton onClick={() => navigate("/edit-commission")} />

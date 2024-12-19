@@ -16,7 +16,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const loginAction = async (data:any) => {
     try {
       const res = await apiService.loginUser(data);
-      console.log("res", res.data);  
+      console.log("user", res.data);  
       if (res.data) {
         setUser(res.data.user);
         setAccess_token(res.data.access_token);

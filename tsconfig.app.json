@@ -24,7 +24,9 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": [
+    
     "src/**/*",
+    "services/**/*.ts",
     "config/**/*" // Ajoutez ce chemin pour inclure le dossier config
   ],
   "exclude": ["node_modules"]

@@ -23,7 +23,7 @@ const AddCommission = () => {
             phonePers: "",
             situation: null,
             sousComite: "",
-            commission: "",
+            commission: "Pco",
             motPass: "",
             roleMembre: "",
 
@@ -31,7 +31,7 @@ const AddCommission = () => {
     });
     const genrePers = watch("genrePers") || "";
     const sousComite = watch("sousComite") || "";
-    const commission = watch("commission") || "";
+    // const commission = watch("commission") || "";
     const roleMembre = watch("roleMembre") || "";
     const situation = watch("situation") || "false";
 
@@ -48,22 +48,10 @@ const AddCommission = () => {
 
     ];
 
-    const commisionOptions = [
-        { value: "pco", label: "pco" },
-        { value: "Communication", label: "Communication" },
-        { value: "Formation", label: "Formation" },
-        { value: "Restauration", label: "Restauration" },
-        { value: "Securite", label: "Securité" },
-        { value: "Finance", label: "Finance" },
-        { value: "Protocole", label: "Protocole" },
-        { value: "Hygiene", label: "Hygiène" },
-        { value: "Administration", label: "Administration" },
-        { value: "Accueil_Hebegement", label: "Accueil_Hébergement" },
-        { value: "Logistique", label: "Logistique" },
-        { value: "Pepiniere", label: "Pépinière" },
-        { value: "Sante", label: "Santé" },
+    // const commisionOptions = [
+    //     { value: "pco", label: "pco" },
 
-    ];
+    // ];
 
     // const rolePersOptions = [
     //     { value: "pco", label: "pco" },
@@ -120,7 +108,7 @@ const AddCommission = () => {
             sousComite: data.sousComite,
             commission: data.commission,
             roleMembre: data.roleMembre,
-            situation: data.situation === "true" ? true : false,
+            situation: data.situation === "Sur le camp" ? 1 : "Hors du camp",
             motPass: data.motPass,
         });
         console.log("addedCoMember", addedCoMember);
@@ -141,8 +129,8 @@ const AddCommission = () => {
                 <SecondLayout title={"Comité d'organisation"}>
                     <div className="flex justify-between">
                         <div className="w-full flex flex-row justify-between">
-                            <h1 className="text-2xl font-semibold text-primary_green">Ajouter une commission</h1>
-                            <Button onClick={() => navigate("/add-commission")} outline={true} className='button-icon bg-quaternary_green' bg={''}>
+                            <h1 className="text-2xl font-semibold text-primary_green">Ajouter Pco</h1>
+                            <Button onClick={() => navigate("/home")} outline={true} className='button-icon bg-quaternary_green' bg={''}>
                                 <Icon icon="solar:arrow-left-linear" className='text-secondary_green w-[20px] h-[20px]' />
                                 <p className='text-secondary_green'>Retour</p>
                             </Button>
@@ -215,20 +203,6 @@ const AddCommission = () => {
                                 </div>
                                 <div className="md:w-[48%]">
                                     <Select
-                                        options={commisionOptions}
-                                        label="Commission"
-                                        value={commission} // Watch the selected value
-                                        onChange={(value: any) => setValue("commission", value)} // Update form state
-                                        placeholder="Choisir une option"
-                                    />
-                                    <p className="error-message">{errors.commission?.message}</p>
-                                </div>
-                            </div>
-                            {/* line 4 */}
-                            <div className='flex flex-col space-y-[20px] md:space-y-[0px]  md:flex-row md:justify-between md:items-center'>
-
-                                <div className="md:w-[48%]">
-                                    <Select
                                         options={roleMembreOptions}
                                         label="Rôle membre"
                                         value={roleMembre} // Watch the selected value
@@ -237,6 +211,12 @@ const AddCommission = () => {
                                     />
                                     <p className="error-message">{errors.roleMembre?.message}</p>
                                 </div>
+                        
+                            </div>
+                            {/* line 4 */}
+                            <div className='flex flex-col space-y-[20px] md:space-y-[0px]  md:flex-row md:justify-between md:items-center'>
+
+                             
                                 <div className="md:w-[48%]">
                                     <Select
                                         options={situationOptions}
@@ -247,10 +227,6 @@ const AddCommission = () => {
                                     />
                                     <p className="error-message">{errors.situation?.message}</p>
                                 </div>
-                            </div>
-                            {/* line 5 */}
-                            <div className='flex flex-col space-y-[20px] md:space-y-[0px]  md:flex-row md:justify-between md:items-center'>
-                           
                                 <div className=' md:w-[48%]'>
                                     <Input type={'text'} id={'motPass'} label='Mot de passe' required={true} {...register("motPass", {
                                         required: {
@@ -260,8 +236,8 @@ const AddCommission = () => {
                                     })} />
                                     <p className='error-message'>{errors.motPass?.message}</p>
                                 </div>
-
                             </div>
+                         
 
 
                             <div className=' md:px-[300px] mt-[300px]'>

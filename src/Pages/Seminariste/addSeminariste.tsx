@@ -337,8 +337,6 @@ const AddSeminariste = () => {
                                             value: false,
                                             message: "Ce champ est obligatoire"
                                         },
-
-
                                     })} />
                                     <p className='error-message'>{errors.problemeSante?.message}</p>
                                 </div>

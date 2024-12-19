@@ -14,8 +14,10 @@ import AddDortoir from "./Pages/Dortoir/AddDortoir";
 import IndexPageVisiteur from "./Pages/Visiteur/IndexPage";
 import AddVisiteur from "./Pages/Visiteur/AddVisiteur";
 import UpdateVisiteur from "./Pages/Visiteur/UpdateVisiteur";
+import UpdatePco from "./Pages/ComiteOrganisation/UpdatePco";
+import IndexPageMateriel  from './Pages/Materiel/IndexPage';
 
-function App() {
+function App() { 
   console.log("App");
   
   return (
@@ -28,6 +30,7 @@ function App() {
               <Route path="/home" element={<Home />} />
               <Route path="/add-commission" element={<AddCommission />} />
               <Route path="/comite-organisation" element={<IndexPageComiteOrganisation />} />
+              <Route path="/update-pco/:pcoId" element={<UpdatePco />} />
               <Route path="/seminariste" element={<IndexPageSeminariste />} />
               <Route path="/add-seminariste" element={<AddSeminariste />} />
               <Route path="/update-seminariste/:seminaristeId" element={<UpdateSeminariste />} />
@@ -40,6 +43,9 @@ function App() {
               {/* dortoir */}
               <Route path="/dortoir" element={<IndexPageDortoir />} />
               <Route path="/add-dortoir" element={<AddDortoir />} />
+
+              {/* materiel */}
+               <Route path="/materiel" element={< IndexPageMateriel/>} />
             </Route>
             {/* Other routes */}
           </Routes>

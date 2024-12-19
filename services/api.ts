@@ -16,6 +16,7 @@ import axiosClient from '../config/axios';
         }
     }
     const getData = async (endpoint: string, params?: any) => {
+        console.log("params", params);
         const access_token = localStorage.getItem("access_token") as string; ;
         try {
             const response = await axiosClient(access_token).get(endpoint, { params });
@@ -28,9 +29,10 @@ import axiosClient from '../config/axios';
 
     // Exemple de méthode POST
    const  postData = async (endpoint: string, data: any) => {
+    console.log("data", data);
     const access_token = localStorage.getItem("access_token");
         try {
-            const response = await axiosClient(access_token).post(endpoint, data);
+            const response = await axiosClient(access_token).post(endpoint, data); 
             return response;
         } catch (error) { 
             console.error("Error in postData:", error);
@@ -72,11 +74,14 @@ const apiService = {
         getCommission: async () => getData("/commission/totalByGender"),
         //co
         addMembereCo: async (data: any) => postData("/membre-co/add", data),
+        getPcoById: async (pcoId: any) => getDataById(`/membre-co/getPcobyid`, pcoId),
         getListParCo: async () => getData("/commission/listeparco"),
+        updatePco: async (id:any,data: any) => updateData("/membre-co/update", id, data),
+        deletePco: async (id: any) => deleteData("/membre-co/delete", id),
 
         //membreco
-
         getTotalGender: async () => getData("/membre-co/TotalGender"),
+        getTotalFormateur: async () => getData("/membre-co/totalFormateur"),
         getPco: async () => getData("/membre-co/getPco"),
 
         getAllDortoir: async () => getData("/dortoirs"),
@@ -87,7 +92,6 @@ const apiService = {
         addNiveau: async (data: any) => postData("/niveau/add", data),
         getNiveau: async () => getData("/niveau/all"),
         getSeminaristeById: async (seminaristeId: any) => getDataById(`/seminariste/getone`, seminaristeId),
-
 
         // dortoir
         getDortoirList: async () => getData("/dortoirs/listeDortoir"),
@@ -103,15 +107,17 @@ const apiService = {
         getNbVisiteurDuJours: async (currentDate:string) => getData(`/visiteur/totalByJourParGenre?date=${currentDate}`),
         getTotalVisiteurByGenre: async () => getData("/visiteur/totalByGenre"),
         getVisiteurEnCours: async () => getData("/visiteur/visites/encours"),
-        getVisiteurTermines: async () => getData("/visiteur/visites/termine"),
+        getVisiteurTermines: async () => getData("/visiteur/visites/termine"), 
         getVisiteurById: async (visiteurId: any) => getDataById(`/visiteur/getone`, visiteurId),
         updateVisiteur: async (id:any,data: any) => updateData("/visiteur/update", id, data),
         deleteVisiteur: async (id: any) => deleteData("/visiteur/delete", id),
-        terminateVisiteur: async (id: any) => deleteData("/visiteur/softdelete", id),
+        terminateVisiteur: async (id: any) => deleteData("/visiteur/softdelete", id), 
+        getTotalVisiteurByDay: async () => getData("/visiteur/totalByday"),
 
-        //materiel
+        //materiel  
 
         getTotalByComi: async () => getData("/materiel/getTotalByComi"),
+        getStatMateriel: async () => getData("/commission/statistiquematerielBycomi"),
 
 }; 
 

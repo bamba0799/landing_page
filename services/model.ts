@@ -62,6 +62,17 @@ export interface User {
     roleMembre: string;
   }
 
+  export interface UpdatePcoFormValues {
+    nomPers: string;
+    pernomPers: string;
+    genrePers: "frere" | "soeur" | "";
+    phonePers: string;
+    situation: string | null; 
+    sousComite: string; 
+    motPass: string; 
+    roleMembre: string;
+  }
+
   export interface AddSeminaristeFormValues {
     nomSemi: string;
     prenomSemi: string;

@@ -51,11 +51,11 @@ function Login() {
                 <div className='md:w-[40%] md:h-screen md:px-[40px]'>
                     <div className='flex flex-col items-center'>
                         <img src={logo} className=' w-[100px] h-[100px]' />
-                        <span className=' text-[12px] text-primary_green'>Système de gestion administratif du séminaire al Ikhwane</span>
+                        <span className=' text-[12px] text-primary_green'>Système de gestion administrative du séminaire Al Ikhwane</span>
                     </div>
                     <div className='flex flex-col items-center mt-[50px]'>
                         <h1 className='text-primary_green font-bold text-[20px]'>Bienvenue</h1>
-                        <span className='text-[12px] text-primary_green'>Merci de vous identifier pour acceder a la plateforme</span>
+                        <span className='text-[12px] text-primary_green'>Merci de vous identifier pour accéder à la plateforme</span>
                     </div>
                     <div className='flex flex-col justify-center space-y-[20px] mt-[24px]'>
                         <div>

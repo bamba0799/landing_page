@@ -22,7 +22,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(({ options, labe
                 value={value}
                 ref={ref as React.Ref<HTMLSelectElement>}
                 onChange={(e) => onChange(e.target.value)}
-            >
+            >       
                 <option value="" disabled>{placeholder || "Choisir une option"}</option>
                 {options.map((option, index) => (
                     <option key={index} value={option.value}>

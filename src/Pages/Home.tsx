@@ -15,15 +15,28 @@ import Button from '../ components/Button/Button'
 import { Commision, MembreCo, Seminariste } from '../../services/model'
 import EditButton from '../ components/Button/EditButton';
 import DeleteButton from '../ components/Button/DeleteButton';
+import DeleteModal from '../ components/Modal/DeleteModal';
+import toast from 'react-hot-toast';
+import { useAuth } from '../contexts/AuthContext';
 
 
 function Home() {
+  const auth:any = useAuth() ;
+  console.log("userrrrrr",auth);
+  
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false)
   console.log("isLoading", isLoading);
 
-  const [pco, setPco] = useState([])
+  const [open, setOpen] = useState<boolean>(false);
+  const [pcoId, setPcoId] = useState<any>(null);
+  const [pcoPhone, setPcoPhone] = useState<any>(null);
+  const [isClicked, setIsClicked] = useState<boolean>(false);
 
+  const [pco, setPco] = useState([])
+  const [totalFormateur, setTotalFormateur] = useState<any>(0)
+
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
 
   const [seminariste, setSeminariste] = useState<Seminariste>({
@@ -65,6 +78,11 @@ function Home() {
     }
   ])
 
+   // Fonction pour filtrer les commissions
+   const filteredCommission = commission.filter((item) =>
+    item.commission.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
 
   const columns = [
     { title: "Commission", field: "commission", },
@@ -90,6 +108,24 @@ function Home() {
   // }
   //https://github.com/vikas62081/material-table-YT/blob/pdfExport/src/App.js exporter en excel
 
+  const deletePco = async (id: any) => {
+    if(pcoPhone == auth?.user.phonePers){
+      toast.error("Vous ne pouvez pas vous supprimer vous même")
+      setOpen(false)
+    } else{
+
+    try {
+      const { data } = await apiService.deletePco(id)
+      console.log("data", data);
+      setOpen(false)
+      setIsClicked(!isClicked);
+      toast.success("Pco supprimé avec succès");
+
+    } catch (error) {
+      console.log("error pco", error);
+      toast.error("Une erreur s'est produite lors de la suppression du pco");
+    }}
+  }
   const getPco = async () => {
     setIsLoading(true)
     try {
@@ -117,6 +153,8 @@ function Home() {
     setIsLoading(true)
     try {
       const { data: membreCo } = await apiService.getMembresCo();
+      console.log("yyyyyyy", membreCo);
+      
       setMembreCo(membreCo)
       const { data: seminariste } = await apiService.getSeminariste()
       setSeminariste(seminariste)
@@ -125,6 +163,16 @@ function Home() {
       const { data: commission } = await apiService.getCommission()
       setCommission(commission)
       console.log("commission", commission);
+
+      const {data:totalFormateur} = await apiService.getTotalFormateur()
+      console.log("totalFormateur",totalFormateur);
+      setTotalFormateur(totalFormateur)
+
+      const {data:totalVisiteur} = await apiService.getTotalVisiteurByDay()
+      console.log("totalVisiteur",totalVisiteur);
+      
+      
+      
     } catch (error) {
       setIsLoading(false)
       console.log("error", error);
@@ -133,7 +181,7 @@ function Home() {
   useEffect(() => {
     getHomeData()
     getPco()
-  }, [])
+  }, [isClicked])
 
   return (
     <div>
@@ -144,14 +192,14 @@ function Home() {
               <div className=' flex flex-col items-center space-y-0 lg:flex-row lg:items-center  lg:space-y-0'>
                 <HomeCard bg={'bg-secondary_orange'} title={'Membres de C.O'} item1={{
                   title: "Frères",
-                  value: membreCo?.Formation.frere + membreCo?.Administration.frere + membreCo?.Accueil_Hebergement.frere
+                  value: membreCo?.Formation?.frere + membreCo?.Administration?.frere + membreCo?.Accueil_Hebergement?.frere
                 }} item2={{
                   title: "Sœurs",
-                  value: membreCo?.Formation.soeur + membreCo?.Administration.soeur + membreCo?.Accueil_Hebergement.soeur
+                  value: membreCo?.Formation?.soeur + membreCo?.Administration?.soeur + membreCo?.Accueil_Hebergement?.soeur
                 }}
                   item3={{
                     title: "Total",
-                    value: membreCo?.Accueil_Hebergement.Total + membreCo?.Administration.Total + membreCo?.Formation.Total
+                    value: membreCo?.Accueil_Hebergement?.Total + membreCo?.Administration?.Total + membreCo?.Formation?.Total
                   }}
                   icon={'fa:group'}
                   eye={false}
@@ -189,14 +237,14 @@ function Home() {
                 <div className='lg:w-[1px]  bg-primary_green lg:h-[100px] w-[95%] h-[1px]'></div>
                 <HomeCard bg={'bg-secondary_orange'} title={'Nombre de formateur'} item1={{
                   title: "Frères",
-                  value: 10
+                  value: totalFormateur?.frere
                 }} item2={{
                   title: "Sœurs",
-                  value: 12
+                  value: totalFormateur?.soeur
                 }}
                   item3={{
                     title: "Total",
-                    value: 12
+                    value: totalFormateur?.total_general
                   }}
                   icon={'fa-solid:home'}
                   eye={false}
@@ -220,7 +268,7 @@ function Home() {
             </div>
             <div className='flex flex-row items-center justify-between mt-[10px]'>
               <div className=' '>
-                <Input className='rounded-[5px]' type='text' id={"recherche"} placeholder='Rechercher' onChange={(e) => console.log(e.target.value)} />
+                <Input className='rounded-[5px]' type='text' id={"recherche"} placeholder='Rechercher' onChange={(e) => setSearchTerm(e.target.value)} />
               </div>
               <Button onClick={() => downloadPdf()} outline={true} className='button-icon bg-tertiary_green' bg={''}>
                 <p className='text-secondary_green'>Exporter</p>
@@ -239,7 +287,7 @@ function Home() {
                 <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
 
                   {
-                    commission.map((item, index) => (
+                    filteredCommission.map((item, index) => (
                       <tr className={`${index % 2 == 0 ? "bg-white" : "bg-white/50"} dark:bg-gray-800`} key={index}>
                         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                           {item.commission}
@@ -284,15 +332,16 @@ function Home() {
                           {item.nomPers} {item.pernomPers}
                         </th>
                         <td className="px-6 py-4">{item.genrePers}</td>
-                        <td className="px-6 py-4">{item.phonePers}</td>
                         <td className="px-6 py-4">{item.sousComite}</td>
+                        <td className="px-6 py-4">{item.phonePers}</td>
                         <td className="px-6 py-4">{item.situation}</td>
                         <td className="px-6 py-4 text-right">
                           <div className='flex flex-row justify-start items-center space-x-2'>
-                            <EditButton onClick={() => navigate(`/update-seminariste/${item.idSemi}`)} />
+                            <EditButton onClick={() => navigate(`/update-pco/${item.idpers}`)} />
                             <DeleteButton onClick={() => {
-                              // setOpen(true)
-                              // setSeminaristeId(item.idSemi)
+                              setOpen(true)
+                              setPcoId(item.idpers)
+                              setPcoPhone(item.phonePers)
 
                             }} />
                           </div>
@@ -303,6 +352,8 @@ function Home() {
                 </tbody>
               </table>
             </div>
+            <DeleteModal deleteAction={() => deletePco(pcoId)} cancelAction={() => { setOpen(false); setPcoId("") }} text='Etes vous sur de bien effacer?' open={open} onClose={() => setOpen(false)} />
+
           </div>
         </PrimaryLayout>
       </Main>
