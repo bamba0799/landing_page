@@ -20,10 +20,10 @@ import toast from 'react-hot-toast';
 
 
 function Home() {
-  let auth:any = localStorage.getItem("user");
+  let auth: any = localStorage.getItem("user");
   auth = JSON.parse(auth);
-  console.log("auth",auth);
-  
+  console.log("auth", auth);
+
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false)
   console.log("isLoading", isLoading);
@@ -47,21 +47,9 @@ function Home() {
   })
 
   const [membreCo, setMembreCo] = useState<MembreCo>({
-    Accueil_Hebergement: {
-      frere: 0,
-      soeur: 0,
-      Total: 0
-    },
-    Administration: {
-      frere: 0,
-      soeur: 0,
-      Total: 0
-    },
-    Formation: {
-      frere: 0,
-      soeur: 0,
-      Total: 0
-    }
+    frere: 0,
+    soeur: 0,
+    non_defini: 0
   })
 
   const [dortoir, setDortoir] = useState({
@@ -78,8 +66,8 @@ function Home() {
     }
   ])
 
-   // Fonction pour filtrer les commissions
-   const filteredCommission = commission.filter((item) =>
+  // Fonction pour filtrer les commissions
+  const filteredCommission = commission.filter((item) =>
     item.commission.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -109,29 +97,29 @@ function Home() {
   //https://github.com/vikas62081/material-table-YT/blob/pdfExport/src/App.js exporter en excel
 
   const deletePco = async (id: any) => {
-    if(pcoPhone == auth?.phonePers){
+    if (pcoPhone == auth?.phonePers) {
       toast.error("Vous ne pouvez pas vous supprimer vous même")
       setOpen(false)
-    } else{
+    } else {
 
-    try {
-      const { data } = await apiService.deletePco(id)
-      console.log("data", data);
-      setOpen(false)
-      setIsClicked(!isClicked);
-      toast.success("Pco supprimé avec succès");
+      try {
+        const { data } = await apiService.deletePco(id)
+        console.log("data", data);
+        setOpen(false)
+        setIsClicked(!isClicked);
+        toast.success("Pco supprimé avec succès");
 
-    } catch (error) {
-      console.log("error pco", error);
-      toast.error("Une erreur s'est produite lors de la suppression du pco");
-    }}
+      } catch (error) {
+        console.log("error pco", error);
+        toast.error("Une erreur s'est produite lors de la suppression du pco");
+      }
+    }
   }
   const getPco = async () => {
     setIsLoading(true)
     try {
       const { data: pco } = await apiService.getPco()
       setPco(pco)
-      console.log("pco", pco);
     } catch (error) {
       setIsLoading(false)
       console.log("error", error);
@@ -154,7 +142,7 @@ function Home() {
     try {
       const { data: membreCo } = await apiService.getMembresCo();
       console.log("yyyyyyy", membreCo);
-      
+
       setMembreCo(membreCo)
       const { data: seminariste } = await apiService.getSeminariste()
       setSeminariste(seminariste)
@@ -162,17 +150,15 @@ function Home() {
       setDortoir(dort)
       const { data: commission } = await apiService.getCommission()
       setCommission(commission)
-      console.log("commission", commission);
 
-      const {data:totalFormateur} = await apiService.getTotalFormateur()
-      console.log("totalFormateur",totalFormateur);
+      const { data: totalFormateur } = await apiService.getTotalFormateur()
+      console.log("totalFormateur", totalFormateur);
       setTotalFormateur(totalFormateur)
 
-      const {data:totalVisiteur} = await apiService.getTotalVisiteurByDay()
-      console.log("totalVisiteur",totalVisiteur);
-      
-      
-      
+      const { data: totalVisiteur } = await apiService.getTotalVisiteurByGenre()
+      console.log("totalVisiteur", totalVisiteur);
+
+
     } catch (error) {
       setIsLoading(false)
       console.log("error", error);
@@ -192,14 +178,14 @@ function Home() {
               <div className=' flex flex-col items-center space-y-0 lg:flex-row lg:items-center  lg:space-y-0'>
                 <HomeCard bg={'bg-secondary_orange'} title={'Membres de C.O'} item1={{
                   title: "Frères",
-                  value: membreCo?.Formation?.frere + membreCo?.Administration?.frere + membreCo?.Accueil_Hebergement?.frere
+                  value: membreCo?.frere
                 }} item2={{
                   title: "Sœurs",
-                  value: membreCo?.Formation?.soeur + membreCo?.Administration?.soeur + membreCo?.Accueil_Hebergement?.soeur
+                  value: membreCo?.soeur
                 }}
                   item3={{
                     title: "Total",
-                    value: membreCo?.Accueil_Hebergement?.Total + membreCo?.Administration?.Total + membreCo?.Formation?.Total
+                    value: membreCo?.frere + membreCo?.soeur + membreCo?.non_defini
                   }}
                   icon={'fa:group'}
                   eye={false}
@@ -305,12 +291,14 @@ function Home() {
             </div>
             <div className='mt-[10px] flex flex-row justify-between items-center'>
               <p className=' text-[12px] text-primary_green font-bold'>Les PCO du séminaire</p>
-              <Button onClick={() => navigate("/add-pco")} outline={true} className='button-icon bg-quaternary_green' bg={''}>
-                <div className='border rounded-full p-[3px] bg-primary_green'>
-                  <Icon icon="mdi:plus" className='text-white' />
-                </div>
-                <p className='text-secondary_green'>Ajouter un PCO</p>
-              </Button>
+              {auth?.rolePers == "Accueil_Hebergement" ? null
+                :
+                <Button onClick={() => navigate("/add-pco")} outline={true} className='button-icon bg-quaternary_green' bg={''}>
+                  <div className='border rounded-full p-[3px] bg-primary_green'>
+                    <Icon icon="mdi:plus" className='text-white' />
+                  </div>
+                  <p className='text-secondary_green'>Ajouter un PCO</p>
+                </Button>}
             </div>
             <div className="relative overflow-x-auto shadow-sm mt-[10px]">
               <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -321,7 +309,9 @@ function Home() {
                     <th scope="col" className="px-6 py-3">Sous-comités</th>
                     <th scope="col" className="px-6 py-3">Contact</th>
                     <th scope="col" className="px-6 py-3">Situation</th>
-                    <th scope="col" className="px-6 py-3">Actions</th>
+                    {auth?.rolePers == "Accueil_Hebergement" ? null :
+                      <th scope="col" className="px-6 py-3">Actions</th>
+                    }
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -335,17 +325,20 @@ function Home() {
                         <td className="px-6 py-4">{item.sousComite}</td>
                         <td className="px-6 py-4">{item.phonePers}</td>
                         <td className="px-6 py-4">{item.situation}</td>
+                        {auth?.rolePers == "Accueil_Hebergement" ? null :
                         <td className="px-6 py-4 text-right">
-                          <div className='flex flex-row justify-start items-center space-x-2'>
-                            <EditButton onClick={() => navigate(`/update-pco/${item.idpers}`)} />
-                            <DeleteButton onClick={() => {
-                              setOpen(true)
-                              setPcoId(item.idpers)
-                              setPcoPhone(item.phonePers)
+                            <div className='flex flex-row justify-start items-center space-x-2'>
+                              <EditButton onClick={() => navigate(`/update-pco/${item.idpers}`)} />
+                              <DeleteButton onClick={() => {
+                                setOpen(true)
+                                setPcoId(item.idpers)
+                                setPcoPhone(item.phonePers)
 
-                            }} />
-                          </div>
-                        </td>
+                              }} />
+                            </div>
+                            </td>
+                          }
+                        
                       </tr>
                     ))
                   }

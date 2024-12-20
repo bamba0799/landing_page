@@ -57,14 +57,12 @@ const AddVisiteur = () => {
         const {data: addVisiteur} = await apiService.addVisiteur(data);
         console.log("addVisiteur", addVisiteur);
         toast.success("Visiteur ajouté avec succès");
-        navigate("/home");
+        navigate("/visiteur");
        } catch (error) {
         console.log("error", error);
         toast.error("Une erreur s'est produite lors de l'ajout du membre du comité d'organisation");
        }
     }
-
-
 
     return (
         <div>
@@ -74,7 +72,7 @@ const AddVisiteur = () => {
                     <div className="flex justify-between">
                         <div className="w-full flex flex-row justify-between">
                             <h1 className="text-2xl font-semibold text-primary_green">Ajouter Visiteur</h1>
-                            <Button onClick={() => navigate("/add-commission")} outline={true} className='button-icon bg-quaternary_green' bg={''}>
+                            <Button onClick={() => navigate("/visiteur")} outline={true} className='button-icon bg-quaternary_green' bg={''}>
                                 <Icon icon="solar:arrow-left-linear" className='text-secondary_green w-[20px] h-[20px]' />
                                 <p className='text-secondary_green'>Retour</p>
                             </Button>

@@ -20,25 +20,25 @@ const IndexPage = () => {
     const [searchTerm, setSearchTerm] = useState<string>("");
     const filteredStatMateriel = statMateriel.filter((item) =>
         item.commission.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+    );
 
 
 
-  const columns = [
-    { title: "Commission", field: "commission", },
-    { title: "Materiels loués", field: "materiels_loues" },
-    { title: "Materiels achetés", field: "materiels_achete" },
-    { title: "Total matériels", field: "total_materiels" },
-    { title: "Montant dépensé(Fcfa)", field: "total_depense" },
-  ]
+    const columns = [
+        { title: "Commission", field: "commission", },
+        { title: "Materiels loués", field: "materiels_loues" },
+        { title: "Materiels achetés", field: "materiels_achete" },
+        { title: "Total matériels", field: "total_materiels" },
+        { title: "Montant dépensé(Fcfa)", field: "total_depense" },
+    ]
 
     const downloadPdf = () => {
         const doc: any = new jsPDF()
         doc.text(`statistiques des matériels`, 20, 10)
         doc.autoTable({
-          theme: "grid",
-          columns: columns.map(col => ({ ...col, dataKey: col.field })),
-          body: statMateriel
+            theme: "grid",
+            columns: columns.map(col => ({ ...col, dataKey: col.field })),
+            body: statMateriel
         })
         doc.save(`statistique_materiel.pdf`)
     }
@@ -96,7 +96,7 @@ const IndexPage = () => {
                                     <th scope="col" className="px-6 py-3">Materiels achetés</th>
                                     <th scope="col" className="px-6 py-3">Total matériels</th>
                                     <th scope="col" className="px-6 py-3">Montant dépensé(Fcfa)</th>
-                                    {/* <th scope="col" className="px-6 py-3">Actions</th> */}
+                                    <th scope="col" className="px-6 py-3">Actions</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -110,12 +110,13 @@ const IndexPage = () => {
                                             <td className="px-6 py-4">{item.materiels_achete}</td>
                                             <td className="px-6 py-4">{item.total_materiels}</td>
                                             <td className="px-6 py-4">{item.total_depense}</td>
-                                            {/* <td className="px-6 py-4">
+                                            <td className="px-6 py-4">
                                                 <div className="flex items-center space-x-2">
-                                                    <EditButton onClick={() => navigate("/edit-commission")} />
-                                                    <DeleteButton onClick={() => alert("delete")} />
+                                                    <button onClick={()=>navigate(`/materiel-detail/${item.commission}`)} className='border border-secondary_green p-[5px] rounded-full'>
+                                                        <Icon icon="solar:eye-linear" className='text-secondary_green w-[14px] h-[14px]' />
+                                                    </button>
                                                 </div>
-                                            </td> */}
+                                            </td>
 
                                         </tr>
                                     ))

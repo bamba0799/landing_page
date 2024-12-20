@@ -152,7 +152,7 @@ const AddSeminariste = () => {
             const { data: seminariste } = await apiService.addSeminariste(datas);
             console.log("seminariste", seminariste);
             toast.success("Membre du comité d'organisation ajouté avec succès");
-            navigate(-1);
+            navigate('/seminariste');
         } catch (error) {
             console.log("error", error);
             toast.error("Une erreur s'est produite lors de l'ajout du membre du comité d'organisation");
@@ -189,8 +189,8 @@ const AddSeminariste = () => {
                 <SecondLayout title={"Comité d'organisation"}>
                     <div className="flex justify-between">
                         <div className="w-full flex flex-row justify-between">
-                            <h1 className="text-2xl font-semibold text-primary_green">Ajouter une commission</h1>
-                            <Button onClick={() => navigate("/add-commission")} outline={true} className='button-icon bg-quaternary_green' bg={''}>
+                            <h1 className="text-2xl font-semibold text-primary_green">Ajouter un Séminariste</h1>
+                            <Button onClick={() => navigate("/seminariste")} outline={true} className='button-icon bg-quaternary_green' bg={''}>
                                 <Icon icon="solar:arrow-left-linear" className='text-secondary_green w-[20px] h-[20px]' />
                                 <p className='text-secondary_green'>Retour</p>
                             </Button>

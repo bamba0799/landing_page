@@ -13,7 +13,7 @@ const axiosClient = ( token: string | null = null): any => {
 
   const client = axios.create({
     // baseURL: "ec2-54-205-20-252.compute-1.amazonaws.com:3000", 18.233.60.120
-    baseURL: "http://18.233.60.120:3000",
+    baseURL: "http://localhost:3005",
     headers,
     timeout: 60000,
     withCredentials: false,

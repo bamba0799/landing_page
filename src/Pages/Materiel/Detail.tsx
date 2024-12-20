@@ -1,17 +1,21 @@
+
+
 import React, { useEffect } from 'react';
 import Main from '../../ components/Main/Main';
 import PrimaryLayout from '../../layouts/PrimaryLayout';
 import HomeCard from '../../ components/Card/HomeCard';
 import Button from '../../ components/Button/Button';
 import { Icon } from '@iconify/react/dist/iconify.js';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Input from '../../ components/Input/Input';
 import EditButton from '../../ components/Button/EditButton';
 import DeleteButton from '../../ components/Button/DeleteButton';
 import apiService from '../../../services/api';
 import DeleteModal from '../../ components/Modal/DeleteModal';
 import toast from 'react-hot-toast';
-const IndexPage = () => {
+const Detail = () => {
+        const { commissionId } = useParams();
+        console.log("commissionId", commissionId);
 
     let auth: any = localStorage.getItem("user");
     auth = JSON.parse(auth);
@@ -62,7 +66,6 @@ const IndexPage = () => {
             setTotalSeminariste(totalSeminarist);
             console.log("statistiqueSeminariste", stat);
 
-
         } catch (error) {
             console.error("Error in getStatistiqueSeminariste:", error);
 
@@ -100,25 +103,11 @@ const IndexPage = () => {
     return (
         <div>
             <Main className=''>
-                <PrimaryLayout title={"Séminaristes"}>
+                <PrimaryLayout title={"Detail matériels"}>
                     <div>
                         <div className='flex flex-col lg:flex-row lg:items-center '>
                             <div className=' flex flex-col items-center space-y-2 lg:flex-row lg:items-center  lg:space-y-0 lg:space-x-3'>
-                                {/* card1 */}
-                                <HomeCard bg={'bg-secondary_orange'} title={'Nombre de séminariste'} item1={{
-                                    title: "Frères",
-                                    value: totalFrereSeminariste
-                                }} item2={{
-                                    title: "Sœurs",
-                                    value: totalSoeurSeminariste
-                                }}
-                                    item3={{
-                                        title: "Total",
-                                        value: totalSeminariste
-                                    }}
-                                    icon={'mdi:account-student'}
-                                    eye={false}
-                                />
+    
                                 {/* card2 */}
                                 <HomeCard bg={'bg-quaternary_green'} title={'Pépinières'} item1={{
                                     title: "Frères",
@@ -134,36 +123,7 @@ const IndexPage = () => {
                                     icon={''}
                                     eye={false}
                                 />
-                                {/* card3 */}
-                                <HomeCard bg={'bg-quaternary_green'} title={'Enfants'} item1={{
-                                    title: "Frères",
-                                    value: statistiqueSeminariste?.Enfants.totalFrere
-                                }} item2={{
-                                    title: "Sœurs",
-                                    value: statistiqueSeminariste?.Enfants.totalSoeur
-                                }}
-                                    item3={{
-                                        title: "Total",
-                                        value: statistiqueSeminariste?.Enfants.totalFrere + statistiqueSeminariste?.Enfants.totalSoeur
-                                    }}
-                                    icon={''}
-                                    eye={false}
-                                />
-                                {/* card4 */}
-                                <HomeCard bg={'bg-quaternary_green'} title={'Jeunes et adultes'} item1={{
-                                    title: "Frères",
-                                    value: statistiqueSeminariste?.Jeunes_et_Adultes.totalFrere
-                                }} item2={{
-                                    title: "Sœurs",
-                                    value: statistiqueSeminariste?.Jeunes_et_Adultes.totalSoeur
-                                }}
-                                    item3={{
-                                        title: "Total",
-                                        value: statistiqueSeminariste?.Jeunes_et_Adultes.totalFrere + statistiqueSeminariste?.Jeunes_et_Adultes.totalSoeur
-                                    }}
-                                    icon={''}
-                                    eye={false}
-                                />
+          
                             </div>
 
                         </div>
@@ -278,4 +238,4 @@ const IndexPage = () => {
     );
 }
 
-export default IndexPage;
+export default Detail;

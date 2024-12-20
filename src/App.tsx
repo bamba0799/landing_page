@@ -18,6 +18,8 @@ import UpdateVisiteur from "./Pages/Visiteur/UpdateVisiteur";
 import UpdatePco from "./Pages/ComiteOrganisation/UpdatePco";
 import IndexPageMateriel  from './Pages/Materiel/IndexPage';
 import UpdateCo from "./Pages/Commission/UpdateCo";
+import UpdateDortoirSeminariste from "./Pages/Dortoir/UpdateDortoirSeminariste";
+import Detail from "./Pages/Materiel/Detail";
 
 function App() { 
   console.log("App");
@@ -47,9 +49,11 @@ function App() {
               {/* dortoir */}
               <Route path="/dortoir" element={<IndexPageDortoir />} />
               <Route path="/add-dortoir" element={<AddDortoir />} />
+              <Route path="/update-dortoir-seminariste/:seminaristeId" element={<UpdateDortoirSeminariste />} />
 
               {/* materiel */}
                <Route path="/materiel" element={< IndexPageMateriel/>} />
+               <Route path="/materiel-detail/:commission" element={< Detail/>} />
             </Route>
             {/* Other routes */}
           </Routes>

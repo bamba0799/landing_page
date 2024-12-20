@@ -68,7 +68,7 @@ import axiosClient from '../config/axios';
 const apiService = {
         getUser: async () => getData("/get"),
         loginUser: async (data: any) => postData("/auth/signIn", data),
-        getMembresCo: async () => getData("/membre-co/totalByGender"),
+        getMembresCo: async () => getData("/membre-co/TotalGender"),
         getSeminariste: async () => getData("/seminariste/totalByGender"),
         getDortoir: async () => getData("/dortoirs/totaldortoirBytype"),
         getCommission: async () => getData("/commission/totalByGender"),
@@ -104,6 +104,7 @@ const apiService = {
         getDortoirById: async (dortoirId: any) => getDataById(`/dortoirs/getone`, dortoirId),
         getTotalDortoirByType: async () => getData("/dortoirs/totaldortoirBytype"),
         getTotalDortoirByGenre: async () => getData("/dortoirs/totaldortoirByGenre"),
+        updateDortoirSeminariste: async (id:any,data: any) => updateData("/seminariste/update", id, data),
 
         // visiteur
         addVisiteur: async (data: any) => postData("/visiteur/add", data),
@@ -116,6 +117,9 @@ const apiService = {
         deleteVisiteur: async (id: any) => deleteData("/visiteur/delete", id),
         terminateVisiteur: async (id: any) => deleteData("/visiteur/softdelete", id), 
         getTotalVisiteurByDay: async () => getData("/visiteur/totalByday"),
+        // getTotalVisiteurByGenre: async () => getData("/visiteur/totalByGenre"),
+
+
 
         //materiel  
 

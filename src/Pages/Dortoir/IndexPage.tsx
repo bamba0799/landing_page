@@ -26,6 +26,8 @@ const IndexPage = () => {
 
     const [seminaristeForPdf, setSeminaristeForPdf] = React.useState<any>([]);
 
+    let auth: any = localStorage.getItem("user");
+    auth = JSON.parse(auth);
 
     const columns = [
         { title: "Nom et Prénoms", field: "nomPrenomSemi", },
@@ -69,7 +71,7 @@ const IndexPage = () => {
             const { data: dortoirList } = await apiService.getDortoirList();
             console.log("getDortoirList", dortoirList);
             setDortoirList(dortoirList);
-            const currentDortoir = dortoirList.filter(( index: number) => index == activeTabIndex);
+            const currentDortoir = dortoirList.filter((_items: any, index: number) => index == activeTabIndex);
             console.log("currentDortoir", currentDortoir);
 
             setCurrentDortoir(currentDortoir);
@@ -170,14 +172,16 @@ const IndexPage = () => {
                             </div>
 
                         </div>
-                        <div className='mt-[10px] flex flex-row justify-end items-center'>
-                            <Button onClick={() => navigate("/add-dortoir")} outline={true} className='button-icon bg-quaternary_green' bg={''}>
-                                <div className='border rounded-full p-[3px] bg-primary_green'>
-                                    <Icon icon="mdi:plus" className='text-white' />
-                                </div>
-                                <p className='text-secondary_green'>Ajouter un dortoir </p>
-                            </Button>
-                        </div>
+                        {auth?.rolePers != "Accueil_Hebergement" ? null :
+                            <div className='mt-[10px] flex flex-row justify-end items-center'>
+                                <Button onClick={() => navigate("/add-dortoir")} outline={true} className='button-icon bg-quaternary_green' bg={''}>
+                                    <div className='border rounded-full p-[3px] bg-primary_green'>
+                                        <Icon icon="mdi:plus" className='text-white' />
+                                    </div>
+                                    <p className='text-secondary_green'>Ajouter un dortoir </p>
+                                </Button>
+                            </div>
+                        }
                         {/* tableau */}
                         <div className='md:border md:shadow-lg py-[20px] md:px-[10px]  border-gray-300 mt-[14px] rounded-t-[10px]'>
                             <div className='w-full md:border-b-[2px] border-gray-300 flex items-center space-x-[10px] md:space-x-[20px] overflow-x-auto hide-scrollbar'>
@@ -220,7 +224,11 @@ const IndexPage = () => {
                                             <th scope="col" className="px-6 py-3">Santé</th>
                                             <th scope="col" className="px-6 py-3">Contact</th>
                                             <th scope="col" className="px-6 py-3">Situation</th>
-                                            <th scope="col" className="px-6 py-3">Actions</th>
+                                            {
+                                                auth?.rolePers != "Accueil_Hebergement" ? null :
+                                                    <th scope="col" className="px-6 py-3">Actions</th>
+                                            }
+
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -238,17 +246,20 @@ const IndexPage = () => {
                                                         <td className="px-6 py-4">{item.etatSante}</td>
                                                         <td className="px-6 py-4">{item.phoneSemi}</td>
                                                         <td className="px-6 py-4">{item.situation}</td>
+                                                        {
+                                                            auth?.rolePers != "Accueil_Hebergement" ? null :
+                                                                <td className="px-6 py-4 text-right">
+                                                                    <div className='flex flex-row justify-start items-center space-x-2'>
+                                                                        <EditButton onClick={() => navigate(`/update-dortoir-seminariste/${item.idSemi}`)} />
+                                                                        <DeleteButton onClick={() => {
+                                                                            setOpen(true)
+                                                                            setSeminaristeId(item.idSemi)
 
-                                                        <td className="px-6 py-4 text-right">
-                                                            <div className='flex flex-row justify-start items-center space-x-2'>
-                                                                <EditButton onClick={() => navigate(`/update-seminariste/${item.idSemi}`)} />
-                                                                <DeleteButton onClick={() => {
-                                                                    setOpen(true)
-                                                                    setSeminaristeId(item.idSemi)
+                                                                        }} />
+                                                                    </div>
+                                                                </td>
+                                                        }
 
-                                                                }} />
-                                                            </div>
-                                                        </td>
 
                                                     </tr>
                                                 )) :

@@ -22,6 +22,9 @@ const IndexPage = () => {
     const [visiteurId, setVisiteurId] = React.useState<any>(null);
     const [isClicked, setIsClicked] = React.useState<boolean>(false);
 
+    let auth: any = localStorage.getItem("user");
+    auth = JSON.parse(auth);
+    console.log("auth", auth);
 
     const [activeTabIndex, setActiveTabIndex] = React.useState<number>(0);
 
@@ -128,7 +131,7 @@ const IndexPage = () => {
                     roleVisiteur: item.roleVisiteur,
                     phoneVisiteur: item.phoneVisiteur,
                     createdAt: new Date(item.createdAt).toLocaleDateString('fr-FR'),
-                    deleteAt: item.deleteAt ? new Date(item.deleteAt).toLocaleDateString('fr-FR') : 'Néant'
+                    deletedAt: item.deletedAt
                 }
             });
             setVisiteurForPdf(visiteurForPdf);
@@ -150,7 +153,7 @@ const IndexPage = () => {
                     roleVisiteur: item.roleVisiteur,
                     phoneVisiteur: item.phoneVisiteur,
                     createdAt: new Date(item.createdAt).toLocaleDateString('fr-FR'),
-                    deleteAt: item.deleteAt ? new Date(item.deleteAt).toLocaleDateString('fr-FR') : 'Néant'
+                    deletedAt: item.deletedAt
                 }
             });
             setVisiteurForPdf(visiteurForPdf);
@@ -240,12 +243,14 @@ const IndexPage = () => {
                                     <Input className='rounded-[5px]' type='text' id={"recherche"} placeholder='Rechercher' onChange={(e) => console.log(e.target.value)} />
                                 </div>
                                 <div className='flex flex-col  space-y-[10px] md:flex-row md:items-center md:justify-between md:space-x-[20px] md:space-y-[0px]'>
-                                    <Button onClick={() => navigate("/add-visiteur")} outline={true} className='button-icon bg-quaternary_green' bg={''}>
-                                        <div className='border rounded-full p-[3px] bg-primary_green'>
-                                            <Icon icon="mdi:plus" className='text-white' />
-                                        </div>
-                                        <p className='text-secondary_green'>Ajouter un visiteur </p>
-                                    </Button>
+                                    { auth?.rolePers != "Accueil_Hebergement"? null:
+                                        <Button onClick={() => navigate("/add-visiteur")} outline={true} className='button-icon bg-quaternary_green' bg={''}>
+                                            <div className='border rounded-full p-[3px] bg-primary_green'>
+                                                <Icon icon="mdi:plus" className='text-white' />
+                                            </div>
+                                            <p className='text-secondary_green'>Ajouter un visiteur </p>
+                                        </Button>
+                                    }
                                     <Button onClick={() => downloadPdf()} outline={true} className='button-icon bg-tertiary_green' bg={''}>
                                         <p className='text-secondary_green'>Exporter</p>
                                     </Button>
@@ -262,8 +267,9 @@ const IndexPage = () => {
                                             <th scope="col" className="px-6 py-3">Contact</th>
                                             <th scope="col" className="px-6 py-3">Date d'entrée</th>
                                             <th scope="col" className="px-6 py-3">Date de sortie</th>
-                                            {activeTabIndex == 1 &&
+                                            {(activeTabIndex == 1 && auth?.rolePers=="Accueil_Hebergement")?
                                                 <th scope="col" className="px-6 py-3">Actions</th>
+                                                :null
                                             }
 
                                         </tr>
@@ -280,9 +286,11 @@ const IndexPage = () => {
                                                         <td className="px-6 py-4">{item.sousComite}</td>
                                                         <td className="px-6 py-4">{item.roleVisiteur ? item.roleVisiteur : "Néant"}</td>
                                                         <td className="px-6 py-4">{item.phoneVisiteur}</td>
-                                                        <td className="px-6 py-4">{new Date(item.createdAt).toLocaleDateString('fr-FR')}</td>
-                                                        <td className="px-6 py-4">{item.deleteAt ? new Date(item.deletedAt).toLocaleDateString('fr-FR') : 'Néant'}</td>
-                                                        {activeTabIndex == 1 &&
+                                                        <td className="px-6 py-4">{new Date(item.createdAt).toLocaleString('fr-FR', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+                                                        </td>
+                                                        <td className="px-6 py-4">{new Date(item.deletedAt).toLocaleString('fr-FR', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+                                                        </td>
+                                                        {(activeTabIndex == 1 && auth?.rolePers=="Accueil_Hebergement")?
                                                             <td className="px-6 py-4 text-right">
                                                                 <div className='flex flex-row justify-start items-center space-x-2'>
                                                                     <EditButton onClick={() => navigate(`/update-visiteur/${item.idVisiteur}`)} />
@@ -290,15 +298,15 @@ const IndexPage = () => {
                                                                         onClick={() => {
                                                                             setOpenTerminateModal(true);
                                                                             setVisiteurId(item.idVisiteur);
-                                                                           
+
                                                                         }}
                                                                     />
                                                                     <DeleteButton onClick={() => {
-                                                                      setOpen(true);
-                                                                      setVisiteurId(item.idVisiteur);
+                                                                        setOpen(true);
+                                                                        setVisiteurId(item.idVisiteur);
                                                                     }} />
                                                                 </div>
-                                                            </td>
+                                                            </td>:null
                                                         }
 
                                                     </tr>

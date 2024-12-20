@@ -16,7 +16,7 @@ import toast from "react-hot-toast";
 
 const AddCommission = () => {
     const navigate = useNavigate();
-  
+
     const { register, handleSubmit, setValue, watch, formState } = useForm<AddCommissionFormValues>({
         defaultValues: {
             nomPers: "",
@@ -117,7 +117,7 @@ const AddCommission = () => {
 
     const { errors } = formState;
 
-    
+
 
     const addCoMember = async (data: any) => {
         console.log("data", data);
@@ -137,13 +137,16 @@ const AddCommission = () => {
             console.log("addedCoMember", addedCoMember);
             toast.success("Membre du comité d'organisation ajouté avec succès");
             navigate("/comite-organisation");
-        } catch (error:any) {
+        } catch (error: any) {
             const status = error.response.status;
-            if(status === 701){
+            if (status === 701) {
                 return toast.error("Vous n'etes pas autorisé à effectuer cette action");
+            } else if (status == 704) {
+                toast.error("Pas autorisé à ajouter ce membre dans votre commission");
+            } else {
+                console.log("error", error);
+                toast.error("Une erreur s'est produite lors de l'ajout du membre du comité d'organisation");
             }
-            console.log("error", error);
-            toast.error("Une erreur s'est produite lors de l'ajout du membre du comité d'organisation");
         }
     }
 

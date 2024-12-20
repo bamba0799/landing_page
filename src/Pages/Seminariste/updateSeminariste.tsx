@@ -18,6 +18,9 @@ const UpdateSeminariste = () => {
     const { seminaristeId } = useParams();
     console.log("seminaristeId", seminaristeId);
 
+    let auth: any = localStorage.getItem("user");
+    auth = JSON.parse(auth);
+    console.log("auth", auth);
     const [allDortoirs, setAllDortoirs] = useState([]);
     console.log("allDortoirs", allDortoirs);
     
@@ -124,7 +127,7 @@ const UpdateSeminariste = () => {
             const { data: seminariste } = await apiService.updateSeminariste(seminaristeId!,datas);
             console.log("seminariste", seminariste);
             toast.success("Séminariste modifié avec succès");
-            navigate(-1);
+            navigate("/seminariste");
         } catch (error) {
             console.log("error", error);
             toast.error("Une erreur s'est produite lors de la modification du seminariste");
@@ -396,7 +399,8 @@ const UpdateSeminariste = () => {
                                     {errors.categorie && (<p className="error-message">{errors.categorie.message}</p>)}
                                 </div>
 
-                                <div className="md:w-[48%]">
+                        { auth?.rolePers == "Accueil_Hebergement"? null:    
+                            <div className="md:w-[48%]">
                                     <Controller
                                         name="niveau"
                                         control={control}
@@ -415,7 +419,7 @@ const UpdateSeminariste = () => {
                                         )}
                                     />
                                     {errors.niveau && (<p className="error-message">{errors.niveau.message}</p>)}
-                                </div>
+                                </div>}
                             </div>
                             {/* line 7 */}
                             <div className='flex flex-col space-y-[20px] md:space-y-[0px]  md:flex-row md:justify-between md:items-center'>

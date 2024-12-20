@@ -24,11 +24,16 @@ export interface User {
     soeur: number ;
     Total: number ;
   }
+
+  export interface UpdateDortoirSeminaristeFormValues{
+    dortoir: string;
+
+  }
   
   export interface MembreCo {
-    Formation: CategoryStats;
-    Administration: CategoryStats;
-    Accueil_Hebergement: CategoryStats;
+    frere: number;         // Nombre de frères
+    soeur: number;         // Nombre de sœurs
+    non_defini: number;         // Total des membres
   }
 
   export interface Seminariste {
