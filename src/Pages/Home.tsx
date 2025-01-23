@@ -1,354 +1,143 @@
 import { useEffect, useState } from 'react'
 import Main from '../ components/Main/Main'
-import { useNavigate } from 'react-router-dom';
 
-// import { Button } from 'flowbite-react'
-import Input from '../ components/Input/Input'
-import HomeCard from '../ components/Card/HomeCard'
-import PrimaryLayout from '../layouts/PrimaryLayout'
-import { Icon } from '@iconify/react/dist/iconify.js'
-
-import apiService from '../../services/api'
-import jsPDF from 'jspdf'
-import 'jspdf-autotable'
-import Button from '../ components/Button/Button'
-import { Commision, MembreCo, Seminariste } from '../../services/model'
-import EditButton from '../ components/Button/EditButton';
-import DeleteButton from '../ components/Button/DeleteButton';
-import DeleteModal from '../ components/Modal/DeleteModal';
-import toast from 'react-hot-toast';
+import homeImage1 from "../assets/homeImage1.png";
+import featureImage2 from "../assets/featureImage2.png";
+import grapheImage1 from "../assets/grapheImage1.png";
+import SecondButton from '../ components/Button/SecondButton';
+import FeatureCard from '../ components/FeatureCard';
 
 
 function Home() {
-  let auth: any = localStorage.getItem("user");
-  auth = JSON.parse(auth);
-  console.log("auth", auth);
-
-  const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false)
-  console.log("isLoading", isLoading);
-
-  const [open, setOpen] = useState<boolean>(false);
-  const [pcoId, setPcoId] = useState<any>(null);
-  const [pcoPhone, setPcoPhone] = useState<any>(null);
-  const [isClicked, setIsClicked] = useState<boolean>(false);
-
-  const [pco, setPco] = useState([])
-  const [totalFormateur, setTotalFormateur] = useState<any>(0)
-
-  const [searchTerm, setSearchTerm] = useState<string>("");
-
-
-  const [seminariste, setSeminariste] = useState<Seminariste>({
-    frere: 0,
-    soeur: 0,
-    Total: 0,
-    m: null
-  })
-
-  const [membreCo, setMembreCo] = useState<MembreCo>({
-    frere: 0,
-    soeur: 0,
-    non_defini: 0
-  })
-
-  const [dortoir, setDortoir] = useState({
-    co: 0,
-    seminariste: 0,
-    non_defini: 0
-  })
-  const [commission, setCommission] = useState<Commision[]>([
-    {
-      commission: "",
-      total_frères: 0,
-      total_soeurs: 0,
-      total_membres: ""
-    }
-  ])
-
-  // Fonction pour filtrer les commissions
-  const filteredCommission = commission.filter((item) =>
-    item.commission.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-
-  const columns = [
-    { title: "Commission", field: "commission", },
-    { title: "Total frères", field: "total_frères", },
-    { title: "Total soeurs", field: "total_soeurs", type: "numeric" },
-    { title: "Total membres", field: 'total_membres', type: "currency" }]
-
-  // const downloadExcel = () => {
-  //   const newData = commissionDataForExport.map(row => {
-  //     delete row.tableData
-  //     return row
-  //   })
-  //   const workSheet = XLSX.utils.json_to_sheet(newData)
-  //   const workBook = XLSX.utils.book_new()
-  //   XLSX.utils.book_append_sheet(workBook, workSheet, "students")
-  //   //Buffer
-  //   XLSX.write(workBook, { bookType: "xlsx", type: "buffer" })
-  //   //Binary string
-  //   XLSX.write(workBook, { bookType: "xlsx", type: "binary" })
-  //   //Download
-  //   XLSX.writeFile(workBook, "StudentsData.xlsx")
-
-  // }
-  //https://github.com/vikas62081/material-table-YT/blob/pdfExport/src/App.js exporter en excel
-
-  const deletePco = async (id: any) => {
-    if (pcoPhone == auth?.phonePers) {
-      toast.error("Vous ne pouvez pas vous supprimer vous même")
-      setOpen(false)
-    } else {
-
-      try {
-        const { data } = await apiService.deletePco(id)
-        console.log("data", data);
-        setOpen(false)
-        setIsClicked(!isClicked);
-        toast.success("Pco supprimé avec succès");
-
-      } catch (error) {
-        console.log("error pco", error);
-        toast.error("Une erreur s'est produite lors de la suppression du pco");
-      }
-    }
-  }
-  const getPco = async () => {
-    setIsLoading(true)
-    try {
-      const { data: pco } = await apiService.getPco()
-      setPco(pco)
-    } catch (error) {
-      setIsLoading(false)
-      console.log("error", error);
-    }
-  }
-
-  const downloadPdf = () => {
-    const doc: any = new jsPDF()
-    doc.text("Commission Ikhwane", 20, 10)
-    doc.autoTable({
-      theme: "grid",
-      columns: columns.map(col => ({ ...col, dataKey: col.field })),
-      body: commission
-    })
-    doc.save('table.pdf')
-  }
-
-  const getHomeData = async () => {
-    setIsLoading(true)
-    try {
-      const { data: membreCo } = await apiService.getMembresCo();
-      console.log("yyyyyyy", membreCo);
-
-      setMembreCo(membreCo)
-      const { data: seminariste } = await apiService.getSeminariste()
-      setSeminariste(seminariste)
-      const { data: dort } = await apiService.getDortoir()
-      setDortoir(dort)
-      const { data: commission } = await apiService.getCommission()
-      setCommission(commission)
-
-      const { data: totalFormateur } = await apiService.getTotalFormateur()
-      console.log("totalFormateur", totalFormateur);
-      setTotalFormateur(totalFormateur)
-
-      const { data: totalVisiteur } = await apiService.getTotalVisiteurByGenre()
-      console.log("totalVisiteur", totalVisiteur);
-
-
-    } catch (error) {
-      setIsLoading(false)
-      console.log("error", error);
-    }
-  }
-  useEffect(() => {
-    getHomeData()
-    getPco()
-  }, [isClicked])
-
   return (
-    <div>
+    <div className='bg-white min-h-screen'>
       <Main className=''>
-        <PrimaryLayout title={"Tableau de bord"}>
-          <div>
-            <div className='flex flex-col lg:flex-row lg:items-center '>
-              <div className=' flex flex-col items-center space-y-0 lg:flex-row lg:items-center  lg:space-y-0'>
-                <HomeCard bg={'bg-secondary_orange'} title={'Membres de C.O'} item1={{
-                  title: "Frères",
-                  value: membreCo?.frere
-                }} item2={{
-                  title: "Sœurs",
-                  value: membreCo?.soeur
-                }}
-                  item3={{
-                    title: "Total",
-                    value: membreCo?.frere + membreCo?.soeur + membreCo?.non_defini
-                  }}
-                  icon={'fa:group'}
-                  eye={false}
+        <div className="mt-[30px]   flex flex-col justify-between items-center">
+          <section className="w-full relative bg-gradient-to-b from-blue-900 to-blue-800 text-white ">
+            <div className="border border-orange-800 lg:mx-[30px]   py-12 flex flex-col lg:flex-row items-center lg:justify-between ">
+              {/* Image principale */}
+              <div className="w-full border border-red-800 flex justify-center lg:hidden mb-6">
+                <img
+                  src={homeImage1}
+                  alt="Illustration de la page d'accueil"
+                  className="w-2/3 object-cover"
                 />
-                <div className='lg:w-[1px]  bg-primary_green lg:h-[100px] w-[95%] h-[1px]'></div>
-                <HomeCard bg={'bg-secondary_orange'} title={'Nombre de séminariste'} item1={{
-                  title: "Frères",
-                  value: seminariste?.frere
-                }} item2={{
-                  title: "Sœurs",
-                  value: seminariste?.soeur
-                }}
-                  item3={{
-                    title: "Total",
-                    value: seminariste?.Total
-                  }}
-                  icon={'mdi:account-student'}
-                  eye={false}
-                />
-                <div className='lg:w-[1px]  bg-primary_green lg:h-[100px] w-[95%] h-[1px]'></div>
-                <HomeCard bg={'bg-secondary_orange'} title={'Nombre de dortoirs'} item1={{
-                  title: "Co",
-                  value: dortoir?.co
-                }} item2={{
-                  title: "séminariste",
-                  value: dortoir?.seminariste
-                }}
-                  item3={{
-                    title: "Total",
-                    value: dortoir?.non_defini + dortoir?.co + dortoir?.seminariste
-                  }}
-                  icon={'fa-solid:home'}
-                  eye={false}
-                />
-                <div className='lg:w-[1px]  bg-primary_green lg:h-[100px] w-[95%] h-[1px]'></div>
-                <HomeCard bg={'bg-secondary_orange'} title={'Nombre de formateur'} item1={{
-                  title: "Frères",
-                  value: totalFormateur?.frere
-                }} item2={{
-                  title: "Sœurs",
-                  value: totalFormateur?.soeur
-                }}
-                  item3={{
-                    title: "Total",
-                    value: totalFormateur?.total_general
-                  }}
-                  icon={'fa-solid:home'}
-                  eye={false}
-                />
+              </div>
+              <div className='border lg:w-[50%]'>
+                {/* Texte principal */}
+                <h1 className="text-2xl font-bold leading-tight mb-4">
+                  Le pilotage de votre activité n'a jamais été aussi simple
+                </h1>
+                <p className="text-sm mb-6">
+                  Facturez vos clients, et suivez votre trésorerie aisément,
+                  tout en focus sur votre activité
+                </p>
+                {/* Boutons */}
+                <div className="w-full flex flex-col lg:flex-row  lg:items-center space-y-4 lg:space-y-0 lg:space-x-3">
+                  <SecondButton shadow=' shadow-custom' text={"Ouvrir un compte"} />
+                  <SecondButton bgColor='bg-white' textColor='text-black' text={"Tester gratuitement"} />
+                </div>
+                {/* Flèche vers le bas */}
 
               </div>
-              <HomeCard bg={'bg-quaternary_green mt-3 lg:mt-0 lg:ml-3'} title={'Nombre total de visite'} item1={{
-                title: "Frères",
-                value: 10
-              }} item2={{
-                title: "Sœurs",
-                value: 12
-              }}
-                item3={{
-                  title: "Total",
-                  value: 10
-                }}
-                icon={'fa-solid:home'}
-                eye={false}
+              <div className="border w-full lg:w-[50%] hidden lg:flex justify-center mb-6">
+                <img
+                  src={homeImage1}
+                  alt="Illustration de la page d'accueil"
+                  className="w-2/3"
+                />
+              </div>
+            </div>
+            <div className="flex justify-center mt-8 mb-20 z-[999999px]">
+              <button className="text-white">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19.5 12.75L12 19.5l-7.5-6.75"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div className="absolute z-[999px] -bottom-[50px] left-0 w-full h-[100px] bg-white border-[5px] border-t-orange-500  transform -skew-y-[6deg] lg:-skew-y-[2deg] origin-bottom"></div>
+          </section>
+          <div className='flex flex-col items-center '>
+            {/* first */}
+            <div className='mt-[100px] grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8 mx-[30px]'>
+              <FeatureCard
+                image={featureImage2}
+                title="Analyse de données avec Ia"
+                description="Suivez votre trésorerie à la transaction près. Analysez vos postes de dépenses et vos recettes en un seul clic."
               />
-            </div>
-            <div className='flex flex-row items-center justify-between mt-[10px]'>
-              <div className=' '>
-                <Input className='rounded-[5px]' type='text' id={"recherche"} placeholder='Rechercher' onChange={(e) => setSearchTerm(e.target.value)} />
-              </div>
-              <Button onClick={() => downloadPdf()} outline={true} className='button-icon bg-tertiary_green' bg={''}>
-                <p className='text-secondary_green'>Exporter</p>
-              </Button>
-            </div>
-            <div className="relative overflow-x-auto shadow-sm mt-[10px]">
-              <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-white  bg-secondary_green">
-                  <tr>
-                    <th scope="col" className="px-6 py-3">Commission</th>
-                    <th scope="col" className="px-6 py-3">Total frères</th>
-                    <th scope="col" className="px-6 py-3">Total soeurs</th>
-                    <th scope="col" className="px-6 py-3">Total membres</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-
-                  {
-                    filteredCommission.map((item, index) => (
-                      <tr className={`${index % 2 == 0 ? "bg-white" : "bg-white/50"} dark:bg-gray-800`} key={index}>
-                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          {item.commission}
-                        </th>
-                        <td className="px-6 py-4">{item.total_frères}</td>
-                        <td className="px-6 py-4">{item.total_soeurs}</td>
-                        <td className="px-6 py-4">{item.total_membres}</td>
-
-                      </tr>
-                    ))
-                  }
-                </tbody>
-              </table>
+              <FeatureCard
+                image={featureImage2}
+                title="Devis & Facturation"
+                description="Suivez votre trésorerie à la transaction près. Analysez vos postes de dépenses et vos recettes en un seul clic."
+              />
+              <FeatureCard
+                image={featureImage2}
+                title="Trésorerie"
+                description="Suivez votre trésorerie à la transaction près. Analysez vos postes de dépenses et vos recettes en un seul clic."
+              />
+              <FeatureCard
+                image={featureImage2}
+                title="Trésorerie"
+                description="Suivez votre trésorerie à la transaction près. Analysez vos postes de dépenses et vos recettes en un seul clic."
+              />
+              <FeatureCard
+                image={featureImage2}
+                title="Trésorerie"
+                description="Suivez votre trésorerie à la transaction près. Analysez vos postes de dépenses et vos recettes en un seul clic."
+              />
+              <FeatureCard
+                image={featureImage2}
+                title="Trésorerie"
+                description="Suivez votre trésorerie à la transaction près. Analysez vos postes de dépenses et vos recettes en un seul clic."
+              />
 
             </div>
-            <div className='mt-[10px] flex flex-row justify-between items-center'>
-              <p className=' text-[12px] text-primary_green font-bold'>Les PCO du séminaire</p>
-              {auth?.rolePers == "Accueil_Hebergement" ? null
-                :
-                <Button onClick={() => navigate("/add-pco")} outline={true} className='button-icon bg-quaternary_green' bg={''}>
-                  <div className='border rounded-full p-[3px] bg-primary_green'>
-                    <Icon icon="mdi:plus" className='text-white' />
+            {/* second */}
+            <div className="mt-[20px] bg-gray-200 relative border h-[300px] lg:h-[400px] flex flex-col justify-center w-full overflow-hidden">
+              {/* Texte (doit être au-dessus du cercle) */}
+              <div className="relative z-10 w-full border border-red-800 flex flex-col ">
+                <div className='flex flex-col lg:flex-row  items-center justify-between'>
+                  <div className='w-full lg:w-[55%] lg:h-[300px] border border-red-800'>
+                    <div className='w-full h-full relative'>
+                      <img src={grapheImage1} alt={"title"} className="w-full h-full object-contain" />
+                      <div className="absolute -bottom-[20px] right-10 bg-white shadow-sm shadow-black/20  p-6 w-[170px] lg:w-[250px] h-[100px] border border-gray-200 rounded-[5px] z-20">
+                        <p className="text-[12px] text-gray-700 ">
+                          Grâce à votre tableau de bord intuitif
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <p className='text-secondary_green'>Ajouter un PCO</p>
-                </Button>}
-            </div>
-            <div className="relative overflow-x-auto shadow-sm mt-[10px]">
-              <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-white  bg-secondary_green">
-                  <tr>
-                    <th scope="col" className="px-6 py-3">Nom et prénoms</th>
-                    <th scope="col" className="px-6 py-3">Genre</th>
-                    <th scope="col" className="px-6 py-3">Sous-comités</th>
-                    <th scope="col" className="px-6 py-3">Contact</th>
-                    <th scope="col" className="px-6 py-3">Situation</th>
-                    {auth?.rolePers == "Accueil_Hebergement" ? null :
-                      <th scope="col" className="px-6 py-3">Actions</th>
-                    }
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                  {
-                    pco?.map((item: any, index: number) => (
-                      <tr className={`${index % 2 == 0 ? "bg-white" : "bg-white/50"} dark:bg-gray-800`} key={index}>
-                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          {item.nomPers} {item.pernomPers}
-                        </th>
-                        <td className="px-6 py-4">{item.genrePers}</td>
-                        <td className="px-6 py-4">{item.sousComite}</td>
-                        <td className="px-6 py-4">{item.phonePers}</td>
-                        <td className="px-6 py-4">{item.situation}</td>
-                        {auth?.rolePers == "Accueil_Hebergement" ? null :
-                        <td className="px-6 py-4 text-right">
-                            <div className='flex flex-row justify-start items-center space-x-2'>
-                              <EditButton onClick={() => navigate(`/update-pco/${item.idpers}`)} />
-                              <DeleteButton onClick={() => {
-                                setOpen(true)
-                                setPcoId(item.idpers)
-                                setPcoPhone(item.phonePers)
+                  <div className='w-full lg:w-[45%] border   border-red-800'>
+                    <p>Notre espace analytique dynamique</p>
+                    <p>Suivez la rentabilité de votre
+                    activité en temps réels</p>
+                  </div>
 
-                              }} />
-                            </div>
-                            </td>
-                          }
-                        
-                      </tr>
-                    ))
-                  }
-                </tbody>
-              </table>
+                </div>
+              </div>
+              {/* Cercle décoratif (doit rester en arrière-plan) */}
+              <div className="absolute -top-[100px] left-[50%] -translate-x-[240px] w-[480px] h-[480px] rounded-full bg-gray-300/30 z-0 flex flex-row justify-center items-center">
+                <div className="w-[400px] h-[400px] rounded-full bg-gray-200"></div>
+              </div>
             </div>
-            <DeleteModal deleteAction={() => deletePco(pcoId)} cancelAction={() => { setOpen(false); setPcoId("") }} text='Etes vous sur de bien effacer?' open={open} onClose={() => setOpen(false)} />
-
+            <div className='mt-[20px]'>
+              <p>dsndsd</p>r
+            </div>
+         
           </div>
-        </PrimaryLayout>
+
+        </div>
       </Main>
     </div>
   )

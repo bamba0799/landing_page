@@ -24,7 +24,18 @@ export default {
           secondary_red:"#E63F50",
           tertiary_red:"#FFE2E3",
 
-        }
+          
+
+        },
+        boxShadow: {
+          custom: "0 -4px 6px rgba(255, 255, 255, 0.4), 0 4px 6px rgba(255, 255, 255, 0.4)",
+          glow: "0 4px 20px rgba(66, 153, 225, 0.5)", // Pour un effet lumineux
+          inset: "inset 0 2px 4px rgba(0, 0, 0, 0.1)", // Ombre intérieure
+        },
+        clipPath: {
+          custom: "polygon(0 0, 70% 0, 100% 100%, 0 75%)",
+        },
+  
     },
   },
   plugins: [

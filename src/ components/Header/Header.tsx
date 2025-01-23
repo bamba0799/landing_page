@@ -1,8 +1,10 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import React, { useEffect, useState } from "react";
-import logo_aeemci from "../../assets/logo_aeemci.jpg";
+import logo1 from "../../assets/logo1.png";
 import Button from "../Button/Button";
 import messi from '../../assets/lionel-messi.jpg';
+import FirstButton from "../Button/FirstButton";
+import SecondButton from "../Button/SecondButton";
 
 interface HeaderProps {
   toggleSideBar: () => void;
@@ -15,53 +17,53 @@ type HeaderIconType = {
   path: string
 }
 
-const Header: React.FC<HeaderProps> = ({ toggleSideBar, isActiveMenuBar=true }) => {
+const Header: React.FC<HeaderProps> = ({ toggleSideBar, isActiveMenuBar = true }) => {
   const [activeTab, setActiveTab] = useState<string>("");
   const HeaderIcon: HeaderIconType[] = [
     {
       icon: "material-symbols:empty-dashboard-sharp",
-      name:"Tableau de bord",
+      name: "Tableau de bord",
       path: "/home",
     },
     {
       icon: "fa:group",
-      name:"Comité d'organisation",
+      name: "Comité d'organisation",
       path: "/comite-organisation",
     },
     {
       icon: "mdi:account-student",
-      name:"Séminariste",
+      name: "Séminariste",
       path: "/seminariste",
     },
     {
       icon: "fa-solid:home",
-      name:"Dortoir",
+      name: "Dortoir",
       path: "/dortoir",
     },
     {
       icon: "heroicons:users-solid",
-      name:"Visiteurs",
+      name: "Visiteurs",
       path: "/visiteur",
     },
 
     {
       icon: "bi:patch-check-fill",
-      name:"Permissions",
+      name: "Permissions",
       path: "/permissions",
     },
-    
+
 
   ]
 
   const handleRefresh = () => {
     window.location.reload();
   };
-  
+
 
   const getOnglet = () => {
     const currentPath = window.location.pathname;
     console.log("currentPath", currentPath);
-    
+
     const activeItem = HeaderIcon.find(item => item.path === currentPath);
     if (activeItem) {
       setActiveTab(activeItem.path);
@@ -73,62 +75,40 @@ const Header: React.FC<HeaderProps> = ({ toggleSideBar, isActiveMenuBar=true }) 
   }, []);
 
   return (
-    <nav className="fixed top-0 z-50 w-full bg-white ">
+    <nav className=" border-red-500 fixed top-0 left-0 right-0 z-50 w-[100%] max-w-full bg-white">
       {/* <h2>Header</h2> */}
-      <div className="px-3 py-3 lg:px-5 lg:pl-3 md:border-b-[3px] md:border-primary_orange">
+      <div className="px-3 py-3 lg:px-5 lg:pl-3 ">
         <div className="flex flex-row items-center justify-between">
-          <div className="flex items-center justify-start rtl:justify-end">
-            <div className="lg:hidden flex flex-row items-center space-x-[5px]">
-              <button onClick={toggleSideBar} className=" inline-flex items-center p-2 text-sm text-gray-500 rounded-lg  hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200">
-                <Icon icon="vaadin:menu" className="w-4 h-4 text-black" />
-              </button>
-              <p className="text-[12px] text-green-700">Admin Ikhwane</p>
-            </div>
-            <div className="flex flex-row items-center space-x-[25px]">
-              <img className="w-12 h-9  object-fill hidden lg:flex lg:items-center" src={logo_aeemci} alt="" />
-              <Button onClick={handleRefresh} outline={true} className="hidden lg:flex" bg={""}>
-                <div className="button-icon text-green-800">
-                  <Icon icon="charm:refresh" />
-                  <p>Rafraichir</p>
-                </div>
-              </Button>
-            </div>
+          <div className="flex flex-row items-center ">
+            <img className="object-fill " src={logo1} alt="" />
           </div>
-          <div className="hidden lg:flex">
-            <p className="text-green-800 font-semibold text-[12px]">Système de gestion administratif du séminaire Al Ikhwane</p>
+          <div className="hidden lg:flex flex-row space-x-[50px]">
+            <p className="text-blue-900 font-semibold text-[14px]">Accueil</p>
+            <p className="text-blue-900 font-semibold text-[14px]">A propos </p>
+            <p className="text-blue-900 font-semibold text-[14px]">Tarif</p>
+            <p className="text-blue-900 font-semibold text-[14px]">Contact</p>
           </div>
-          <button className="relative  rounded-full h-[30px] w-[30px] flex flex-row justify-center items-center group">
-            <div className="absolute hidden lg:flex flex-col text-[12px] right-[50px] ">
-              <p>Kandé</p>
-              <p>dk47hh8</p>
-            </div>
-            <div className="p-1 flex flex-col lg:hidden items-start  opacity-0 group-hover:opacity-100 lg:group:opacity-100 transition-opacity duration-300 absolute -top-1/2 transform translate-y-[15%] right-[45px] border bg-white text-[12px]">
-              <span>Kandé</span>
-              <p>dk47hh8</p>
-            </div>
-            {/* <Icon icon="basil:user-solid" className="w-[30px] h-[30px] text-black absolute"/> */}
-            <div className="absolute rounded-full w-[35px] h-[35px]">
-              <img src={messi} alt="" className=" text-black h-full w-full rounded-full object-cover" />
-            </div>
-
-          </button>
+          <div className="lg:hidden bg-blue-900 rounded-full flex flex-row items-center ">
+            <button onClick={()=>console.log("rechercher")} className=" inline-flex items-center p-2 text-sm text-gray-500 rounded-lg ">
+              <Icon icon="vaadin:menu" className="w-4 h-4 text-white/80" />
+            </button>
+            {/* <button onClick={toggleSideBar} className=" inline-flex items-center p-2 text-sm text-gray-500 rounded-lg ">
+              <Icon icon="vaadin:menu" className="w-4 h-4 text-white/80" />
+            </button> */}
+          </div>
+          <div className="hidden  lg:flex flex-row items-center space-x-5 ">
+            {/* <button onClick={toggleSideBar} className=" inline-flex items-center p-2 text-sm text-gray-500 rounded-lg ">
+              <p>Se connecter</p>
+            </button> */}
+            <FirstButton text={"Se connecter"}/>
+            {/* <button onClick={toggleSideBar} className=" inline-flex items-center p-2 text-sm text-gray-500 rounded-lg ">
+              <p>S'inscrire</p>
+            </button> */}
+            <SecondButton text={"Ouvrir un compte"}/>
+          </div>
         </div>
       </div>
-      <div className={`bg-primary_green px-[15px] h-[80px]  fixed w-full hidden ${isActiveMenuBar==true?"lg:flex":"lg:none"} flex-col justify-center`}>
-        <div className="flex flex-row h-full justify-between">
-          {HeaderIcon.map((item, index) => (
-            <a key={index} href={item.path} onClick={() => {
-              setActiveTab(item.path)
-            }} className={` w-[140px] flex flex-row justify-center items-center text-white/70 ${activeTab == item.path ? 'bg-white/30 text-white' : ''}`}>
-              <div className="flex flex-col justify-between items-center space-y-[3px]">
-                <Icon icon={item.icon} className={`w-[30px] h-[30px] ${activeTab == item.path ? 'text-white' : 'text-primary_gray'} `} />
-                <span className={`text-[12px] ${activeTab == item.path ? 'text-white' : 'text-primary_gray'}`}>{item.name}</span>
-              </div>
-            </a>
-          ))}
-        </div>
 
-      </div>
     </nav>
   );
 }

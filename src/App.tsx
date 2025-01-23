@@ -4,7 +4,7 @@ import AuthProvider from "../src/contexts/AuthContext";
 import PrivateRoute from "../src/router/PrivateRoutes";
 import Home from "./Pages/Home";
 import AddPco from "./Pages/Commission/AddPco";
-import AddCommission from "./Pages/Commission/AddCommission";
+// import AddCommission from "./Pages/Commission/AddCommission";
 import IndexPageComiteOrganisation from "./Pages/ComiteOrganisation/IndexPage";
 import IndexPageSeminariste from "./Pages/Seminariste/IndexPage";
 import IndexPageDortoir from "./Pages/Dortoir/IndexPage";
@@ -29,11 +29,10 @@ function App() {
       <Router>
         <AuthProvider>
           <Routes>
-            <Route path="/" element={<Login />} />
+            <Route path="/" element={<Home />} />
             <Route element={<PrivateRoute  />}>
               <Route path="/home" element={<Home />} />
               <Route path="/add-pco" element={<AddPco />} />
-              <Route path="/add-commission" element={<AddCommission />} />
               <Route path="/comite-organisation" element={<IndexPageComiteOrganisation />} />
               <Route path="/update-pco/:pcoId" element={<UpdatePco />} />
               <Route path="/seminariste" element={<IndexPageSeminariste />} />
