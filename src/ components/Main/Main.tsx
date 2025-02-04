@@ -1,10 +1,17 @@
-import { useState } from "react"
+import { ReactNode, useState } from "react"
 import Header from "../Header/Header"
 import SideBar from "../SideBar/SideBar"
 
 
+interface MainProps {
+  children: ReactNode;
+  onClickAccueil?: () => void;
+  onClickTarif?: () => void;
+  onClickApropos?: () => void;
+}
 
-const Main = ({children}:any) => {
+
+const Main: React.FC<MainProps> = ({ children, onClickAccueil, onClickTarif, onClickApropos }) => {
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
@@ -18,7 +25,7 @@ const Main = ({children}:any) => {
     </button>
     :null
     }
-    <Header toggleSideBar={toggleSideBar}/>
+    <Header onClickAccueil={onClickAccueil} onClickApropos={onClickApropos} onClickTarif={onClickTarif}  toggleSideBar={toggleSideBar}/>
     <SideBar isSidebarOpen={isSidebarOpen}/>
       {children}
     </div>

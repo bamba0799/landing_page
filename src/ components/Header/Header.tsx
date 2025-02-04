@@ -1,23 +1,32 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import React, { useEffect, useState } from "react";
 import logo1 from "../../assets/logo1.png";
-import Button from "../Button/Button";
-import messi from '../../assets/lionel-messi.jpg';
 import FirstButton from "../Button/FirstButton";
 import SecondButton from "../Button/SecondButton";
+import { useNavigate } from "react-router-dom";
+import ConnexionModal from "../Modal/ConnexionModal";
+import ConnexionModal2 from "../Modal/ConnexionModal2";
 
 interface HeaderProps {
   toggleSideBar: () => void;
   isActiveMenuBar?: boolean
-
+  onClickAccueil?: () => void;
+  onClickTarif?: () => void;
+  onClickApropos?: () => void;
 }
+
 type HeaderIconType = {
   icon: string,
   name: string,
   path: string
 }
 
-const Header: React.FC<HeaderProps> = ({ toggleSideBar, isActiveMenuBar = true }) => {
+const Header: React.FC<HeaderProps> = ({onClickAccueil, onClickTarif, onClickApropos}) => {
+  const navigate = useNavigate();
+  const [openConnexionModal, setOpenConnexionModal] = useState<boolean>(false);
+  const [openInscriptionModal2, setOpenInscriptionModal2] = useState<boolean>(false);
+  console.log("openInscriptionModal2",openInscriptionModal2);
+  
   const [activeTab, setActiveTab] = useState<string>("");
   const HeaderIcon: HeaderIconType[] = [
     {
@@ -83,10 +92,11 @@ const Header: React.FC<HeaderProps> = ({ toggleSideBar, isActiveMenuBar = true }
             <img className="object-fill " src={logo1} alt="" />
           </div>
           <div className="hidden lg:flex flex-row space-x-[50px]">
-            <p className="text-blue-900 font-semibold text-[14px]">Accueil</p>
-            <p className="text-blue-900 font-semibold text-[14px]">A propos </p>
-            <p className="text-blue-900 font-semibold text-[14px]">Tarif</p>
+            <p onClick={onClickAccueil} className="text-blue-900 font-semibold text-[14px]">Accueil</p>
+            <p onClick={onClickApropos} className="text-blue-900 font-semibold text-[14px]">A propos </p>
+            <p onClick={onClickTarif} className="text-blue-900 font-semibold text-[14px]">Tarif</p>
             <p className="text-blue-900 font-semibold text-[14px]">Contact</p>
+            <p onClick={() => navigate("/service")} className="text-blue-900 font-semibold text-[14px]">Services</p>
           </div>
           <div className="lg:hidden bg-blue-900 rounded-full flex flex-row items-center ">
             <button onClick={()=>console.log("rechercher")} className=" inline-flex items-center p-2 text-sm text-gray-500 rounded-lg ">
@@ -100,7 +110,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSideBar, isActiveMenuBar = true }
             {/* <button onClick={toggleSideBar} className=" inline-flex items-center p-2 text-sm text-gray-500 rounded-lg ">
               <p>Se connecter</p>
             </button> */}
-            <FirstButton text={"Se connecter"}/>
+            <FirstButton onClick={()=> setOpenConnexionModal(true)} text={"Se connecter"}/>
             {/* <button onClick={toggleSideBar} className=" inline-flex items-center p-2 text-sm text-gray-500 rounded-lg ">
               <p>S'inscrire</p>
             </button> */}
@@ -108,7 +118,8 @@ const Header: React.FC<HeaderProps> = ({ toggleSideBar, isActiveMenuBar = true }
           </div>
         </div>
       </div>
-
+      <ConnexionModal isSuivant={((val)=>setOpenInscriptionModal2(val))} deleteAction={() => console.log("sss")} cancelAction={() => { setOpenConnexionModal(false) }} text='Etes vous sur de bien effacer?' open={openConnexionModal} onClose={() => setOpenConnexionModal(false)} />
+      <ConnexionModal2 isSuivant={((val)=>setOpenInscriptionModal2(val))} deleteAction={() => console.log("sss")} cancelAction={() => { setOpenConnexionModal(false) }} text='Etes vous sur de bien effacer?' open={openInscriptionModal2} onClose={() => setOpenConnexionModal(false)} />
     </nav>
   );
 }

@@ -8,15 +8,15 @@ type FeatureCardProps = {
 
 const FeatureCard: React.FC<FeatureCardProps> = ({ image, title, description }) => {
   return (
-    <div className="bg-white relative w-full  shadow-md shadow-black/30 rounded-lg p-[20px] h-[270px] overflow-hidden">
+    <div className="bg-white relative w-full  shadow-md shadow-black/30 rounded-lg p-[4px]  md:p-[20px] h-[290px] md:h-[270px] overflow-hidden">
       <div className="flex flex-col items-center w-full">
-        <div className="w-[100px] h-[100px] mx-auto mb-4 bg-[#CFE8F4] rounded-full p-[2px]">
+        <div className="w-[60px] h-[60px] md:w-[100px] md:h-[100px] mx-auto mb-4 bg-[#CFE8F4] rounded-full p-[2px]">
           <img src={image} alt={title} className="w-full h-full object-contain" />
         </div>
 
         <div className="z-10 relative flex flex-col items-center">
-          <h3 className="text-[18px] font-semibold text-blue-900 mb-2">{title}</h3>
-          <p className="text-[12px] text-blue-900">{description}</p>
+          <h3 className="text-[13px] md:text-[18px] font-semibold text-blue-900 mb-[4px] md:mb-2">{title}</h3>
+          <p className="text-[12px] text-center text-blue-900">{description}</p>
         </div>
       </div>
 
