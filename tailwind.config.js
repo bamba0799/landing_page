@@ -10,6 +10,10 @@ export default {
   theme: {
     extend: {
         colors:{
+
+          brand_bleu_inter:"#0E5588",
+          neutral_blanc:"#FDFDFD",
+
           primary_green:"#0E5907",   
           secondary_green:"#265828",   
           tertiary_green:"#ABC5A9", 
@@ -26,6 +30,9 @@ export default {
 
           
 
+        },
+        fontFamily: {
+          poppins: ["Poppins", "sans-serif"],
         },
         boxShadow: {
           custom: "0 -4px 6px rgba(255, 255, 255, 0.4), 0 4px 6px rgba(255, 255, 255, 0.4)",

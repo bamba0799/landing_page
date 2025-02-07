@@ -95,34 +95,34 @@ function Home() {
       <Main onClickAccueil={() => scrollToSection(accueilRef)} onClickApropos={() => scrollToSection(aproposRef)} onClickTarif={() => scrollToSection(tarifRef)}>
         <div className="mt-[30px] flex flex-col justify-between items-center">
           {/* Section principale */}
-          <section ref={accueilRef} className="w-full relative bg-gradient-to-b from-blue-900 to-blue-800 text-white ">
-            <div className=" border-orange-800 lg:mx-[30px]   py-12 flex flex-col lg:flex-row items-center lg:justify-between ">
+          <section ref={accueilRef} className=" w-full relative bg-gradient-to-b from-[#011E3E] to-[#0E5588] text-white ">
+            <div className="border border-orange-800 mx-[20px] md:mx-[50px] mt-[50px] md:mt-[100px]  flex flex-col lg:flex-row items-center lg:justify-between ">
               {/* Image principale */}
               <div className="w-full  border-red-800 flex justify-center lg:hidden mb-6">
                 <img
                   src={homeImage1}
                   alt="Illustration de la page d'accueil"
-                  className="w-2/3 object-cover"
+                  className=" w-full md:w-2/3 object-cover"
                 />
               </div>
-              <div className=' lg:w-[50%]'>
+              <div className='border md:w-[45%]'>
                 {/* Texte principal */}
-                <h1 className="text-2xl font-bold leading-tight mb-4">
+                <h1 className=" font-poppins text-[24px] md:text-[38px] font-bold leading-tight mb-4">
                   Le pilotage de votre activité n'a jamais été aussi simple
                 </h1>
-                <p className="text-sm mb-6">
+                <p className="text-[12px] md:text-[20px] mb-6">
                   Facturez vos clients, et suivez votre trésorerie aisément,
                   tout en focus sur votre activité
                 </p>
                 {/* Boutons */}
                 <div className="w-full flex flex-col lg:flex-row  lg:items-center space-y-4 lg:space-y-0 lg:space-x-3">
                   <SecondButton onClick={() => setOpenConnexionModal(true)} shadow=' shadow-custom' text={"Ouvrir un compte"} />
-                  <SecondButton bgColor='bg-white' textColor='text-black' text={"Tester gratuitement"} />
+                  <SecondButton bgColor='bg-neutral_blanc' textColor='text-brand_bleu_inter' text={"Tester gratuitement"} />
                 </div>
                 {/* Flèche vers le bas */}
 
               </div>
-              <div className=" w-full lg:w-[50%] hidden lg:flex justify-center mb-6">
+              <div className=" border w-full lg:w-[50%] hidden lg:flex justify-center  ">
                 <img
                   src={homeImage1}
                   alt="Illustration de la page d'accueil"
@@ -130,7 +130,7 @@ function Home() {
                 />
               </div>
             </div>
-            <div className="flex flex-col items-center mt-8 mb-20 z-[999999]">
+            <div className="flex flex-col items-center mt-[30px] mb-[70px] z-40 ">
               {/* Première flèche */}
               <motion.svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -138,30 +138,38 @@ function Home() {
                 viewBox="0 0 24 24"
                 strokeWidth={2}
                 stroke="currentColor"
-                className="w-6 h-6 text-white"
-                animate={{ opacity: [0, 1, 0], y: [-5, 0, 5] }}
+                className=" w-[30px] h-[30px] text-white " // Utilisation de -mt-1 pour réduire l'espace
+                animate={{ opacity: [0, 1, 0], y: [-3, 0, 3] }} // Même animation mais avec un délai différent
                 transition={{ repeat: Infinity, duration: 1, ease: "easeInOut", delay: 0.1 }}
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12.75L12 19.5l-7.5-6.75" />
               </motion.svg>
-              {/* Deuxième flèche avec un décalage de temps */}
+
+              {/* Deuxième flèche plus proche */}
               <motion.svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={2}
                 stroke="currentColor"
-                className="w-6 h-6 text-white mt-2"
-                animate={{ opacity: [0, 1, 0], y: [-5, 0, 5] }}
-                transition={{ repeat: Infinity, duration: 1, ease: "easeInOut", delay: 0.4 }}
+                className=" w-[30px] h-[30px] text-white -mt-[8px]" // Utilisation de -mt-1 pour réduire l'espace
+                animate={{ opacity: [0, 1, 0], y: [-3, 0, 3] }} // Même animation mais avec un délai différent
+                transition={{ repeat: Infinity, duration: 1, ease: "easeInOut", delay: 0.3 }}
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12.75L12 19.5l-7.5-6.75" />
               </motion.svg>
             </div>
-            <div className="absolute z-[999px] -bottom-[50px] left-0 w-full h-[100px] bg-white border-t-[5px] border-t-orange-500  transform -skew-y-[6deg] lg:-skew-y-[2deg] origin-bottom"></div>
+
+            <div className="absolute z-[999px] -bottom-[50px] left-0 w-full h-[100px] bg-white border-t-[8px] border-t-[#F76E25]  transform -skew-y-[6deg] lg:-skew-y-[2deg] origin-bottom"></div>
           </section>
           {/* first */}
-          <div className="mt-[100px] grid grid-cols-2 gap-4 lg:grid-cols-3 lg:gap-8 mx-[30px]">
+          <div className='mt-[20px] z-10 md:mt-[100px] w-full'>
+            <div className='border  w-full   flex flex-col text-center justify-center0'>
+              <p className='text-orange-400'>Notre espace analytique dynamique</p>
+              <p className='text-[18px] font-bold'>Suivez la rentabilité de votre activité en temps réels</p>
+            </div>
+          </div>
+          <div className="mt-[20px] grid grid-cols-2 gap-4 lg:grid-cols-3 lg:gap-8 mx-[30px]">
             <FeatureCard
               image={feature1}
               title="Analyse de données avec IA"
