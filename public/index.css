@@ -6,3 +6,22 @@
   .hide-scrollbar::-webkit-scrollbar {
     display: none; /* Pour Chrome, Safari et Opera */
   }
+
+
+  .bg_custom {
+    color: blue;
+    background-size: 200%;
+  }
+  
+  @media (max-width: 1024px) {
+    .bg_custom {
+      background-size: 200%;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .bg_custom {
+      background-size: 200%;
+    }
+  }
+  

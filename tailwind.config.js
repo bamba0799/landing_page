@@ -11,8 +11,13 @@ export default {
     extend: {
         colors:{
 
+          surface_bleu:"#CFE8F4",
           brand_bleu_inter:"#0E5588",
+          brand_bleu_fonce_500:"#011E3E",
           neutral_blanc:"#FDFDFD",
+          neutral_gris:"#9CA2A9",
+
+          brand_orange:"#F76E25",
 
           primary_green:"#0E5907",   
           secondary_green:"#265828",   

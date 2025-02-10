@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply font-poppins;
+}
+
+
 @layer components {
   .button-icon  {
     @apply flex flex-row items-center space-x-[5px] text-[12px] font-semibold;
