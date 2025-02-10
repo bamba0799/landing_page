@@ -113,25 +113,25 @@ function Home() {
   const testimonials = [
     {
       id: 1,
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna diam sed lobortis pellentesque vestibulum ultrices quam eu.",
+      text: "Lorem ipsum dolor sit amet, consectetur  adipiscing elit. Magna diam sed lobortis pellentesque vestibulum ultrices quam  eu. Lorem ipsum dolor sit amet, consectetur  adipiscing elit. Magna diam sed pellentesque vestibulum ultrices quam eu.  Lorem ipsum dolor sit amet. vestibulum ultrices quam eu. Lorem ipsum dolor sit amet.",
       name: "Laurence Françoise",
       company: "HADEM Solutions",
     },
     {
       id: 2,
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna diam sed lobortis pellentesque vestibulum ultrices quam eu.",
+      text: "Lorem ipsum dolor sit amet, consectetur  adipiscing elit. Magna diam sed lobortis pellentesque vestibulum ultrices quam  eu. Lorem ipsum dolor sit amet, consectetur  adipiscing elit. Magna diam sed pellentesque vestibulum ultrices quam eu.  Lorem ipsum dolor sit amet. vestibulum ultrices quam eu. Lorem ipsum dolor sit amet.",
       name: "Laurence Françoise",
       company: "HADEM Solutions",
     },
     {
       id: 3,
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna diam sed lobortis pellentesque vestibulum ultrices quam eu.",
+      text: "Lorem ipsum dolor sit amet, consectetur  adipiscing elit. Magna diam sed lobortis pellentesque vestibulum ultrices quam  eu. Lorem ipsum dolor sit amet, consectetur  adipiscing elit. Magna diam sed pellentesque vestibulum ultrices quam eu.  Lorem ipsum dolor sit amet. vestibulum ultrices quam eu. Lorem ipsum dolor sit amet.",
       name: "Laurence Françoise",
       company: "HADEM Solutions",
     },
     {
       id: 4,
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna diam sed lobortis pellentesque vestibulum ultrices quam eu.",
+      text: "Lorem ipsum dolor sit amet, consectetur  adipiscing elit. Magna diam sed lobortis pellentesque vestibulum ultrices quam  eu. Lorem ipsum dolor sit amet, consectetur  adipiscing elit. Magna diam sed pellentesque vestibulum ultrices quam eu.  Lorem ipsum dolor sit amet. vestibulum ultrices quam eu. Lorem ipsum dolor sit amet.",
       name: "Laurence Françoise",
       company: "HADEM Solutions",
     },
@@ -163,7 +163,7 @@ function Home() {
         <div className="mt-[30px] flex flex-col justify-between items-center">
           {/* Section principale */}
           <section ref={accueilRef} className=" w-full relative bg-gradient-to-b from-[#011E3E] to-[#0E5588] text-white ">
-            <div className="border border-orange-800 mx-[20px] md:mx-[50px] mt-[50px] md:mt-[100px]  flex flex-col lg:flex-row items-center lg:justify-between ">
+            <div className=" border-orange-800 mx-[20px] md:mx-[50px] mt-[50px] md:mt-[100px]  flex flex-col lg:flex-row items-center lg:justify-between ">
               {/* Image principale */}
               <div className="w-full  border-red-800 flex justify-center lg:hidden mb-6">
                 <img
@@ -172,7 +172,7 @@ function Home() {
                   className=" w-full md:w-2/3 object-cover"
                 />
               </div>
-              <div className='border md:w-[45%]'>
+              <div className=' md:w-[45%]'>
                 {/* Texte principal */}
                 <h1 className=" font-poppins text-[24px] md:text-[38px] font-bold leading-tight mb-4">
                   Le pilotage de votre activité n'a jamais été aussi simple
@@ -189,7 +189,7 @@ function Home() {
                 {/* Flèche vers le bas */}
 
               </div>
-              <div className=" border w-full lg:w-[50%] hidden lg:flex justify-center  ">
+              <div className="  w-full lg:w-[50%] hidden lg:flex justify-center  ">
                 <img
                   src={homeImage1}
                   alt="Illustration de la page d'accueil"
@@ -237,7 +237,7 @@ function Home() {
             </div>
           </div>
           {/* feature md */}
-          <div className=" hidden  md:mt-[20px] md:grid grid-cols-2 gap-4 lg:grid-cols-3 lg:gap-8 mx-[20px] md:mx-[50px] border">
+          <div className=" hidden  md:mt-[20px] md:grid grid-cols-2 gap-4 lg:grid-cols-3 lg:gap-8 mx-[20px] md:mx-[50px] ">
             <FeatureCard
               image={feature1}
               title="Analyse de données avec IA"
@@ -283,7 +283,7 @@ function Home() {
 
           </div>
           {/* second */}
-          <div style={{ backgroundSize: bgSize }} ref={aproposRef} className="border border-red-800  mt-[20px] px-[20px] md:px-[50px] bg-[#FAFAFA] relative h-[300px] lg:h-[400px] flex flex-col justify-center w-full  bg-[url('/bgIcon.png')] bg-full bg-center bg-no-repeat">
+          <div style={{ backgroundSize: bgSize }} ref={aproposRef} className=" border-red-800  mt-[20px] px-[20px] md:px-[50px] bg-[#FAFAFA] relative h-[300px] lg:h-[400px] flex flex-col justify-center w-full  bg-[url('/bgIcon.png')] bg-full bg-center bg-no-repeat">
             {/* Texte (doit être au-dessus du cercle) */}
             <div className=" z-10 w-full  border-red-800 flex flex-col ">
 
@@ -293,8 +293,8 @@ function Home() {
                   <p className='font-bold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-poppins'>Suivez la rentabilité de votre activité en temps réels</p>
                 </div>
               </div>
-              <div className='border border-red-600 flex flex-col md:flex-row mt-[20px] md:mt-[0px] items-center justify-center md:space-x-[30px]'>
-                <div className='w-full md:w-[55%] md:h-[300px]  border border-green-800'>
+              <div className=' border-red-600 flex flex-col md:flex-row mt-[20px] md:mt-[0px] items-center justify-center md:space-x-[30px]'>
+                <div className='w-full md:w-[55%] md:h-[300px]   border-green-800'>
                   <div className='w-full h-full relative'>
                     <img src={grapheImage1} alt={"title"} className="w-full h-full object-contain" />
                     <div className="absolute -bottom-[40px] right-[0px] md:right-[10px] bg-neutral_blanc shadow-sm shadow-black/20 py-[10px] md:py-[20px]  px-[10px] w-[199px] md:w-[395px] h-[110px] md:h-[215px] border-[1.4px] border-neutral_gris  rounded-[16px] z-20 text-start flex flex-col justify-between">
@@ -307,7 +307,7 @@ function Home() {
                     </div>
                   </div>
                 </div>
-                <div className='mt-[20px] z-10  w-full px-[20px] hidden md:flex border border-red-600 md:w-[35%] '>
+                <div className='mt-[20px] z-10  w-full px-[20px] hidden md:flex  border-red-600 md:w-[35%] '>
                   <div className=' w-full flex flex-col text-starts justify-center'>
                     <p className='text-brand_orange text-[16px] md:text-[24px] font-poppins'>Notre espace analytique dynamique</p>
                     <p className='font-bold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-poppins'>Suivez la rentabilité de votre activité en temps réels</p>
@@ -319,7 +319,7 @@ function Home() {
           </div>
           {/* third */}
           <div className='px-[30px] mt-[30px] md:mt-[20px]  border-blue-600 w-full flex flex-col md:flex-row justify-between md:px-[130px]'>
-            <div className='w-full flex flex-col items-center justify-between md:w-[40%]  border border-red-800'>
+            <div className='w-full flex flex-col items-center justify-between md:w-[40%]   border-red-800'>
               <div className='mt-[20px] z-10 md:mt-[10px] w-full px-[20px] md:px-[50px]  border-red-600'>
                 <div className=' w-full flex flex-col text-center md:text-start md:w-[350px] justify-center'>
                   <p className='text-brand_orange text-[16px] md:text-[24px] font-poppins'>Nos cibles</p>
@@ -350,9 +350,9 @@ function Home() {
             </div>
           </div>
           {/* fourth les tarifs */}
-          <div style={{ backgroundSize: bgSize }}  ref={tarifRef} className="bg-[#FAFAFA] overflow-hidden relative  border-red-600 mt-[50px] w-full flex flex-col items-center bg-[url('/bgIcon.png')] bg-full bg-center bg-no-repeat">
+          <div style={{ backgroundSize: bgSize }} ref={tarifRef} className="bg-[#FAFAFA] overflow-hidden relative  border-red-600 mt-[50px] w-full flex flex-col items-center bg-[url('/bgIcon.png')] bg-full bg-center bg-no-repeat">
             {/* button */}
-            <div className='mt-[20px] z-10  w-full px-[20px]  border border-red-600 flex flex-row justify-center'>
+            <div className='mt-[20px] z-10  w-full px-[20px]   border-red-600 flex flex-row justify-center'>
               <div className=' w-full md:w-[800px] flex flex-col text-center justify-center'>
                 <p className='text-brand_orange text-[16px] md:text-[24px] font-poppins'>Nos tarifs</p>
                 <p className='font-bold text-brand_bleu_fonce_500 mt-[7px] text-[20px] md:text-[32px] font-poppins'>Choisissez l’offre qui vous correspond</p>
@@ -374,7 +374,7 @@ function Home() {
             </div>
             {/* Conteneur scrollable */}
             <div className="mt-[20px]   border-blue-700 w-full  px-[20px] pt-10  z-10 overflow-x-scroll md:overflow-hidden flex space-x-5 md:justify-center scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-200">
-              <div className={`flex-shrink-0 w-[90%] lg:w-[300px]`}>
+              <div className={`flex-shrink-0`}>
                 <PricingCard
                   title='Start'
                   price={29}
@@ -389,7 +389,7 @@ function Home() {
                   ]}
                 />
               </div>
-              <div className={`flex-shrink-0 w-[90%] lg:w-[300px]`}>
+              <div className={`flex-shrink-0`}>
                 <PricingCard
                   title='Premium'
                   price={29}
@@ -404,8 +404,17 @@ function Home() {
                   ]}
                 />
               </div>
-              <div className={`flex-shrink-0 w-[90%] lg:w-[300px]`}>
+              <div className={`flex-shrink-0`}>
                 <EnterpriseCard
+                  data={[
+                    "Plan Premium",
+                    "Utilisateurs illimités",
+                    "Nom de domaine personnalisé",
+                    "Intégration custom (sur demande)",
+                    "Détection fraude  acwaba Copilot",
+                    "Custom Branding",
+                    "Nous contacter",
+                  ]}
                   title='premium'
                   description='Une offre personnalisée selon vos besoins. '
                 />
@@ -413,13 +422,13 @@ function Home() {
 
             </div>
             {/* voir avantage */}
-            <div className=' hidden  w-full  border-red-600 lg:flex flex-row justify-between items-center'>
+            <div className=' hidden  w-full  border-red-600 lg:flex flex-row justify-between items-center mb-20'>
               <div className='w-[43%]  border-red-800' >
                 <img src={Arrowleft} alt="" className=' object-cover w-full' />
               </div>
               <div className='w-[15%] flex justify-start ml-1 items-center  border-red-800'>
-                <a href='' className='text-[12px] font-bold text-blue-800'>Voir tous les avantages</a>
-                <Icon icon="weui:arrow-filled" className="text-blue-800 w-5 h-5" />
+                <a href='' className='text-[12px]  md:text-[16px] font-bold text-brand_bleu_fonce_500'>Voir tous les avantages</a>
+                <Icon icon="weui:arrow-filled" className="text-brand_bleu_fonce_500 w-5 h-5" />
               </div>
               <div className='w-[43%]  border-red-800'>
                 <img src={Arrowright} alt="" className=' object-cover w-full' />
@@ -427,43 +436,40 @@ function Home() {
             </div>
           </div>
           {/* fifth */}
-          <div className="bg-white w-full">
-            {/* Section Header */}
-            <div className=" w-full   border-green-900 flex flex-col items-center lg:items-start  lg:px-[20px]">
-              <p className="text-orange-400 font-semibold text-lg">
-                Nos clients
-              </p>
-              <h2 className="text-blue-900 text-[20px] font-bold">
-                Observez ce que disent <br /> ceux qui ont testé Acwaba
-              </h2>
+          <div className="bg-white w-full ">
+            <div className='mt-[20px] z-10 md:mt-[10px] w-full md:w-[800px]  px-[20px] md:ml-[60px]  border-red-600'>
+              <div className=' w-full flex flex-col text-center md:text-start  justify-center'>
+                <p className='text-brand_orange text-[16px] md:text-[24px] font-poppins'>Nos clients</p>
+                <p className='font-bold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-poppins'>Observez ce que disent <br /> ceux qui ont testé Acwaba</p>
+              </div>
             </div>
-            <div className=' hidden lg:flex relative w-full '>
-              <div className=" absolute -top-10 right-0 flex items-start justify-start px-[20px] pt-[20px] w-[400px] h-[200px] bg-orange-50 rounded-md">
-                <button className="w-10 h-10 flex items-center justify-center rounded-full  border-orange-400 bg-white text-orange-500 hover:bg-orange-100">
-                  <span>&larr;</span>
+            <div className=' hidden md:flex relative w-full '>
+              <div className=" absolute -top-10 right-0 flex items-start justify-start px-[20px] pt-[20px] w-[800px] h-[368px] bg-surface_orange rounded-md">
+                <button className="w-[60px] h-[60px] flex items-center justify-center rounded-full  border-orange-400 bg-white text-orange-500 hover:bg-brand_orange hover:text-white">
+                  <Icon icon="heroicons:arrow-left-16-solid" className="w-5 h-5" />
                 </button>
-                <button className="w-10 h-10 ml-[20px] flex items-center justify-center rounded-full  border-orange-400 bg-white text-orange-500 hover:bg-orange-100 ">
-                  <span>&rarr;</span>
+                <button className="w-[60px] h-[60px]  ml-[20px] flex items-center justify-center rounded-full  border-orange-400 bg-white text-orange-500 hover:bg-brand_orange hover:text-white">
+                  <Icon icon="heroicons:arrow-right-16-solid" className="  w-5 h-5" />
                 </button>
               </div>
             </div>
 
             {/* Testimonials Section */}
-            <div className="relative  mx-auto ">
-              <div className="flex space-x-6 overflow-x-auto scrollbar-hide py-6">
+            <div className="relative  mx-auto z-20">
+              <div className=" border-red-700 pb-[20px] flex space-x-6 overflow-x-auto scrollbar-hide mt-[30px] md:mt-[50px]">
                 {testimonials.map((testimonial: any, index: number, self: any[]) => (
                   <div
                     key={testimonial.id}
-                    className={`bg-white rounded-xl ${index == 0 ? "ml-[20px]" : ""} ${index + 1 == self.length ? "mr-[20px]" : ""} shadow-lg p-6 flex-shrink-0 w-[300px]`}
+                    className={`bg-white rounded-[16px] ${index == 0 ? "ml-[20px] md:ml-[60px]" : ""} ${index + 1 == self.length ? "mr-[20px]" : ""} shadow-lg shadow-black/30 p-6 flex-shrink-0 w-[423px] h-[314px] flex flex-col justify-between  border-red-700 pb-[40px]`}
                   >
-                    <p className="text-gray-600 text-sm mb-4">{testimonial.text}</p>
+                    <p className=" text-neutral_gris text-[14px] mb-4">{testimonial.text}</p>
                     <div className="flex items-center space-x-3">
-                      <div className="w-12 h-12 bg-gray-200 rounded-full"></div>
+                      <div className="w-[95px] h-[95px] bg-gray-200 rounded-full"></div>
                       <div>
-                        <p className="font-bold text-gray-800">
+                        <p className="font-bold text-brand_bleu_inter text-[14px]">
                           {testimonial.name}
                         </p>
-                        <p className="text-gray-500 text-sm">{testimonial.company}</p>
+                        <p className="text-neutral_gris text-sm">{testimonial.company}</p>
                       </div>
                     </div>
                   </div>
@@ -473,47 +479,49 @@ function Home() {
             </div>
           </div>
           {/* Sixth */}
-          <div className="mt-[20px] w-full">
-            <div className="w-full flex flex-col lg:flex-row items-center justify-between px-4 lg:px-16 py-8 bg-cover bg-center  shadow-lg"
+          <div className="mt-[20px] w-full z-20  border-blue-500">
+            <div className="w-full flex flex-col md:flex-row items-center justify-between px-4 md:px-16 py-8 bg-cover bg-center  shadow-lg"
               style={{ backgroundImage: `url(${questionbg})` }}
             >
               {/* Section FAQ */}
-              <div className="bg-white  border-red-600 bg-opacity-90 w-full lg:w-1/2 rounded-lg p-6 lg:p-8 lg:ml-auto">
-                <p className="text-orange-500 font-semibold text-sm">FAQ</p>
-                <h2 className="text-blue-900 font-bold text-lg lg:text-2xl mb-6">
-                  Souhaitez-vous nous poser une question ?
-                </h2>
+              <div className="flex flex-col justify-between bg-white  border-red-600 bg-opacity-90 w-[350px] h-[536px] md:w-[544px] md:h-[620] rounded-[16px] px-[20px] md:px-[24px] lg:ml-auto">
+                <div className='mt-[20px] md:mt-[30px]'>
+                  <p className="text-brand_orange font-semibold text-[16px] md:text-[24px] text-center md:text-start">FAQ</p>
+                  <h2 className="text-brand_bleu_fonce_500 font-bold text-[20px] md:text-[32px] mb-[12px] text-center md:text-start">
+                    Souhaitez-vous nous poser une question ?
+                  </h2>
 
-                {/* FAQ Items */}
-                <div className="space-y-4">
-                  {questions.map((item, index) => (
-                    <div key={index} className="border-b border-blue-900 pb-3">
-                      <button
-                        className="flex justify-between items-center w-full cursor-pointer focus:outline-none"
-                        onClick={() => toggleQuestion(index)}
-                      >
-                        <p className="text-gray-700 font-medium">{item.question}</p>
-                        <Icon
-                          icon={openIndex === index ? "bi:chevron-up" : "bi:chevron-down"}
-                          className="text-blue-900 w-[16px] h-[16px] lg:w-[20px] lg:h-[20px]"
-                        />
-                      </button>
-                      <div
-                        className={`overflow-hidden transition-all duration-300 ${openIndex === index ? "max-h-40 opacity-100 mt-2" : "max-h-0 opacity-0"
-                          }`}
-                      >
-                        <p className="text-gray-600 text-sm">{item.answer}</p>
+                  {/* FAQ Items */}
+                  <div className="space-y-4">
+                    {questions.map((item, index) => (
+                      <div key={index} className="border-b border-blue-900 pb-3">
+                        <button
+                          className="flex justify-between items-center w-full cursor-pointer focus:outline-none"
+                          onClick={() => toggleQuestion(index)}
+                        >
+                          <p className="text-brand_bleu_fonce_500 text-start font-semibold text-[12px] md:text-[14px]">{item.question}</p>
+                          <Icon
+                            icon={openIndex === index ? "bi:chevron-up" : "bi:chevron-down"}
+                            className="text-brand_bleu_fonce_500 w-[16px] h-[16px] lg:w-[20px] lg:h-[20px]"
+                          />
+                        </button>
+                        <div
+                          className={`overflow-hidden transition-all duration-300 ${openIndex === index ? "max-h-40 opacity-100 mt-2" : "max-h-0 opacity-0"
+                            }`}
+                        >
+                          <p className="text-gray-600 text-sm">{item.answer}</p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
 
                 {/* Buttons */}
-                <div className="flex mt-6 justify-between">
-                  <button className="w-[48%] py-2 bg-blue-800 text-white font-medium rounded-lg hover:bg-blue-900">
+                <div className="flex mt-6 justify-center">
+                  <button className="w-[232px] text-[12px] md:text-[14px] py-2 bg-gradient-to-b from-[#011E3E] to-[#0E5588] text-white font-medium h-[60px] rounded-t-[16px] hover:bg-blue-900">
                     Questions Fonctionnelles
                   </button>
-                  <button className="w-[48%] py-2 bg-transparent border-2 border-blue-800 text-blue-800 font-medium rounded-lg hover:bg-blue-800 hover:text-white">
+                  <button className="w-[232px] text-[12px] md:text-[14px] py-2 bg-transparent border-[1.4px] border-brand_bleu_inter text-brand_bleu_inter font-medium h-[60px] rounded-t-[16px] hover:bg-blue-800 hover:text-white">
                     Questions Support
                   </button>
                 </div>
@@ -521,7 +529,7 @@ function Home() {
             </div>
           </div>
           {/* seventh */}
-          <div className='mt-[20px] w-full border border-red-800'>
+          <div className='mt-[20px] w-full  border-red-800'>
             <div className="bg-white w-full py-12 px-4 lg:px-16 flex flex-col lg:flex-row items-center justify-between">
               {/* Mobile: une seule fusée */}
               <div className="lg:hidden">
@@ -532,24 +540,22 @@ function Home() {
                 />
               </div>
               {/* Texte */}
-              <div className="lg:w-1/2 text-center lg:text-left mt-[10px] lg:mt-0">
-                <p className="text-orange-500 font-bold text-sm uppercase mb-4">
+              <div className="lg:w-1/2 text-center lg:text-left mt-[10px] lg:mt-0  border-black flex flex-col items-center md:items-start">
+                <p className="text-brand_orange font-semibold text-[16px] md:text-[24px] uppercase mb-4">
                   Prêt à embarquer avec Acwaba ?
                 </p>
-                <h2 className="text-blue-900 text-2xl font-bold mb-6">
+                <h2 className="font-bold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] ">
                   Gagnez du temps dans <br /> votre facturation et <br /> la gestion de <br />
                   votre trésorerie.
                 </h2>
-                <button className="bg-blue-800 text-white py-3 px-6 rounded-lg shadow-lg hover:bg-blue-900">
-                  Ouvrir un compte
-                </button>
+                <SecondButton className='mt-[10px]' onClick={() => setOpenConnexionModal(true)} shadow=' shadow-custom' text={"Ouvrir un compte"} />
               </div>
 
               {/* Image */}
               <div className="mt-8 lg:mt-0 lg:w-1/2 flex justify-center">
                 {/* Web: grille de fusées */}
                 <div className="hidden lg:flex ">
-                  <img src={Fuseemany} />
+                  <img src={FuseeOne} />
                 </div>
 
 
@@ -558,11 +564,11 @@ function Home() {
 
           </div>
           {/* footer */}
-          <div className='mt-[20px] w-full border border-red-800'>
+          <div className='mt-[20px] w-full  border-red-800'>
             <footer className="w-ful">
               <div className=" flex flex-col md:flex-row ">
                 {/* 1 */}
-                <div className="bg-gradient-to-r from-blue-900 to-blue-700 text-white p-8 w-full md:w-[50%]">
+                <div className="bg-gradient-to-r  from-[#011E3E] to-[#0E5588] text-white p-8 w-full md:w-[50%]">
                   <div className="flex flex-col items-center">
                     {/* Logo */}
                     <img src="/path-to-your-logo/acwaba.png" alt="Acwaba" className="h-12 mb-4" />
@@ -602,7 +608,7 @@ function Home() {
                   </div>
                 </div>
                 {/* 2 */}
-                <div className="bg-[#BFDBFE] overflow-hidden relative  border-red-600   flex flex-col items-cent w-full md:w-[50%]">
+                <div className="bg-[#CFE8F4] overflow-hidden relative  border-red-600   flex flex-col items-cent w-full md:w-[50%] bg-[url('/bgIcon.png')] bg-full bg-right bg-no-repeat ">
                   {/* contact */}
                   <div className='flex flex-col items-center justify-center w-full h-full'>
                     <div className=" p-8 rounded-lg flex flex-row justify-between md:space-x-[80px] space-x-[0px] md: z-10">
@@ -642,9 +648,6 @@ function Home() {
                     </div>
                   </div>
 
-                  <div className="absolute top-[0px] bottom-[0px] right-[0px]  w-[380px] h-[380px] rounded-full bg-gray-300/30 z-0 flex flex-row justify-center items-center">
-                    <div className="w-[300px] h-[300px] rounded-full bg-[#BFDBFE]"></div>
-                  </div>
                 </div>
               </div>
             </footer>

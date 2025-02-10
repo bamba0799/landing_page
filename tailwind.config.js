@@ -18,6 +18,8 @@ export default {
           neutral_gris:"#9CA2A9",
 
           brand_orange:"#F76E25",
+          surface_orange:"#FEF1EA",
+
 
           primary_green:"#0E5907",   
           secondary_green:"#265828",   

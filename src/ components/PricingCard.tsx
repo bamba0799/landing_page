@@ -1,5 +1,6 @@
 import { Icon } from '@iconify/react/dist/iconify.js';
 import premiumIcon from "../assets/premiumIcon.png";
+import SecondButton from './Button/SecondButton';
 type PricingCardProps = {
     title?: "Start" | "Premium";
     price: number;
@@ -8,12 +9,16 @@ type PricingCardProps = {
 }
 const PricingCard: React.FC<PricingCardProps> = ({ title, description, price, data }) => {
     return (
-        <div className="w-full h-[438px] shadow-sm shadow-black/30 rounded-[10px] bg-white flex flex-col justify-between">
-            <div>
-                <div className='border border-black bg-surface_bleu  h-[135px] flex flex-col justify-between p-[20px]'>
+        <div className="w-[438px] h-[438px]  border-red-600 shadow-sm shadow-black/30 rounded-[10px] bg-white flex flex-col justify-between items-center">
+            <div className="w-full  border-b-emerald-900">
+                <div className='rounded-t-[10px] bg-surface_bleu  h-[135px] flex flex-col justify-between p-[20px]'>
                     {/* Header */}
-                    <div className="rounded-[10px]  px-[10px] pt-[5px] flex flow-row justify-between items-center">
-                        <h3 className="text-xl font-bold text-brand_bleu_inter text-[20px]">{title}</h3>
+                    <div className="rounded-[10px] px-[10px] pt-[5px] flex flow-row justify-between items-center">
+                        <div className='flex flex-row justify-between items-center'>
+                            <h3 className="text-xl font-bold text-brand_bleu_inter text-[20px]">{title}</h3>
+                            <Icon icon="jam:alert-f" className="text-brand_orange w-5 h-5 ml-2" />
+                        </div>
+
                         {title === 'Premium' &&
                             <div className='flex flow-row justify-between items-center'>
                                 <p className='text-[8px] text-brand_orange '>Choix le plus populaire</p>
@@ -22,13 +27,13 @@ const PricingCard: React.FC<PricingCardProps> = ({ title, description, price, da
                         }
                     </div>
                     {/* Pricing */}
-                    <div className="px-[10px] py-4 flex items-center justify-between">
+                    <div className="px-[10px] py-[10px] flex items-center justify-between">
                         <div className=' w-[70%] '>
-                            <p className="text-sm text-brand_bleu_inter text-[14px]">{description}</p>
+                            <p className="text-brand_bleu_inter text-[14px]">{description}</p>
                         </div>
                         <div className=' w-[30%]'>
-                            <span className="text-2xl font-bold text-orange-400">€{price}</span>
-                            <span className="text-sm text-gray-500">/mois</span>
+                            <span className="text-[20px] font-bold text-brand_orange">€{price}</span>
+                            <span className="text-[20px] text-brand_orange"> / mois</span>
                         </div>
                     </div>
                 </div>
@@ -36,18 +41,16 @@ const PricingCard: React.FC<PricingCardProps> = ({ title, description, price, da
                 <ul className="px-[20px] py-4 space-y-3">
                     {data.map((feature, index) => (
                         <li key={index} className="flex items-center text-gray-700">
-                            <Icon icon="mdi:check-circle-outline" className="text-orange-400 w-5 h-5 mr-2" />
-                            <span>{feature}</span>
+                            <Icon icon="mdi:check-circle-outline" className="text-brand_orange w-5 h-5 mr-2" />
+                            <span className=' text-[14px] text-brand_bleu_inter'>{feature}</span>
                         </li>
                     ))}
                 </ul>
             </div>
 
             {/* Call to Action */}
-            <div className="px-6 py-4">
-                <button className="w-full py-2 px-4 rounded-xl bg-blue-900 text-white font-bold hover:bg-blue-800">
-                    Ouvrir un compte
-                </button>
+            <div className=" pb-[20px]">
+                <SecondButton text={"Ouvrir un compte"} />
             </div>
         </div>
     );
