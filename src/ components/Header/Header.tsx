@@ -64,9 +64,6 @@ const Header: React.FC<HeaderProps> = ({onClickAccueil, onClickTarif, onClickApr
 
   ]
 
-  const handleRefresh = () => {
-    window.location.reload();
-  };
 
 
   const getOnglet = () => {
@@ -92,11 +89,11 @@ const Header: React.FC<HeaderProps> = ({onClickAccueil, onClickTarif, onClickApr
             <img className="object-fill " src={logo1} alt="" />
           </div>
           <div className="hidden lg:flex flex-row space-x-[50px]">
-            <p onClick={onClickAccueil} className="text-blue-900 font-semibold text-[14px]">Accueil</p>
-            <p onClick={onClickApropos} className="text-blue-900 font-semibold text-[14px]">A propos </p>
-            <p onClick={onClickTarif} className="text-blue-900 font-semibold text-[14px]">Tarif</p>
-            <p className="text-blue-900 font-semibold text-[14px]">Contact</p>
-            <p onClick={() => navigate("/service")} className="text-blue-900 font-semibold text-[14px]">Services</p>
+            <p onClick={onClickAccueil} className="text-brand_bleu_fonce_500 font-semibold text-[14px]">Accueil</p>
+            <p onClick={onClickApropos} className="text-brand_bleu_fonce_500 font-semibold text-[14px]">A propos </p>
+            <p onClick={onClickTarif} className="text-brand_bleu_fonce_500 font-semibold text-[14px]">Tarif</p>
+            <p className="text-brand_bleu_fonce_500 font-semibold text-[14px]">Contact</p>
+            <p onClick={() => navigate("/service")} className="text-brand_bleu_fonce_500 font-semibold text-[14px]">Services</p>
           </div>
           <div className="lg:hidden bg-blue-900 rounded-full flex flex-row items-center ">
             <button onClick={()=>console.log("rechercher")} className=" inline-flex items-center p-2 text-sm text-gray-500 rounded-lg ">
@@ -110,7 +107,7 @@ const Header: React.FC<HeaderProps> = ({onClickAccueil, onClickTarif, onClickApr
             {/* <button onClick={toggleSideBar} className=" inline-flex items-center p-2 text-sm text-gray-500 rounded-lg ">
               <p>Se connecter</p>
             </button> */}
-            <FirstButton onClick={()=> setOpenConnexionModal(true)} text={"Se connecter"}/>
+            <SecondButton onClick={()=> setOpenConnexionModal(true)} bgColor="bg-transoarent" textColor="text-brand_bleu_inter" text={"Se connecter"} className="border border-brand_bleu_inter"/>
             {/* <button onClick={toggleSideBar} className=" inline-flex items-center p-2 text-sm text-gray-500 rounded-lg ">
               <p>S'inscrire</p>
             </button> */}

@@ -8,10 +8,13 @@ import feature3 from "../assets/feature/feature3.png";
 import feature4 from "../assets/feature/feature4.png";
 import feature5 from "../assets/feature/feature5.png";
 import feature6 from "../assets/feature/feature6.png";
-import featur from "../assets/bgIcon.png";
+import logo1 from "../assets/logo1.png";
 import grapheImage1 from "../assets/grapheImage1.png";
 import tfeImage from "../assets/cible/tfeImage.png";
 import pmeImage from "../assets/cible/pmeImage.png";
+import facebook from "../assets/socialNetwork/facebook.png";
+import lIn from "../assets/socialNetwork/lIn.png";
+import youtube from "../assets/socialNetwork/youtube.png";
 import startupImage from "../assets/cible/startupImage.png";
 import associationImage from "../assets/cible/associationImage.png";
 import SecondButton from '../ components/Button/SecondButton';
@@ -23,7 +26,6 @@ import EnterpriseCard from '../ components/EnterpriseCard';
 import Arrowright from '../assets/Arrowright.png';
 import Arrowleft from '../assets/Arrowleft.png';
 import questionbg from '../assets/questionbg.png';
-import Fuseemany from '../assets/Fuseemany.png';
 import FuseeOne from '../assets/FuseeOne.png';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import { FaMapMarkerAlt, FaEnvelope, FaPhone } from "react-icons/fa";
@@ -39,6 +41,7 @@ function Home() {
   const [openDescriptionModal, setOpenDescriptionModal] = useState<boolean>(false);
   const [description, setDescription] = useState<string>("");
   const [bgSize, setBgSize] = useState("120%");
+  const [tarifBgSize, setTarifBgSize] = useState("120%");
 
 
   const accueilRef = useRef<HTMLDivElement>(null);
@@ -143,10 +146,13 @@ function Home() {
     const handleResize = () => {
       if (window.innerWidth < 640) {
         setBgSize("150%"); // Mobile
+        setTarifBgSize("tarifBgSize%")
       } else if (window.innerWidth < 1024) {
         setBgSize("90%"); // Tablette
+        setTarifBgSize("200%")
       } else {
         setBgSize("90%"); // PC
+        setTarifBgSize("200%")
       }
     };
 
@@ -350,7 +356,7 @@ function Home() {
             </div>
           </div>
           {/* fourth les tarifs */}
-          <div style={{ backgroundSize: bgSize }} ref={tarifRef} className="bg-[#FAFAFA] overflow-hidden relative  border-red-600 mt-[50px] w-full flex flex-col items-center bg-[url('/bgIcon.png')] bg-full bg-center bg-no-repeat">
+          <div style={{ backgroundSize: tarifBgSize }} ref={tarifRef} className="bg-[#FAFAFA] overflow-hidden relative  border-red-600 mt-[50px] w-full flex flex-col items-center bg-[url('/bgIcon.png')] bg-full bg-center bg-no-repeat">
             {/* button */}
             <div className='mt-[20px] z-10  w-full px-[20px]   border-red-600 flex flex-row justify-center'>
               <div className=' w-full md:w-[800px] flex flex-col text-center justify-center'>
@@ -494,7 +500,7 @@ function Home() {
                   {/* FAQ Items */}
                   <div className="space-y-4">
                     {questions.map((item, index) => (
-                      <div key={index} className="border-b border-blue-900 pb-3">
+                      <div key={index} className="border-b bordet-bratext-brand_bleu_inter pb-3">
                         <button
                           className="flex justify-between items-center w-full cursor-pointer focus:outline-none"
                           onClick={() => toggleQuestion(index)}
@@ -518,7 +524,7 @@ function Home() {
 
                 {/* Buttons */}
                 <div className="flex mt-6 justify-center">
-                  <button className="w-[232px] text-[12px] md:text-[14px] py-2 bg-gradient-to-b from-[#011E3E] to-[#0E5588] text-white font-medium h-[60px] rounded-t-[16px] hover:bg-blue-900">
+                  <button className="w-[232px] text-[12px] md:text-[14px] py-2 bg-gradient-to-b from-[#011E3E] to-[#0E5588] text-white font-medium h-[60px] rounded-t-[16px] hover:bt-bratext-brand_bleu_inter">
                     Questions Fonctionnelles
                   </button>
                   <button className="w-[232px] text-[12px] md:text-[14px] py-2 bg-transparent border-[1.4px] border-brand_bleu_inter text-brand_bleu_inter font-medium h-[60px] rounded-t-[16px] hover:bg-blue-800 hover:text-white">
@@ -568,76 +574,81 @@ function Home() {
             <footer className="w-ful">
               <div className=" flex flex-col md:flex-row ">
                 {/* 1 */}
-                <div className="bg-gradient-to-r  from-[#011E3E] to-[#0E5588] text-white p-8 w-full md:w-[50%]">
-                  <div className="flex flex-col items-center">
+                <div className="bg-gradient-to-r  from-[#011E3E] to-[#0E5588] text-white p-8 w-full md:w-[45%]">
+                  <div className="flex flex-col justify-between space-y-[10px] items-start">
                     {/* Logo */}
-                    <img src="/path-to-your-logo/acwaba.png" alt="Acwaba" className="h-12 mb-4" />
-
-                    {/* Subscription Text */}
-                    <p className="text-center mb-4 max-w-md">
-                      Rejoignez notre liste d’abonnés pour recevoir instantanément les dernières nouvelles et offres spéciales.
-                    </p>
+                    <img src={logo1} alt="Acwaba" className="h-12 " />
 
                     {/* Subscription Form */}
-                    <div className="flex justify-between md:justify-center md:space-x-5 w-full">
+                    <div className="flex md:justify-start md:space-x-5 w-full">
                       <input
                         type="email"
                         placeholder="Email"
-                        className="px-4 py-2 rounded-full text-black focus:outline-none"
+                        className=" w-[223px] md:w-[286px] h-[44px] rounded-[44px] text-black focus:outline-none"
                       />
-                      <button className="bg-orange-500 hover:bg-orange-600  py-2 px-[20px] md:px-[40px] rounded-full text-[14px]">
+                      <button className="ml-[10px] md:ml-[5px] w-[119px] md:w-[146px] h-[44px] bg-orange-500 hover:bg-orange-600  p md:px-[45px] rounded-[44px] text-[14px]">
                         Verifier
                       </button>
                     </div>
+                    {/* Subscription Text */}
+                    <p className="text-start text-[12px] md:text-[14px]">
+                      Rejoignez notre liste d’abonnés pour recevoir instantanément les dernières nouvelles et offres spéciales.
+                    </p>
 
                     {/* Copyright Text */}
-                    <p className="text-sm mt-6">© Copyright 2024. All Rights Reserved by Acwaba</p>
+                    <p className="text-[12px] md:text-[14px] text-brand_bleu_inter">© Copyright 2024. All Rights Reserved by Acwaba</p>
 
                     {/* Social Icons */}
-                    <div className="flex gap-4 mt-4">
-                      <a href="#" className="w-10 h-10 flex items-center justify-center bg-gray-200 rounded-full">
-                        <img src="/path-to-your-icons/facebook.png" alt="Facebook" className="w-5 h-5" />
+                    <div className="flex gap-4 ">
+                      <a href="#" className="">
+                        <img src={facebook} alt="Facebook" className="w-[30px] h-[30px]" />
                       </a>
-                      <a href="#" className="w-10 h-10 flex items-center justify-center bg-gray-200 rounded-full">
-                        <img src="/path-to-your-icons/instagram.png" alt="Instagram" className="w-5 h-5" />
+                      <a href="#" className="">
+                        <img src={youtube} alt="Instagram" className="w-[30px] h-[30px]" />
                       </a>
-                      <a href="#" className="w-10 h-10 flex items-center justify-center bg-gray-200 rounded-full">
-                        <img src="/path-to-your-icons/youtube.png" alt="YouTube" className="w-5 h-5" />
+                      <a href="#" className="">
+                        <img src={lIn} alt="YouTube" className="w-[30px] h-[30px]" />
                       </a>
                     </div>
                   </div>
                 </div>
                 {/* 2 */}
-                <div className="bg-[#CFE8F4] overflow-hidden relative  border-red-600   flex flex-col items-cent w-full md:w-[50%] bg-[url('/bgIcon.png')] bg-full bg-right bg-no-repeat ">
+                <div className="bg-[#CFE8F4] overflow-hidden relative  border-red-600   flex flex-col items-cent w-full md:w-[55%] bg-[url('/bgIcon.png')] bg-full bg-right bg-no-repeat ">
                   {/* contact */}
                   <div className='flex flex-col items-center justify-center w-full h-full'>
-                    <div className=" p-8 rounded-lg flex flex-row justify-between md:space-x-[80px] space-x-[0px] md: z-10">
+                    <div className=" p-8 rounded-lg flex flex-row justify-between md:space-x-[140px] space-x-[0px] md: z-10">
                       {/* Pages Section */}
                       <div>
-                        <h2 className=" font-bold text-blue-900 mb-4">Pages</h2>
-                        <ul className="space-y-2 text-blue-900">
-                          <li><a href="#" className="hover:underline">Accueil</a></li>
-                          <li><a href="#" className="hover:underline">À propos</a></li>
-                          <li><a href="#" className="hover:underline">Tarif</a></li>
-                          <li><a href="#" className="hover:underline">Contact</a></li>
-                          <li><a href="#" className="hover:underline">Conditions générales</a></li>
+                        <h2 className=" font-bold text-brand_bleu_inter mb-4">Pages</h2>
+                        <ul className="space-y-[24px] text-brand_bleu_inter">
+                          <li><a href="#" className="hover:underline text-[12px] md:text-[16px]">Accueil</a></li>
+                          <li><a href="#" className="hover:underline md:text-[16px]">À propos</a></li>
+                          <li><a href="#" className="hover:underline text-[12px] md:text-[16px]">Tarif</a></li>
+                          <li><a href="#" className="hover:underline md:text-[16px]">Contact</a></li>
+                          <li><a href="#" className="hover:underline text-[12px] md:text-[16px]">Conditions générales</a></li>
                         </ul>
                       </div>
 
                       {/* Contacts Section */}
                       <div>
-                        <h2 className=" font-bold text-blue-900 mb-4">Contacts</h2>
-                        <ul className="space-y-3 text-blue-900">
+                        <h2 className=" font-bold text-brand_bleu_inter mb-4">Contacts</h2>
+                        <ul className="space-y-[24px] text-brand_bleu_inter">
                           <li className="flex items-center gap-2">
-                            <FaMapMarkerAlt className="text-blue-700" />
-                            <span>25 Rue de Ponthieu<br />75008, Paris<br />France</span>
+                            <div className='w-[40px] md:w-[50px] h-[40px] md:h-[50px] flex items-center justify-center rounded-full bg-white'>
+                            <FaMapMarkerAlt className="text-brand_bleu_inte" />
+                            </div>
+                            <span className='ext-[12px] md:text-[16px]'>25 Rue de Ponthieu<br />75008, Paris<br />France</span>
                           </li>
                           <li className="flex items-center gap-2">
-                            <FaEnvelope className="text-blue-700" />
-                            <a href="mailto:contact@acwaba.com" className="hover:underline">contact@acwaba.com</a>
+                          <div className='w-[40px] md:w-[50px] h-[40px] md:h-[50px] flex items-center justify-center rounded-full bg-white'>
+                            <FaEnvelope className="text-brand_bleu_inter" />
+                            </div>
+                            <a href="mailto:contact@acwaba.com" className="hover:underline ext-[12px] md:text-[16px]">contact@acwaba.com</a>
                           </li>
                           <li className="flex items-center gap-2">
-                            <FaPhone className="text-blue-700" />
+                          <div className='w-[40px] md:w-[50px] h-[40px] md:h-[50px] flex items-center justify-center rounded-full bg-white'>
+                            <FaPhone className="text-brand_bleu_inter ext-[12px] md:text-[16px]" />
+                            </div>
                             <span>
                               +33 6 63 67 31 02<br />
                               +33 6 60 53 04 97
