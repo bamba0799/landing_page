@@ -1,7 +1,6 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import React, { useEffect, useState } from "react";
 import logo1 from "../../assets/logo1.png";
-import FirstButton from "../Button/FirstButton";
 import SecondButton from "../Button/SecondButton";
 import { useNavigate } from "react-router-dom";
 import ConnexionModal from "../Modal/ConnexionModal";

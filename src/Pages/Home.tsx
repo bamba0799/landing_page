@@ -36,7 +36,7 @@ import GeneralModal from '../ components/Modal/GeneralModal';
 
 function Home() {
   const [tarifButtonId, setTarifButtonId] = useState(0);
-  const [openConnexionModal, setOpenConnexionModal] = useState<boolean>(false);
+  const [openConnexionModal, setOpenConnexionModal] = useState<boolean>(true);
   const [openInscriptionModal2, setOpenInscriptionModal2] = useState<boolean>(false);
   const [openDescriptionModal, setOpenDescriptionModal] = useState<boolean>(false);
   const [description, setDescription] = useState<string>("");
