@@ -26,7 +26,7 @@ const Main: React.FC<MainProps> = ({ children, onClickAccueil, onClickTarif, onC
     :null
     }
     <Header onClickAccueil={onClickAccueil} onClickApropos={onClickApropos} onClickTarif={onClickTarif}  toggleSideBar={toggleSideBar}/>
-    <SideBar isSidebarOpen={isSidebarOpen}/>
+    <SideBar isSidebarOpen={isSidebarOpen} toggleSideBar={toggleSideBar}/>
       {children}
     </div>
   );
