@@ -8,10 +8,12 @@ interface MainProps {
   onClickAccueil?: () => void;
   onClickTarif?: () => void;
   onClickApropos?: () => void;
+  onClickContact?: () => void;
+  getPage?: (page: any) => void;
 }
 
 
-const Main: React.FC<MainProps> = ({ children, onClickAccueil, onClickTarif, onClickApropos }) => {
+const Main: React.FC<MainProps> = ({ children, onClickAccueil, onClickTarif, onClickApropos, onClickContact, getPage }) => {
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
@@ -25,8 +27,8 @@ const Main: React.FC<MainProps> = ({ children, onClickAccueil, onClickTarif, onC
     </button>
     :null
     }
-    <Header onClickAccueil={onClickAccueil} onClickApropos={onClickApropos} onClickTarif={onClickTarif}  toggleSideBar={toggleSideBar}/>
-    <SideBar isSidebarOpen={isSidebarOpen} toggleSideBar={toggleSideBar}/>
+    <Header onClickAccueil={onClickAccueil} onClickApropos={onClickApropos} onClickTarif={onClickTarif} onClickContact={onClickContact}  toggleSideBar={toggleSideBar}/>
+    <SideBar isSidebarOpen={isSidebarOpen} toggleSideBar={toggleSideBar} getPage={getPage}/>
       {children}
     </div>
   );

@@ -8,11 +8,12 @@ type EnterpriseCardProps = {
   image?: string;
   color?: "orange" | "blue";
   data: string[]
+  seeOver?: () => void;
 };
 
-const EnterpriseCard: React.FC<EnterpriseCardProps> = ({ title, description, image, color, data }) => {
+const EnterpriseCard: React.FC<EnterpriseCardProps> = ({ title, description, image, color, data, seeOver }) => {
   return (
-    <div className="w-[438px] h-[438px]  border-red-600 shadow-sm shadow-black/30 rounded-[10px] bg-white flex flex-col justify-between items-center">
+    <div className=" w-full h-full  border-red-600 shadow-sm shadow-black/30 rounded-[10px] bg-white flex flex-col justify-between items-center">
       <div className="w-full  border-b-emerald-900">
         <div className='rounded-t-[10px] bg-gradient-to-b from-orange-100 to-white  h-[135px] flex flex-col justify-between p-[20px]'>
           <div className="w-full flex flex-col justify-center items-center pt-[5px]">
@@ -33,6 +34,10 @@ const EnterpriseCard: React.FC<EnterpriseCardProps> = ({ title, description, ima
               <span className=' text-[14px] text-brand_bleu_inter'>{feature}</span>
             </li>
           ))}
+          <button onClick={seeOver} className='ml-[5px] flex flex-row  items-center'>
+            <div className='   text-[15px] text-brand_bleu_inter'>Voir plus</div>
+            <Icon icon="akar-icons:arrow-right" className="text-brand_orange w-[20px] h-[20px] ml-2" />
+          </button>
         </ul>
       </div>
 

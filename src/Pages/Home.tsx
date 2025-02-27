@@ -8,6 +8,15 @@ import feature3 from "../assets/feature/feature3.png";
 import feature4 from "../assets/feature/feature4.png";
 import feature5 from "../assets/feature/feature5.png";
 import feature6 from "../assets/feature/feature6.png";
+
+
+import partner1 from "../assets/Logos/logos-partner-01.png";
+import partner2 from "../assets/Logos/logos-partner-02.png";
+import partner3 from "../assets/Logos/logos-partner-03.png";
+import partner4 from "../assets/Logos/logos-partner-04.png";
+
+
+
 import logo1 from "../assets/logo1.png";
 import grapheImage1 from "../assets/grapheImage1.png";
 import tfeImage from "../assets/cible/tfeImage.png";
@@ -39,6 +48,8 @@ function Home() {
   const [openConnexionModal, setOpenConnexionModal] = useState<boolean>(false);
   const [openInscriptionModal2, setOpenInscriptionModal2] = useState<boolean>(false);
   const [openDescriptionModal, setOpenDescriptionModal] = useState<boolean>(false);
+  const [openFonctionalityModal, setOpenFonctionalityModal] = useState<boolean>(false);
+  const [data, setData] = useState<string[]>([]);
   const [description, setDescription] = useState<string>("");
   const [bgSize, setBgSize] = useState("120%");
   const [tarifBgSize, setTarifBgSize] = useState("120%");
@@ -47,6 +58,7 @@ function Home() {
   const accueilRef = useRef<HTMLDivElement>(null);
   const aproposRef = useRef<HTMLDivElement>(null);
   const tarifRef = useRef<HTMLDivElement>(null);
+  const contact = useRef<HTMLDivElement>(null);
 
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
@@ -60,6 +72,116 @@ function Home() {
     { question: "Puis-je me désabonner à tout moment ?", answer: "Oui, vous pouvez résilier votre abonnement à tout moment dans les paramètres." },
     { question: "Puis-je récupérer les informations saisies ?", answer: "Oui, vous pouvez télécharger vos données depuis votre espace utilisateur." },
   ];
+
+  const smartData1 = [
+    "1 utilisateurs inclus",
+    "2 Utilisateurs max par formule",
+    "Utilisateurs suppl - (+5€/mois HT)",
+    "Droits et permissions",
+    "Rapprochement bancaire",
+    "Synchronisation bancaire",
+  ]
+
+  const smartData2 = [
+    "1 Banques incluses",
+    "1 Banques supplémentaires (+7€/mois)",
+    "Catégorisation automatisée des transactions",
+    "Nombre de sous-catégories",
+    "Planification budgétaire",
+    "Estimation automatisée de la TVA",
+    "Vue tabulaire et graphique du tableau de bord des transactions",
+    "Graphiques par catégories",
+    "Bases de données fournisseurs & clients (intégration INSEE)",
+    "Gestion des dépenses et des recettes",
+    "Journal des transactions",
+    "Gestion des produits /articles",
+    "Bases de données articles et produits",
+    "Interface de suivi des factures",
+    "Devis et factures",
+    "Import/Export de justificatifs comptables",
+    "Import/Export Excel des transactions",
+    "Centre d’aide et tutoriels vidéos",
+    "Support par mail et tchat",
+
+
+  ]
+
+  const premiumData1 = [
+    "2 utilisateurs inclus",
+    "5 Utilisateurs max par formule",
+    "Utilisateurs suppl - (+5€/mois HT)",
+    "Droits et permissions",
+    "Rapprochement bancaire",
+    "Synchronisation bancaire",
+  ]
+
+  const premiumData2 = [
+    "2 Banques incluses",
+    "2 Banques supplémentaires (+7€/mois)",
+    "Catégorisation automatisée des transactions",
+    "3 sous-catégories",
+    "Option Multi-filiale + Consolidation",
+    "Planification budgétaire",
+    "Analyse réel vs prévisionnelle",
+    "Estimation automatisée de la TVA",
+    "Formule de scénario avancées",
+    "4 Scénario inclus par année fiscale",
+    "Vue tabulaire et graphique du tableau de bord des transactions",
+    "Graphiques par catégories",
+    "Bases de données fournisseurs & clients (intégration INSEE)",
+    "Gestion des dépenses et des recettes",
+    "Validations des opérations (double sécurité) en option",
+    "Journal des transactions",
+    "Gestion des produits /articles",
+    "Bases de données articles et produits",
+    "Interface de suivi des factures",
+    "Devis et factures",
+    "Paiement de factures fournisseur",
+    "Import/Export de justificatifs comptables",
+    "Import/Export Excel des transactions",
+    "Intégration de fonctionnalités personnalisées - (sur devis)",
+    "Centre d’aide et tutoriels vidéos",
+    "Support par mail et tchat",
+    "Support prioritaire",
+  ]
+
+  const entrepriseData1 = [
+    "2 utilisateurs inclus",
+    "Utilisateurs max par formule - (illimité)",
+    "Utilisateurs suppl - (+5€/mois HT)",
+    "Droits et permissions",
+    "Rapprochement bancaire",
+    "Synchronisation bancaire",
+  ]
+  const entrepriseData2 = [
+    "2 Banques incluses",
+    "2 Banques supplémentaires (+7€/mois) - (inclus)",
+    "Catégorisation automatisée des transactions",
+    "sous-catégories - (illimité)",
+    "Option Multi-filiale + Consolidation",
+    "Planification budgétaire",
+    "Analyse réel vs prévisionnelle",
+    "Estimation automatisée de la TVA",
+    "Formule de scénario avancées",
+    "Scénario inclus par année fiscale - (illimité)",
+    "Vue tabulaire et graphique du tableau de bord des transactions",
+    "Graphiques par catégories",
+    "Bases de données fournisseurs & clients (intégration INSEE)",
+    "Gestion des dépenses et des recettes",
+    "Validations des opérations (double sécurité) en option",
+    "Journal des transactions",
+    "Gestion des produits /articles",
+    "Bases de données articles et produits",
+    "Interface de suivi des factures",
+    "Devis et factures",
+    "Paiement de factures fournisseur",
+    "Import/Export de justificatifs comptables",
+    "Import/Export Excel des transactions",
+    "Intégration de fonctionnalités personnalisées - (sur devis)",
+    "Centre d’aide et tutoriels vidéos",
+    "Support par mail et tchat",
+    "Support prioritaire",
+  ]
 
 
   // Fonction pour faire défiler vers une section spécifique
@@ -110,8 +232,6 @@ function Home() {
         "Notre module analytics vous offre des graphes et un tableau de bord dynamique et intuitifs afin de comprendre et suivre vos statistiques en temps réel.",
     },
   ];
-
-
 
   const testimonials = [
     {
@@ -165,8 +285,26 @@ function Home() {
 
   return (
     <div className="bg-white min-h-screen z-[100px]">
-      <Main onClickAccueil={() => scrollToSection(accueilRef)} onClickApropos={() => scrollToSection(aproposRef)} onClickTarif={() => scrollToSection(tarifRef)}>
-        <div className="mt-[30px] flex flex-col justify-between items-center">
+      <Main getPage={(page)=>{
+        console.log("eeeee",page)
+        if(page==="Accueil"){
+          scrollToSection(accueilRef)
+        }
+        if(page==="A propos"){
+          scrollToSection(aproposRef)
+        }
+        if(page==="Tarif"){
+          scrollToSection(tarifRef)
+        }
+        if(page==="Contact"){
+          scrollToSection(contact)
+        }
+        if(page==="Ouvrir un compte"){
+          setOpenConnexionModal(true)
+        }
+
+        }} onClickContact={()=> scrollToSection(contact)} onClickAccueil={() => scrollToSection(accueilRef)} onClickApropos={() => scrollToSection(aproposRef)} onClickTarif={() => scrollToSection(tarifRef)}>
+        <div className="mt-[30px]  flex flex-col justify-between items-center">
           {/* Section principale */}
           <section ref={accueilRef} className=" w-full relative bg-gradient-to-b from-[#011E3E] to-[#0E5588] text-white ">
             <div className=" border-orange-800 mx-[20px] md:mx-[50px] mt-[50px] md:mt-[100px]  flex flex-col lg:flex-row items-center lg:justify-between ">
@@ -180,10 +318,10 @@ function Home() {
               </div>
               <div className=' md:w-[45%]'>
                 {/* Texte principal */}
-                <h1 className=" font-poppins text-[24px] md:text-[38px] font-bold leading-tight mb-4">
+                <h1 className=" font-extrabold text-[24px] md:text-[38px]  leading-tight mb-4">
                   Le pilotage de votre activité n'a jamais été aussi simple
                 </h1>
-                <p className="text-[12px] md:text-[20px] mb-6">
+                <p className=" font-[500px] normal   text-[12px] md:text-[20px] mb-6">
                   Facturez vos clients, et suivez votre trésorerie aisément,
                   tout en focus sur votre activité
                 </p>
@@ -233,13 +371,13 @@ function Home() {
               </motion.svg>
             </div>
 
-            <div className="absolute z-[999px] -bottom-[50px] left-0 w-full h-[100px] bg-white border-t-[8px] border-t-[#F76E25]  transform -skew-y-[6deg] lg:-skew-y-[2deg] origin-bottom"></div>
+            <div className="absolute z-[999px] -bottom-[50px] left-0 w-full h-[100px] bg-white border-t-[12px] border-t-[#F76E25]  transform -skew-y-[6deg] lg:-skew-y-[2deg] origin-bottom"></div>
           </section>
           {/* first */}
-          <div className='mt-[20px] z-10 md:mt-[100px] w-full px-[20px] md:px-[50px]  border-red-600'>
+          <div className=' z-10 md:mt-[30px] w-full px-[20px] md:px-[50px]  border-red-600'>
             <div className=' w-full flex flex-col text-center justify-center'>
-              <p className='text-brand_orange text-[16px] md:text-[24px] font-poppins'>Nos Fonctionnalités exceptionnelles</p>
-              <p className='font-bold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-poppins'>Suivez la rentabilité de votre activité en temps réels</p>
+              <p className='text-brand_orange text-[16px] md:text-[24px] font-[600px]'>Nos Fonctionnalités exceptionnelles</p>
+              <p className='font-extrabold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-poppins'>Suivez la rentabilité de votre activité en temps réels</p>
             </div>
           </div>
           {/* feature md */}
@@ -295,8 +433,8 @@ function Home() {
 
               <div className='mt-[20px] z-10 md:mt-[100px]  w-full px-[20px] md:hidden  border-red-600'>
                 <div className=' w-full flex flex-col text-center justify-center'>
-                  <p className='text-brand_orange text-[16px] md:text-[24px] font-poppins'>Notre espace analytique dynamique</p>
-                  <p className='font-bold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-poppins'>Suivez la rentabilité de votre activité en temps réels</p>
+                  <p className= ' font-bold text-brand_orange text-[16px] md:text-[24px] font-poppins'>Notre espace analytique dynamique</p>
+                  <p className='font-extrabold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-poppins'>Suivez la rentabilité de votre activité en temps réels</p>
                 </div>
               </div>
               <div className=' border-red-600 flex flex-col md:flex-row mt-[20px] md:mt-[0px] items-center justify-center md:space-x-[30px]'>
@@ -328,8 +466,8 @@ function Home() {
             <div className='w-full flex flex-col items-center justify-between md:w-[40%]   border-red-800'>
               <div className='mt-[20px] z-10 md:mt-[10px] w-full px-[20px] md:px-[50px]  border-red-600'>
                 <div className=' w-full flex flex-col text-center md:text-start md:w-[350px] justify-center'>
-                  <p className='text-brand_orange text-[16px] md:text-[24px] font-poppins'>Nos cibles</p>
-                  <p className='font-bold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-poppins'>Découvrez nos cibles pour qui Acwaba est adapté</p>
+                  <p className='text-brand_orange text-[16px] md:text-[24px] font-bold'>Nos cibles</p>
+                  <p className=' text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-extrabold'>Découvrez nos cibles pour qui Acwaba est adapté</p>
                 </div>
               </div>
               <div>
@@ -360,9 +498,9 @@ function Home() {
             {/* button */}
             <div className='mt-[20px] z-10  w-full px-[20px]   border-red-600 flex flex-row justify-center'>
               <div className=' w-full md:w-[800px] flex flex-col text-center justify-center'>
-                <p className='text-brand_orange text-[16px] md:text-[24px] font-poppins'>Nos tarifs</p>
+                <p className='text-brand_orange text-[16px] md:text-[24px] font-bold'>Nos tarifs</p>
                 <p className='font-bold text-brand_bleu_fonce_500 mt-[7px] text-[20px] md:text-[32px] font-poppins'>Choisissez l’offre qui vous correspond</p>
-                <p className=' text-[12px] md:text-[14px] text-neutral_gris'>Comparer les fonctionnalités et sélectionner la meilleure offre pour votre business.
+                <p className='font-extrabold text-[12px] md:text-[14px] text-neutral_gris'>Comparer les fonctionnalités et sélectionner la meilleure offre pour votre business.
                   Acwaba propose plusieurs offres qui s’adaptent à tout type de d’entreprise.</p>
               </div>
             </div>
@@ -379,48 +517,29 @@ function Home() {
               ))}
             </div>
             {/* Conteneur scrollable */}
-            <div className="mt-[20px]   border-blue-700 w-full  px-[20px] pt-10  z-10 overflow-x-scroll md:overflow-hidden flex space-x-5 md:justify-center scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-200">
-              <div className={`flex-shrink-0`}>
+            <div className="mt-[20px] pb-[10px]  border-blue-700 w-full  px-[20px] pt-10  z-10 overflow-x-scroll md:overflow-hidden flex space-x-5 md:justify-center scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-200">
+              <div className={`flex-shrink-0 w-[90%]  md:w-[438px] h-[438px]`}>
                 <PricingCard
-                  title='Start'
-                  price={29}
+                  seeOver={() => { setOpenFonctionalityModal(true), setData(smartData2) }}
+                  title='Smart'
+                  price={16}
                   description='Adapté aux auto-entrepreneurs & TPE'
-                  data={[
-                    "Clients & Fournisseurs",
-                    "Devis & Facturation",
-                    "1 utilisateur",
-                    "Gestion de la trésorerie",
-                    "Connection bancaire - 1 seul compte",
-                    "Prévision bancaire - 1 seul scénario",
-                  ]}
+                  data={smartData1}
                 />
               </div>
-              <div className={`flex-shrink-0`}>
+              <div className={`flex-shrink-0 w-[90%]  md:w-[438px] h-[438px]`}>
                 <PricingCard
+                  seeOver={() => { setOpenFonctionalityModal(true), setData(premiumData2) }}
                   title='Premium'
                   price={29}
                   description='Adapté aux auto-entrepreneurs & TPE'
-                  data={[
-                    "Clients & Fournisseurs",
-                    "Devis & Facturation",
-                    "1 utilisateur",
-                    "Gestion de la trésorerie",
-                    "Connection bancaire - 1 seul compte",
-                    "Prévision bancaire - 1 seul scénario",
-                  ]}
+                  data={premiumData1}
                 />
               </div>
-              <div className={`flex-shrink-0`}>
+              <div className={`flex-shrink-0 w-[90%]  md:w-[438px] h-[438px]`}>
                 <EnterpriseCard
-                  data={[
-                    "Plan Premium",
-                    "Utilisateurs illimités",
-                    "Nom de domaine personnalisé",
-                    "Intégration custom (sur demande)",
-                    "Détection fraude  acwaba Copilot",
-                    "Custom Branding",
-                    "Nous contacter",
-                  ]}
+                  seeOver={() => { setOpenFonctionalityModal(true), setData(entrepriseData2) }}
+                  data={entrepriseData1}
                   title='premium'
                   description='Une offre personnalisée selon vos besoins. '
                 />
@@ -445,8 +564,8 @@ function Home() {
           <div className="bg-white w-full ">
             <div className='mt-[20px] z-10 md:mt-[10px] w-full md:w-[800px]  px-[20px] md:ml-[60px]  border-red-600'>
               <div className=' w-full flex flex-col text-center md:text-start  justify-center'>
-                <p className='text-brand_orange text-[16px] md:text-[24px] font-poppins'>Nos clients</p>
-                <p className='font-bold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-poppins'>Observez ce que disent <br /> ceux qui ont testé Acwaba</p>
+                <p className='text-brand_orange text-[16px] md:text-[24px] font-bold'>Nos clients</p>
+                <p className='font-extrabold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-poppins'>Observez ce que disent <br /> ceux qui ont testé Acwaba</p>
               </div>
             </div>
             <div className=' hidden md:flex relative w-full '>
@@ -466,11 +585,11 @@ function Home() {
                 {testimonials.map((testimonial: any, index: number, self: any[]) => (
                   <div
                     key={testimonial.id}
-                    className={`bg-white rounded-[16px] ${index == 0 ? "ml-[20px] md:ml-[60px]" : ""} ${index + 1 == self.length ? "mr-[20px]" : ""} shadow-lg shadow-black/30 p-6 flex-shrink-0 w-[423px] h-[314px] flex flex-col justify-between  border-red-700 pb-[40px]`}
+                    className={`bg-white rounded-[16px] ${index == 0 ? "ml-[20px] md:ml-[60px]" : ""} ${index + 1 == self.length ? "mr-[20px]" : ""} shadow-lg shadow-black/30 p-6 flex-shrink-0 w-[85%] md:w-[423px] h-[314px] flex flex-col justify-between  border-red-700 pb-[40px]`}
                   >
                     <p className=" text-neutral_gris text-[14px] mb-4">{testimonial.text}</p>
                     <div className="flex items-center space-x-3">
-                      <div className="w-[95px] h-[95px] bg-gray-200 rounded-full"></div>
+                      <div className=" w-[70px] md:w-[95px]  h-[70px] md:h-[95px] bg-gray-200 rounded-full"></div>
                       <div>
                         <p className="font-bold text-brand_bleu_inter text-[14px]">
                           {testimonial.name}
@@ -490,10 +609,10 @@ function Home() {
               style={{ backgroundImage: `url(${questionbg})` }}
             >
               {/* Section FAQ */}
-              <div className="flex flex-col justify-between bg-white  border-red-600 bg-opacity-90 w-[350px] h-[536px] md:w-[544px] md:h-[620] rounded-[16px] px-[20px] md:px-[24px] lg:ml-auto">
+              <div className="flex flex-col justify-between bg-white  border-red-600 bg-opacity-90 w-[350px] h-[450px] md:w-[544px] md:h-[520px] rounded-[16px] px-[20px] md:px-[24px] lg:ml-auto">
                 <div className='mt-[20px] md:mt-[30px]'>
-                  <p className="text-brand_orange font-semibold text-[16px] md:text-[24px] text-center md:text-start">FAQ</p>
-                  <h2 className="text-brand_bleu_fonce_500 font-bold text-[20px] md:text-[32px] mb-[12px] text-center md:text-start">
+                  <p className="text-brand_orange font-bold text-[16px] md:text-[24px] text-center md:text-start">FAQ</p>
+                  <h2 className="text-brand_bleu_fonce_500 font-extrabold text-[20px] md:text-[32px] mb-[12px] text-center md:text-start">
                     Souhaitez-vous nous poser une question ?
                   </h2>
 
@@ -527,7 +646,7 @@ function Home() {
                   <button className="w-[232px] text-[12px] md:text-[14px] py-2 bg-gradient-to-b from-[#011E3E] to-[#0E5588] text-white font-medium h-[60px] rounded-t-[16px] hover:bt-bratext-brand_bleu_inter">
                     Questions Fonctionnelles
                   </button>
-                  <button className="w-[232px] text-[12px] md:text-[14px] py-2 bg-transparent border-[1.4px] border-brand_bleu_inter text-brand_bleu_inter font-medium h-[60px] rounded-t-[16px] hover:bg-blue-800 hover:text-white">
+                  <button className="w-[232px] text-[12px] md:text-[14px] py-2 bg-transparent border-[1.4px] border-brand_bleu_inter text-brand_bleu_inter font-medium h-[60px] rounded-t-[16px]">
                     Questions Support
                   </button>
                 </div>
@@ -536,7 +655,7 @@ function Home() {
           </div>
           {/* seventh */}
           <div className='mt-[20px] w-full  border-red-800'>
-            <div className="bg-white w-full py-12 px-4 lg:px-16 flex flex-col lg:flex-row items-center justify-between">
+            <div className="bg-white w-full pt-[10px] px-4 lg:px-16 flex flex-col lg:flex-row items-center justify-between">
               {/* Mobile: une seule fusée */}
               <div className="lg:hidden">
                 <img
@@ -547,10 +666,10 @@ function Home() {
               </div>
               {/* Texte */}
               <div className="lg:w-1/2 text-center lg:text-left mt-[10px] lg:mt-0  border-black flex flex-col items-center md:items-start">
-                <p className="text-brand_orange font-semibold text-[16px] md:text-[24px] uppercase mb-4">
+                <p className="text-brand_orange font-bold text-[16px] md:text-[24px] uppercase mb-4">
                   Prêt à embarquer avec Acwaba ?
                 </p>
-                <h2 className="font-bold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] ">
+                <h2 className="font-extrabold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] ">
                   Gagnez du temps dans <br /> votre facturation et <br /> la gestion de <br />
                   votre trésorerie.
                 </h2>
@@ -563,14 +682,24 @@ function Home() {
                 <div className="hidden lg:flex ">
                   <img src={FuseeOne} />
                 </div>
-
-
               </div>
             </div>
 
           </div>
+          {/* first partener */}
+          <div className=' z-10 md:mt-[100px] w-full px-[20px] md:px-[50px]  border-red-600'>
+            <div className=' w-full flex flex-col text-center justify-center'>
+              <p className='text-brand_orange text-[16px] md:text-[24px] font-bold'>Nos partenaires</p>
+              <div className=' my-[20px] flex flex-row md:justify-center space-x-[20px] md:space-x-[40px] overflow-x-scroll md:overflow-hidden'>
+                <img src={partner1} alt="partner1" className="border-[1.5px]  md:ml-[0px] border-gray-300 rounded-[10px] w-[100px] h-[100px] md:w-[200px] md:h-[200px] " />
+                <img src={partner2} alt="partner1" className="border-[1.5px]  border-gray-300 rounded-[10px] w-[100px] h-[100px] md:w-[200px] md:h-[200px]" />
+                <img src={partner3} alt="partner1" className="border-[1.5px]  border-gray-300 rounded-[10px] w-[100px] h-[100px] md:w-[200px] md:h-[200px]" />
+                <img src={partner4} alt="partner1" className="border-[1.5px]  border-gray-300 rounded-[10px] w-[100px] h-[100px] md:w-[200px] md:h-[200px]" />
+              </div>
+            </div>
+          </div>
           {/* footer */}
-          <div className='mt-[20px] w-full  border-red-800'>
+          <div  ref={contact} className='mt-[20px] w-full  border-red-800'>
             <footer className="w-ful">
               <div className=" flex flex-col md:flex-row ">
                 {/* 1 */}
@@ -621,11 +750,11 @@ function Home() {
                       <div>
                         <h2 className=" font-bold text-brand_bleu_inter mb-4">Pages</h2>
                         <ul className="space-y-[24px] text-brand_bleu_inter">
-                          <li><a href="#" className="hover:underline text-[12px] md:text-[16px]">Accueil</a></li>
-                          <li><a href="#" className="hover:underline md:text-[16px]">À propos</a></li>
-                          <li><a href="#" className="hover:underline text-[12px] md:text-[16px]">Tarif</a></li>
-                          <li><a href="#" className="hover:underline md:text-[16px]">Contact</a></li>
-                          <li><a href="#" className="hover:underline text-[12px] md:text-[16px]">Conditions générales</a></li>
+                          <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">Accueil</a></li>
+                          <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">À propos</a></li>
+                          <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">Tarif</a></li>
+                          <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">Contact</a></li>
+                          <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">Conditions générales</a></li>
                         </ul>
                       </div>
 
@@ -635,21 +764,21 @@ function Home() {
                         <ul className="space-y-[24px] text-brand_bleu_inter">
                           <li className="flex items-center gap-2">
                             <div className='w-[40px] md:w-[50px] h-[40px] md:h-[50px] flex items-center justify-center rounded-full bg-white'>
-                            <FaMapMarkerAlt className="text-brand_bleu_inte" />
+                              <FaMapMarkerAlt className="text-brand_bleu_inte" />
                             </div>
-                            <span className='ext-[12px] md:text-[16px]'>25 Rue de Ponthieu<br />75008, Paris<br />France</span>
+                            <span className='ext-[12px] md:text-[16px] text-[14px]'>25 Rue de Ponthieu<br />75008, Paris<br />France</span>
                           </li>
                           <li className="flex items-center gap-2">
-                          <div className='w-[40px] md:w-[50px] h-[40px] md:h-[50px] flex items-center justify-center rounded-full bg-white'>
-                            <FaEnvelope className="text-brand_bleu_inter" />
+                            <div className='w-[40px] md:w-[50px] h-[40px] md:h-[50px] flex items-center justify-center rounded-full bg-white'>
+                              <FaEnvelope className="text-brand_bleu_inter" />
                             </div>
-                            <a href="mailto:contact@acwaba.com" className="hover:underline ext-[12px] md:text-[16px]">contact@acwaba.com</a>
+                            <a href="mailto:contact@acwaba.com" className="hover:underline ext-[12px] md:text-[16px] text-[14px]">contact@acwaba.com</a>
                           </li>
                           <li className="flex items-center gap-2">
-                          <div className='w-[40px] md:w-[50px] h-[40px] md:h-[50px] flex items-center justify-center rounded-full bg-white'>
-                            <FaPhone className="text-brand_bleu_inter ext-[12px] md:text-[16px]" />
+                            <div className='w-[40px] md:w-[50px] h-[40px] md:h-[50px] flex items-center justify-center rounded-full bg-white'>
+                              <FaPhone className="text-brand_bleu_inter ext-[12px] md:text-[16px]" />
                             </div>
-                            <span>
+                            <span className='text-[14px] md:text-[16px]'>
                               +33 6 63 67 31 02<br />
                               +33 6 60 53 04 97
                             </span>
@@ -667,6 +796,22 @@ function Home() {
         <GeneralModal open={openDescriptionModal} onClose={() => setOpenDescriptionModal(false)} >
           <div className='text-center bg-white p-4'>
             {description}
+          </div>
+        </GeneralModal>
+        <GeneralModal open={openFonctionalityModal} onClose={() => setOpenFonctionalityModal(false)}>
+          <div className="bg-white p-4 rounded-sm w-[600px] max-h-[80vh] overflow-y-auto">
+            <ul className="px-[20px] py-4 space-y-3">
+              {data.map((feature, index) => (
+                <li key={index} className="flex items-center text-gray-700">
+                  <Icon
+                    icon="mdi:check-circle-outline"
+                    className="w-5 h-5 text-brand_orange flex-shrink-0"
+                  />
+                  <span className="text-[14px] text-brand_bleu_inter ml-2">{feature}</span>
+                </li>
+              ))}
+            </ul>
+
           </div>
         </GeneralModal>
         <ConnexionModal isSuivant={((val) => setOpenInscriptionModal2(val))} deleteAction={() => console.log("sss")} cancelAction={() => { setOpenConnexionModal(false) }} text='Etes vous sur de bien effacer?' open={openConnexionModal} onClose={() => setOpenConnexionModal(false)} />

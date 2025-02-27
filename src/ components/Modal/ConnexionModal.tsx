@@ -25,7 +25,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ open, isSuivant, onClose, del
     return (
         <div onClick={onClose} className={`fixed inset-0 flex justify-center z-40 items-center transition-colors ${open ? "visible bg-black/20" : "invisible"}`}>
             {isFirstStep ?
-                <div onClick={(e) => e.stopPropagation()} className="flex flex-col  rounded-[16px] bg-white  border-red-800  w-[90%] md:w-[520px] h-[570px] md:h-[600px] rounded-t-[20px] items-center">
+                <div onClick={(e) => e.stopPropagation()} className="flex flex-col  rounded-[16px] bg-white  border-red-800  w-[90%] md:w-[520px] h-[630px] md:h-[600px] rounded-t-[20px] items-center">
                     {/* Header avec le logo et l'indicateur de page */}
                     <div className="relative  flex h-[90px] md:h-[100px] items-center w-full  rounded-t-[16px] justify-center bg-gradient-to-b from-[#011E3E] to-[#0E5588]">
                         <img className="object-fill  w-[180px] h-[55px]" src={logo1} alt="" />
@@ -53,6 +53,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ open, isSuivant, onClose, del
 
                             {/* Mot de passe */}
                             <ConnexionInput isPassword={true} icon={'si:lock-alt-line'} placeholder='Mot de passe' />
+                            <ConnexionInput isPassword={true} icon={'si:lock-alt-line'} placeholder='Confirmez mot de passe' />
 
                             {/* Bouton Continuer */}
 

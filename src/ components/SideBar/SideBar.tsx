@@ -5,6 +5,7 @@ import logo2 from "../../assets/logo2.png";
 interface SideBarProps {
     isSidebarOpen: boolean;
     toggleSideBar?: () => void;
+    getPage?: (page: any) => void;
 }
 const sideBarItems = [
     {
@@ -39,7 +40,7 @@ const sideBarItems = [
 
 
 
-const SideBar: React.FC<SideBarProps> = ({ isSidebarOpen, toggleSideBar }) => {
+const SideBar: React.FC<SideBarProps> = ({ isSidebarOpen, toggleSideBar, getPage }) => {
     const [activeTab, setActiveTab] = useState<string>("");
     useEffect(() => {
         // Set the active tab based on the current URL path
@@ -52,7 +53,7 @@ const SideBar: React.FC<SideBarProps> = ({ isSidebarOpen, toggleSideBar }) => {
 
     return (
         <aside
-            className={` fixed top-0 left-0 z-50 bg-white w-[299px] h-screen  bg-white-300  lg:hidden transition-transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+            className={` fixed top-0 left-0 z-50 bg-white w-full h-screen  bg-white-300  lg:hidden transition-transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
                 }`}
         >
             <div className="h-full   overflow-auto">
@@ -72,10 +73,10 @@ const SideBar: React.FC<SideBarProps> = ({ isSidebarOpen, toggleSideBar }) => {
                     {sideBarItems.map((item, index) => (
                         <a
                             key={index}
-                            href={item.path}
+                            // href={item.path}
                             className={`flex items-center rounded-md pl-2 py-[4px] hover:bg-blue-[20px] mt-2 ${activeTab === item.name ? "bg-white/30 text-black font-semibold" : "text-[#253873] font-semibold"
                                 }`}
-                            onClick={() => setActiveTab(item.name)} // Update the active tab on click
+                            onClick={() => { if (getPage) getPage(item.name); if(toggleSideBar) toggleSideBar()}} // Update the active tab on click
                         >
                             <div className=" w-full border-b border-[#9CA2A9] pb-[5px] flex items-center justify-between">
                                 <span className="ml-[6px] text-[13px]">{item.name}</span>
