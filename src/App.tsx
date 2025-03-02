@@ -11,18 +11,16 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <AuthProvider>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route element={<PrivateRoute  />}>
+            {/* <Route element={<PrivateRoute  />}> */}
               <Route path="/home" element={<Home />} />
               <Route path="/service" element={<Service />} />
               <Route path="/contact" element={<Contact />} />
 
-            </Route>
+            {/* </Route> */}
             {/* Other routes */}
           </Routes>
-        </AuthProvider>
       </Router>
     </div>
   );

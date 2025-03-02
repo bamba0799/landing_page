@@ -9,9 +9,11 @@ type EnterpriseCardProps = {
   color?: "orange" | "blue";
   data: string[]
   seeOver?: () => void;
+  onClick?: () => void;
+
 };
 
-const EnterpriseCard: React.FC<EnterpriseCardProps> = ({ title, description, image, color, data, seeOver }) => {
+const EnterpriseCard: React.FC<EnterpriseCardProps> = ({ title, description, image, color, data, seeOver, onClick }) => {
   return (
     <div className=" w-full h-full  border-red-600 shadow-sm shadow-black/30 rounded-[10px] bg-white flex flex-col justify-between items-center">
       <div className="w-full  border-b-emerald-900">
@@ -43,7 +45,7 @@ const EnterpriseCard: React.FC<EnterpriseCardProps> = ({ title, description, ima
 
       {/* Call to Action */}
       <div className=" pb-[20px]">
-        <SecondButton bgColor="bg-brand_orange" textColor="text-white" text={"Nous contacter"} />
+        <SecondButton onClick={onClick} bgColor="bg-brand_orange" textColor="text-white" text={"Nous contacter"} />
       </div>
     </div>
     // <div className=" w-[438px]  h-[438px]   bg-gradient-to-b from-orange-100 to-white border border-orange-200 rounded-xl shadow-md p-6 flex flex-col ">

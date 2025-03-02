@@ -82,22 +82,22 @@ const Header: React.FC<HeaderProps> = ({ onClickAccueil, onClickTarif, onClickAp
   }, []);
 
   return (
-    <nav className=" border-red-500 fixed top-0 left-0 right-0 z-50 w-[100%] max-w-full bg-white">
+    <nav className=" border-red-500 fixed top-0 left-0 right-0 z-50 w-[100%] max-w-full bg-gradient-to-b from-white to-[#f7f8f8]">
       {/* <h2>Header</h2> */}
       <div className="px-3 py-3 lg:px-5 lg:pl-3 ">
         <div className="flex flex-row items-center justify-between">
           <div className=" flex flex-row items-center ">
-            <img className=" absolute w-[100px] h-[100px] " src={logoNoir} alt=""  />
+            <img className=" absolute w-[140px] h-[140px] " src={logoNoir} alt=""  />
           </div>
 
           <div className="hidden lg:flex flex-row space-x-[50px]">
-            <p onClick={onClickAccueil} className="text-brand_bleu_fonce_500 font-semibold text-[14px]">Accueil</p>
-            <p onClick={onClickApropos} className="text-brand_bleu_fonce_500 font-semibold text-[14px]">A propos </p>
-            <p onClick={onClickTarif} className="text-brand_bleu_fonce_500 font-semibold text-[14px]">Tarif</p>
-            <p onClick={onClickContact} className="text-brand_bleu_fonce_500 font-semibold text-[14px]">Contact</p>
-            <p onClick={() => navigate("/service")} className="text-brand_bleu_fonce_500 font-semibold text-[14px]">Services</p>
+            <p onClick={onClickAccueil} className="text-brand_bleu_fonce_500 font-semibold text-[16px]">Accueil</p>
+            <p onClick={onClickApropos} className="text-brand_bleu_fonce_500 font-semibold text-[16px]">A propos </p>
+            <p onClick={onClickTarif} className="text-brand_bleu_fonce_500 font-semibold text-[16px]">Tarif</p>
+            <p onClick={onClickContact} className="text-brand_bleu_fonce_500 font-semibold text-[16px]">Contact</p>
+            <p onClick={() => navigate("/service")} className="text-brand_bleu_fonce_500 font-semibold text-[16px]">Services</p>
           </div>
-          <div className="md:hidden bg-blue-900 rounded-full flex flex-row items-center  ">
+          <div className="md:hidden bg-brand_bleu_fonce_500 rounded-full flex flex-row items-center  ">
             <button onClick={toggleSideBar} className=" inline-flex items-center p-2 text-sm text-gray-500 rounded-lg ">
               <Icon icon="vaadin:menu" className="w-4 h-4 text-white/80" />
             </button>

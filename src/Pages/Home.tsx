@@ -17,6 +17,7 @@ import partner4 from "../assets/Logos/logos-partner-04.png";
 
 
 
+import Logo_acwaba_blanc from "../assets/Logos/Logo_acwaba-blanc.svg";
 import logo1 from "../assets/logo1.png";
 import grapheImage1 from "../assets/grapheImage1.png";
 import tfeImage from "../assets/cible/tfeImage.png";
@@ -42,8 +43,29 @@ import ConnexionModal from '../ components/Modal/ConnexionModal';
 import ConnexionModal2 from '../ components/Modal/ConnexionModal2';
 import FeatureCardMobile from '../ components/FeatureCardMobile';
 import GeneralModal from '../ components/Modal/GeneralModal';
+import { set } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 768); // Mobile si < 768px (taille md dans Tailwind)
+    };
+
+    checkScreenSize(); // Vérification initiale
+    window.addEventListener('resize', checkScreenSize);
+
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
+  return isMobile;
+};
 
 function Home() {
+  const navigate = useNavigate();
+  const isMobile = useIsMobile();
   const [tarifButtonId, setTarifButtonId] = useState(0);
   const [openConnexionModal, setOpenConnexionModal] = useState<boolean>(false);
   const [openInscriptionModal2, setOpenInscriptionModal2] = useState<boolean>(false);
@@ -59,12 +81,28 @@ function Home() {
   const aproposRef = useRef<HTMLDivElement>(null);
   const tarifRef = useRef<HTMLDivElement>(null);
   const contact = useRef<HTMLDivElement>(null);
+  const partnerScrollRef = useRef<HTMLDivElement>(null);
+
 
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleQuestion = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -300, behavior: "smooth" }); // Défiler vers la gauche
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 300, behavior: "smooth" }); // Défiler vers la droite
+    }
+  };
+
 
   const questions = [
     { question: "Comment puis-je renouveler mon abonnement ?", answer: "Vous pouvez renouveler votre abonnement via la section Mon Compte." },
@@ -261,6 +299,10 @@ function Home() {
 
   ];
 
+  const handleTarifButton = (id: number) => {
+    setTarifButtonId(id);
+  }
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -281,29 +323,45 @@ function Home() {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+  useEffect(() => {
+    const scrollInterval = setInterval(() => {
+      if (partnerScrollRef.current) {
+        const scrollContainer = partnerScrollRef.current;
+
+        // Vérifie si on est à la fin du scroll
+        if (scrollContainer.scrollLeft + scrollContainer.clientWidth >= scrollContainer.scrollWidth) {
+          scrollContainer.scrollTo({ left: 0, behavior: 'smooth' }); // Revient au début
+        } else {
+          scrollContainer.scrollBy({ left: 20, behavior: 'smooth' }); // Scroll vers la droite
+        }
+      }
+    }, 1000); // Défilement toutes les 3 secondes
+
+    return () => clearInterval(scrollInterval); // Nettoyage du setInterval au démontage du composant
+  }, []);
 
 
   return (
     <div className="bg-white min-h-screen z-[100px]">
-      <Main getPage={(page)=>{
-        console.log("eeeee",page)
-        if(page==="Accueil"){
+      <Main getPage={(page) => {
+        console.log("eeeee", page)
+        if (page === "Accueil") {
           scrollToSection(accueilRef)
         }
-        if(page==="A propos"){
+        if (page === "A propos") {
           scrollToSection(aproposRef)
         }
-        if(page==="Tarif"){
+        if (page === "Tarif") {
           scrollToSection(tarifRef)
         }
-        if(page==="Contact"){
+        if (page === "Contact") {
           scrollToSection(contact)
         }
-        if(page==="Ouvrir un compte"){
+        if (page === "Ouvrir un compte") {
           setOpenConnexionModal(true)
         }
 
-        }} onClickContact={()=> scrollToSection(contact)} onClickAccueil={() => scrollToSection(accueilRef)} onClickApropos={() => scrollToSection(aproposRef)} onClickTarif={() => scrollToSection(tarifRef)}>
+      }} onClickContact={() => scrollToSection(contact)} onClickAccueil={() => scrollToSection(accueilRef)} onClickApropos={() => scrollToSection(aproposRef)} onClickTarif={() => scrollToSection(tarifRef)}>
         <div className="mt-[30px]  flex flex-col justify-between items-center">
           {/* Section principale */}
           <section ref={accueilRef} className=" w-full relative bg-gradient-to-b from-[#011E3E] to-[#0E5588] text-white ">
@@ -326,9 +384,13 @@ function Home() {
                   tout en focus sur votre activité
                 </p>
                 {/* Boutons */}
-                <div className="w-full flex flex-col lg:flex-row  lg:items-center space-y-4 lg:space-y-0 lg:space-x-3">
-                  <SecondButton onClick={() => setOpenConnexionModal(true)} shadow=' shadow-custom' text={"Ouvrir un compte"} />
-                  <SecondButton bgColor='bg-neutral_blanc' textColor='text-brand_bleu_inter' text={"Tester gratuitement"} />
+                <div className="w-full flex flex-col  md:flex-row  items-center space-y-4 md:space-y-0 md:space-x-3">
+                  <div className={`  ${isMobile ? "w-[80%]" : ""}  flex flex-col items-center`}>
+                    <SecondButton isWithFull={isMobile} onClick={() => setOpenConnexionModal(true)} shadow=' shadow-custom' text={"Ouvrir un compte"} />
+                  </div>
+                  <div className={` ${isMobile ? "w-[80%]" : ""}   flex flex-col items-center`}>
+                    <SecondButton isWithFull={isMobile} bgColor='bg-neutral_blanc' textColor='text-brand_bleu_inter' text={"Tester gratuitement"} />
+                  </div>
                 </div>
                 {/* Flèche vers le bas */}
 
@@ -376,8 +438,8 @@ function Home() {
           {/* first */}
           <div className=' z-10 md:mt-[30px] w-full px-[20px] md:px-[50px]  border-red-600'>
             <div className=' w-full flex flex-col text-center justify-center'>
-              <p className='text-brand_orange text-[16px] md:text-[24px] font-[600px]'>Nos Fonctionnalités exceptionnelles</p>
-              <p className='font-extrabold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-poppins'>Suivez la rentabilité de votre activité en temps réels</p>
+              <p className='text-brand_orange text-[16px] md:text-[32px] font-bold'>Nos Fonctionnalités exceptionnelles</p>
+              <p className='font-extrabold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] '>Suivez la rentabilité de votre activité en temps réels</p>
             </div>
           </div>
           {/* feature md */}
@@ -433,8 +495,8 @@ function Home() {
 
               <div className='mt-[20px] z-10 md:mt-[100px]  w-full px-[20px] md:hidden  border-red-600'>
                 <div className=' w-full flex flex-col text-center justify-center'>
-                  <p className= ' font-bold text-brand_orange text-[16px] md:text-[24px] font-poppins'>Notre espace analytique dynamique</p>
-                  <p className='font-extrabold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-poppins'>Suivez la rentabilité de votre activité en temps réels</p>
+                  <p className='  text-brand_orange text-[16px] md:text-[24px] font-bold'>Notre espace analytique dynamique</p>
+                  <p className=' text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-extrabold'>Suivez la rentabilité de votre activité en temps réels</p>
                 </div>
               </div>
               <div className=' border-red-600 flex flex-col md:flex-row mt-[20px] md:mt-[0px] items-center justify-center md:space-x-[30px]'>
@@ -453,8 +515,8 @@ function Home() {
                 </div>
                 <div className='mt-[20px] z-10  w-full px-[20px] hidden md:flex  border-red-600 md:w-[35%] '>
                   <div className=' w-full flex flex-col text-starts justify-center'>
-                    <p className='text-brand_orange text-[16px] md:text-[24px] font-poppins'>Notre espace analytique dynamique</p>
-                    <p className='font-bold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-poppins'>Suivez la rentabilité de votre activité en temps réels</p>
+                    <p className='text-brand_orange text-[16px] md:text-[24px] font-bold'>Notre espace analytique dynamique</p>
+                    <p className=' text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-extrabold'>Suivez la rentabilité de votre activité en temps réels</p>
                   </div>
                 </div>
 
@@ -498,7 +560,7 @@ function Home() {
             {/* button */}
             <div className='mt-[20px] z-10  w-full px-[20px]   border-red-600 flex flex-row justify-center'>
               <div className=' w-full md:w-[800px] flex flex-col text-center justify-center'>
-                <p className='text-brand_orange text-[16px] md:text-[24px] font-bold'>Nos tarifs</p>
+                <p className='text-brand_orange text-[16px] md:text-[32px] font-bold'>Nos tarifs</p>
                 <p className='font-bold text-brand_bleu_fonce_500 mt-[7px] text-[20px] md:text-[32px] font-poppins'>Choisissez l’offre qui vous correspond</p>
                 <p className='font-extrabold text-[12px] md:text-[14px] text-neutral_gris'>Comparer les fonctionnalités et sélectionner la meilleure offre pour votre business.
                   Acwaba propose plusieurs offres qui s’adaptent à tout type de d’entreprise.</p>
@@ -508,7 +570,7 @@ function Home() {
               {tarifButtonData.map((_item, index) => (
                 <button
                   key={index}
-                  onClick={() => setTarifButtonId(index)}
+                  onClick={() => handleTarifButton(_item.id)}
                   className={`w-[50%] text-[14px] md:text-[16px] text-brand_bleu_inter h-full rounded-full ${index === tarifButtonId ? "bg-brand_orange text-white" : "bg-transparent"
                     }`}
                 >
@@ -518,26 +580,31 @@ function Home() {
             </div>
             {/* Conteneur scrollable */}
             <div className="mt-[20px] pb-[10px]  border-blue-700 w-full  px-[20px] pt-10  z-10 overflow-x-scroll md:overflow-hidden flex space-x-5 md:justify-center scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-200">
-              <div className={`flex-shrink-0 w-[90%]  md:w-[438px] h-[438px]`}>
+              <div className={`flex-shrink-0 w-[90%]  md:w-[438px] h-[450px]`}>
                 <PricingCard
+                  onClick={() => setOpenConnexionModal(true)}
                   seeOver={() => { setOpenFonctionalityModal(true), setData(smartData2) }}
                   title='Smart'
-                  price={16}
+                  price={tarifButtonId == 0 ? 16 : 176}
+                  step={tarifButtonId == 0 ? "mois" : "année"}
                   description='Adapté aux auto-entrepreneurs & TPE'
                   data={smartData1}
                 />
               </div>
-              <div className={`flex-shrink-0 w-[90%]  md:w-[438px] h-[438px]`}>
+              <div className={`flex-shrink-0 w-[90%]  md:w-[438px] h-[450px]`}>
                 <PricingCard
+                  onClick={() => setOpenConnexionModal(true)}
                   seeOver={() => { setOpenFonctionalityModal(true), setData(premiumData2) }}
                   title='Premium'
-                  price={29}
+                  price={tarifButtonId == 0 ? 25 : 275}
+                  step={tarifButtonId == 0 ? "mois" : "année"}
                   description='Adapté aux auto-entrepreneurs & TPE'
                   data={premiumData1}
                 />
               </div>
-              <div className={`flex-shrink-0 w-[90%]  md:w-[438px] h-[438px]`}>
+              <div className={`flex-shrink-0 w-[90%]  md:w-[438px] h-[450px]`}>
                 <EnterpriseCard
+                  onClick={() => navigate("/contact")}
                   seeOver={() => { setOpenFonctionalityModal(true), setData(entrepriseData2) }}
                   data={entrepriseData1}
                   title='premium'
@@ -561,35 +628,53 @@ function Home() {
             </div>
           </div>
           {/* fifth */}
-          <div className="bg-white w-full ">
-            <div className='mt-[20px] z-10 md:mt-[10px] w-full md:w-[800px]  px-[20px] md:ml-[60px]  border-red-600'>
-              <div className=' w-full flex flex-col text-center md:text-start  justify-center'>
+          <div className="bg-white w-full  border-blue-600 overflow-hidden">
+            <div className=' border flex flex-col md:flex-row mt-[20px] z-10 md:mt-[10px] w-full   px-[20px] md:ml-[60px]  border-red-600'>
+              <div className='border w-full md:w-[50%]  flex flex-col text-center md:text-start  justify-center'>
                 <p className='text-brand_orange text-[16px] md:text-[24px] font-bold'>Nos clients</p>
                 <p className='font-extrabold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-poppins'>Observez ce que disent <br /> ceux qui ont testé Acwaba</p>
+              </div>
+              <div className='w-full md:w-[50%]  border border-black  md:flex  overflow-hidden md:mb-[30px]'>
+                <div ref={partnerScrollRef} className='  border-gray-900 md:mx-[130px] scroll-smooth my-[20px] flex flex-row md:justify-center space-x-[20px] md:space-x-[40px] overflow-x-scroll md:overflow-hidden'>
+                {/* <div className='w-[100px]'></div> */}
+                  <img src={partner1} alt="partner1" className="border-[1.5px]  md:ml-[0px] border-gray-300 rounded-[10px] w-[100px] h-[100px] " />
+                  <img src={partner2} alt="partner1" className="border-[1.5px]  border-gray-300 rounded-[10px] w-[100px] h-[100px]"/>
+                  <img src={partner3} alt="partner1" className="border-[1.5px]  border-gray-300 rounded-[10px] w-[100px] h-[100px]"/>
+                  <img src={partner4} alt="partner1" className="border-[1.5px]  border-gray-300 rounded-[10px] w-[100px] h-[100px]"/>
+                  
+
+                  <img src={partner1} alt="partner1" className="border-[1.5px]  md:ml-[0px] border-gray-300 rounded-[10px] w-[100px] h-[100px] " />
+                  <img src={partner2} alt="partner1" className="border-[1.5px]  border-gray-300 rounded-[10px] w-[100px] h-[100px]"/>
+                  <img src={partner3} alt="partner1" className="border-[1.5px]  border-gray-300 rounded-[10px] w-[100px] h-[100px]"/>
+                  <img src={partner4} alt="partner1" className="border-[1.5px]  border-gray-300 rounded-[10px] w-[100px] h-[100px]"/>
+                  <div className='w-[30px]'></div>
+
+               
+                </div>
               </div>
             </div>
             <div className=' hidden md:flex relative w-full '>
               <div className=" absolute -top-10 right-0 flex items-start justify-start px-[20px] pt-[20px] w-[800px] h-[368px] bg-surface_orange rounded-md">
-                <button className="w-[60px] h-[60px] flex items-center justify-center rounded-full  border-orange-400 bg-white text-orange-500 hover:bg-brand_orange hover:text-white">
+                <button onClick={scrollLeft} className="w-[60px] h-[60px] flex items-center justify-center rounded-full  border-orange-400 bg-white text-orange-500 hover:bg-brand_orange hover:text-white">
                   <Icon icon="heroicons:arrow-left-16-solid" className="w-5 h-5" />
                 </button>
-                <button className="w-[60px] h-[60px]  ml-[20px] flex items-center justify-center rounded-full  border-orange-400 bg-white text-orange-500 hover:bg-brand_orange hover:text-white">
-                  <Icon icon="heroicons:arrow-right-16-solid" className="  w-5 h-5" />
+                <button onClick={scrollRight} className="w-[60px] h-[60px]  ml-[20px] flex items-center justify-center rounded-full  border-orange-400 bg-white text-orange-500 hover:bg-brand_orange hover:text-white">
+                  <Icon icon="heroicons:arrow-right-16-solid" className="w-5 h-5" />
                 </button>
               </div>
             </div>
 
             {/* Testimonials Section */}
             <div className="relative  mx-auto z-20">
-              <div className=" border-red-700 pb-[20px] flex space-x-6 overflow-x-auto scrollbar-hide mt-[30px] md:mt-[50px]">
+              <div ref={scrollRef} className=" border-red-700 pb-[20px] flex space-x-6 overflow-x-auto scrollbar-hide mt-[30px] md:mt-[50px]">
                 {testimonials.map((testimonial: any, index: number, self: any[]) => (
                   <div
                     key={testimonial.id}
-                    className={`bg-white rounded-[16px] ${index == 0 ? "ml-[20px] md:ml-[60px]" : ""} ${index + 1 == self.length ? "mr-[20px]" : ""} shadow-lg shadow-black/30 p-6 flex-shrink-0 w-[85%] md:w-[423px] h-[314px] flex flex-col justify-between  border-red-700 pb-[40px]`}
+                    className={`bg-white rounded-[16px] ${index == 0 ? "ml-[20px] md:ml-[60px]" : ""}  ${(index + 1) == self.length ? "mr-[20px] md:mr-[60px]" : ""} shadow-md shadow-black/30 p-6 flex-shrink-0 w-[85%] md:w-[423px] h-[314px] flex flex-col justify-between  border-red-700 pb-[40px]`}
                   >
                     <p className=" text-neutral_gris text-[14px] mb-4">{testimonial.text}</p>
                     <div className="flex items-center space-x-3">
-                      <div className=" w-[70px] md:w-[95px]  h-[70px] md:h-[95px] bg-gray-200 rounded-full"></div>
+                      <div className=" w-[60px] md:w-[95px]  h-[60px] md:h-[95px] bg-gray-200 rounded-full"></div>
                       <div>
                         <p className="font-bold text-brand_bleu_inter text-[14px]">
                           {testimonial.name}
@@ -599,8 +684,8 @@ function Home() {
                     </div>
                   </div>
                 ))}
+                <div className='w-[20px] md:w-[60px]'></div>
               </div>
-
             </div>
           </div>
           {/* Sixth */}
@@ -686,30 +771,19 @@ function Home() {
             </div>
 
           </div>
-          {/* first partener */}
-          <div className=' z-10 md:mt-[100px] w-full px-[20px] md:px-[50px]  border-red-600'>
-            <div className=' w-full flex flex-col text-center justify-center'>
-              <p className='text-brand_orange text-[16px] md:text-[24px] font-bold'>Nos partenaires</p>
-              <div className=' my-[20px] flex flex-row md:justify-center space-x-[20px] md:space-x-[40px] overflow-x-scroll md:overflow-hidden'>
-                <img src={partner1} alt="partner1" className="border-[1.5px]  md:ml-[0px] border-gray-300 rounded-[10px] w-[100px] h-[100px] md:w-[200px] md:h-[200px] " />
-                <img src={partner2} alt="partner1" className="border-[1.5px]  border-gray-300 rounded-[10px] w-[100px] h-[100px] md:w-[200px] md:h-[200px]" />
-                <img src={partner3} alt="partner1" className="border-[1.5px]  border-gray-300 rounded-[10px] w-[100px] h-[100px] md:w-[200px] md:h-[200px]" />
-                <img src={partner4} alt="partner1" className="border-[1.5px]  border-gray-300 rounded-[10px] w-[100px] h-[100px] md:w-[200px] md:h-[200px]" />
-              </div>
-            </div>
-          </div>
+
           {/* footer */}
-          <div  ref={contact} className='mt-[20px] w-full  border-red-800'>
+          <div ref={contact} className='mt-[20px] w-full  border-red-800'>
             <footer className="w-ful">
-              <div className=" flex flex-col md:flex-row ">
+              <div className="relative flex flex-col md:flex-row ">
                 {/* 1 */}
                 <div className="bg-gradient-to-r  from-[#011E3E] to-[#0E5588] text-white p-8 w-full md:w-[45%]">
-                  <div className="flex flex-col justify-between space-y-[10px] items-start">
+                  <div className="  border-red-700  flex flex-col justify-between space-y-[10px] items-start">
                     {/* Logo */}
-                    <img src={logo1} alt="Acwaba" className="h-12 " />
+                    <img src={Logo_acwaba_blanc} alt="Acwaba" className=" absolute left-6  top-0 w-[120px] h-[120px]  " />
 
                     {/* Subscription Form */}
-                    <div className="flex md:justify-start md:space-x-5 w-full">
+                    <div className="flex md:justify-start md:space-x-5 w-full pt-[50px]">
                       <input
                         type="email"
                         placeholder="Email"

@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Pour Firefox */
+* {
+  scrollbar-width: none;
+}
+
+/* Pour éviter l'interaction avec le scroll */
+.overflow-hidden::-webkit-scrollbar {
+  display: none;
+}
+
 
 
 

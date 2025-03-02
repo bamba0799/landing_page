@@ -15,7 +15,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ image, title, description }) 
         </div>
         <div className="z-10 relative flex flex-col items-center">
           <h3 className="text-[13px] md:text-[20px] font-semibold text-brand_bleu_inter mb-[4px] md:mb-2">{title}</h3>
-          <p className="text-[14px] text-center text-brand_bleu_inter">{description}</p>
+          <p className="text-[16px] text-center text-brand_bleu_inter">{description}</p>
         </div>
       </div>
       <div className="absolute -bottom-[30px] -left-[40px] w-[150px] h-[150px] rounded-full bg-gray-100/70 z-0 flex flex-row justify-center items-center">
