@@ -6,7 +6,7 @@ interface ServiceCardProps {
 
 import burea from '../assets/bureaucrate.jpeg';
 
-const ServiceCard: React.FC<ServiceCardProps> = ({ imageSrc, title, categories }) => {
+const ServiceCard: React.FC<ServiceCardProps> = ({ title, categories }) => {
 
     return (
         <div className="bg-white rounded-lg shadow-md overflow-hidden w-80">

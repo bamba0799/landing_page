@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import logo2 from "../../assets/logo2.png";
 
 interface SideBarProps {
@@ -10,29 +10,27 @@ interface SideBarProps {
 const sideBarItems = [
     {
         name: "Accueil",
-        path: "/home",
     },
     {
 
         name: "A propos",
-        path: "/comite-organisation",
+ 
     },
     {
         name: "Tarif",
-        path: "/seminariste",
     },
     {
         name: "Contact",
-        path: "/dortoir",
+    },
+    {
+        name: "Services",
     },
     {
         name: "Connexion",
-        path: "/visiteur",
     },
 
     {
         name: "Ouvrir un compte",
-        path: "/permissions",
     },
 ];
 
@@ -41,15 +39,6 @@ const sideBarItems = [
 
 
 const SideBar: React.FC<SideBarProps> = ({ isSidebarOpen, toggleSideBar, getPage }) => {
-    const [activeTab, setActiveTab] = useState<string>("");
-    useEffect(() => {
-        // Set the active tab based on the current URL path
-        const currentPath = window.location.pathname;
-        const activeItem = sideBarItems.find(item => item.path === currentPath)
-        if (activeItem) {
-            setActiveTab(activeItem.name);
-        }
-    }, []);
 
     return (
         <aside
@@ -74,7 +63,7 @@ const SideBar: React.FC<SideBarProps> = ({ isSidebarOpen, toggleSideBar, getPage
                         <a
                             key={index}
                             // href={item.path}
-                            className={`flex items-center rounded-md pl-2 py-[4px] hover:bg-blue-[20px] mt-2 ${activeTab === item.name ? "bg-white/30 text-black font-semibold" : "text-[#253873] font-semibold"
+                            className={`flex items-center rounded-md pl-2 py-[4px] hover:bg-blue-[20px] mt-2 ${"text-[#253873] font-semibold"
                                 }`}
                             onClick={() => { if (getPage) getPage(item.name); if(toggleSideBar) toggleSideBar()}} // Update the active tab on click
                         >

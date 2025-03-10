@@ -29,6 +29,8 @@ const Header: React.FC<HeaderProps> = ({ onClickAccueil, onClickTarif, onClickAp
   console.log("openInscriptionModal2", openInscriptionModal2);
 
   const [activeTab, setActiveTab] = useState<string>("");
+  console.log("activeTab", activeTab);
+  
   const HeaderIcon: HeaderIconType[] = [
     {
       icon: "material-symbols:empty-dashboard-sharp",

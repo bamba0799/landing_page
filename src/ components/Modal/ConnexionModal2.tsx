@@ -1,4 +1,3 @@
-import { Icon } from '@iconify/react/dist/iconify.js';
 import React from 'react';
 import { FaBuilding, FaUser } from "react-icons/fa";
 
@@ -13,14 +12,14 @@ type DeleteModalProps = {
 
 }
 
-const DeleteModal: React.FC<DeleteModalProps> = ({ open, isSuivant, onClose, deleteAction, cancelAction, text }) => {
+const DeleteModal: React.FC<DeleteModalProps> = ({ open, onClose}) => {
 
-    const handleContinue = () => {
-        if (isSuivant) {
-            isSuivant(true);
-        }
-        onClose();
-    };
+    // const handleContinue = () => {
+    //     if (isSuivant) {
+    //         isSuivant(true);
+    //     }
+    //     onClose();
+    // };
 
 
 

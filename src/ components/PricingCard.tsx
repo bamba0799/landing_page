@@ -35,8 +35,8 @@ const PricingCard: React.FC<PricingCardProps> = ({ title, description, price, da
                             <p className="text-brand_bleu_inter text-[14px]">{description}</p>
                         </div>
                         <div className=' w-[30%]'>
-                            <span className=" text-[16px] md:text-[20px] font-bold text-brand_orange">€{price}</span>
-                            <span className=" text-[16px] md:text-[20px] text-brand_orange"> / {step}</span>
+                            <span className=" text-[14px] md:text-[16px] font-bold text-brand_orange">€{price}</span>
+                            <span className=" text-[14px] md:text-[16px] text-brand_orange"> / {step}</span>
                         </div>
                     </div>
                 </div>

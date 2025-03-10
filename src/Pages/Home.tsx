@@ -18,7 +18,6 @@ import partner4 from "../assets/Logos/logos-partner-04.png";
 
 
 import Logo_acwaba_blanc from "../assets/Logos/Logo_acwaba-blanc.svg";
-import logo1 from "../assets/logo1.png";
 import grapheImage1 from "../assets/grapheImage1.png";
 import tfeImage from "../assets/cible/tfeImage.png";
 import pmeImage from "../assets/cible/pmeImage.png";
@@ -43,8 +42,7 @@ import ConnexionModal from '../ components/Modal/ConnexionModal';
 import ConnexionModal2 from '../ components/Modal/ConnexionModal2';
 import FeatureCardMobile from '../ components/FeatureCardMobile';
 import GeneralModal from '../ components/Modal/GeneralModal';
-import { set } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -73,8 +71,61 @@ function Home() {
   const [openFonctionalityModal, setOpenFonctionalityModal] = useState<boolean>(false);
   const [data, setData] = useState<string[]>([]);
   const [description, setDescription] = useState<string>("");
+  const [title, setTitle] = useState<string>("");
+  const [titleFonctionality, setTitleFonctionality] = useState<string>("");
   const [bgSize, setBgSize] = useState("120%");
   const [tarifBgSize, setTarifBgSize] = useState("120%");
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const [question, setQuestion] = useState(
+    [
+      { question: "Comment puis-je renouveler mon abonnement ?", answer: "Vous pouvez renouveler votre abonnement via la section Mon Compte." },
+      { question: "Ma connexion et mes données sont-elles sécurisées ?", answer: "Oui, nous utilisons des protocoles de sécurité avancés pour protéger vos données." },
+      { question: "Puis-je me désabonner à tout moment ?", answer: "Oui, vous pouvez résilier votre abonnement à tout moment dans les paramètres." },
+      { question: "Puis-je récupérer les informations saisies ?", answer: "Oui, vous pouvez télécharger vos données depuis votre espace utilisateur." },
+    ]
+  );
+
+  const handleQuestion = (index: number) => {
+    setSelectedIndex(index);
+    if (index == 0) {
+
+      setQuestion([
+        { question: "Comment puis-je renouveler mon abonnement ?", answer: "Vous pouvez renouveler votre abonnement via la section Mon Compte." },
+        { question: "Ma connexion et mes données sont-elles sécurisées ?", answer: "Oui, nous utilisons des protocoles de sécurité avancés pour protéger vos données." },
+        { question: "Puis-je me désabonner à tout moment ?", answer: "Oui, vous pouvez résilier votre abonnement à tout moment dans les paramètres." },
+        { question: "Puis-je récupérer les informations saisies ?", answer: "Oui, vous pouvez télécharger vos données depuis votre espace utilisateur." },
+      ])
+    }
+    else {
+      setQuestion([
+        {
+          question: "Quelles sont les étapes pour renouveler mon abonnement ?",
+          answer: "Vous pouvez renouveler votre abonnement via la section Mon Compte."
+        },
+        {
+          question: "Où puis-je procéder au renouvellement de mon abonnement ?",
+          answer: "Le renouvellement est accessible dans la section Mon Compte de votre espace utilisateur."
+        },
+        {
+          question: "Comment effectuer le renouvellement de mon abonnement ?",
+          answer: "Rendez-vous dans la section Mon Compte pour renouveler votre abonnement."
+        },
+        {
+          question: "Mes informations et ma connexion sont-elles protégées ?",
+          answer: "Oui, nous utilisons des protocoles de sécurité avancés pour protéger vos données."
+        },
+      ])
+    }
+  }
+
+
+
+  const location = useLocation();
+  const currentPage = location.pathname;
+  console.log("currentPage", currentPage);
+
 
 
   const accueilRef = useRef<HTMLDivElement>(null);
@@ -82,6 +133,9 @@ function Home() {
   const tarifRef = useRef<HTMLDivElement>(null);
   const contact = useRef<HTMLDivElement>(null);
   const partnerScrollRef = useRef<HTMLDivElement>(null);
+
+  const premiumCardRef = useRef<HTMLDivElement>(null);
+
 
 
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -104,12 +158,6 @@ function Home() {
   };
 
 
-  const questions = [
-    { question: "Comment puis-je renouveler mon abonnement ?", answer: "Vous pouvez renouveler votre abonnement via la section Mon Compte." },
-    { question: "Ma connexion et mes données sont-elles sécurisées ?", answer: "Oui, nous utilisons des protocoles de sécurité avancés pour protéger vos données." },
-    { question: "Puis-je me désabonner à tout moment ?", answer: "Oui, vous pouvez résilier votre abonnement à tout moment dans les paramètres." },
-    { question: "Puis-je récupérer les informations saisies ?", answer: "Oui, vous pouvez télécharger vos données depuis votre espace utilisateur." },
-  ];
 
   const smartData1 = [
     "1 utilisateurs inclus",
@@ -145,80 +193,103 @@ function Home() {
   ]
 
   const premiumData1 = [
+    "Tous les avantages de  Smart",
     "2 utilisateurs inclus",
     "5 Utilisateurs max par formule",
-    "Utilisateurs suppl - (+5€/mois HT)",
-    "Droits et permissions",
-    "Rapprochement bancaire",
-    "Synchronisation bancaire",
+    "2 Banques incluses",
+    " Formule de scénario avancées",
+    "3 sous-catégories",
+
+    // "2 utilisateurs inclus",
+    // "5 Utilisateurs max par formule",
+    // "Utilisateurs suppl - (+5€/mois HT)",
+    // "Droits et permissions",
+    // "Rapprochement bancaire",
+    // "Synchronisation bancaire",
   ]
 
   const premiumData2 = [
-    "2 Banques incluses",
-    "2 Banques supplémentaires (+7€/mois)",
-    "Catégorisation automatisée des transactions",
-    "3 sous-catégories",
     "Option Multi-filiale + Consolidation",
-    "Planification budgétaire",
     "Analyse réel vs prévisionnelle",
-    "Estimation automatisée de la TVA",
-    "Formule de scénario avancées",
+    "2 Banques supplémentaires (+7€/mois)",
     "4 Scénario inclus par année fiscale",
-    "Vue tabulaire et graphique du tableau de bord des transactions",
-    "Graphiques par catégories",
-    "Bases de données fournisseurs & clients (intégration INSEE)",
-    "Gestion des dépenses et des recettes",
     "Validations des opérations (double sécurité) en option",
-    "Journal des transactions",
-    "Gestion des produits /articles",
-    "Bases de données articles et produits",
-    "Interface de suivi des factures",
-    "Devis et factures",
     "Paiement de factures fournisseur",
-    "Import/Export de justificatifs comptables",
-    "Import/Export Excel des transactions",
     "Intégration de fonctionnalités personnalisées - (sur devis)",
-    "Centre d’aide et tutoriels vidéos",
-    "Support par mail et tchat",
-    "Support prioritaire",
+    "Support prioritaire"
+
+    // "2 Banques incluses",
+    // "2 Banques supplémentaires (+7€/mois)",
+    // "Catégorisation automatisée des transactions",
+    // "3 sous-catégories",
+    // "Option Multi-filiale + Consolidation",
+    // "Planification budgétaire",
+    // "Analyse réel vs prévisionnelle",
+    // "Estimation automatisée de la TVA",
+    // "Formule de scénario avancées",
+    // "4 Scénario inclus par année fiscale",
+    // "Vue tabulaire et graphique du tableau de bord des transactions",
+    // "Graphiques par catégories",
+    // "Bases de données fournisseurs & clients (intégration INSEE)",
+    // "Gestion des dépenses et des recettes",
+    // "Validations des opérations (double sécurité) en option",
+    // "Journal des transactions",
+    // "Gestion des produits /articles",
+    // "Bases de données articles et produits",
+    // "Interface de suivi des factures",
+    // "Devis et factures",
+    // "Paiement de factures fournisseur",
+    // "Import/Export de justificatifs comptables",
+    // "Import/Export Excel des transactions",
+    // "Intégration de fonctionnalités personnalisées - (sur devis)",
+    // "Centre d’aide et tutoriels vidéos",
+    // "Support par mail et tchat",
+    // "Support prioritaire",
   ]
 
   const entrepriseData1 = [
-    "2 utilisateurs inclus",
+    "Tous les avantages de Smart et Premium",
     "Utilisateurs max par formule - (illimité)",
-    "Utilisateurs suppl - (+5€/mois HT)",
-    "Droits et permissions",
-    "Rapprochement bancaire",
-    "Synchronisation bancaire",
+    "2 Banques supplémentaires (+7€/mois) - (inclus)",
+    "Scénario inclus par année fiscale - (illimité)"
+
+
+    // "2 utilisateurs inclus",
+    // "Utilisateurs max par formule - (illimité)",
+    // "Utilisateurs suppl - (+5€/mois HT)",
+    // "Droits et permissions",
+    // "Rapprochement bancaire",
+    // "Synchronisation bancaire",
   ]
   const entrepriseData2 = [
-    "2 Banques incluses",
-    "2 Banques supplémentaires (+7€/mois) - (inclus)",
-    "Catégorisation automatisée des transactions",
     "sous-catégories - (illimité)",
-    "Option Multi-filiale + Consolidation",
-    "Planification budgétaire",
-    "Analyse réel vs prévisionnelle",
-    "Estimation automatisée de la TVA",
-    "Formule de scénario avancées",
-    "Scénario inclus par année fiscale - (illimité)",
-    "Vue tabulaire et graphique du tableau de bord des transactions",
-    "Graphiques par catégories",
-    "Bases de données fournisseurs & clients (intégration INSEE)",
-    "Gestion des dépenses et des recettes",
-    "Validations des opérations (double sécurité) en option",
-    "Journal des transactions",
-    "Gestion des produits /articles",
-    "Bases de données articles et produits",
-    "Interface de suivi des factures",
-    "Devis et factures",
-    "Paiement de factures fournisseur",
-    "Import/Export de justificatifs comptables",
-    "Import/Export Excel des transactions",
-    "Intégration de fonctionnalités personnalisées - (sur devis)",
-    "Centre d’aide et tutoriels vidéos",
-    "Support par mail et tchat",
-    "Support prioritaire",
+    // "2 Banques incluses",
+    // "2 Banques supplémentaires (+7€/mois) - (inclus)",
+    // "Catégorisation automatisée des transactions",
+    // "sous-catégories - (illimité)",
+    // "Option Multi-filiale + Consolidation",
+    // "Planification budgétaire",
+    // "Analyse réel vs prévisionnelle",
+    // "Estimation automatisée de la TVA",
+    // "Formule de scénario avancées",
+    // "Scénario inclus par année fiscale - (illimité)",
+    // "Vue tabulaire et graphique du tableau de bord des transactions",
+    // "Graphiques par catégories",
+    // "Bases de données fournisseurs & clients (intégration INSEE)",
+    // "Gestion des dépenses et des recettes",
+    // "Validations des opérations (double sécurité) en option",
+    // "Journal des transactions",
+    // "Gestion des produits /articles",
+    // "Bases de données articles et produits",
+    // "Interface de suivi des factures",
+    // "Devis et factures",
+    // "Paiement de factures fournisseur",
+    // "Import/Export de justificatifs comptables",
+    // "Import/Export Excel des transactions",
+    // "Intégration de fonctionnalités personnalisées - (sur devis)",
+    // "Centre d’aide et tutoriels vidéos",
+    // "Support par mail et tchat",
+    // "Support prioritaire",
   ]
 
 
@@ -340,13 +411,35 @@ function Home() {
     return () => clearInterval(scrollInterval); // Nettoyage du setInterval au démontage du composant
   }, []);
 
+  useEffect(() => {
+    if (window.innerWidth < 768) { // Seulement pour les mobiles
+      const container = premiumCardRef.current?.parentElement; // Récupère le parent (scroll container)
+
+      if (container) {
+        const premiumCard = premiumCardRef.current;
+        const containerWidth = container.clientWidth;
+        const premiumCardPosition = premiumCard.offsetLeft; // Position de la carte Premium
+
+        container.scrollTo({
+          left: premiumCardPosition - containerWidth / 2 + premiumCard.clientWidth / 2, // Centre la carte
+          behavior: "smooth"
+        });
+      }
+    }
+  }, []);
+
+
+
 
   return (
     <div className="bg-white min-h-screen z-[100px]">
       <Main getPage={(page) => {
-        console.log("eeeee", page)
         if (page === "Accueil") {
-          scrollToSection(accueilRef)
+          if (currentPage === "/") {
+            scrollToSection(accueilRef)
+          } else {
+            navigate('/')
+          }
         }
         if (page === "A propos") {
           scrollToSection(aproposRef)
@@ -355,13 +448,13 @@ function Home() {
           scrollToSection(tarifRef)
         }
         if (page === "Contact") {
-          scrollToSection(contact)
+          navigate('/contact')
         }
         if (page === "Ouvrir un compte") {
           setOpenConnexionModal(true)
         }
 
-      }} onClickContact={() => scrollToSection(contact)} onClickAccueil={() => scrollToSection(accueilRef)} onClickApropos={() => scrollToSection(aproposRef)} onClickTarif={() => scrollToSection(tarifRef)}>
+      }} onClickContact={() => navigate("/contact")} onClickAccueil={() => scrollToSection(accueilRef)} onClickApropos={() => scrollToSection(aproposRef)} onClickTarif={() => scrollToSection(tarifRef)}>
         <div className="mt-[30px]  flex flex-col justify-between items-center">
           {/* Section principale */}
           <section ref={accueilRef} className=" w-full relative bg-gradient-to-b from-[#011E3E] to-[#0E5588] text-white ">
@@ -479,7 +572,7 @@ function Home() {
           <div className="mt-[10px] md:mt-[20px] grid grid-cols-2 gap-4 mx-[20px]  md:hidden">
             {features.map((_item) => (
               <FeatureCardMobile
-                onClick={() => { setDescription(_item.description); setOpenDescriptionModal(true) }}
+                onClick={() => { setDescription(_item.description); setTitle(_item.title); setOpenDescriptionModal(true) }}
                 image={_item.image}
                 title={_item.title}
                 description={_item.description}
@@ -583,7 +676,7 @@ function Home() {
               <div className={`flex-shrink-0 w-[90%]  md:w-[438px] h-[450px]`}>
                 <PricingCard
                   onClick={() => setOpenConnexionModal(true)}
-                  seeOver={() => { setOpenFonctionalityModal(true), setData(smartData2) }}
+                  seeOver={() => { setOpenFonctionalityModal(true); setTitleFonctionality("Smart"); setData(smartData2) }}
                   title='Smart'
                   price={tarifButtonId == 0 ? 16 : 176}
                   step={tarifButtonId == 0 ? "mois" : "année"}
@@ -591,10 +684,10 @@ function Home() {
                   data={smartData1}
                 />
               </div>
-              <div className={`flex-shrink-0 w-[90%]  md:w-[438px] h-[450px]`}>
+              <div ref={premiumCardRef} className={`flex-shrink-0 w-[90%]  md:w-[438px] h-[450px]`}>
                 <PricingCard
                   onClick={() => setOpenConnexionModal(true)}
-                  seeOver={() => { setOpenFonctionalityModal(true), setData(premiumData2) }}
+                  seeOver={() => { setOpenFonctionalityModal(true); setTitleFonctionality("Premium"); setData(premiumData2) }}
                   title='Premium'
                   price={tarifButtonId == 0 ? 25 : 275}
                   step={tarifButtonId == 0 ? "mois" : "année"}
@@ -605,7 +698,7 @@ function Home() {
               <div className={`flex-shrink-0 w-[90%]  md:w-[438px] h-[450px]`}>
                 <EnterpriseCard
                   onClick={() => navigate("/contact")}
-                  seeOver={() => { setOpenFonctionalityModal(true), setData(entrepriseData2) }}
+                  seeOver={() => { setOpenFonctionalityModal(true); setTitleFonctionality("Entreprise"); setData(entrepriseData2) }}
                   data={entrepriseData1}
                   title='premium'
                   description='Une offre personnalisée selon vos besoins. '
@@ -629,27 +722,27 @@ function Home() {
           </div>
           {/* fifth */}
           <div className="bg-white w-full  border-blue-600 overflow-hidden">
-            <div className=' border flex flex-col md:flex-row mt-[20px] z-10 md:mt-[10px] w-full   px-[20px] md:ml-[60px]  border-red-600'>
-              <div className='border w-full md:w-[50%]  flex flex-col text-center md:text-start  justify-center'>
+            <div className='  flex flex-col md:flex-row mt-[20px] z-10 md:mt-[10px] w-full   px-[20px] md:ml-[60px]  border-red-600'>
+              <div className=' w-full md:w-[50%]  flex flex-col text-center md:text-start  justify-center'>
                 <p className='text-brand_orange text-[16px] md:text-[24px] font-bold'>Nos clients</p>
                 <p className='font-extrabold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-poppins'>Observez ce que disent <br /> ceux qui ont testé Acwaba</p>
               </div>
-              <div className='w-full md:w-[50%]  border border-black  md:flex  overflow-hidden md:mb-[30px]'>
+              <div className='w-full md:w-[50%]   border-black  md:flex  overflow-hidden md:mb-[30px]'>
                 <div ref={partnerScrollRef} className='  border-gray-900 md:mx-[130px] scroll-smooth my-[20px] flex flex-row md:justify-center space-x-[20px] md:space-x-[40px] overflow-x-scroll md:overflow-hidden'>
-                {/* <div className='w-[100px]'></div> */}
+                  {/* <div className='w-[100px]'></div> */}
                   <img src={partner1} alt="partner1" className="border-[1.5px]  md:ml-[0px] border-gray-300 rounded-[10px] w-[100px] h-[100px] " />
-                  <img src={partner2} alt="partner1" className="border-[1.5px]  border-gray-300 rounded-[10px] w-[100px] h-[100px]"/>
-                  <img src={partner3} alt="partner1" className="border-[1.5px]  border-gray-300 rounded-[10px] w-[100px] h-[100px]"/>
-                  <img src={partner4} alt="partner1" className="border-[1.5px]  border-gray-300 rounded-[10px] w-[100px] h-[100px]"/>
-                  
+                  <img src={partner2} alt="partner1" className="border-[1.5px]  border-gray-300 rounded-[10px] w-[100px] h-[100px]" />
+                  <img src={partner3} alt="partner1" className="border-[1.5px]  border-gray-300 rounded-[10px] w-[100px] h-[100px]" />
+                  <img src={partner4} alt="partner1" className="border-[1.5px]  border-gray-300 rounded-[10px] w-[100px] h-[100px]" />
+
 
                   <img src={partner1} alt="partner1" className="border-[1.5px]  md:ml-[0px] border-gray-300 rounded-[10px] w-[100px] h-[100px] " />
-                  <img src={partner2} alt="partner1" className="border-[1.5px]  border-gray-300 rounded-[10px] w-[100px] h-[100px]"/>
-                  <img src={partner3} alt="partner1" className="border-[1.5px]  border-gray-300 rounded-[10px] w-[100px] h-[100px]"/>
-                  <img src={partner4} alt="partner1" className="border-[1.5px]  border-gray-300 rounded-[10px] w-[100px] h-[100px]"/>
+                  <img src={partner2} alt="partner1" className="border-[1.5px]  border-gray-300 rounded-[10px] w-[100px] h-[100px]" />
+                  <img src={partner3} alt="partner1" className="border-[1.5px]  border-gray-300 rounded-[10px] w-[100px] h-[100px]" />
+                  <img src={partner4} alt="partner1" className="border-[1.5px]  border-gray-300 rounded-[10px] w-[100px] h-[100px]" />
                   <div className='w-[30px]'></div>
 
-               
+
                 </div>
               </div>
             </div>
@@ -703,7 +796,7 @@ function Home() {
 
                   {/* FAQ Items */}
                   <div className="space-y-4">
-                    {questions.map((item, index) => (
+                    {question.map((item, index) => (
                       <div key={index} className="border-b bordet-bratext-brand_bleu_inter pb-3">
                         <button
                           className="flex justify-between items-center w-full cursor-pointer focus:outline-none"
@@ -728,12 +821,15 @@ function Home() {
 
                 {/* Buttons */}
                 <div className="flex mt-6 justify-center">
-                  <button className="w-[232px] text-[12px] md:text-[14px] py-2 bg-gradient-to-b from-[#011E3E] to-[#0E5588] text-white font-medium h-[60px] rounded-t-[16px] hover:bt-bratext-brand_bleu_inter">
-                    Questions Fonctionnelles
-                  </button>
-                  <button className="w-[232px] text-[12px] md:text-[14px] py-2 bg-transparent border-[1.4px] border-brand_bleu_inter text-brand_bleu_inter font-medium h-[60px] rounded-t-[16px]">
+                  {["Questions Fonctionnelles", "Questions Support"].map((item, index) => (
+                    <button onClick={() => handleQuestion(index)} className={`w-[232px] text-[12px] md:text-[14px] py-2 ${selectedIndex == index ? " bg-gradient-to-b from-[#011E3E] to-[#0E5588] text-white" : "bg-transparent border-[1.4px] border-brand_bleu_inter text-brand_bleu_inter"}  font-medium h-[60px] rounded-t-[16px] hover:bt-bratext-brand_bleu_inter`}>
+                      {item}
+                    </button>
+                  ))
+                  }
+                  {/* <button className="w-[232px] text-[12px] md:text-[14px] py-2 bg-transparent border-[1.4px] border-brand_bleu_inter text-brand_bleu_inter font-medium h-[60px] rounded-t-[16px]">
                     Questions Support
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>
@@ -828,7 +924,7 @@ function Home() {
                           <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">À propos</a></li>
                           <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">Tarif</a></li>
                           <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">Contact</a></li>
-                          <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">Conditions générales</a></li>
+                          <li><a href="/condition-generale" className="hover:underline text-[14px] md:text-[16px]">Conditions générales</a></li>
                         </ul>
                       </div>
 
@@ -868,23 +964,33 @@ function Home() {
           </div>
         </div>
         <GeneralModal open={openDescriptionModal} onClose={() => setOpenDescriptionModal(false)} >
-          <div className='text-center bg-white p-4'>
-            {description}
+          <div className=' border-red-700  bg-white rounded-[10px]'>
+            <div className='h-[42px] bg-gradient-to-b from-[#011E3E] to-[#0E5588] rounded-t-[10px] flex items-center justify-center text-white'>
+              {title}
+            </div>
+            <div className=' text-center px-4 py-2 text-brand_bleu_inter text-[14px]'>
+              {description}
+            </div>
           </div>
         </GeneralModal>
         <GeneralModal open={openFonctionalityModal} onClose={() => setOpenFonctionalityModal(false)}>
-          <div className="bg-white p-4 rounded-sm w-[600px] max-h-[80vh] overflow-y-auto">
-            <ul className="px-[20px] py-4 space-y-3">
-              {data.map((feature, index) => (
-                <li key={index} className="flex items-center text-gray-700">
-                  <Icon
-                    icon="mdi:check-circle-outline"
-                    className="w-5 h-5 text-brand_orange flex-shrink-0"
-                  />
-                  <span className="text-[14px] text-brand_bleu_inter ml-2">{feature}</span>
-                </li>
-              ))}
-            </ul>
+          <div className="bg-white border-red-600 overflow-hidden  w-[600px] max-h-[80vh] rounded-[10px]">
+            <div className='h-[42px] md:h-[50px] bg-gradient-to-b from-[#011E3E] to-[#0E5588] rounded-t-[10px] flex items-center justify-center text-white'>
+              {titleFonctionality}
+            </div>
+            <div className='p-4 overflow-y-scroll max-h-[80vh]'>
+              <ul className="px-[20px] py-4 space-y-3">
+                {data.map((feature, index, self: any) => (
+                  <li key={index} className={`flex items-center text-gray-700 ${self.length == (index + 1) ? "pb-20" : "pb-0"}`}>
+                    <Icon
+                      icon="mdi:check-circle-outline"
+                      className="w-5 h-5 text-brand_orange flex-shrink-0"
+                    />
+                    <span className="text-[14px] text-brand_bleu_inter ml-2">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
           </div>
         </GeneralModal>

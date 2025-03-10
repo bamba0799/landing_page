@@ -1,20 +1,42 @@
 import Main from '../ components/Main/Main';
 import { motion } from 'framer-motion';
 import { FaEnvelope, FaHome, FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
-import ServiceCard from '../ components/ServiceCard';
-import logo1 from "../assets/logo1.png";
 import youtube from "../assets/socialNetwork/youtube.png";
 import facebook from "../assets/socialNetwork/facebook.png";
 import lIn from "../assets/socialNetwork/lIn.png";
-import ConnexionInput from '../ components/Input/ConnexionInput';
 import ContactInput from '../ components/Input/ContactInput';
 import SecondButton from '../ components/Button/SecondButton';
+import { Icon } from '@iconify/react';
+import Logo_acwaba_blanc from "../assets/Logos/Logo_acwaba-blanc.svg";
+import { useNavigate } from 'react-router-dom';
+
 
 
 const Contact = () => {
+    const navigate = useNavigate();
+
     return (
         <div className="bg-white min-h-screen">
-            <Main>
+            <Main getPage={(page) => {
+                if (page === "Accueil") {
+                    navigate('/')
+                }
+                if (page === "A propos") {
+                    // scrollToSection(aproposRef)
+                }
+                if (page === "Tarif") {
+                    // scrollToSection(tarifRef)
+                    navigate('/')
+                }
+                if (page === "Contact") {
+                    navigate('/contact')
+                }
+                if (page === "Ouvrir un compte") {
+                    // setOpenConnexionModal(true)
+                }
+            }}
+                onClickContact={() => navigate("/contact")} onClickAccueil={() => navigate("/")} onClickApropos={() => navigate("/apropos")} onClickTarif={() => navigate("/")}
+            >
                 <div className='mt-[30px] flex flex-col justify-between items-center'>
 
                     <div className="bg-gradient-to-t from-[#011E3E] to-[#0E5588] w-full  md:h-[400px] h-[300px]">
@@ -64,76 +86,73 @@ const Contact = () => {
                         </div>
                     </div>
                     <div className='w-full flex flex-col md:flex-row items-center justify-center  md:space-x-[70px] space-x-[0px]  mt-[20px]'>
-                        <div className=' border-blue-500'>
+                        <div className=' border-blue-500 px-[20px] md:px-[20px]'>
                             {/* <p className='font-bold'</p> */}
                             <p className='text-[20px] md:text-[32px] text-brand_bleu_fonce_500 font-bold'>Nos informations</p>
 
                             <div>
                                 <div className='text-[16px] text-brand_bleu_inter font-bold mt-3'>
                                     <p>Contactez-nous par téléphone ici</p>
-                                    <div className='flex flex-row items-center space-x-[10px]'>
-                                        <div className='w-[30px] md:w-[40px] h-[30px] md:h-[40px] flex items-center justify-center rounded-full bg-brand_bleu_inter'>
-                                            <FaPhone className="text-white" />
+                                    <div className='flex flex-row items-center space-x-[10px] mt-[14px]'>
+                                        <div className='w-[30px] md:w-[40px] h-[30px] md:h-[40px] flex items-center justify-center rounded-full bg-[#CFE8F4]'>
+                                            <Icon icon={'fluent-emoji-high-contrast:telephone'} />
                                         </div>
                                         <p className='text-[14px] text-brand_bleu_inter'>+33 6 63 67 31 02 / +33 6 60 53 04 97</p>
                                     </div>
                                 </div>
                                 <div className='text-[16px] text-brand_bleu_inter font-bold mt-3'>
-                                    <p>Contactez-nous par téléphone ici</p>
-                                    <div className='flex flex-row items-center space-x-[10px]'>
-                                        <div className='w-[30px] md:w-[40px] h-[30px] md:h-[40px] flex items-center justify-center rounded-full bg-brand_bleu_inter'>
-                                            <FaMapMarkerAlt className="text-white" />
+                                    <p>Contactez-nous par mail ici</p>
+                                    <div className='flex flex-row items-center space-x-[10px] mt-[14px]'>
+                                        <div className='w-[30px] md:w-[40px] h-[30px] md:h-[40px] flex items-center justify-center rounded-full bg-[#CFE8F4]'>
+
+                                            <FaMapMarkerAlt className="text-brand_bleu_inter" />
                                         </div>
-                                        <p className='text-[14px] text-brand_bleu_inter'>+33 6 63 67 31 02 / +33 6 60 53 04 97</p>
+                                        <p className='text-[14px] text-brand_bleu_inter'>25 Rue de Ponthieu - 75008, Paris - France</p>
                                     </div>
                                 </div>
                                 <div className='text-[16px] text-brand_bleu_inter font-bold mt-3'>
-                                    <p>Contactez-nous par téléphone ici</p>
-                                    <div className='flex flex-row items-center space-x-[10px]'>
-                                        <div className='w-[30px] md:w-[40px] h-[30px] md:h-[40px] flex items-center justify-center rounded-full bg-brand_bleu_inter'>
-                                            <FaMapMarkerAlt className="text-white" />
+                                    <p>Notre localisation</p>
+                                    <div className='flex flex-row items-center space-x-[10px] mt-[14px]'>
+                                        <div className='w-[30px] md:w-[40px] h-[30px] md:h-[40px] flex items-center justify-center rounded-full bg-[#CFE8F4]'>
+                                            <Icon icon={'ic:sharp-email'} />
                                         </div>
-                                        <p className='text-[14px] text-brand_bleu_inter'>+33 6 63 67 31 02 / +33 6 60 53 04 97</p>
+                                        <p className='text-[14px] text-brand_bleu_inter'>contact@acwaba.com</p>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
-                        <div className=' mt-[20px] md:mt-[0px] w-[90%] md:w-[660px] h-[480px]  flex flex-col justify-center items-center  border-red-500 p-[20px] rounded-[16px]  shadow-sm shadow-black/20 bg-neutral_blanc'>
+                        <div className=' mt-[20px] md:mt-[0px] w-[90%] md:w-[660px] h-[480px]  flex flex-col justify-center   border-red-500 p-[20px] rounded-[16px]  shadow-sm shadow-black/20 bg-neutral_blanc'>
                             <div>
-                                <p className='  text-brand_orange  text-[16px] md:text-[24px]'>Avez-vous des questions ?</p>
+                                <p className='  text-brand_orange  text-[16px] md:text-[24px] font-bold'>Avez-vous des questions ?</p>
                                 <p className='text-[20px] md:text-[32px] text-brand_bleu_fonce_500 font-bold'>Envoyez-nous un message</p>
                             </div>
                             <div className='flex flex-col items-center justify-center mt-[20px]'>
-                                <form onSubmit={(e) => e.preventDefault()} className="mt-[20px] border-red-800 space-y-[30px]">
+                                <form onSubmit={(e) => e.preventDefault()} className="mt-[20px] border-red-800 space-y-[10px] md:space-y-[30px]">
                                     {/* Email */}
-                                    <div className='flex flex-row items-center space-x-[20px]'>
-                                        <div className='w-[140px] md:w-[280px]'>
+                                    <div className='flex flex-col md:flex-row items-center space-y-[10px] md:space-y-[0px] md:space-x-[20px] space-x-0'>
+                                        <div className='w-full md:w-[280px]'>
                                             <ContactInput isPassword={false} icon={'mingcute:user-3-fill'} placeholder='Nom et prénoms' />
                                         </div>
-                                        <div className='w-[140px] md:w-[280px]'>
+                                        <div className='w-full md:w-[280px]'>
                                             <ContactInput isPassword={false} icon={'mingcute:mail-fill'} placeholder='Email' />
                                         </div>
 
                                     </div>
-                                    <div className='flex flex-row items-center space-x-[20px] mt-[30px]'>
-                                        <div className='w-[140px] md:w-[280px]'>
+                                    <div className='flex flex-col md:flex-row items-center space-y-[10px] md:space-y-[0px] md:space-x-[20px] space-x-0 md:mt-[30px] mt-0'>
+                                        <div className='w-full md:w-[280px]'>
                                             <ContactInput isPassword={false} icon={'tabler:building'} placeholder="Nom de l'entreprise" />
                                         </div>
-                                        <div className='w-[140px] md:w-[280px]'>
+                                        <div className='w-full md:w-[280px]'>
                                             <ContactInput isPassword={false} icon={'material-symbols:edit-outline'} placeholder='Objet' />
                                         </div>
                                     </div>
-                                    <div className='flex flex-row items-center space-x-[20px] mt-[30px]'>
+                                    <div className='flex flex-col md:flex-row items-center space-y-[10px] md:space-y-[0px] md:space-x-[20px] space-x-0 md:mt-[30px] mt-0'>
                                         <div className='w-full'>
                                             <ContactInput isPassword={false} icon={'ant-design:message-outlined'} placeholder="Message" />
                                         </div>
 
                                     </div>
-
-                                    {/* mingcute:user-3-fill */}
-
-                                    {/* Bouton Continuer */}
 
                                 </form>
                             </div>
@@ -143,18 +162,17 @@ const Contact = () => {
                         </div>
                     </div>
                     {/* footer */}
-                    {/* footer */}
                     <div className='mt-[20px] w-full  border-red-800'>
                         <footer className="w-ful">
-                            <div className=" flex flex-col md:flex-row ">
+                            <div className="relative flex flex-col md:flex-row ">
                                 {/* 1 */}
                                 <div className="bg-gradient-to-r  from-[#011E3E] to-[#0E5588] text-white p-8 w-full md:w-[45%]">
-                                    <div className="flex flex-col justify-between space-y-[10px] items-start">
+                                    <div className="  border-red-700  flex flex-col justify-between space-y-[10px] items-start">
                                         {/* Logo */}
-                                        <img src={logo1} alt="Acwaba" className="h-12 " />
+                                        <img src={Logo_acwaba_blanc} alt="Acwaba" className=" absolute left-6  top-0 w-[120px] h-[120px]  " />
 
                                         {/* Subscription Form */}
-                                        <div className="flex md:justify-start md:space-x-5 w-full">
+                                        <div className="flex md:justify-start md:space-x-5 w-full pt-[50px]">
                                             <input
                                                 type="email"
                                                 placeholder="Email"
@@ -195,11 +213,11 @@ const Contact = () => {
                                             <div>
                                                 <h2 className=" font-bold text-brand_bleu_inter mb-4">Pages</h2>
                                                 <ul className="space-y-[24px] text-brand_bleu_inter">
-                                                    <li><a href="#" className="hover:underline text-[12px] md:text-[16px]">Accueil</a></li>
-                                                    <li><a href="#" className="hover:underline md:text-[16px]">À propos</a></li>
-                                                    <li><a href="#" className="hover:underline text-[12px] md:text-[16px]">Tarif</a></li>
-                                                    <li><a href="#" className="hover:underline md:text-[16px]">Contact</a></li>
-                                                    <li><a href="#" className="hover:underline text-[12px] md:text-[16px]">Conditions générales</a></li>
+                                                    <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">Accueil</a></li>
+                                                    <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">À propos</a></li>
+                                                    <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">Tarif</a></li>
+                                                    <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">Contact</a></li>
+                                                    <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">Conditions générales</a></li>
                                                 </ul>
                                             </div>
 
@@ -211,19 +229,19 @@ const Contact = () => {
                                                         <div className='w-[40px] md:w-[50px] h-[40px] md:h-[50px] flex items-center justify-center rounded-full bg-white'>
                                                             <FaMapMarkerAlt className="text-brand_bleu_inte" />
                                                         </div>
-                                                        <span className='ext-[12px] md:text-[16px]'>25 Rue de Ponthieu<br />75008, Paris<br />France</span>
+                                                        <span className='ext-[12px] md:text-[16px] text-[14px]'>25 Rue de Ponthieu<br />75008, Paris<br />France</span>
                                                     </li>
                                                     <li className="flex items-center gap-2">
                                                         <div className='w-[40px] md:w-[50px] h-[40px] md:h-[50px] flex items-center justify-center rounded-full bg-white'>
                                                             <FaEnvelope className="text-brand_bleu_inter" />
                                                         </div>
-                                                        <a href="mailto:contact@acwaba.com" className="hover:underline ext-[12px] md:text-[16px]">contact@acwaba.com</a>
+                                                        <a href="mailto:contact@acwaba.com" className="hover:underline ext-[12px] md:text-[16px] text-[14px]">contact@acwaba.com</a>
                                                     </li>
                                                     <li className="flex items-center gap-2">
                                                         <div className='w-[40px] md:w-[50px] h-[40px] md:h-[50px] flex items-center justify-center rounded-full bg-white'>
                                                             <FaPhone className="text-brand_bleu_inter ext-[12px] md:text-[16px]" />
                                                         </div>
-                                                        <span>
+                                                        <span className='text-[14px] md:text-[16px]'>
                                                             +33 6 63 67 31 02<br />
                                                             +33 6 60 53 04 97
                                                         </span>

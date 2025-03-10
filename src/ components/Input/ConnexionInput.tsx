@@ -1,5 +1,4 @@
 import { Icon } from '@iconify/react';
-import { Eye, EyeOff } from 'lucide-react';
 import React, { useState } from 'react';
 
 type ConnexionInputProps = {

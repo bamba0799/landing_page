@@ -1,8 +1,8 @@
-import { Icon } from '@iconify/react/dist/iconify.js';
 import React from 'react';
 import { FcGoogle } from "react-icons/fc";
-import logo1 from "../../assets/logo1.png";
 import ConnexionInput from '../Input/ConnexionInput';
+import Logo_acwaba_blanc from "../../assets/Logos/Logo_acwaba-blanc.svg";
+
 
 type DeleteModalProps = {
     open: boolean;
@@ -13,7 +13,7 @@ type DeleteModalProps = {
     isSuivant?: (value: boolean) => void;
 }
 
-const DeleteModal: React.FC<DeleteModalProps> = ({ open, isSuivant, onClose, deleteAction, cancelAction, text }) => {
+const DeleteModal: React.FC<DeleteModalProps> = ({ open, onClose }) => {
     const [isFirstStep, setIsFirstStep] = React.useState(true);
 
     const handleContinue = () => {
@@ -28,7 +28,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ open, isSuivant, onClose, del
                 <div onClick={(e) => e.stopPropagation()} className="flex flex-col  rounded-[16px] bg-white  border-red-800  w-[90%] md:w-[520px] h-[630px] md:h-[600px] rounded-t-[20px] items-center">
                     {/* Header avec le logo et l'indicateur de page */}
                     <div className="relative  flex h-[90px] md:h-[100px] items-center w-full  rounded-t-[16px] justify-center bg-gradient-to-b from-[#011E3E] to-[#0E5588]">
-                        <img className="object-fill  w-[180px] h-[55px]" src={logo1} alt="" />
+                        <img className="object-fill  absolute  w-[160px] h-[160px]" src={Logo_acwaba_blanc} alt="" />
                         <div className="absolute right-4 bottom-2 flex flex-col  items-center text-white">
                             <span className="text-[10px]">1 / 2</span>
                             <div className="flex space-x-1">
@@ -99,10 +99,10 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ open, isSuivant, onClose, del
                 </div>
                 :
                 <div onClick={onClose} className={`fixed inset-0 flex justify-center z-40 items-center transition-colors ${open ? "visible bg-black/20" : "invisible"}`}>
-                    <div onClick={(e) => e.stopPropagation()} className="flex flex-col rounded-[16px] bg-white  border-red-800  w-[90%] md:w-[520px] h-[570px] md:h-[600px] rounded-t-[20px] items-center">
+                    <div onClick={(e) => e.stopPropagation()} className="flex flex-col rounded-[16px] bg-white  border-red-800  w-[90%] md:w-[520px] h-[620px] md:h-[600px] rounded-t-[20px] items-center">
                         {/* Header avec le logo et l'indicateur de page */}
                         <div className="relative  flex h-[90px] md:h-[100px] items-center w-full  rounded-t-[16px] justify-center bg-gradient-to-b from-[#011E3E] to-[#0E5588]">
-                            <img className="object-fill  w-[180px] h-[55px]" src={logo1} alt="" />
+                        <img className="object-fill  absolute  w-[160px] h-[160px]" src={Logo_acwaba_blanc} alt="" />
                             <div className="absolute right-4 bottom-2 flex flex-col  items-center text-white">
                                 <span className="text-[10px]">1 / 2</span>
                                 <div className="flex space-x-1">
@@ -127,9 +127,8 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ open, isSuivant, onClose, del
                                 {/* Mot de passe */}
                                 <ConnexionInput isPassword={false} icon={'mingcute:user-3-fill'} placeholder='Prénom' />
                                 <ConnexionInput isPassword={false} icon={'tabler:building'} placeholder="Nom de l'entreprise" />
-
+                                <ConnexionInput isPassword={false} icon={'tabler:building'} placeholder="Type d'entreprise" />
                                 {/* Bouton Continuer */}
-
                             </form>
                             <button onClick={handleContinue} className="mt-[24px] w-[250px] md:w-[340px] rounded-full bg-gradient-to-r h-[44px] from-[#011E3E] to-[#0E5588] text-white font-semibold transition hover:opacity-90">
                                 Commencer maintenant
@@ -152,8 +151,6 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ open, isSuivant, onClose, del
 
                 </div>
             }
-
-
         </div>
     );
 }
