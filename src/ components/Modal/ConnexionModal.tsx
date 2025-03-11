@@ -102,12 +102,13 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ open, onClose }) => {
                     <div onClick={(e) => e.stopPropagation()} className="flex flex-col rounded-[16px] bg-white  border-red-800  w-[90%] md:w-[520px] h-[620px] md:h-[600px] rounded-t-[20px] items-center">
                         {/* Header avec le logo et l'indicateur de page */}
                         <div className="relative  flex h-[90px] md:h-[100px] items-center w-full  rounded-t-[16px] justify-center bg-gradient-to-b from-[#011E3E] to-[#0E5588]">
+                            <p onClick={()=>setIsFirstStep(true)} className=' text-white absolute top-[45px] md:top-[50px] left-[20px] text-[12px] underline -translate-y-1/2'>Retour</p>
                         <img className="object-fill  absolute  w-[160px] h-[160px]" src={Logo_acwaba_blanc} alt="" />
                             <div className="absolute right-4 bottom-2 flex flex-col  items-center text-white">
-                                <span className="text-[10px]">1 / 2</span>
+                                <span  className="text-[10px]">2 / 2</span>
                                 <div className="flex space-x-1">
                                     <span className="h-[10px] w-[10px] rounded-full bg-blue-400"></span>
-                                    <span className="h-[10px] w-[10px] rounded-full  bg-white"></span>
+                                    <span className="h-[10px] w-[10px] rounded-full bg-blue-400"></span>
                                 </div>
                             </div>
                         </div>

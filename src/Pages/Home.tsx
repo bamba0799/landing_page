@@ -9,13 +9,12 @@ import feature4 from "../assets/feature/feature4.png";
 import feature5 from "../assets/feature/feature5.png";
 import feature6 from "../assets/feature/feature6.png";
 
+import Fusee3d from "../assets/Fusee3d.gif";
 
 import partner1 from "../assets/Logos/logos-partner-01.png";
 import partner2 from "../assets/Logos/logos-partner-02.png";
 import partner3 from "../assets/Logos/logos-partner-03.png";
 import partner4 from "../assets/Logos/logos-partner-04.png";
-
-
 
 import Logo_acwaba_blanc from "../assets/Logos/Logo_acwaba-blanc.svg";
 import grapheImage1 from "../assets/grapheImage1.png";
@@ -35,7 +34,6 @@ import EnterpriseCard from '../ components/EnterpriseCard';
 import Arrowright from '../assets/Arrowright.png';
 import Arrowleft from '../assets/Arrowleft.png';
 import questionbg from '../assets/questionbg.png';
-import FuseeOne from '../assets/FuseeOne.png';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import { FaMapMarkerAlt, FaEnvelope, FaPhone } from "react-icons/fa";
 import ConnexionModal from '../ components/Modal/ConnexionModal';
@@ -712,7 +710,7 @@ function Home() {
                 <img src={Arrowleft} alt="" className=' object-cover w-full' />
               </div>
               <div className='w-[15%] flex justify-start ml-1 items-center  border-red-800'>
-                <a href='' className='text-[12px]  md:text-[16px] font-bold text-brand_bleu_fonce_500'>Voir tous les avantages</a>
+                <a  className='text-[12px]  md:text-[16px] font-bold text-brand_bleu_fonce_500'>Voir tous les avantages</a>
                 <Icon icon="weui:arrow-filled" className="text-brand_bleu_fonce_500 w-5 h-5" />
               </div>
               <div className='w-[43%]  border-red-800'>
@@ -724,7 +722,7 @@ function Home() {
           <div className="bg-white w-full  border-blue-600 overflow-hidden">
             <div className='  flex flex-col md:flex-row mt-[20px] z-10 md:mt-[10px] w-full   px-[20px] md:ml-[60px]  border-red-600'>
               <div className=' w-full md:w-[50%]  flex flex-col text-center md:text-start  justify-center'>
-                <p className='text-brand_orange text-[16px] md:text-[24px] font-bold'>Nos clients</p>
+                <p className='text-brand_orange text-[16px] md:text-[32px] font-bold'>Nos clients</p>
                 <p className='font-extrabold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-poppins'>Observez ce que disent <br /> ceux qui ont testé Acwaba</p>
               </div>
               <div className='w-full md:w-[50%]   border-black  md:flex  overflow-hidden md:mb-[30px]'>
@@ -787,7 +785,7 @@ function Home() {
               style={{ backgroundImage: `url(${questionbg})` }}
             >
               {/* Section FAQ */}
-              <div className="flex flex-col justify-between bg-white  border-red-600 bg-opacity-90 w-[350px] h-[450px] md:w-[544px] md:h-[520px] rounded-[16px] px-[20px] md:px-[24px] lg:ml-auto">
+              <div className="flex flex-col justify-between bg-white  border-red-600 bg-opacity-90 w-[350px] pt-[20px] md:w-[544px]  rounded-[16px] px-[20px] md:px-[24px] lg:ml-auto">
                 <div className='mt-[20px] md:mt-[30px]'>
                   <p className="text-brand_orange font-bold text-[16px] md:text-[24px] text-center md:text-start">FAQ</p>
                   <h2 className="text-brand_bleu_fonce_500 font-extrabold text-[20px] md:text-[32px] mb-[12px] text-center md:text-start">
@@ -820,7 +818,7 @@ function Home() {
                 </div>
 
                 {/* Buttons */}
-                <div className="flex mt-6 justify-center">
+                <div className="flex pt-[50px] md:pt-[80px] justify-center">
                   {["Questions Fonctionnelles", "Questions Support"].map((item, index) => (
                     <button onClick={() => handleQuestion(index)} className={`w-[232px] text-[12px] md:text-[14px] py-2 ${selectedIndex == index ? " bg-gradient-to-b from-[#011E3E] to-[#0E5588] text-white" : "bg-transparent border-[1.4px] border-brand_bleu_inter text-brand_bleu_inter"}  font-medium h-[60px] rounded-t-[16px] hover:bt-bratext-brand_bleu_inter`}>
                       {item}
@@ -837,17 +835,17 @@ function Home() {
               {/* Mobile: une seule fusée */}
               <div className="lg:hidden">
                 <img
-                  src={FuseeOne} // Remplace par l'image réelle
+                  src={Fusee3d} // Remplace par l'image réelle
                   alt="Rocket"
                   className="w-32 h-32"
                 />
               </div>
               {/* Texte */}
               <div className="lg:w-1/2 text-center lg:text-left mt-[10px] lg:mt-0  border-black flex flex-col items-center md:items-start">
-                <p className="text-brand_orange font-bold text-[16px] md:text-[24px] uppercase mb-4">
+                <p className="text-brand_orange text-[16px] md:text-[32px] font-bold">
                   Prêt à embarquer avec Acwaba ?
                 </p>
-                <h2 className="font-extrabold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] ">
+                <h2 className="font-bold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] ">
                   Gagnez du temps dans <br /> votre facturation et <br /> la gestion de <br />
                   votre trésorerie.
                 </h2>
@@ -858,7 +856,7 @@ function Home() {
               <div className="mt-8 lg:mt-0 lg:w-1/2 flex justify-center">
                 {/* Web: grille de fusées */}
                 <div className="hidden lg:flex ">
-                  <img src={FuseeOne} />
+                  <img src={Fusee3d} />
                 </div>
               </div>
             </div>

@@ -1,6 +1,7 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import React from "react";
 import logo2 from "../../assets/logo2.png";
+import { motion } from "framer-motion";
 
 interface SideBarProps {
     isSidebarOpen: boolean;
@@ -14,7 +15,7 @@ const sideBarItems = [
     {
 
         name: "A propos",
- 
+
     },
     {
         name: "Tarif",
@@ -51,9 +52,13 @@ const SideBar: React.FC<SideBarProps> = ({ isSidebarOpen, toggleSideBar, getPage
                         <div className="flex items-center justify-center h-[90px] w-[90px] rounded-full bg-white ">
                             <img src={logo2} alt="logo" className="w-[40px] h-[40px]" />
                         </div>
-                        <div onClick={toggleSideBar}>
+                        <motion.div
+                            onClick={toggleSideBar}
+                            animate={{ opacity: [1, 0, 1] }}
+                            transition={{ repeat: Infinity, duration: 0.8 }}
+                        >
                             <Icon icon="iconamoon:arrow-left-2" className="absolute left-0 top-[10px] w-[30px] h-[30px] text-[#253873]" />
-                        </div>
+                        </motion.div>
                     </div>
                 </div>
 
@@ -65,7 +70,7 @@ const SideBar: React.FC<SideBarProps> = ({ isSidebarOpen, toggleSideBar, getPage
                             // href={item.path}
                             className={`flex items-center rounded-md pl-2 py-[4px] hover:bg-blue-[20px] mt-2 ${"text-[#253873] font-semibold"
                                 }`}
-                            onClick={() => { if (getPage) getPage(item.name); if(toggleSideBar) toggleSideBar()}} // Update the active tab on click
+                            onClick={() => { if (getPage) getPage(item.name); if (toggleSideBar) toggleSideBar() }} // Update the active tab on click
                         >
                             <div className=" w-full border-b border-[#9CA2A9] pb-[5px] flex items-center justify-between">
                                 <span className="ml-[6px] text-[13px]">{item.name}</span>
