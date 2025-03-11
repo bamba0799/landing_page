@@ -41,6 +41,7 @@ const GeneralCondition = () => {
                     En cas de non-acceptation des CGU stipulées dans le présent contrat, l’Utilisateur se doit de renoncer à
                     l’accès aux services proposés par le site.
                 </p>
+                {/* ss */}
 
                 <p className="mt-4  font-semibold">
                     <a href="https://www.acwaba.com" className="text-blue-600 hover:underline">
