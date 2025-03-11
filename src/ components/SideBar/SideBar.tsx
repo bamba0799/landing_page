@@ -1,81 +1,77 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
-import React, { useEffect, useState } from "react";
-// import esphereLogo from "../../assets/logo2.jpg";
+import React from "react";
+import logo2 from "../../assets/logo2.png";
 
 interface SideBarProps {
     isSidebarOpen: boolean;
+    toggleSideBar?: () => void;
+    getPage?: (page: any) => void;
 }
 const sideBarItems = [
     {
-    icon: "material-symbols:empty-dashboard-sharp",
-    name:"Tableau de bord",
-    path: "/home",
-  },
-  {
-    icon: "fa:group",
-    name:"Comité d'organisation",
-    path: "/comite-organisation",
-  },
-  {
-    icon: "mdi:account-student",
-    name:"Séminariste",
-    path: "/seminariste",
-  },
-  {
-    icon: "fa-solid:home",
-    name:"Dortoir",
-    path: "/dortoir",
-  },
-  {
-    icon: "heroicons:users-solid",
-    name:"Visiteurs",
-    path: "/visiteur",
-  },
+        name: "Accueil",
+    },
+    {
 
-  {
-    icon: "bi:patch-check-fill",
-    name:"Permissions",
-    path: "/permissions",
-  },
+        name: "A propos",
+ 
+    },
+    {
+        name: "Tarif",
+    },
+    {
+        name: "Contact",
+    },
+    {
+        name: "Services",
+    },
+    {
+        name: "Connexion",
+    },
+
+    {
+        name: "Ouvrir un compte",
+    },
 ];
 
 
 
 
 
-const SideBar: React.FC<SideBarProps> = ({ isSidebarOpen }) => {
-    const [activeTab, setActiveTab] = useState<string>("");
-    useEffect(() => {
-        // Set the active tab based on the current URL path
-        const currentPath = window.location.pathname;
-        const activeItem = sideBarItems.find(item => item.path === currentPath) 
-        if (activeItem) {
-            setActiveTab(activeItem.name);
-        }
-    }, []);
+const SideBar: React.FC<SideBarProps> = ({ isSidebarOpen, toggleSideBar, getPage }) => {
 
     return (
         <aside
-            className={` fixed top-0 left-0 z-40 bg-primary_green w-[199px] h-screen pt-[80px] bg-white-300 border-l-[2px] border-primary_orange lg:hidden transition-transform ${
-                isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-            }`}
+            className={` fixed top-0 left-0 z-50 bg-white w-full h-screen  bg-white-300  lg:hidden transition-transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+                }`}
         >
-            <div className="h-full px-[8px] pb-4 overflow-auto">
-                <span className="text-white/70 text-[16px] font-semibold">Menu</span>
-                <div className="my-2 border-b-[1px] mb-[16px] text-white/70"></div>
+            <div className="h-full   overflow-auto">
+                <div className="  h-[200px] bg-gradient-to-b from-[#0F5689] to-[#FFFFFF] flex items-center justify-center">
+                    <div className="mb-[50px] relative  w-[230px] flex items-center justify-center">
+                        <div className="flex items-center justify-center h-[90px] w-[90px] rounded-full bg-white ">
+                            <img src={logo2} alt="logo" className="w-[40px] h-[40px]" />
+                        </div>
+                        <div onClick={toggleSideBar}>
+                            <Icon icon="iconamoon:arrow-left-2" className="absolute left-0 top-[10px] w-[30px] h-[30px] text-[#253873]" />
+                        </div>
+                    </div>
+                </div>
+
                 {/* Menu items */}
-                <div className="px-">
+                <div className="px-[8px]">
                     {sideBarItems.map((item, index) => (
                         <a
                             key={index}
-                            href={item.path}
-                            className={`flex items-center rounded-md pl-2 py-[12px] hover:bg-blue-[20px] mt-2 ${
-                                activeTab === item.name ? "bg-white/30 text-white" : "text-white/70"
-                            }`}
-                            onClick={() => setActiveTab(item.name)} // Update the active tab on click
+                            // href={item.path}
+                            className={`flex items-center rounded-md pl-2 py-[4px] hover:bg-blue-[20px] mt-2 ${"text-[#253873] font-semibold"
+                                }`}
+                            onClick={() => { if (getPage) getPage(item.name); if(toggleSideBar) toggleSideBar()}} // Update the active tab on click
                         >
-                            <Icon icon={item.icon} className="w-5 h-5" />
-                            <span className="ml-[6px] text-[13px]">{item.name}</span>
+                            <div className=" w-full border-b border-[#9CA2A9] pb-[5px] flex items-center justify-between">
+                                <span className="ml-[6px] text-[13px]">{item.name}</span>
+                                <Icon icon="iconamoon:arrow-right-2" className=" left-0 top-[10px] w-[20px] h-[20px] text-[#253873]" />
+
+                            </div>
                         </a>
                     ))}
                 </div>
