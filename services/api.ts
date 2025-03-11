@@ -35,7 +35,6 @@ import axiosClient from '../config/axios';
 const apiService = {
         getUser: async () => getData("/get"),
         loginUser: async (data: any) => postData("/auth/signIn", data),
-        getMembresCo: async () => getData("/membres"),
 
 }; 
 

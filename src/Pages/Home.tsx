@@ -827,9 +827,6 @@ function Home() {
                     </button>
                   ))
                   }
-                  {/* <button className="w-[232px] text-[12px] md:text-[14px] py-2 bg-transparent border-[1.4px] border-brand_bleu_inter text-brand_bleu_inter font-medium h-[60px] rounded-t-[16px]">
-                    Questions Support
-                  </button> */}
                 </div>
               </div>
             </div>
