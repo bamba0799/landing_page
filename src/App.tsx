@@ -5,6 +5,9 @@ import Home from "./Pages/Home";
 import Service from "./Pages/Service";
 import Contact from "./Pages/Contact";
 import GeneralCondition from "./Pages/GeneralCondition";
+import About from "./Pages/About";
+import Rgpd from "./Pages/Rgpd";
+import Cgs from "./Pages/Cgs";
 
 function App() { 
   console.log("App");
@@ -19,7 +22,9 @@ function App() {
               <Route path="/service" element={<Service />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/condition-generale" element={<GeneralCondition />} />
-
+              <Route path="/rgpd" element={<Rgpd />} />
+              <Route path="/cgs" element={<Cgs />} />
+              <Route path="/about" element={<About />} />
             {/* </Route> */}
             {/* Other routes */}
           </Routes>

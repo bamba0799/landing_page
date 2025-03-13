@@ -15,6 +15,10 @@ const GeneralCondition = () => {
                 {/* <p className=" text-brand_bleu_inter text-[12px]">
 
                 </p> */}
+                <div className="flex flex-row  space-x-[20px] items-center mt-4">
+                    <a href="/rgpd">RGPD</a>
+                    <a href="/cgs">CGS</a>
+                </div>
                 <h1 className=" mb-4">En vigueur au 04/03/2024</h1>
 
                 <p className="">

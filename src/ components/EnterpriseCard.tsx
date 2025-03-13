@@ -32,14 +32,14 @@ const EnterpriseCard: React.FC<EnterpriseCardProps> = ({ description, data, seeO
         <ul className="px-[20px] py-4 space-y-3">
           {data.map((feature, index) => (
             <li key={index} className="flex items-center text-gray-700">
-              <Icon icon="mdi:check-circle-outline" className="text-brand_orange w-5 h-5 mr-2" />
+              <Icon icon="mdi:check-circle-outline" className="text-brand_orange flex-shrink-0 w-5 h-5 mr-2" />
               <span className=' text-[14px] text-brand_bleu_inter'>{feature}</span>
             </li>
           ))}
-          <button onClick={seeOver} className='ml-[5px] flex flex-row  items-center'>
+          {/* <button onClick={seeOver} className='ml-[5px] flex flex-row  items-center'>
             <div className='   text-[15px] text-brand_bleu_inter'>Voir plus</div>
             <Icon icon="akar-icons:arrow-right" className="text-brand_orange w-[20px] h-[20px] ml-2" />
-          </button>
+          </button> */}
         </ul>
       </div>
 

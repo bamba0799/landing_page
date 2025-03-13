@@ -246,10 +246,11 @@ function Home() {
   ]
 
   const entrepriseData1 = [
-    "Tous les avantages de Smart et Premium",
-    "Utilisateurs max par formule - (illimité)",
-    "2 Banques supplémentaires (+7€/mois) - (inclus)",
-    "Scénario inclus par année fiscale - (illimité)"
+    // "Tous les avantages de Smart et Premium",
+    "Mutli-entités",
+    "Autorisations - Rôles",
+    "Développement spécifique à votre activité",
+    "Support prioritaire",
 
 
     // "2 utilisateurs inclus",
@@ -330,13 +331,12 @@ function Home() {
       image: feature5,
       title: "Sécurité",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus pharetra, mollis cras. Luctus pharetra duis nisi, fermentum, ipsum et felis odio.",
+        "Renforcez la sécurité de vos transactions avec des mécanismes de validation avancés et des mesures anti-fraude. Les données Acwaba sont stockées sur un serveur dédié et sécurisé selon les normes standards, hébergé sur le cloud Microsoft Azure.",
     },
     {
       image: feature6,
       title: "Multi-entités",
-      description:
-        "Notre module analytics vous offre des graphes et un tableau de bord dynamique et intuitifs afin de comprendre et suivre vos statistiques en temps réel.",
+      description: "Structurez vos entités et suivez l'évolution de votre trésorerie grâce à une vue consolidée et une approche en comptabilité analytique. Avec les statistiques avancées d’Acwaba, identifiez facilement les entités les plus rentables ou celles générant les dépenses les plus importantes."
     },
   ];
 
@@ -538,7 +538,10 @@ function Home() {
             <FeatureCard
               image={feature1}
               title="Analyse de données avec IA"
-              description="Notre module analytics vous offre des graphes et un tableau de bord dynamique et intuitifs afin de comprendre et suivre vos statistiques en temps réel"
+              description="Notre module “IA analytics” vous offre en utilisant
+l’intelligence artificiel des graphes et un tableau de
+bord dynamique et intuitifs pour vous permettre de
+comprendre et suivre vos statistiques en temps réel"
             />
             <FeatureCard
               image={feature2}
@@ -548,7 +551,11 @@ function Home() {
             <FeatureCard
               image={feature3}
               title="Trésorerie"
-              description="Suivez votre trésorerie à la transaction près. Analyser vos postes de dépenses et vos recettes en un seul clic."
+              description="Suivez votre tresorerie à la transaction près. Analyser
+                vos postes de dépenses et vos recettes en un seul clic.
+  Simplifiez également vos opérations grâce à la
+gestion intuitive des avances de caisse et des stocks
+de marchandises."
             />
             <FeatureCard
               image={feature4}
@@ -558,12 +565,15 @@ function Home() {
             <FeatureCard
               image={feature5}
               title="Sécurité"
-              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus pharetra, mollis cras. Luctus pharetra duis nisi, fermentum, ipsum et felis odio."
+              description={"Renforcez la sécurité de vos transactions avec des mécanismes de validation avancés et des mesures anti-fraude. Les données Acwaba sont stockées sur un serveur dédié et sécurisé selon les normes standards."}
+
             />
             <FeatureCard
               image={feature6}
               title="Multi-entités"
-              description="Notre module analytics vous offre des graphes et un tableau de bord dynamique et intuitifs afin de comprendre et suivre vos statistiques en temps réel."
+              description="Structurez vos entités et suivez l'évolution de votre
+trésorerie grâce à une vue consolidée et une approche
+en comptabilité analytique."
             />
           </div>
           {/* feature mobile */}
@@ -710,7 +720,7 @@ function Home() {
                 <img src={Arrowleft} alt="" className=' object-cover w-full' />
               </div>
               <div className='w-[15%] flex justify-start ml-1 items-center  border-red-800'>
-                <a  className='text-[12px]  md:text-[16px] font-bold text-brand_bleu_fonce_500'>Voir tous les avantages</a>
+                <a className='text-[12px]  md:text-[16px] font-bold text-brand_bleu_fonce_500'>Voir tous les avantages</a>
                 <Icon icon="weui:arrow-filled" className="text-brand_bleu_fonce_500 w-5 h-5" />
               </div>
               <div className='w-[43%]  border-red-800'>
@@ -830,10 +840,10 @@ function Home() {
             </div>
           </div>
           {/* seventh */}
-          <div className='mt-[20px] w-full  border-red-800'>
+          <div className='mt-[20px] w-full border h-[500px]  border-red-800'>
             <div className="bg-white w-full pt-[10px] px-4 lg:px-16 flex flex-col lg:flex-row items-center justify-between">
               {/* Mobile: une seule fusée */}
-              <div className="lg:hidden">
+              <div className="md:hidden">
                 <img
                   src={Fusee3d} // Remplace par l'image réelle
                   alt="Rocket"
@@ -845,7 +855,7 @@ function Home() {
                 <p className="text-brand_orange text-[16px] md:text-[32px] font-bold">
                   Prêt à embarquer avec Acwaba ?
                 </p>
-                <h2 className="font-bold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] ">
+                <h2 className="font-bold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[30px] leading-[16px] md:leading-[40px] ">
                   Gagnez du temps dans <br /> votre facturation et <br /> la gestion de <br />
                   votre trésorerie.
                 </h2>
@@ -855,8 +865,8 @@ function Home() {
               {/* Image */}
               <div className="mt-8 lg:mt-0 lg:w-1/2 flex justify-center">
                 {/* Web: grille de fusées */}
-                <div className="hidden lg:flex ">
-                  <img src={Fusee3d} />
+                <div className="hidden md:flex ">
+                  <img src={Fusee3d} className=' transform rotate-[25deg] md:w-[400px] md:h-[400px]' />
                 </div>
               </div>
             </div>

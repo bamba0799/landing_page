@@ -44,7 +44,7 @@ const PricingCard: React.FC<PricingCardProps> = ({ title, description, price, da
                 <ul className="px-[20px] py-4 space-y-3">
                     {data.map((feature, index) => (
                         <li key={index} className="flex items-center text-gray-700">
-                            <Icon icon="mdi:check-circle-outline" className="text-brand_orange w-5 h-5 mr-2" />
+                            <Icon icon="mdi:check-circle-outline" className="text-brand_orange flex-shrink-0 w-5 h-5 mr-2" />
                             <span className=' text-[14px] text-brand_bleu_inter'>{feature}</span>
                         </li>
                     ))}
