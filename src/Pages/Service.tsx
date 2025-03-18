@@ -10,116 +10,103 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Service = () => {
-          const navigate = useNavigate();
-    
-    return (
-        <div className="bg-white min-h-screen">
-            <Main
-            getPage={(page) => {
-                if (page === "Accueil") {
-                    navigate('/')
-                }
-                if (page === "A propos") {
-                    // scrollToSection(aproposRef)
-                }
-                if (page === "Tarif") {
-                    // scrollToSection(tarifRef)
-                    navigate('/')
-                }
-                if (page === "Contact") {
-                    navigate('/contact')
-                }
-                if (page === "Ouvrir un compte") {
-                    // setOpenConnexionModal(true)
-                }
-            }}
-            onClickContact={() => navigate("/contact")} onClickAccueil={() => navigate("/")} onClickApropos={() => navigate("/apropos")} onClickTarif={() => navigate("/")}
+  const navigate = useNavigate();
 
-            >
-                <div className='mt-[30px] flex flex-col justify-between items-center'>
+  return (
+    <div className="bg-white min-h-screen">
+      <Main
+        getPage={(page) => {
+          if (page === "Ouvrir un compte") {
+            // setOpenConnexionModal(true)
+          }
+        }}
+        onClickContact={() => navigate("/contact")} onClickAccueil={() => navigate("/")} onClickApropos={() => navigate("/about")} onClickTarif={() => navigate("/")}
 
-                    <div className="bg-gradient-to-t from-[#011E3E] to-[#0E5588] w-full  md:h-[400px] h-[300px]">
-                        <div className=" mt-[30px] flex flex-col justify-center relative  border-red-500  text-white h-full text-center   bg-[url('/bgIcon.png')] w-full bg-full bg-right bg-no-repeat">
-                            {/* Titre principal */}
-                            <h1 className="text-[24px] md:text-[38px] font-bold">
-                                Nos Services et <span className="text-[#269AD2]">Projets</span>
-                            </h1>
+      >
+        <div className='mt-[30px] flex flex-col justify-between items-center'>
 
-                            {/* Breadcrumb */}
-                            <div className="mt-4 flex justify-center items-center text-sm ">
-                                <FaHome className="text-white mr-2" />
-                                <a href="/" className="text-white hover:underline">Accueil</a>
-                                <span className="mx-2 text-white text-[10px]">{">>"}</span>
-                                <span className="text-brand_orange">Services</span>
-                            </div>
+          <div className="bg-gradient-to-t from-[#011E3E] to-[#0E5588] w-full  md:h-[400px] h-[300px]">
+            <div className=" mt-[30px] flex flex-col justify-center relative  border-red-500  text-white h-full text-center   bg-[url('/bgIcon.png')] w-full bg-full bg-right bg-no-repeat">
+              {/* Titre principal */}
+              <h1 className="text-[24px] md:text-[38px] font-bold">
+                Nos Services et <span className="text-[#269AD2]">Projets</span>
+              </h1>
 
-                            <div className="flex flex-col items-center mt-[30px]  z-40 ">
-                                {/* Première flèche */}
-                                <motion.svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth={2}
-                                    stroke="currentColor"
-                                    className=" w-[30px] h-[30px] text-white " // Utilisation de -mt-1 pour réduire l'espace
-                                    animate={{ opacity: [0, 1, 0], y: [-3, 0, 3] }} // Même animation mais avec un délai différent
-                                    transition={{ repeat: Infinity, duration: 1, ease: "easeInOut", delay: 0.1 }}
-                                >
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12.75L12 19.5l-7.5-6.75" />
-                                </motion.svg>
+              {/* Breadcrumb */}
+              <div className="mt-4 flex justify-center items-center text-sm ">
+                <FaHome className="text-white mr-2" />
+                <a href="/" className="text-white hover:underline">Accueil</a>
+                <span className="mx-2 text-white text-[10px]">{">>"}</span>
+                <span className="text-brand_orange">Services</span>
+              </div>
 
-                                {/* Deuxième flèche plus proche */}
-                                <motion.svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth={2}
-                                    stroke="currentColor"
-                                    className=" w-[30px] h-[30px] text-white -mt-[8px]" // Utilisation de -mt-1 pour réduire l'espace
-                                    animate={{ opacity: [0, 1, 0], y: [-3, 0, 3] }} // Même animation mais avec un délai différent
-                                    transition={{ repeat: Infinity, duration: 1, ease: "easeInOut", delay: 0.3 }}
-                                >
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12.75L12 19.5l-7.5-6.75" />
-                                </motion.svg>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10'>
-                        <ServiceCard
-                            imageSrc={'../assets/bureaucrate.jpg'}
-                            title="Presentation Services 1"
-                            categories={["Digital", "Business"]}
-                        />
-                        <ServiceCard
-                            imageSrc={'../assets/bureaucrate.jpg'}
-                            title="Presentation Services 1"
-                            categories={["Digital", "Business"]}
-                        />
-                        <ServiceCard
-                            imageSrc={'../assets/bureaucrate.jpg'}
-                            title="Presentation Services 1"
-                            categories={["Digital", "Business"]}
-                        />
-                        <ServiceCard
-                            imageSrc={'../assets/bureaucrate.jpg'}
-                            title="Presentation Services 1"
-                            categories={["Digital", "Business"]}
-                        />
-                        <ServiceCard
-                            imageSrc={'../assets/bureaucrate.jpg'}
-                            title="Presentation Services 1"
-                            categories={["Digital", "Business"]}
-                        />
-                        <ServiceCard
-                            imageSrc={'../assets/bureaucrate.jpg'}
-                            title="Presentation Services 1"
-                            categories={["Digital", "Business"]}
-                        />
+              <div className="flex flex-col items-center mt-[30px]  z-40 ">
+                {/* Première flèche */}
+                <motion.svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2}
+                  stroke="currentColor"
+                  className=" w-[30px] h-[30px] text-white " // Utilisation de -mt-1 pour réduire l'espace
+                  animate={{ opacity: [0, 1, 0], y: [-3, 0, 3] }} // Même animation mais avec un délai différent
+                  transition={{ repeat: Infinity, duration: 1, ease: "easeInOut", delay: 0.1 }}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12.75L12 19.5l-7.5-6.75" />
+                </motion.svg>
+
+                {/* Deuxième flèche plus proche */}
+                <motion.svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2}
+                  stroke="currentColor"
+                  className=" w-[30px] h-[30px] text-white -mt-[8px]" // Utilisation de -mt-1 pour réduire l'espace
+                  animate={{ opacity: [0, 1, 0], y: [-3, 0, 3] }} // Même animation mais avec un délai différent
+                  transition={{ repeat: Infinity, duration: 1, ease: "easeInOut", delay: 0.3 }}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12.75L12 19.5l-7.5-6.75" />
+                </motion.svg>
+              </div>
+            </div>
+          </div>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10'>
+            <ServiceCard
+              imageSrc={'../assets/bureaucrate.jpg'}
+              title="Presentation Services 1"
+              categories={["Digital", "Business"]}
+            />
+            <ServiceCard
+              imageSrc={'../assets/bureaucrate.jpg'}
+              title="Presentation Services 1"
+              categories={["Digital", "Business"]}
+            />
+            <ServiceCard
+              imageSrc={'../assets/bureaucrate.jpg'}
+              title="Presentation Services 1"
+              categories={["Digital", "Business"]}
+            />
+            <ServiceCard
+              imageSrc={'../assets/bureaucrate.jpg'}
+              title="Presentation Services 1"
+              categories={["Digital", "Business"]}
+            />
+            <ServiceCard
+              imageSrc={'../assets/bureaucrate.jpg'}
+              title="Presentation Services 1"
+              categories={["Digital", "Business"]}
+            />
+            <ServiceCard
+              imageSrc={'../assets/bureaucrate.jpg'}
+              title="Presentation Services 1"
+              categories={["Digital", "Business"]}
+            />
 
 
-                    </div>
-                 {/* footer */}
-          <div  className='mt-[20px] w-full  border-red-800'>
+          </div>
+          {/* footer */}
+          <div className='mt-[20px] w-full  border-red-800'>
             <footer className="w-ful">
               <div className="relative flex flex-col md:flex-row ">
                 {/* 1 */}
@@ -212,10 +199,10 @@ const Service = () => {
               </div>
             </footer>
           </div>
-                </div>
-            </Main>
         </div>
-    );
+      </Main>
+    </div>
+  );
 }
 
 export default Service;
