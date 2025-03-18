@@ -35,7 +35,7 @@ const Contact = () => {
                     // setOpenConnexionModal(true)
                 }
             }}
-                onClickContact={() => navigate("/contact")} onClickAccueil={() => navigate("/")} onClickApropos={() => navigate("/apropos")} onClickTarif={() => navigate("/")}
+                onClickContact={() => navigate("/contact")} onClickAccueil={() => navigate("/")} onClickApropos={() => navigate("/about")} onClickTarif={() => navigate("/")}
             >
                 <div className='mt-[30px] flex flex-col justify-between items-center'>
 

@@ -127,7 +127,6 @@ function Home() {
 
 
   const accueilRef = useRef<HTMLDivElement>(null);
-  const aproposRef = useRef<HTMLDivElement>(null);
   const tarifRef = useRef<HTMLDivElement>(null);
   const contact = useRef<HTMLDivElement>(null);
   const partnerScrollRef = useRef<HTMLDivElement>(null);
@@ -439,9 +438,9 @@ function Home() {
             navigate('/')
           }
         }
-        if (page === "A propos") {
-          scrollToSection(aproposRef)
-        }
+        // if (page === "A propos") {
+        //   navigate('/about')
+        // }
         if (page === "Tarif") {
           scrollToSection(tarifRef)
         }
@@ -452,7 +451,7 @@ function Home() {
           setOpenConnexionModal(true)
         }
 
-      }} onClickContact={() => navigate("/contact")} onClickAccueil={() => scrollToSection(accueilRef)} onClickApropos={() => scrollToSection(aproposRef)} onClickTarif={() => scrollToSection(tarifRef)}>
+      }} onClickContact={() => navigate("/contact")} onClickAccueil={() => scrollToSection(accueilRef)} onClickApropos={() => navigate("/about")} onClickTarif={() => scrollToSection(tarifRef)}>
         <div className="mt-[30px]  flex flex-col justify-between items-center">
           {/* Section principale */}
           <section ref={accueilRef} className=" w-full relative bg-gradient-to-b from-[#011E3E] to-[#0E5588] text-white ">
@@ -590,7 +589,7 @@ en comptabilité analytique."
 
           </div>
           {/* second */}
-          <div style={{ backgroundSize: bgSize }} ref={aproposRef} className=" border-red-800  mt-[20px] px-[20px] md:px-[50px] bg-[#FAFAFA] relative h-[300px] lg:h-[400px] flex flex-col justify-center w-full  bg-[url('/bgIcon.png')] bg-full bg-center bg-no-repeat">
+          <div style={{ backgroundSize: bgSize }} className=" border-red-800  mt-[20px] px-[20px] md:px-[50px] bg-[#FAFAFA] relative h-[300px] lg:h-[400px] flex flex-col justify-center w-full  bg-[url('/bgIcon.png')] bg-full bg-center bg-no-repeat">
             {/* Texte (doit être au-dessus du cercle) */}
             <div className=" z-10 w-full  border-red-800 flex flex-col ">
 
