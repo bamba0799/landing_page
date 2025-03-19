@@ -8,8 +8,8 @@ const GeneralCondition = () => {
         <div className='flex-1'>
             <div className='h-[100px] bg-gradient-to-b from-[#0E5588] to-[#F3F4F6] w-full  flex flex-col justify-center items-center'>
                 <Icon onClick={() => navigate(-1)} icon="material-symbols:chevron-left-rounded" className="text-black w-8 h-8 ml-2 absolute left-0" />
-                <p className=" text-white font-bold text-[16px]">Condition générale</p>
-                <p className=" text-white font-bold text-[16px]"> d'utilisation</p>
+                <p className=" text-white font-bold text-[16px]">Condition générale d'utilisation</p>
+                {/* <p className=" text-white font-bold text-[16px]"> </p> */}
             </div>
             <div className=" overflow-y-scroll h-[calc(100vh-100px)] p-[20px] text-brand_bleu_inter text-[12px]">
                 {/* <p className=" text-brand_bleu_inter text-[12px]">
