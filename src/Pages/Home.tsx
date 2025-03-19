@@ -839,14 +839,14 @@ en comptabilité analytique."
             </div>
           </div>
           {/* seventh */}
-          <div className='mt-[20px] w-full border h-[500px]  border-red-800'>
+          <div className='mt-[20px] w-full  md:h-[500px]  border-red-800'>
             <div className="bg-white w-full pt-[10px] px-4 lg:px-16 flex flex-col lg:flex-row items-center justify-between">
               {/* Mobile: une seule fusée */}
               <div className="md:hidden">
                 <img
                   src={Fusee3d} // Remplace par l'image réelle
                   alt="Rocket"
-                  className="w-32 h-32"
+                  className="w-32 h-32 transform rotate-[25deg]"
                 />
               </div>
               {/* Texte */}
@@ -865,7 +865,7 @@ en comptabilité analytique."
               <div className="mt-8 lg:mt-0 lg:w-1/2 flex justify-center">
                 {/* Web: grille de fusées */}
                 <div className="hidden md:flex ">
-                  <img src={Fusee3d} className=' transform rotate-[25deg] md:w-[400px] md:h-[400px]' />
+                  <img src={Fusee3d} className='transform rotate-[25deg] md:w-[400px] md:h-[400px]' />
                 </div>
               </div>
             </div>
