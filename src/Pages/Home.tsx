@@ -9,7 +9,8 @@ import feature4 from "../assets/feature/feature4.png";
 import feature5 from "../assets/feature/feature5.png";
 import feature6 from "../assets/feature/feature6.png";
 
-import Fusee3d from "../assets/Fusee3d.gif";
+import FuseeAnimation from "../assets/Fusee3d.json";
+import Lottie from "lottie-react"
 
 import partner1 from "../assets/Logos/logos-partner-01.png";
 import partner2 from "../assets/Logos/logos-partner-02.png";
@@ -41,6 +42,8 @@ import ConnexionModal2 from '../ components/Modal/ConnexionModal2';
 import FeatureCardMobile from '../ components/FeatureCardMobile';
 import GeneralModal from '../ components/Modal/GeneralModal';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { navigateTo } from '../../services/utilis';
+
 
 const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -60,6 +63,7 @@ const useIsMobile = () => {
 };
 
 function Home() {
+
   const navigate = useNavigate();
   const isMobile = useIsMobile();
   const [tarifButtonId, setTarifButtonId] = useState(0);
@@ -85,6 +89,12 @@ function Home() {
     ]
   );
 
+
+  //  const handleNavigate = (route:any) => {
+  //   const navigate = useNavigate();
+  //   navigate(route);
+  //   localStorage.setItem('currentRoute', route);
+  // }
   const handleQuestion = (index: number) => {
     setSelectedIndex(index);
     if (index == 0) {
@@ -371,6 +381,14 @@ function Home() {
     setTarifButtonId(id);
   }
 
+  useEffect(() => {
+    localStorage.setItem('currentRoute', "/");
+  }, []);
+
+  // useEffect(() => {
+  //   scrollToSection(tarifRef)
+  // },[])
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -381,7 +399,7 @@ function Home() {
         setBgSize("90%"); // Tablette
         setTarifBgSize("200%")
       } else {
-        setBgSize("90%"); // PC
+        setBgSize("90%"); 
         setTarifBgSize("200%")
       }
     };
@@ -391,6 +409,7 @@ function Home() {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
   useEffect(() => {
     const scrollInterval = setInterval(() => {
       if (partnerScrollRef.current) {
@@ -430,7 +449,8 @@ function Home() {
 
   return (
     <div className="bg-white min-h-screen z-[100px]">
-      <Main getPage={(page) => {
+      <Main 
+      getPage={(page) => {
         if (page === "Accueil") {
           if (currentPage === "/") {
             scrollToSection(accueilRef)
@@ -438,9 +458,12 @@ function Home() {
             navigate('/')
           }
         }
-        // if (page === "A propos") {
-        //   navigate('/about')
-        // }
+        if (page === "A propos") {
+          navigate('/about')
+        }
+        if(page === "Services"){
+          navigate('/service')
+      }
         if (page === "Tarif") {
           scrollToSection(tarifRef)
         }
@@ -451,7 +474,8 @@ function Home() {
           setOpenConnexionModal(true)
         }
 
-      }} onClickContact={() => navigate("/contact")} onClickAccueil={() => scrollToSection(accueilRef)} onClickApropos={() => navigate("/about")} onClickTarif={() => scrollToSection(tarifRef)}>
+      }}
+      onClickContact={() => navigateTo(navigate, "/contact")} onClickAccueil={() => scrollToSection(accueilRef)} onClickApropos={() => navigateTo(navigate, "/about")} onClickTarif={() => scrollToSection(tarifRef)}>
         <div className="mt-[30px]  flex flex-col justify-between items-center">
           {/* Section principale */}
           <section ref={accueilRef} className=" w-full relative bg-gradient-to-b from-[#011E3E] to-[#0E5588] text-white ">
@@ -471,7 +495,7 @@ function Home() {
                 </h1>
                 <p className=" font-[500px] normal   text-[12px] md:text-[20px] mb-6">
                   Facturez vos clients, et suivez votre trésorerie aisément,
-                  tout en focus sur votre activité
+                  tout en restant focus sur votre activité
                 </p>
                 {/* Boutons */}
                 <div className="w-full flex flex-col  md:flex-row  items-center space-y-4 md:space-y-0 md:space-x-3">
@@ -843,11 +867,12 @@ en comptabilité analytique."
             <div className="bg-white w-full pt-[10px] px-4 lg:px-16 flex flex-col lg:flex-row items-center justify-between">
               {/* Mobile: une seule fusée */}
               <div className="md:hidden">
-                <img
+                {/* <img
                   src={Fusee3d} // Remplace par l'image réelle
                   alt="Rocket"
                   className="w-32 h-32 transform rotate-[25deg]"
-                />
+                /> */}
+                   <Lottie animationData={FuseeAnimation} className="w-32 h-32 transform rotate-[25deg]" />
               </div>
               {/* Texte */}
               <div className="lg:w-1/2 text-center lg:text-left mt-[10px] lg:mt-0  border-black flex flex-col items-center md:items-start">
@@ -865,7 +890,8 @@ en comptabilité analytique."
               <div className="mt-8 lg:mt-0 lg:w-1/2 flex justify-center">
                 {/* Web: grille de fusées */}
                 <div className="hidden md:flex ">
-                  <img src={Fusee3d} className='transform rotate-[25deg] md:w-[400px] md:h-[400px]' />
+                  {/* <img src={Fusee3d} className='transform rotate-[25deg] md:w-[400px] md:h-[400px]' /> */}
+                  <Lottie animationData={FuseeAnimation} className="transform rotate-[25deg] md:w-[400px] md:h-[400px]" />
                 </div>
               </div>
             </div>
@@ -924,11 +950,11 @@ en comptabilité analytique."
                       <div>
                         <h2 className=" font-bold text-brand_bleu_inter mb-4">Pages</h2>
                         <ul className="space-y-[24px] text-brand_bleu_inter">
-                          <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">Accueil</a></li>
-                          <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">À propos</a></li>
-                          <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">Tarif</a></li>
-                          <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">Contact</a></li>
-                          <li><a href="/condition-generale" className="hover:underline text-[14px] md:text-[16px]">Conditions générales</a></li>
+                          <li><a onClick={() => navigateTo(navigate, "/")} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Accueil</a></li>
+                          <li><a onClick={() => navigateTo(navigate, "/about")}  className="hover:underline text-[14px] md:text-[16px] cursor-pointer">À propos</a></li>
+                          <li><a onClick={() => scrollToSection(tarifRef)} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Tarif</a></li>
+                          <li><a onClick={() => navigateTo(navigate, "/contact")}  className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Contact</a></li>
+                          <li><a onClick={() => navigate("/condition-generale")}  className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Conditions générales</a></li>
                         </ul>
                       </div>
 

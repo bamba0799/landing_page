@@ -9,6 +9,7 @@ import SecondButton from '../ components/Button/SecondButton';
 import { Icon } from '@iconify/react';
 import Logo_acwaba_blanc from "../assets/Logos/Logo_acwaba-blanc.svg";
 import { useNavigate } from 'react-router-dom';
+import { navigateTo } from '../../services/utilis';
 
 
 
@@ -17,7 +18,8 @@ const Contact = () => {
 
     return (
         <div className="bg-white min-h-screen">
-            <Main getPage={(page) => {
+            <Main
+            getPage={(page) => {
                 if (page === "Accueil") {
                     navigate('/')
                 }
@@ -28,6 +30,9 @@ const Contact = () => {
                     // scrollToSection(tarifRef)
                     navigate('/')
                 }
+                if(page === "Services"){
+                    navigate('/service')
+                }
                 if (page === "Contact") {
                     navigate('/contact')
                 }
@@ -35,7 +40,7 @@ const Contact = () => {
                     // setOpenConnexionModal(true)
                 }
             }}
-                onClickContact={() => navigate("/contact")} onClickAccueil={() => navigate("/")} onClickApropos={() => navigate("/about")} onClickTarif={() => navigate("/")}
+                onClickContact={() => navigateTo(navigate, "/contact")} onClickAccueil={() => navigateTo(navigate, "/")} onClickApropos={() => navigateTo(navigate, "/about")} onClickTarif={() => navigateTo(navigate, "/")}
             >
                 <div className='mt-[30px] flex flex-col justify-between items-center'>
 
@@ -107,7 +112,7 @@ const Contact = () => {
 
                                             <FaMapMarkerAlt className="text-brand_bleu_inter" />
                                         </div>
-                                        <p className='text-[14px] text-brand_bleu_inter'>25 Rue de Ponthieu - 75008, Paris - France</p>
+                                        <p className='text-[14px] text-brand_bleu_inter'>contact@acwaba.com</p>
                                     </div>
                                 </div>
                                 <div className='text-[16px] text-brand_bleu_inter font-bold mt-3'>
@@ -116,7 +121,8 @@ const Contact = () => {
                                         <div className='w-[30px] md:w-[40px] h-[30px] md:h-[40px] flex items-center justify-center rounded-full bg-[#CFE8F4]'>
                                             <Icon icon={'ic:sharp-email'} />
                                         </div>
-                                        <p className='text-[14px] text-brand_bleu_inter'>contact@acwaba.com</p>
+                                        <p className='text-[14px] text-brand_bleu_inter'>25 Rue de Ponthieu - 75008, Paris - France</p>
+
                                     </div>
                                 </div>
 
@@ -161,6 +167,7 @@ const Contact = () => {
                             </div>
                         </div>
                     </div>
+                    {/* footer */}
                     {/* footer */}
                     <div className='mt-[20px] w-full  border-red-800'>
                         <footer className="w-ful">
@@ -213,11 +220,11 @@ const Contact = () => {
                                             <div>
                                                 <h2 className=" font-bold text-brand_bleu_inter mb-4">Pages</h2>
                                                 <ul className="space-y-[24px] text-brand_bleu_inter">
-                                                    <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">Accueil</a></li>
-                                                    <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">À propos</a></li>
-                                                    <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">Tarif</a></li>
-                                                    <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">Contact</a></li>
-                                                    <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">Conditions générales</a></li>
+                                                    <li><a onClick={() => navigateTo(navigate, "/")} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Accueil</a></li>
+                                                    <li><a onClick={() => navigateTo(navigate, "/about")} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">À propos</a></li>
+                                                    <li><a onClick={() => navigateTo(navigate, "/")} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Tarif</a></li>
+                                                    <li><a onClick={() => navigateTo(navigate, "/contact")} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Contact</a></li>
+                                                    <li><a onClick={() => navigate("/condition-generale")} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Conditions générales</a></li>
                                                 </ul>
                                             </div>
 

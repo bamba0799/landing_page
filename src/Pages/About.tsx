@@ -6,6 +6,7 @@ import facebook from "../assets/socialNetwork/facebook.png";
 import lIn from "../assets/socialNetwork/lIn.png";
 import youtube from "../assets/socialNetwork/youtube.png";
 import { motion } from "framer-motion";
+import { navigateTo } from "../../services/utilis";
 
 
 const About = () => {
@@ -13,25 +14,29 @@ const About = () => {
 
     return (
         <div className="bg-white min-h-screen">
-            <Main getPage={(page) => {
-                if (page === "Accueil") {
-                    navigate('/')
-                }
-                if (page === "A propos") {
-                    // scrollToSection(aproposRef)
-                }
-                if (page === "Tarif") {
-                    // scrollToSection(tarifRef)
-                    navigate('/')
-                }
-                if (page === "Contact") {
-                    navigate('/contact')
-                }
-                if (page === "Ouvrir un compte") {
-                    // setOpenConnexionModal(true)
-                }
-            }}
-                onClickContact={() => navigate("/contact")} onClickAccueil={() => navigate("/")} onClickApropos={() => navigate("/apropos")} onClickTarif={() => navigate("/")}
+            <Main
+                getPage={(page) => {
+                    if (page === "Accueil") {
+                        navigate('/')
+                    }
+                    if (page === "A propos") {
+                        // scrollToSection(aproposRef)
+                    }
+                    if (page === "Services") {
+                        navigate('/service')
+                    }
+                    if (page === "Tarif") {
+                        // scrollToSection(tarifRef)
+                        navigate('/')
+                    }
+                    if (page === "Contact") {
+                        navigate('/contact')
+                    }
+                    if (page === "Ouvrir un compte") {
+                        // setOpenConnexionModal(true)
+                    }
+                }}
+                onClickContact={() => navigateTo(navigate, "/contact")} onClickAccueil={() => navigateTo(navigate, "/")} onClickApropos={() => navigateTo(navigate, "/about")} onClickTarif={() => navigateTo(navigate, "/")}
             >
                 <div className="bg-gradient-to-t from-[#011E3E] to-[#0E5588] w-full  md:h-[400px] h-[300px]">
                     <div className=" mt-[30px] flex flex-col justify-center relative  border-red-500  text-white h-full text-center   bg-[url('/bgIcon.png')] w-full bg-full bg-right bg-no-repeat">
@@ -179,11 +184,11 @@ const About = () => {
                                         <div>
                                             <h2 className=" font-bold text-brand_bleu_inter mb-4">Pages</h2>
                                             <ul className="space-y-[24px] text-brand_bleu_inter">
-                                                <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">Accueil</a></li>
-                                                <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">À propos</a></li>
-                                                <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">Tarif</a></li>
-                                                <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">Contact</a></li>
-                                                <li><a href="/condition-generale" className="hover:underline text-[14px] md:text-[16px]">Conditions générales</a></li>
+                                                <li><a onClick={() => navigateTo(navigate, "/")} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Accueil</a></li>
+                                                <li><a onClick={() => navigateTo(navigate, "/about")} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">À propos</a></li>
+                                                <li><a onClick={() => navigateTo(navigate, "/")} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Tarif</a></li>
+                                                <li><a onClick={() => navigateTo(navigate, "/contact")} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Contact</a></li>
+                                                <li><a onClick={() => navigate("/condition-generale")} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Conditions générales</a></li>
                                             </ul>
                                         </div>
 

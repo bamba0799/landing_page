@@ -7,6 +7,7 @@ import youtube from "../assets/socialNetwork/youtube.png";
 import facebook from "../assets/socialNetwork/facebook.png";
 import lIn from "../assets/socialNetwork/lIn.png";
 import { useNavigate } from 'react-router-dom';
+import { navigateTo } from '../../services/utilis';
 
 
 const Service = () => {
@@ -16,11 +17,27 @@ const Service = () => {
     <div className="bg-white min-h-screen">
       <Main
         getPage={(page) => {
+          if (page === "Accueil") {
+            navigate('/')
+          }
+          if (page === "A propos") {
+            // scrollToSection(aproposRef)
+          }
+          if (page === "Tarif") {
+            // scrollToSection(tarifRef)
+            navigate('/')
+          }
+          if (page === "Services") {
+            navigate('/service')
+          }
+          if (page === "Contact") {
+            navigate('/contact')
+          }
           if (page === "Ouvrir un compte") {
             // setOpenConnexionModal(true)
           }
         }}
-        onClickContact={() => navigate("/contact")} onClickAccueil={() => navigate("/")} onClickApropos={() => navigate("/about")} onClickTarif={() => navigate("/")}
+        onClickContact={() => navigateTo(navigate, "/contact")} onClickAccueil={() => navigateTo(navigate, "/")} onClickApropos={() => navigateTo(navigate, "/about")} onClickTarif={() => navigateTo(navigate, "/")}
 
       >
         <div className='mt-[30px] flex flex-col justify-between items-center'>
@@ -157,11 +174,11 @@ const Service = () => {
                       <div>
                         <h2 className=" font-bold text-brand_bleu_inter mb-4">Pages</h2>
                         <ul className="space-y-[24px] text-brand_bleu_inter">
-                          <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">Accueil</a></li>
-                          <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">À propos</a></li>
-                          <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">Tarif</a></li>
-                          <li><a href="#" className="hover:underline text-[14px] md:text-[16px]">Contact</a></li>
-                          <li><a href="/condition-generale" className="hover:underline text-[14px] md:text-[16px]">Conditions générales</a></li>
+                          <li><a onClick={() => navigateTo(navigate, "/")} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Accueil</a></li>
+                          <li><a onClick={() => navigateTo(navigate, "/about")} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">À propos</a></li>
+                          <li><a onClick={() => navigateTo(navigate, "/")} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Tarif</a></li>
+                          <li><a onClick={() => navigateTo(navigate, "/contact")} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Contact</a></li>
+                          <li><a onClick={() => navigate("/condition-generale")} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Conditions générales</a></li>
                         </ul>
                       </div>
 
