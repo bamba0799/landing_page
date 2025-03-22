@@ -13,9 +13,7 @@ const sideBarItems = [
         name: "Accueil",
     },
     {
-
         name: "A propos",
-
     },
     {
         name: "Tarif",
@@ -29,14 +27,10 @@ const sideBarItems = [
     {
         name: "Connexion",
     },
-
     {
         name: "Ouvrir un compte",
     },
 ];
-
-
-
 
 
 const SideBar: React.FC<SideBarProps> = ({ isSidebarOpen, toggleSideBar, getPage }) => {

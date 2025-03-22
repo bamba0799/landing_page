@@ -178,6 +178,7 @@ const Service = () => {
                           <li><a onClick={() => navigateTo(navigate, "/about")} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">À propos</a></li>
                           <li><a onClick={() => navigateTo(navigate, "/")} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Tarif</a></li>
                           <li><a onClick={() => navigateTo(navigate, "/contact")} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Contact</a></li>
+                          <li><a onClick={() => navigateTo(navigate, "/service")} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Services</a></li>
                           <li><a onClick={() => navigate("/condition-generale")} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Conditions générales</a></li>
                         </ul>
                       </div>
