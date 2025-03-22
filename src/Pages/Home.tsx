@@ -50,10 +50,9 @@ const useIsMobile = () => {
 
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsMobile(window.innerWidth < 768); // Mobile si < 768px (taille md dans Tailwind)
-    };
+      setIsMobile(window.innerWidth < 768);     };
 
-    checkScreenSize(); // Vérification initiale
+    checkScreenSize();
     window.addEventListener('resize', checkScreenSize);
 
     return () => window.removeEventListener('resize', checkScreenSize);
@@ -89,12 +88,6 @@ function Home() {
     ]
   );
 
-
-  //  const handleNavigate = (route:any) => {
-  //   const navigate = useNavigate();
-  //   navigate(route);
-  //   localStorage.setItem('currentRoute', route);
-  // }
   const handleQuestion = (index: number) => {
     setSelectedIndex(index);
     if (index == 0) {
@@ -154,17 +147,15 @@ function Home() {
 
   const scrollLeft = () => {
     if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: -300, behavior: "smooth" }); // Défiler vers la gauche
+      scrollRef.current.scrollBy({ left: -300, behavior: "smooth" }); 
     }
   };
 
   const scrollRight = () => {
     if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: 300, behavior: "smooth" }); // Défiler vers la droite
+      scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
     }
   };
-
-
 
   const smartData1 = [
     "1 utilisateurs inclus",
@@ -399,7 +390,7 @@ function Home() {
         setBgSize("90%"); // Tablette
         setTarifBgSize("200%")
       } else {
-        setBgSize("90%"); 
+        setBgSize("90%");
         setTarifBgSize("200%")
       }
     };
@@ -449,39 +440,39 @@ function Home() {
 
   return (
     <div className="bg-white min-h-screen z-[100px]">
-      <Main 
-      getPage={(page) => {
-        if (page === "Accueil") {
-          if (currentPage === "/") {
-            scrollToSection(accueilRef)
-          } else {
-            navigate('/')
+      <Main
+        getPage={(page) => {
+          if (page === "Accueil") {
+            if (currentPage === "/") {
+              scrollToSection(accueilRef)
+            } else {
+              navigate('/')
+            }
           }
-        }
-        if (page === "A propos") {
-          navigate('/about')
-        }
-        if(page === "Services"){
-          navigate('/service')
-      }
-        if (page === "Tarif") {
-          scrollToSection(tarifRef)
-        }
-        if (page === "Contact") {
-          navigate('/contact')
-        }
-        if (page === "Ouvrir un compte") {
-          setOpenConnexionModal(true)
-        }
+          if (page === "A propos") {
+            navigate('/about')
+          }
+          if (page === "Services") {
+            navigate('/service')
+          }
+          if (page === "Tarif") {
+            scrollToSection(tarifRef)
+          }
+          if (page === "Contact") {
+            navigate('/contact')
+          }
+          if (page === "Ouvrir un compte") {
+            setOpenConnexionModal(true)
+          }
 
-      }}
-      onClickContact={() => navigateTo(navigate, "/contact")} onClickAccueil={() => scrollToSection(accueilRef)} onClickApropos={() => navigateTo(navigate, "/about")} onClickTarif={() => scrollToSection(tarifRef)}>
+        }}
+        onClickContact={() => navigateTo(navigate, "/contact")} onClickAccueil={() => scrollToSection(accueilRef)} onClickApropos={() => navigateTo(navigate, "/about")} onClickTarif={() => scrollToSection(tarifRef)}>
         <div className="mt-[30px]  flex flex-col justify-between items-center">
           {/* Section principale */}
           <section ref={accueilRef} className=" w-full relative bg-gradient-to-b from-[#011E3E] to-[#0E5588] text-white ">
-            <div className=" border-orange-800 mx-[20px] md:mx-[50px] mt-[50px] md:mt-[100px]  flex flex-col lg:flex-row items-center lg:justify-between ">
+            <div className=" border-orange-800 mx-[20px] md:mx-[50px] mt-[50px] md:mt-[100px]  flex flex-col md:flex-row items-center md:justify-between ">
               {/* Image principale */}
-              <div className="w-full  border-red-800 flex justify-center lg:hidden mb-6">
+              <div className="w-full  border-red-800 flex justify-center md:hidden mb-6">
                 <img
                   src={homeImage1}
                   alt="Illustration de la page d'accueil"
@@ -509,7 +500,7 @@ function Home() {
                 {/* Flèche vers le bas */}
 
               </div>
-              <div className="  w-full lg:w-[50%] hidden lg:flex justify-center  ">
+              <div className="  w-full md:w-[50%] hidden md:flex justify-center  ">
                 <img
                   src={homeImage1}
                   alt="Illustration de la page d'accueil"
@@ -637,7 +628,7 @@ en comptabilité analytique."
                     </div>
                   </div>
                 </div>
-                <div className='mt-[20px] z-10  w-full px-[20px] hidden md:flex  border-red-600 md:w-[35%] '>
+                <div className='mt-[20px] z-10  w-full px-[20px] hidden md:flex  border-red-600 md:w-[38%] lg:w-[35%]'>
                   <div className=' w-full flex flex-col text-starts justify-center'>
                     <p className='text-brand_orange text-[16px] md:text-[24px] font-bold'>Notre espace analytique dynamique</p>
                     <p className=' text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-extrabold'>Suivez la rentabilité de votre activité en temps réels</p>
@@ -648,10 +639,10 @@ en comptabilité analytique."
             </div>
           </div>
           {/* third */}
-          <div className='px-[30px] mt-[30px] md:mt-[20px]  border-blue-600 w-full flex flex-col md:flex-row justify-between md:px-[130px]'>
+          <div className='px-[30px] mt-[30px] md:mt-[20px]  border-blue-600 w-full flex flex-col md:flex-row justify-between md:px-[20px] lg:px-[130px]'>
             <div className='w-full flex flex-col items-center justify-between md:w-[40%]   border-red-800'>
-              <div className='mt-[20px] z-10 md:mt-[10px] w-full px-[20px] md:px-[50px]  border-red-600'>
-                <div className=' w-full flex flex-col text-center md:text-start md:w-[350px] justify-center'>
+              <div className='mt-[20px] z-10 md:mt-[60px] lg:mt-[10px] w-full px-[20px] md:px-[50px]  border-red-600'>
+                <div className=' w-full flex flex-col text-center md:text-start md:w-[290px] lg:w-[350px] justify-center'>
                   <p className='text-brand_orange text-[16px] md:text-[24px] font-bold'>Nos cibles</p>
                   <p className=' text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-extrabold'>Découvrez nos cibles pour qui Acwaba est adapté</p>
                 </div>
@@ -660,7 +651,7 @@ en comptabilité analytique."
                 <img src={targetBgImage} alt="" className='opacity-5 hidden md:flex' />
               </div>
             </div>
-            <div className='mt-[10px] md:mt-[0px] border-red-400 flex flex-col items-center '>
+            <div className='mt-[10px] md:mt-[50px] lg:mt-[0px] border-red-400 flex flex-col items-center '>
               <div className='flex flex-row  items-center space-x-[9px] md:space-x-[20px]'>
                 <div>
                   <TargetCard image={tfeImage} title='TFE' color='orange' />
@@ -703,7 +694,7 @@ en comptabilité analytique."
               ))}
             </div>
             {/* Conteneur scrollable */}
-            <div className="mt-[20px] pb-[10px]  border-blue-700 w-full  px-[20px] pt-10  z-10 overflow-x-scroll md:overflow-hidden flex space-x-5 md:justify-center scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-200">
+            <div className="mt-[20px] pb-[10px]  border-blue-700 w-full  px-[20px] pt-10  z-10 overflow-x-scroll lg:overflow-hidden flex space-x-5 lg:justify-center scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-200">
               <div className={`flex-shrink-0 w-[90%]  md:w-[438px] h-[450px]`}>
                 <PricingCard
                   onClick={() => setOpenConnexionModal(true)}
@@ -753,7 +744,7 @@ en comptabilité analytique."
           </div>
           {/* fifth */}
           <div className="bg-white w-full  border-blue-600 overflow-hidden">
-            <div className='  flex flex-col md:flex-row mt-[20px] z-10 md:mt-[10px] w-full   px-[20px] md:ml-[60px]  border-red-600'>
+            <div className='  flex flex-col md:flex-row mt-[20px] z-10 md:mt-[10px] w-full   px-[20px] md:ml-[30px] lg:ml-[60px]  border-red-600'>
               <div className=' w-full md:w-[50%]  flex flex-col text-center md:text-start  justify-center'>
                 <p className='text-brand_orange text-[16px] md:text-[32px] font-bold'>Nos clients</p>
                 <p className='font-extrabold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-poppins'>Observez ce que disent <br /> ceux qui ont testé Acwaba</p>
@@ -778,7 +769,7 @@ en comptabilité analytique."
               </div>
             </div>
             <div className=' hidden md:flex relative w-full '>
-              <div className=" absolute -top-10 right-0 flex items-start justify-start px-[20px] pt-[20px] w-[800px] h-[368px] bg-surface_orange rounded-md">
+              <div className=" absolute -top-10 right-0 flex items-start justify-start px-[20px] pt-[20px]  w-[400px] lg:w-[800px] h-[368px] bg-surface_orange rounded-md">
                 <button onClick={scrollLeft} className="w-[60px] h-[60px] flex items-center justify-center rounded-full  border-orange-400 bg-white text-orange-500 hover:bg-brand_orange hover:text-white">
                   <Icon icon="heroicons:arrow-left-16-solid" className="w-5 h-5" />
                 </button>
@@ -794,7 +785,7 @@ en comptabilité analytique."
                 {testimonials.map((testimonial: any, index: number, self: any[]) => (
                   <div
                     key={testimonial.id}
-                    className={`bg-white rounded-[16px] ${index == 0 ? "ml-[20px] md:ml-[60px]" : ""}  ${(index + 1) == self.length ? "mr-[20px] md:mr-[60px]" : ""} shadow-md shadow-black/30 p-6 flex-shrink-0 w-[85%] md:w-[423px] h-[314px] flex flex-col justify-between  border-red-700 pb-[40px]`}
+                    className={`bg-white rounded-[16px] ${index == 0 ? "ml-[20px] md:ml-[20px] lg:ml-[60px]" : ""}  ${(index + 1) == self.length ? "mr-[20px] md:mr-[60px]" : ""} shadow-md shadow-black/30 p-6 flex-shrink-0 w-[85%] md:w-[423px] h-[314px] flex flex-col justify-between  border-red-700 pb-[40px]`}
                   >
                     <p className=" text-neutral_gris text-[14px] mb-4">{testimonial.text}</p>
                     <div className="flex items-center space-x-3">
@@ -818,7 +809,7 @@ en comptabilité analytique."
               style={{ backgroundImage: `url(${questionbg})` }}
             >
               {/* Section FAQ */}
-              <div className="flex flex-col justify-between bg-white  border-red-600 bg-opacity-90 w-[350px] pt-[20px] md:w-[544px]  rounded-[16px] px-[20px] md:px-[24px] lg:ml-auto">
+              <div className="flex flex-col justify-between bg-white  border-red-600 bg-opacity-90 w-[350px] pt-[20px] md:w-[544px]  rounded-[16px] px-[20px] md:px-[24px] md:ml-auto">
                 <div className='mt-[20px] md:mt-[30px]'>
                   <p className="text-brand_orange font-bold text-[16px] md:text-[24px] text-center md:text-start">FAQ</p>
                   <h2 className="text-brand_bleu_fonce_500 font-extrabold text-[20px] md:text-[32px] mb-[12px] text-center md:text-start">
@@ -864,18 +855,13 @@ en comptabilité analytique."
           </div>
           {/* seventh */}
           <div className='mt-[20px] w-full  md:h-[500px]  border-red-800'>
-            <div className="bg-white w-full pt-[10px] px-4 lg:px-16 flex flex-col lg:flex-row items-center justify-between">
+            <div className="bg-white w-full pt-[10px] px-4 md:px-16 flex flex-col md:flex-row items-center justify-between">
               {/* Mobile: une seule fusée */}
               <div className="md:hidden">
-                {/* <img
-                  src={Fusee3d} // Remplace par l'image réelle
-                  alt="Rocket"
-                  className="w-32 h-32 transform rotate-[25deg]"
-                /> */}
-                   <Lottie animationData={FuseeAnimation} className="w-32 h-32 transform rotate-[25deg]" />
+                <Lottie animationData={FuseeAnimation} className="w-32 h-32 transform rotate-[25deg]" />
               </div>
               {/* Texte */}
-              <div className="lg:w-1/2 text-center lg:text-left mt-[10px] lg:mt-0  border-black flex flex-col items-center md:items-start">
+              <div className="md:w-1/2 text-center md:text-left mt-[10px] md:mt-0  border-black flex flex-col items-center md:items-start">
                 <p className="text-brand_orange text-[16px] md:text-[32px] font-bold">
                   Prêt à embarquer avec Acwaba ?
                 </p>
@@ -887,7 +873,7 @@ en comptabilité analytique."
               </div>
 
               {/* Image */}
-              <div className="mt-8 lg:mt-0 lg:w-1/2 flex justify-center">
+              <div className="mt-8 md:mt-0 md:w-1/2 flex justify-center">
                 {/* Web: grille de fusées */}
                 <div className="hidden md:flex ">
                   {/* <img src={Fusee3d} className='transform rotate-[25deg] md:w-[400px] md:h-[400px]' /> */}
@@ -951,10 +937,11 @@ en comptabilité analytique."
                         <h2 className=" font-bold text-brand_bleu_inter mb-4">Pages</h2>
                         <ul className="space-y-[24px] text-brand_bleu_inter">
                           <li><a onClick={() => navigateTo(navigate, "/")} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Accueil</a></li>
-                          <li><a onClick={() => navigateTo(navigate, "/about")}  className="hover:underline text-[14px] md:text-[16px] cursor-pointer">À propos</a></li>
+                          <li><a onClick={() => navigateTo(navigate, "/about")} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">À propos</a></li>
                           <li><a onClick={() => scrollToSection(tarifRef)} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Tarif</a></li>
-                          <li><a onClick={() => navigateTo(navigate, "/contact")}  className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Contact</a></li>
-                          <li><a onClick={() => navigate("/condition-generale")}  className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Conditions générales</a></li>
+                          <li><a onClick={() => navigateTo(navigate, "/contact")} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Contact</a></li>
+                          <li><a onClick={() => navigateTo(navigate, "/service")} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Services</a></li>
+                          <li><a onClick={() => navigate("/condition-generale")} className="hover:underline text-[14px] md:text-[16px] cursor-pointer">Conditions générales</a></li>
                         </ul>
                       </div>
 

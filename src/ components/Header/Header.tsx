@@ -49,18 +49,18 @@ const Header: React.FC<HeaderProps> = ({ onClickAccueil, onClickTarif, onClickAp
   return (
     <nav className=" border-red-500 fixed top-0 left-0 right-0 z-50 w-[100%] max-w-full bg-gradient-to-b from-white to-[#f7f8f8]">
       {/* <h2>Header</h2> */}
-      <div className="px-3 py-3 lg:px-5 lg:pl-3 ">
+      <div className="px-3 py-3 md:px-5 md:pl-3 ">
         <div className="flex flex-row items-center justify-between">
           <div className=" flex flex-row items-center ">
             <img className=" absolute w-[140px] h-[140px] " src={logoNoir} alt=""  />
           </div>
 
-          <div className="hidden lg:flex flex-row space-x-[50px]">
+          <div className="hidden md:flex flex-row md:space-x-[20px] md:ml-[100px] lg:ml-[100px] lg:space-x-[50px]">
           {menuItems.map((item, index) => (
             <p
               key={index}
               onClick={item.onClick}
-              className={`${(activeTab==item.path && item.path!="/tarif")?"text-brand_orange":"text-brand_bleu_fonce_500"} font-semibold text-[16px] cursor-pointer`}
+              className={`${(activeTab==item.path && item.path!="/tarif")?"text-brand_orange":"text-brand_bleu_fonce_500"} hover:underline font-semibold text-[16px] cursor-pointer`}
             >
               {item.name}
             </p>
@@ -71,7 +71,7 @@ const Header: React.FC<HeaderProps> = ({ onClickAccueil, onClickTarif, onClickAp
               <Icon icon="vaadin:menu" className="w-4 h-4 text-white/80" />
             </button>
           </div>
-          <div className="hidden  lg:flex flex-row items-center space-x-5 ">
+          <div className="hidden  md:flex flex-row items-center md:space-x-3 lg:space-x-5 ">
             <SecondButton onClick={() => console.log("rrr")} bgColor="bg-transoarent" textColor="text-brand_bleu_inter" text={"Se connecter"} className="border border-brand_bleu_inter" />
             <SecondButton onClick={() => setOpenConnexionModal(true)} text={"Ouvrir un compte"} />
           </div>
