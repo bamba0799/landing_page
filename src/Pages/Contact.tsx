@@ -19,27 +19,27 @@ const Contact = () => {
     return (
         <div className="bg-white min-h-screen">
             <Main
-            getPage={(page) => {
-                if (page === "Accueil") {
-                    navigate('/')
-                }
-                if (page === "A propos") {
-                    // scrollToSection(aproposRef)
-                }
-                if (page === "Tarif") {
-                    // scrollToSection(tarifRef)
-                    navigate('/')
-                }
-                if(page === "Services"){
-                    navigate('/service')
-                }
-                if (page === "Contact") {
-                    navigate('/contact')
-                }
-                if (page === "Ouvrir un compte") {
-                    // setOpenConnexionModal(true)
-                }
-            }}
+                getPage={(page) => {
+                    if (page === "Accueil") {
+                        navigate('/')
+                    }
+                    if (page === "A propos") {
+                        // scrollToSection(aproposRef)
+                    }
+                    if (page === "Tarif") {
+                        // scrollToSection(tarifRef)
+                        navigate('/')
+                    }
+                    if (page === "Services") {
+                        navigate('/service')
+                    }
+                    if (page === "Contact") {
+                        navigate('/contact')
+                    }
+                    if (page === "Ouvrir un compte") {
+                        // setOpenConnexionModal(true)
+                    }
+                }}
                 onClickContact={() => navigateTo(navigate, "/contact")} onClickAccueil={() => navigateTo(navigate, "/")} onClickApropos={() => navigateTo(navigate, "/about")} onClickTarif={() => navigateTo(navigate, "/")}
             >
                 <div className='mt-[30px] flex flex-col justify-between items-center'>
@@ -154,8 +154,16 @@ const Contact = () => {
                                         </div>
                                     </div>
                                     <div className='flex flex-col md:flex-row items-center space-y-[10px] md:space-y-[0px] md:space-x-[20px] space-x-0 md:mt-[30px] mt-0'>
-                                        <div className='w-full'>
-                                            <ContactInput isPassword={false} icon={'ant-design:message-outlined'} placeholder="Message" />
+                                        <div className='w-full '>
+                                            {/* <ContactInput isPassword={false} icon={'ant-design:message-outlined'} placeholder="Message" /> */}
+                                            <textarea
+                                            
+                                                className="flex-1 w-full border-2 border-gray-400 focus:border-gray-400 rounded-[4px] outline-none px-3 py-2 focus:outline-none focus:ring-0"
+                                                placeholder="Écrivez un message..."
+                                               
+                                                onChange={(e) => console.log(e.target.value)}
+
+                                            />
                                         </div>
 
                                     </div>
