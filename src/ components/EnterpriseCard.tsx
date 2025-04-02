@@ -15,6 +15,7 @@ type EnterpriseCardProps = {
 
 const EnterpriseCard: React.FC<EnterpriseCardProps> = ({ description, data, onClick }) => {
   return (
+    
     <div className=" w-full h-full  border-red-600 shadow-sm shadow-black/30 rounded-[10px] bg-white flex flex-col justify-between items-center">
       <div className="w-full  border-b-emerald-900">
         <div className='rounded-t-[10px] bg-gradient-to-b from-orange-100 to-white  h-[135px] flex flex-col justify-between p-[20px]'>

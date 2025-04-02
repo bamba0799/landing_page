@@ -43,6 +43,7 @@ import FeatureCardMobile from '../ components/FeatureCardMobile';
 import GeneralModal from '../ components/Modal/GeneralModal';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { navigateTo } from '../../services/utilis';
+import AnimatedSection from '../ components/AnimatedSection';
 
 
 const useIsMobile = () => {
@@ -50,7 +51,8 @@ const useIsMobile = () => {
 
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsMobile(window.innerWidth < 768);     };
+      setIsMobile(window.innerWidth < 768);
+    };
 
     checkScreenSize();
     window.addEventListener('resize', checkScreenSize);
@@ -147,7 +149,7 @@ function Home() {
 
   const scrollLeft = () => {
     if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: -300, behavior: "smooth" }); 
+      scrollRef.current.scrollBy({ left: -300, behavior: "smooth" });
     }
   };
 
@@ -593,94 +595,104 @@ en comptabilité analytique."
           {/* feature mobile */}
           <div className="mt-[10px] md:mt-[20px] grid grid-cols-2 gap-4 mx-[20px]  md:hidden">
             {features.map((_item) => (
+               <AnimatedSection delay={0.2}>
               <FeatureCardMobile
                 onClick={() => { setDescription(_item.description); setTitle(_item.title); setOpenDescriptionModal(true) }}
                 image={_item.image}
                 title={_item.title}
                 description={_item.description}
               />
+              </AnimatedSection>
             ))}
 
 
           </div>
           {/* second */}
-          <div style={{ backgroundSize: bgSize }} className=" border-red-800  mt-[20px] px-[20px] md:px-[50px] bg-[#FAFAFA] relative h-[300px] lg:h-[400px] flex flex-col justify-center w-full  bg-[url('/bgIcon.png')] bg-full bg-center bg-no-repeat">
-            {/* Texte (doit être au-dessus du cercle) */}
-            <div className=" z-10 w-full  border-red-800 flex flex-col ">
+          <AnimatedSection delay={0.2}>
+            <div style={{ backgroundSize: bgSize }} className=" border-red-800  mt-[20px] px-[20px] md:px-[50px] bg-[#FAFAFA] relative h-[300px] lg:h-[400px] flex flex-col justify-center w-full  bg-[url('/bgIcon.png')] bg-full bg-center bg-no-repeat">
+              {/* Texte (doit être au-dessus du cercle) */}
+              <div className=" z-10 w-full  border-red-800 flex flex-col ">
 
-              <div className='mt-[20px] z-10 md:mt-[100px]  w-full px-[20px] md:hidden  border-red-600'>
-                <div className=' w-full flex flex-col text-center justify-center'>
-                  <p className='  text-brand_orange text-[16px] md:text-[24px] font-bold'>Notre espace analytique dynamique</p>
-                  <p className=' text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-extrabold'>Suivez la rentabilité de votre activité en temps réels</p>
-                </div>
-              </div>
-              <div className=' border-red-600 flex flex-col md:flex-row mt-[20px] md:mt-[0px] items-center justify-center md:space-x-[30px]'>
-                <div className='w-full md:w-[55%] md:h-[300px]   border-green-800'>
-                  <div className='w-full h-full relative'>
-                    <img src={grapheImage1} alt={"title"} className="w-full h-full object-contain" />
-                    <div className="absolute -bottom-[40px] right-[0px] md:right-[10px] bg-neutral_blanc shadow-sm shadow-black/20 py-[10px] md:py-[20px]  px-[10px] w-[199px] md:w-[395px] h-[110px] md:h-[215px] border-[1.4px] border-neutral_gris  rounded-[16px] z-20 text-start flex flex-col justify-between">
-                      <p className=' font-bold text-[12px] text-brand_bleu_fonce_500 md:text-[20px]'>Un tableau de bord intuitif</p>
-                      <p className='text-[8px] md:text-[14px] text-neutral_gris '>Pour suivre en temps réels votre  chiffre d’affaire</p>
-                      <p className="text-[8px] md:text-[14px] text-brand_bleu_fonce_500 ">Grâce à votre tableau de bord intuitif, vos
-                        graphes et statistiques dynamiques, suivez
-                        l’évolution financières de votre activités plus
-                        facilement</p>
-                    </div>
-                  </div>
-                </div>
-                <div className='mt-[20px] z-10  w-full px-[20px] hidden md:flex  border-red-600 md:w-[38%] lg:w-[35%]'>
-                  <div className=' w-full flex flex-col text-starts justify-center'>
-                    <p className='text-brand_orange text-[16px] md:text-[24px] font-bold'>Notre espace analytique dynamique</p>
+                <div className='mt-[20px] z-10 md:mt-[100px]  w-full px-[20px] md:hidden  border-red-600'>
+                  <div className=' w-full flex flex-col text-center justify-center'>
+                    <p className='  text-brand_orange text-[16px] md:text-[24px] font-bold'>Notre espace analytique dynamique</p>
                     <p className=' text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-extrabold'>Suivez la rentabilité de votre activité en temps réels</p>
                   </div>
                 </div>
+                <div className=' border-red-600 flex flex-col md:flex-row mt-[20px] md:mt-[0px] items-center justify-center md:space-x-[30px]'>
+                  <div className='w-full md:w-[55%] md:h-[300px]   border-green-800'>
+                    <div className='w-full h-full relative'>
+                      <img src={grapheImage1} alt={"title"} className="w-full h-full object-contain" />
+                      <div className="absolute -bottom-[40px] right-[0px] md:right-[10px] bg-neutral_blanc shadow-sm shadow-black/20 py-[10px] md:py-[20px]  px-[10px] w-[199px] md:w-[395px] h-[110px] md:h-[215px] border-[1.4px] border-neutral_gris  rounded-[16px] z-20 text-start flex flex-col justify-between">
+                        <p className=' font-bold text-[12px] text-brand_bleu_fonce_500 md:text-[20px]'>Un tableau de bord intuitif</p>
+                        <p className='text-[8px] md:text-[14px] text-neutral_gris '>Pour suivre en temps réels votre  chiffre d’affaire</p>
+                        <p className="text-[8px] md:text-[14px] text-brand_bleu_fonce_500 ">Grâce à votre tableau de bord intuitif, vos
+                          graphes et statistiques dynamiques, suivez
+                          l’évolution financières de votre activités plus
+                          facilement</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='mt-[20px] z-10  w-full px-[20px] hidden md:flex  border-red-600 md:w-[38%] lg:w-[35%]'>
+                    <div className=' w-full flex flex-col text-starts justify-center'>
+                      <p className='text-brand_orange text-[16px] md:text-[24px] font-bold'>Notre espace analytique dynamique</p>
+                      <p className=' text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-extrabold'>Suivez la rentabilité de votre activité en temps réels</p>
+                    </div>
+                  </div>
 
+                </div>
               </div>
             </div>
-          </div>
+          </AnimatedSection>
+
           {/* third */}
-          <div className='px-[30px] mt-[30px] md:mt-[20px]  border-blue-600 w-full flex flex-col md:flex-row justify-between md:px-[20px] lg:px-[130px]'>
-            <div className='w-full flex flex-col items-center justify-between md:w-[40%]   border-red-800'>
-              <div className='mt-[20px] z-10 md:mt-[60px] lg:mt-[10px] w-full px-[20px] md:px-[50px]  border-red-600'>
-                <div className=' w-full flex flex-col text-center md:text-start md:w-[290px] lg:w-[350px] justify-center'>
-                  <p className='text-brand_orange text-[16px] md:text-[24px] font-bold'>Nos cibles</p>
-                  <p className=' text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-extrabold'>Découvrez nos cibles pour qui Acwaba est adapté</p>
+          <AnimatedSection delay={0.2}>
+            <div className='px-[30px] mt-[30px] md:mt-[20px]  border-blue-600 w-full flex flex-col md:flex-row justify-between md:px-[20px] lg:px-[130px]'>
+              <div className='w-full flex flex-col items-center justify-between md:w-[40%]   border-red-800'>
+                <div className='mt-[20px] z-10 md:mt-[60px] lg:mt-[10px] w-full px-[20px] md:px-[50px]  border-red-600'>
+                  <div className=' w-full flex flex-col text-center md:text-start md:w-[290px] lg:w-[350px] justify-center'>
+                    <p className='text-brand_orange text-[16px] md:text-[24px] font-bold'>Nos cibles</p>
+                    <p className=' text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[32px] font-extrabold'>Découvrez nos cibles pour qui Acwaba est adapté</p>
+                  </div>
+                </div>
+                <div>
+                  <img src={targetBgImage} alt="" className='opacity-5 hidden md:flex' />
                 </div>
               </div>
-              <div>
-                <img src={targetBgImage} alt="" className='opacity-5 hidden md:flex' />
+              <div className='mt-[10px] md:mt-[50px] lg:mt-[0px] border-red-400 flex flex-col items-center '>
+                <div className='flex flex-row  items-center space-x-[9px] md:space-x-[20px]'>
+                  <div>
+                    <TargetCard image={tfeImage} title='TFE' color='orange' />
+                  </div>
+                  <div className='mt-[9px] md:mt-[20px]'>
+                    <TargetCard image={pmeImage} title='PME' />
+                  </div>
+                </div>
+                <div className='flex flex-row space-x-[9px] md:space-x-[20px] items-center mt-[0px]'>
+                  <div>
+                    <TargetCard image={startupImage} title='startup' />
+                  </div>
+                  <div className='mt-[9px] md:mt-[20px]'>
+                    <TargetCard image={associationImage} title='Association' color='orange' />
+                  </div>
+                </div>
               </div>
             </div>
-            <div className='mt-[10px] md:mt-[50px] lg:mt-[0px] border-red-400 flex flex-col items-center '>
-              <div className='flex flex-row  items-center space-x-[9px] md:space-x-[20px]'>
-                <div>
-                  <TargetCard image={tfeImage} title='TFE' color='orange' />
-                </div>
-                <div className='mt-[9px] md:mt-[20px]'>
-                  <TargetCard image={pmeImage} title='PME' />
-                </div>
-              </div>
-              <div className='flex flex-row space-x-[9px] md:space-x-[20px] items-center mt-[0px]'>
-                <div>
-                  <TargetCard image={startupImage} title='startup' />
-                </div>
-                <div className='mt-[9px] md:mt-[20px]'>
-                  <TargetCard image={associationImage} title='Association' color='orange' />
-                </div>
-              </div>
-            </div>
-          </div>
+          </AnimatedSection>
           {/* fourth les tarifs */}
+
           <div style={{ backgroundSize: tarifBgSize }} ref={tarifRef} className="bg-[#FAFAFA] overflow-hidden relative  border-red-600 mt-[50px] w-full flex flex-col items-center bg-[url('/bgIcon.png')] bg-full bg-center bg-no-repeat">
             {/* button */}
-            <div className='mt-[20px] z-10  w-full px-[20px]   border-red-600 flex flex-row justify-center'>
-              <div className=' w-full md:w-[800px] flex flex-col text-center justify-center'>
-                <p className='text-brand_orange text-[16px] md:text-[32px] font-bold'>Nos tarifs</p>
-                <p className='font-bold text-brand_bleu_fonce_500 mt-[7px] text-[20px] md:text-[32px] font-poppins'>Choisissez l’offre qui vous correspond</p>
-                <p className='font-extrabold text-[12px] md:text-[14px] text-neutral_gris'>Comparer les fonctionnalités et sélectionner la meilleure offre pour votre business.
-                  Acwaba propose plusieurs offres qui s’adaptent à tout type de d’entreprise.</p>
+            <AnimatedSection delay={0.2}>
+              <div className='mt-[20px] z-10  w-full px-[20px]   border-red-600 flex flex-row justify-center'>
+                <div className=' w-full md:w-[800px] flex flex-col text-center justify-center'>
+                  <p className='text-brand_orange text-[16px] md:text-[32px] font-bold'>Nos tarifs</p>
+                  <p className='font-bold text-brand_bleu_fonce_500 mt-[7px] text-[20px] md:text-[32px] font-poppins'>Choisissez l’offre qui vous correspond</p>
+                  <p className='font-extrabold text-[12px] md:text-[14px] text-neutral_gris'>Comparer les fonctionnalités et sélectionner la meilleure offre pour votre business.
+                    Acwaba propose plusieurs offres qui s’adaptent à tout type de d’entreprise.</p>
+                </div>
               </div>
-            </div>
+            </AnimatedSection>
             <div className="h-[40px] w-[80%] z-10 md:w-[400px] rounded-full bg-surface_bleu mt-[20px] flex justify-around">
               {tarifButtonData.map((_item, index) => (
                 <button
@@ -694,30 +706,36 @@ en comptabilité analytique."
               ))}
             </div>
             {/* Conteneur scrollable */}
+
             <div className="mt-[20px] pb-[10px]  border-blue-700 w-full  px-[20px] pt-10  z-10 overflow-x-scroll lg:overflow-hidden flex space-x-5 lg:justify-center scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-200">
               <div className={`flex-shrink-0 w-[90%]  md:w-[438px] h-[450px]`}>
-                <PricingCard
-                  onClick={() => setOpenConnexionModal(true)}
-                  seeOver={() => { setOpenFonctionalityModal(true); setTitleFonctionality("Smart"); setData(smartData2) }}
-                  title='Smart'
-                  price={tarifButtonId == 0 ? 16 : 176}
-                  step={tarifButtonId == 0 ? "mois" : "année"}
-                  description='Adapté aux auto-entrepreneurs & TPE'
-                  data={smartData1}
-                />
+                <AnimatedSection delay={0.2}>
+                  <PricingCard
+                    onClick={() => setOpenConnexionModal(true)}
+                    seeOver={() => { setOpenFonctionalityModal(true); setTitleFonctionality("Smart"); setData(smartData2) }}
+                    title='Smart'
+                    price={tarifButtonId == 0 ? 16 : 176}
+                    step={tarifButtonId == 0 ? "mois" : "année"}
+                    description='Adapté aux auto-entrepreneurs & TPE'
+                    data={smartData1}
+                  />
+                </AnimatedSection>
               </div>
               <div ref={premiumCardRef} className={`flex-shrink-0 w-[90%]  md:w-[438px] h-[450px]`}>
-                <PricingCard
-                  onClick={() => setOpenConnexionModal(true)}
-                  seeOver={() => { setOpenFonctionalityModal(true); setTitleFonctionality("Premium"); setData(premiumData2) }}
-                  title='Premium'
-                  price={tarifButtonId == 0 ? 25 : 275}
-                  step={tarifButtonId == 0 ? "mois" : "année"}
-                  description='Adapté aux auto-entrepreneurs & TPE'
-                  data={premiumData1}
-                />
+                <AnimatedSection delay={0.2}>
+                  <PricingCard
+                    onClick={() => setOpenConnexionModal(true)}
+                    seeOver={() => { setOpenFonctionalityModal(true); setTitleFonctionality("Premium"); setData(premiumData2) }}
+                    title='Premium'
+                    price={tarifButtonId == 0 ? 25 : 275}
+                    step={tarifButtonId == 0 ? "mois" : "année"}
+                    description='Adapté aux auto-entrepreneurs & TPE'
+                    data={premiumData1}
+                  />
+                </AnimatedSection>
               </div>
               <div className={`flex-shrink-0 w-[90%]  md:w-[438px] h-[450px]`}>
+
                 <EnterpriseCard
                   onClick={() => navigate("/contact")}
                   seeOver={() => { setOpenFonctionalityModal(true); setTitleFonctionality("Entreprise"); setData(entrepriseData2) }}
@@ -725,10 +743,12 @@ en comptabilité analytique."
                   title='premium'
                   description='Une offre personnalisée selon vos besoins. '
                 />
+
               </div>
 
             </div>
             {/* voir avantage */}
+
             <div className=' hidden  w-full  border-red-600 lg:flex flex-row justify-between items-center mb-20'>
               <div className='w-[43%]  border-red-800' >
                 <img src={Arrowleft} alt="" className=' object-cover w-full' />
@@ -743,6 +763,7 @@ en comptabilité analytique."
             </div>
           </div>
           {/* fifth */}
+
           <div className="bg-white w-full  border-blue-600 overflow-hidden">
             <div className='  flex flex-col md:flex-row mt-[20px] z-10 md:mt-[10px] w-full   px-[20px] md:ml-[30px] lg:ml-[60px]  border-red-600'>
               <div className=' w-full md:w-[50%]  flex flex-col text-center md:text-start  justify-center'>
@@ -783,93 +804,109 @@ en comptabilité analytique."
             <div className="relative  mx-auto z-20">
               <div ref={scrollRef} className=" border-red-700 pb-[20px] flex space-x-6 overflow-x-auto scrollbar-hide mt-[30px] md:mt-[50px]">
                 {testimonials.map((testimonial: any, index: number, self: any[]) => (
+
                   <div
                     key={testimonial.id}
                     className={`bg-white rounded-[16px] ${index == 0 ? "ml-[20px] md:ml-[20px] lg:ml-[60px]" : ""}  ${(index + 1) == self.length ? "mr-[20px] md:mr-[60px]" : ""} shadow-md shadow-black/30 p-6 flex-shrink-0 w-[85%] md:w-[423px] h-[314px] flex flex-col justify-between  border-red-700 pb-[40px]`}
                   >
-                    <p className=" text-neutral_gris text-[14px] mb-4">{testimonial.text}</p>
-                    <div className="flex items-center space-x-3">
-                      <div className=" w-[60px] md:w-[95px]  h-[60px] md:h-[95px] bg-gray-200 rounded-full"></div>
-                      <div>
-                        <p className="font-bold text-brand_bleu_inter text-[14px]">
-                          {testimonial.name}
-                        </p>
-                        <p className="text-neutral_gris text-sm">{testimonial.company}</p>
+                    <AnimatedSection delay={0.2}>
+                      <p className=" text-neutral_gris text-[14px] mb-4">{testimonial.text}</p>
+                      <div className="flex items-center space-x-3">
+                        <div className=" w-[60px] md:w-[95px]  h-[60px] md:h-[95px] bg-gray-200 rounded-full"></div>
+                        <div>
+                          <p className="font-bold text-brand_bleu_inter text-[14px]">
+                            {testimonial.name}
+                          </p>
+                          <p className="text-neutral_gris text-sm">{testimonial.company}</p>
+                        </div>
                       </div>
-                    </div>
+                    </AnimatedSection>
                   </div>
+
                 ))}
                 <div className='w-[20px] md:w-[60px]'></div>
               </div>
             </div>
           </div>
+
           {/* Sixth */}
           <div className="mt-[20px] w-full z-20  border-blue-500">
             <div className="w-full flex flex-col md:flex-row items-center justify-between px-4 md:px-16 py-8 bg-cover bg-center  shadow-lg"
               style={{ backgroundImage: `url(${questionbg})` }}
             >
               {/* Section FAQ */}
+
               <div className="flex flex-col justify-between bg-white  border-red-600 bg-opacity-90 w-[350px] pt-[20px] md:w-[544px]  rounded-[16px] px-[20px] md:px-[24px] md:ml-auto">
-                <div className='mt-[20px] md:mt-[30px]'>
-                  <p className="text-brand_orange font-bold text-[16px] md:text-[24px] text-center md:text-start">FAQ</p>
-                  <h2 className="text-brand_bleu_fonce_500 font-extrabold text-[20px] md:text-[32px] mb-[12px] text-center md:text-start">
-                    Souhaitez-vous nous poser une question ?
-                  </h2>
+                <AnimatedSection delay={0.2}>
+                  <div className='mt-[20px] md:mt-[30px]'>
+                    <p className="text-brand_orange font-bold text-[16px] md:text-[24px] text-center md:text-start">FAQ</p>
+                    <h2 className="text-brand_bleu_fonce_500 font-extrabold text-[20px] md:text-[32px] mb-[12px] text-center md:text-start">
+                      Souhaitez-vous nous poser une question ?
+                    </h2>
 
-                  {/* FAQ Items */}
-                  <div className="space-y-4">
-                    {question.map((item, index) => (
-                      <div key={index} className="border-b bordet-bratext-brand_bleu_inter pb-3">
-                        <button
-                          className="flex justify-between items-center w-full cursor-pointer focus:outline-none"
-                          onClick={() => toggleQuestion(index)}
-                        >
-                          <p className="text-brand_bleu_fonce_500 text-start font-semibold text-[12px] md:text-[14px]">{item.question}</p>
-                          <Icon
-                            icon={openIndex === index ? "bi:chevron-up" : "bi:chevron-down"}
-                            className="text-brand_bleu_fonce_500 w-[16px] h-[16px] lg:w-[20px] lg:h-[20px]"
-                          />
-                        </button>
-                        <div
-                          className={`overflow-hidden transition-all duration-300 ${openIndex === index ? "max-h-40 opacity-100 mt-2" : "max-h-0 opacity-0"
-                            }`}
-                        >
-                          <p className="text-gray-600 text-sm">{item.answer}</p>
+                    {/* FAQ Items */}
+                    <div className="space-y-4">
+                      {question.map((item, index) => (
+                        <div key={index} className="border-b bordet-bratext-brand_bleu_inter pb-3">
+                          <button
+                            className="flex justify-between items-center w-full cursor-pointer focus:outline-none"
+                            onClick={() => toggleQuestion(index)}
+                          >
+                            <p className="text-brand_bleu_fonce_500 text-start font-semibold text-[12px] md:text-[14px]">{item.question}</p>
+                            <Icon
+                              icon={openIndex === index ? "bi:chevron-up" : "bi:chevron-down"}
+                              className="text-brand_bleu_fonce_500 w-[16px] h-[16px] lg:w-[20px] lg:h-[20px]"
+                            />
+                          </button>
+                          <div
+                            className={`overflow-hidden transition-all duration-300 ${openIndex === index ? "max-h-40 opacity-100 mt-2" : "max-h-0 opacity-0"
+                              }`}
+                          >
+                            <p className="text-gray-600 text-sm">{item.answer}</p>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
-                </div>
 
-                {/* Buttons */}
-                <div className="flex pt-[50px] md:pt-[80px] justify-center">
-                  {["Questions Fonctionnelles", "Questions Support"].map((item, index) => (
-                    <button onClick={() => handleQuestion(index)} className={`w-[232px] text-[12px] md:text-[14px] py-2 ${selectedIndex == index ? " bg-gradient-to-b from-[#011E3E] to-[#0E5588] text-white" : "bg-transparent border-[1.4px] border-brand_bleu_inter text-brand_bleu_inter"}  font-medium h-[60px] rounded-t-[16px] hover:bt-bratext-brand_bleu_inter`}>
-                      {item}
-                    </button>
-                  ))
-                  }
-                </div>
+                  {/* Buttons */}
+                  <div className="flex pt-[50px] md:pt-[80px] justify-center">
+                    {["Questions Fonctionnelles", "Questions Support"].map((item, index) => (
+                      <button onClick={() => handleQuestion(index)} className={`w-[232px] text-[12px] md:text-[14px] py-2 ${selectedIndex == index ? " bg-gradient-to-b from-[#011E3E] to-[#0E5588] text-white" : "bg-transparent border-[1.4px] border-brand_bleu_inter text-brand_bleu_inter"}  font-medium h-[60px] rounded-t-[16px] hover:bt-bratext-brand_bleu_inter`}>
+                        {item}
+                      </button>
+                    ))
+                    }
+                  </div>
+                </AnimatedSection>
               </div>
+
             </div>
           </div>
           {/* seventh */}
           <div className='mt-[20px] w-full  md:h-[500px]  border-red-800'>
             <div className="bg-white w-full pt-[10px] px-4 md:px-16 flex flex-col md:flex-row items-center justify-between">
               {/* Mobile: une seule fusée */}
-              <div className="md:hidden">
-                <Lottie animationData={FuseeAnimation} className="w-32 h-32 transform rotate-[25deg]" />
-              </div>
+              <AnimatedSection delay={0.2}>
+                <div className="md:hidden">
+                  <Lottie animationData={FuseeAnimation} className="w-32 h-32 transform rotate-[25deg]" />
+                </div>
+              </AnimatedSection>
               {/* Texte */}
+
               <div className="md:w-1/2 text-center md:text-left mt-[10px] md:mt-0  border-black flex flex-col items-center md:items-start">
-                <p className="text-brand_orange text-[16px] md:text-[32px] font-bold">
-                  Prêt à embarquer avec Acwaba ?
-                </p>
-                <h2 className="font-bold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[30px] leading-[16px] md:leading-[40px] ">
-                  Gagnez du temps dans <br /> votre facturation et <br /> la gestion de <br />
-                  votre trésorerie.
-                </h2>
-                <SecondButton className='mt-[10px]' onClick={() => setOpenConnexionModal(true)} shadow=' shadow-custom' text={"Ouvrir un compte"} />
+                <AnimatedSection delay={0.2}>
+                  <p className="text-brand_orange text-[16px] md:text-[32px] font-bold">
+                    Prêt à embarquer avec Acwaba ?
+                  </p>
+                  <h2 className="font-bold text-brand_bleu_fonce_500 mt-[7px] md:mt-[20px] text-[16px] md:text-[30px] leading-[16px] md:leading-[40px] ">
+                    Gagnez du temps dans <br /> votre facturation et <br /> la gestion de <br />
+                    votre trésorerie.
+                  </h2>
+                </AnimatedSection>
+                <AnimatedSection delay={0.2}>
+                  <SecondButton className='mt-[10px]' onClick={() => setOpenConnexionModal(true)} shadow=' shadow-custom' text={"Ouvrir un compte"} />
+                </AnimatedSection>
               </div>
 
               {/* Image */}
